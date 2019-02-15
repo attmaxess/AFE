@@ -2,7 +2,15 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/unity:2018.3.1f1
+      - image: debian:stretch
+
     steps:
       - checkout
-      - run: echo "Ar Fighting Engine"
+
+      - run:
+          name: Greeting
+          command: echo Hello, world.
+
+      - run:
+          name: Print the Current Time
+          command: date
