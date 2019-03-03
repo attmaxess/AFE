@@ -111,7 +111,7 @@ abstract public class BuiltInGamepadProfileBank
 				mInst = new BuiltInGamepadProfileBankAndroid();
 				break;
 	
-			case RuntimePlatform.OSXDashboardPlayer :
+			//case RuntimePlatform.OSXDashboardPlayer :
 			case RuntimePlatform.OSXEditor :
 			case RuntimePlatform.OSXPlayer :
 #if UNITY_PRE_5_4
