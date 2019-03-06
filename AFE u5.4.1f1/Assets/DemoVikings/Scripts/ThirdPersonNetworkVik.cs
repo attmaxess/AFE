@@ -43,7 +43,7 @@ public class ThirdPersonNetworkVik : Photon.MonoBehaviour
         if (stream.isWriting)
         {
             //We own this player: send the others our data
-           // stream.SendNext((int)controllerScript._characterState);
+            //stream.SendNext((int)controllerScript._characterState);
             stream.SendNext(transform.position);
             stream.SendNext(transform.rotation);
             stream.SendNext(GetComponent<Rigidbody>().velocity); 

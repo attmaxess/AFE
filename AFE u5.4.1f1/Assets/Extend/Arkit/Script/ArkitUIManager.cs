@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
-public class ArkitUIManager : Photon.PunBehaviour {
+public class ArkitUIManager : MonoBehaviour {
 	[System.Serializable]
     public class ArkitFoundEvent : UnityEvent<ScanValues> { }
 	public ArkitManager arkitManager;
@@ -16,23 +16,13 @@ public class ArkitUIManager : Photon.PunBehaviour {
 	private ArkitFoundEvent OnFoundFloorEvent;
 
 
-    void OnJoinedRoom()
-    {
-        SetActiveSomething(false);
-        arkitManager.StartScanPlane(OnFoundFloor);
-        if (UseForTest.Instance.IsTest)
-        {
-            Invoke("test", UseForTest.Instance.TimeEditor);
-        }
-    }
-
     // Use this for initialization
     void Start () {
-		/*SetActiveSomething (false);
+		SetActiveSomething (false);
 		arkitManager.StartScanPlane (OnFoundFloor);
 		if (UseForTest.Instance.IsTest) {
 			Invoke ("test", UseForTest.Instance.TimeEditor);
-		}     */
+		}     
 	}
 	void test () {
 		OnFoundFloor (ScanValues.GetData (Vector3.one, Quaternion.identity));

@@ -5,7 +5,7 @@ public class GameManagerArVik : Photon.PunBehaviour
 
     bool isJoinedRoom = false;
 
-    ArkitUIManager ArkitUIManager;
+    public ArkitUIManager ArkitUIManager;
 
     private void Awake()
     {

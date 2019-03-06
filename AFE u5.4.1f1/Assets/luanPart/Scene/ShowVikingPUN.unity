@@ -143,6 +143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75517ca1a6ed1534f8db0f37fde92508, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ArkitUIManager: {fileID: 0}
 --- !u!114 &193938943
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -338,75 +339,97 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1027660899779978, guid: 021d76a99b2a90f4b8f612c42487eb42, type: 3}
-      propertyPath: m_IsActive
-      value: 1
+    - target: {fileID: 6660853606564530062, guid: ce1cf813ee46a8d40b262f1f107b8e77,
+        type: 3}
+      propertyPath: m_Name
+      value: ARkit Viking
       objectReference: {fileID: 0}
-    - target: {fileID: 4536150989806620, guid: 021d76a99b2a90f4b8f612c42487eb42, type: 3}
+    - target: {fileID: 1901280764957532252, guid: ce1cf813ee46a8d40b262f1f107b8e77,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4536150989806620, guid: 021d76a99b2a90f4b8f612c42487eb42, type: 3}
+    - target: {fileID: 1901280764957532252, guid: ce1cf813ee46a8d40b262f1f107b8e77,
+        type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4536150989806620, guid: 021d76a99b2a90f4b8f612c42487eb42, type: 3}
+    - target: {fileID: 1901280764957532252, guid: ce1cf813ee46a8d40b262f1f107b8e77,
+        type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4536150989806620, guid: 021d76a99b2a90f4b8f612c42487eb42, type: 3}
+    - target: {fileID: 1901280764957532252, guid: ce1cf813ee46a8d40b262f1f107b8e77,
+        type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4536150989806620, guid: 021d76a99b2a90f4b8f612c42487eb42, type: 3}
+    - target: {fileID: 1901280764957532252, guid: ce1cf813ee46a8d40b262f1f107b8e77,
+        type: 3}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4536150989806620, guid: 021d76a99b2a90f4b8f612c42487eb42, type: 3}
+    - target: {fileID: 1901280764957532252, guid: ce1cf813ee46a8d40b262f1f107b8e77,
+        type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4536150989806620, guid: 021d76a99b2a90f4b8f612c42487eb42, type: 3}
+    - target: {fileID: 1901280764957532252, guid: ce1cf813ee46a8d40b262f1f107b8e77,
+        type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4536150989806620, guid: 021d76a99b2a90f4b8f612c42487eb42, type: 3}
+    - target: {fileID: 1901280764957532252, guid: ce1cf813ee46a8d40b262f1f107b8e77,
+        type: 3}
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 114604165996329478, guid: 021d76a99b2a90f4b8f612c42487eb42,
+    - target: {fileID: 1901280764957532252, guid: ce1cf813ee46a8d40b262f1f107b8e77,
         type: 3}
-      propertyPath: OnTapToPlane100m.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1596958300}
-    - target: {fileID: 114604165996329478, guid: 021d76a99b2a90f4b8f612c42487eb42,
-        type: 3}
-      propertyPath: OnTapToPlane100m.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: CreateVikingObject
-      objectReference: {fileID: 0}
-    - target: {fileID: 114604165996329478, guid: 021d76a99b2a90f4b8f612c42487eb42,
-        type: 3}
-      propertyPath: OnTapToPlane100m.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1901280764957532252, guid: ce1cf813ee46a8d40b262f1f107b8e77,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1901280764957532252, guid: ce1cf813ee46a8d40b262f1f107b8e77,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6509969312524920932, guid: ce1cf813ee46a8d40b262f1f107b8e77,
+        type: 3}
+      propertyPath: OnTapToPlane100m.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1596958300}
+    - target: {fileID: 6509969312524920932, guid: ce1cf813ee46a8d40b262f1f107b8e77,
+        type: 3}
+      propertyPath: OnTapToPlane100m.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: CreateVikingObject
+      objectReference: {fileID: 0}
+    - target: {fileID: 6509969312524920932, guid: ce1cf813ee46a8d40b262f1f107b8e77,
+        type: 3}
+      propertyPath: OnTapToPlane100m.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6509969312524920932, guid: ce1cf813ee46a8d40b262f1f107b8e77,
+        type: 3}
+      propertyPath: OnTapToPlane100m.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 021d76a99b2a90f4b8f612c42487eb42, type: 3}
---- !u!1 &1596958299 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1578546931249888, guid: 021d76a99b2a90f4b8f612c42487eb42,
+  m_SourcePrefab: {fileID: 100100000, guid: ce1cf813ee46a8d40b262f1f107b8e77, type: 3}
+--- !u!114 &1596958300 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1596958300, guid: ce1cf813ee46a8d40b262f1f107b8e77,
     type: 3}
   m_PrefabInstance: {fileID: 1596958298}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1596958300
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1596958299}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 736a735e34dc6894091757876b9a12e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabName: VikingPrefab
