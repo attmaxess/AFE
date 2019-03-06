@@ -9,10 +9,14 @@ public class CreateObject : MonoBehaviour {
 		
 	}
 	public void ShowCube(Vector3 pos, GameObject hitObject){
+
+        Debug.Log("Show cube");
+
 		GameObject obj = CreateModel3D(prefabCube, pos, hitObject.transform.rotation);
-		obj.transform.localScale = Vector3.one * .3f;
-	}
-	GameObject CreateModel3D(GameObject prefab, Vector3 v, Quaternion quater, Transform parent = null){
+		obj.transform.localScale = Vector3.one * 1.3f;
+        Debug.Log("Show cube" + obj.name);
+    }
+    GameObject CreateModel3D(GameObject prefab, Vector3 v, Quaternion quater, Transform parent = null){
 		GameObject obj = Instantiate (prefab, v, quater) as GameObject;
 		if (parent != null) {
 			obj.transform.SetParent (parent);

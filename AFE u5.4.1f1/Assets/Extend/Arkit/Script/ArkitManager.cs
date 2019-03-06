@@ -50,7 +50,7 @@ public class ArkitManager : MonoBehaviour, IArkitManager
     {
         if (saveCallbackFoundPlane != null)
         {
-            Debug.Log("Found Floor !!  " + floor);
+          //  Debug.Log("Found Floor !!  " + floor);
             ScanValues scan = ScanValues.GetData(floor);
             saveCallbackFoundPlane(scan);
         }
