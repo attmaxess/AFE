@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class GameManagerArVik : Photon.PunBehaviour
 {
@@ -10,6 +11,21 @@ public class GameManagerArVik : Photon.PunBehaviour
     private void Awake()
     {
        // ArkitUIManager = GameObject.FindObjectOfType<ArkitUIManager>();
+    }
+
+    IEnumerator OnLeftRoom()
+    {
+
+        Debug.Log("OnLeftRoom");
+        
+        //Easy way to reset the level: Otherwise we'd manually reset the camera
+
+        //Wait untill Photon is properly disconnected (empty room, and connected back to main server)
+        while (PhotonNetwork.room != null || PhotonNetwork.connected == false)
+            yield return 0;
+
+        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
+
     }
 
     private void Start()
