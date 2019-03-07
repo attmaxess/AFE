@@ -1,8 +1,6 @@
-using UnityEngine;
-using System.Collections;
+﻿using UnityEngine;
 
-
-public class ThirdPersonNetworkVik : Photon.MonoBehaviour
+public class ThirdPersonNetworkARVik : Photon.MonoBehaviour
 {
     ThirdPersonCameraNET cameraScript;
     ThirdPersonControllerNET controllerScript;
@@ -20,16 +18,16 @@ public class ThirdPersonNetworkVik : Photon.MonoBehaviour
         if (photonView.isMine)
         {
             //MINE: local player, simply enable the local scripts
-            cameraScript.enabled = true;
+           // cameraScript.enabled = true;
             controllerScript.enabled = true;
-            Camera.main.transform.parent = transform;
-            Camera.main.transform.localPosition = new Vector3(0, 2, -10);
-            Camera.main.transform.localEulerAngles = new Vector3(10, 0, 0);
+           // Camera.main.transform.parent = transform;
+           // Camera.main.transform.localPosition = new Vector3(0, 2, -10);
+           // Camera.main.transform.localEulerAngles = new Vector3(10, 0, 0);
 
         }
         else
-        {           
-            cameraScript.enabled = false;
+        {
+           // cameraScript.enabled = false;
             controllerScript.enabled = true;
 
         }
@@ -43,10 +41,10 @@ public class ThirdPersonNetworkVik : Photon.MonoBehaviour
         if (stream.isWriting)
         {
             //We own this player: send the others our data
-           // stream.SendNext((int)controllerScript._characterState);
+            // stream.SendNext((int)controllerScript._characterState);
             stream.SendNext(transform.position);
             stream.SendNext(transform.rotation);
-            stream.SendNext(GetComponent<Rigidbody>().velocity); 
+            stream.SendNext(GetComponent<Rigidbody>().velocity);
 
         }
         else

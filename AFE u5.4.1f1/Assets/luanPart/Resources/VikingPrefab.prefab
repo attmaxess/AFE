@@ -314,7 +314,7 @@ GameObject:
   - component: {fileID: 114237121465949068}
   - component: {fileID: 114495931273094870}
   - component: {fileID: 114054249793271396}
-  - component: {fileID: 114104570236669060}
+  - component: {fileID: 114817034570833440}
   m_Layer: 0
   m_Name: VikingPrefab
   m_TagString: Untagged
@@ -976,23 +976,12 @@ MonoBehaviour:
   onSerializeRigidBodyOption: 2
   ownershipTransfer: 0
   ObservedComponents:
-  - {fileID: 114104570236669060}
+  - {fileID: 114817034570833440}
   ObservedComponentsFoldoutOpen: 1
   viewIdField: 0
   instantiationId: -1
   currentMasterID: -1
   isRuntimeInstantiated: 0
---- !u!114 &114104570236669060
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1735448285937578}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52a3eca922f886147af2cbcb7cf8c153, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114219644112509026
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1085,6 +1074,17 @@ MonoBehaviour:
   showGizmos: 1
   requireLock: 1
   controlLock: 0
+--- !u!114 &114817034570833440
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1735448285937578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 368a2ef587e966d42b3788c3b1acbd84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!136 &136512392668964310
 CapsuleCollider:
   m_ObjectHideFlags: 1

@@ -178,7 +178,7 @@ Prefab:
     - target: {fileID: 224880000733725854, guid: d39ad26c554f1a04d870956f7fac6fd8,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 466.35
+      value: -3.649994
       objectReference: {fileID: 0}
     - target: {fileID: 224880000733725854, guid: d39ad26c554f1a04d870956f7fac6fd8,
         type: 2}
@@ -198,7 +198,7 @@ Prefab:
     - target: {fileID: 224880000733725854, guid: d39ad26c554f1a04d870956f7fac6fd8,
         type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 0.48941672
       objectReference: {fileID: 0}
     - target: {fileID: 224880000733725854, guid: d39ad26c554f1a04d870956f7fac6fd8,
         type: 2}
@@ -243,7 +243,7 @@ Prefab:
     - target: {fileID: 224841020572500472, guid: d39ad26c554f1a04d870956f7fac6fd8,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -0.00002861023
+      value: 0.0000019073486
       objectReference: {fileID: 0}
     - target: {fileID: 224732714809946368, guid: d39ad26c554f1a04d870956f7fac6fd8,
         type: 2}
@@ -546,26 +546,6 @@ Prefab:
       propertyPath: text
       value: 
       objectReference: {fileID: 1361131290}
-    - target: {fileID: 114629597405883940, guid: 00ab02b5ea58b514ea94aab856b2e4a3,
-        type: 2}
-      propertyPath: OnTapToPlane100m.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114629597405883940, guid: 00ab02b5ea58b514ea94aab856b2e4a3,
-        type: 2}
-      propertyPath: OnTapToPlane100m.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114629597405883940, guid: 00ab02b5ea58b514ea94aab856b2e4a3,
-        type: 2}
-      propertyPath: OnTapToPlane100m.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 224987346858464306, guid: 00ab02b5ea58b514ea94aab856b2e4a3,
-        type: 2}
-      propertyPath: m_SizeDelta.y
-      value: 60
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 00ab02b5ea58b514ea94aab856b2e4a3, type: 2}
   m_IsPrefabAsset: 0
@@ -871,7 +851,7 @@ Prefab:
     - target: {fileID: 224431128458639770, guid: 4d8c6c9fba0e46f489b21fd7d92d739d,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 449.5
+      value: -1.5
       objectReference: {fileID: 0}
     - target: {fileID: 224431128458639770, guid: 4d8c6c9fba0e46f489b21fd7d92d739d,
         type: 2}
@@ -881,7 +861,7 @@ Prefab:
     - target: {fileID: 224431128458639770, guid: 4d8c6c9fba0e46f489b21fd7d92d739d,
         type: 2}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0.5302917
       objectReference: {fileID: 0}
     - target: {fileID: 224431128458639770, guid: 4d8c6c9fba0e46f489b21fd7d92d739d,
         type: 2}
