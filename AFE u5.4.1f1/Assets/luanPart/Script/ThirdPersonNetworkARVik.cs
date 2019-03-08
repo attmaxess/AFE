@@ -44,7 +44,7 @@ public class ThirdPersonNetworkARVik : Photon.MonoBehaviour
             // stream.SendNext((int)controllerScript._characterState);
             stream.SendNext(transform.position);
             stream.SendNext(transform.rotation);
-            stream.SendNext(transform.localScale);
+          //  stream.SendNext(transform.localScale);
             stream.SendNext(GetComponent<Rigidbody>().velocity);
 
         }
@@ -54,7 +54,7 @@ public class ThirdPersonNetworkARVik : Photon.MonoBehaviour
             //controllerScript._characterState = (CharacterState)(int)stream.ReceiveNext();
             correctPlayerPos = (Vector3)stream.ReceiveNext();
             correctPlayerRot = (Quaternion)stream.ReceiveNext();
-            correctPlayerScale = (Vector3)stream.ReceiveNext();
+           // correctPlayerScale = (Vector3)stream.ReceiveNext();
             GetComponent<Rigidbody>().velocity = (Vector3)stream.ReceiveNext();
 
             if (!appliedInitialUpdate)
@@ -62,7 +62,7 @@ public class ThirdPersonNetworkARVik : Photon.MonoBehaviour
                 appliedInitialUpdate = true;
                 transform.position = correctPlayerPos;
                 transform.rotation = correctPlayerRot;
-                transform.localScale = correctPlayerScale;
+              //  transform.localScale = correctPlayerScale;
                 GetComponent<Rigidbody>().velocity = Vector3.zero;
             }
         }
@@ -79,7 +79,7 @@ public class ThirdPersonNetworkARVik : Photon.MonoBehaviour
             //Update remote player (smooth this, this looks good, at the cost of some accuracy)
             transform.position = Vector3.Lerp(transform.position, correctPlayerPos, Time.deltaTime * 5);
             transform.rotation = Quaternion.Lerp(transform.rotation, correctPlayerRot, Time.deltaTime * 5);
-            transform.localScale = Vector3.Lerp(transform.localScale, correctPlayerScale, Time.deltaTime * 5);
+       //     transform.localScale = Vector3.Lerp(transform.localScale, correctPlayerScale, Time.deltaTime * 5);
         }
     }
 
@@ -87,7 +87,7 @@ public class ThirdPersonNetworkARVik : Photon.MonoBehaviour
     {
         //We know there should be instantiation data..get our bools from this PhotonView!
         object[] objs = photonView.instantiationData; //The instantiate data..
-        bool[] mybools = (bool[])objs[0];   //Our bools!
+       // bool[] mybools = (bool[])objs[0];   //Our bools!
 
         //disable the axe and shield meshrenderers based on the instantiate data
         MeshRenderer[] rens = GetComponentsInChildren<MeshRenderer>();
