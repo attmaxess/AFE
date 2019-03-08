@@ -22,19 +22,7 @@ public class CreateVikingPrefab : MonoBehaviour
 
         if (GameManagerArVik != null)
         {
-            bool isSpawn = false;
-            //GameManagerArVik.DestroyObj();
-            var aa = GameObject.FindObjectsOfType<ThirdPersonNetworkARVik>();
-            for (int i = 0; i < aa.Length; i++)
-            {
-                if (aa[i].gameObject.GetPhotonView().isMine)
-                {
-                    isSpawn = true;
-                }
-            }
-
-            if (!isSpawn)
-                GameManagerArVik.RpcSpawnObject(pos, hitObject);
+            GameManagerArVik.SpawnObject(pos, hitObject);
         }
     }
 
@@ -52,7 +40,7 @@ public class CreateVikingPrefab : MonoBehaviour
 
         if (GameManagerArVik != null)
         {
-            GameManagerArVik.prefabName = "Ahri";
+            GameManagerArVik.prefabName = "AhriPrefab";
         }
     }
 
