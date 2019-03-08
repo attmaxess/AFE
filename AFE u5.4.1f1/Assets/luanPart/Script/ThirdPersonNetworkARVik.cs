@@ -18,16 +18,16 @@ public class ThirdPersonNetworkARVik : Photon.MonoBehaviour
         if (photonView.isMine)
         {
             //MINE: local player, simply enable the local scripts
-           // cameraScript.enabled = true;
+            // cameraScript.enabled = true;
             controllerScript.enabled = true;
-           // Camera.main.transform.parent = transform;
-           // Camera.main.transform.localPosition = new Vector3(0, 2, -10);
-           // Camera.main.transform.localEulerAngles = new Vector3(10, 0, 0);
+            // Camera.main.transform.parent = transform;
+            // Camera.main.transform.localPosition = new Vector3(0, 2, -10);
+            // Camera.main.transform.localEulerAngles = new Vector3(10, 0, 0);
 
         }
         else
         {
-           // cameraScript.enabled = false;
+            // cameraScript.enabled = false;
             controllerScript.enabled = true;
 
         }
@@ -44,6 +44,7 @@ public class ThirdPersonNetworkARVik : Photon.MonoBehaviour
             // stream.SendNext((int)controllerScript._characterState);
             stream.SendNext(transform.position);
             stream.SendNext(transform.rotation);
+            stream.SendNext(transform.localScale);
             stream.SendNext(GetComponent<Rigidbody>().velocity);
 
         }
@@ -53,6 +54,7 @@ public class ThirdPersonNetworkARVik : Photon.MonoBehaviour
             //controllerScript._characterState = (CharacterState)(int)stream.ReceiveNext();
             correctPlayerPos = (Vector3)stream.ReceiveNext();
             correctPlayerRot = (Quaternion)stream.ReceiveNext();
+            correctPlayerScale = (Vector3)stream.ReceiveNext();
             GetComponent<Rigidbody>().velocity = (Vector3)stream.ReceiveNext();
 
             if (!appliedInitialUpdate)
@@ -60,6 +62,7 @@ public class ThirdPersonNetworkARVik : Photon.MonoBehaviour
                 appliedInitialUpdate = true;
                 transform.position = correctPlayerPos;
                 transform.rotation = correctPlayerRot;
+                transform.localScale = correctPlayerScale;
                 GetComponent<Rigidbody>().velocity = Vector3.zero;
             }
         }
@@ -67,6 +70,7 @@ public class ThirdPersonNetworkARVik : Photon.MonoBehaviour
 
     private Vector3 correctPlayerPos = Vector3.zero; //We lerp towards this
     private Quaternion correctPlayerRot = Quaternion.identity; //We lerp towards this
+    private Vector3 correctPlayerScale = Vector3.zero; //We lerp towards this
 
     void Update()
     {
@@ -75,6 +79,7 @@ public class ThirdPersonNetworkARVik : Photon.MonoBehaviour
             //Update remote player (smooth this, this looks good, at the cost of some accuracy)
             transform.position = Vector3.Lerp(transform.position, correctPlayerPos, Time.deltaTime * 5);
             transform.rotation = Quaternion.Lerp(transform.rotation, correctPlayerRot, Time.deltaTime * 5);
+            transform.localScale = Vector3.Lerp(transform.localScale, correctPlayerScale, Time.deltaTime * 5);
         }
     }
 
@@ -86,8 +91,8 @@ public class ThirdPersonNetworkARVik : Photon.MonoBehaviour
 
         //disable the axe and shield meshrenderers based on the instantiate data
         MeshRenderer[] rens = GetComponentsInChildren<MeshRenderer>();
-        rens[0].enabled = mybools[0];//Axe
-        rens[1].enabled = mybools[1];//Shield
+        //rens[0].enabled = mybools[0];//Axe
+       // rens[1].enabled = mybools[1];//Shield
 
     }
 
