@@ -40,7 +40,7 @@ public class CreateVikingPrefab : MonoBehaviour
 
         if (GameManagerArVik != null)
         {
-            GameManagerArVik.prefabName = "AhriPrefab";
+            GameManagerArVik.prefabName = "AhriPrefabs";
         }
     }
 
