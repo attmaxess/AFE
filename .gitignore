@@ -63,3 +63,9 @@ AFE/sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+
+#ProjectVersion
+AFE u5.4.1f1/ProjectSettings/ProjectVersion.txt
+
+#BuildInfo
+AFE u5.4.1f1/Assets/StreamingAssets/build_info.txt
