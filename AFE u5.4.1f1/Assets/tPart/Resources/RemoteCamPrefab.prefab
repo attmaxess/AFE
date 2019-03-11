@@ -249,7 +249,7 @@ MonoBehaviour:
   onSerializeRigidBodyOption: 2
   ownershipTransfer: 0
   ObservedComponents:
-  - {fileID: 400006}
+  - {fileID: 114074924794337334}
   ObservedComponentsFoldoutOpen: 1
   viewIdField: 0
   instantiationId: -1
@@ -437,4 +437,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c06139d2cc5be84094340dfb509d4d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SimulCam: {fileID: 4097577596957964}

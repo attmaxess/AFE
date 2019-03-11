@@ -808,12 +808,12 @@ MonoBehaviour:
   group: 0
   OwnerShipWasTransfered: 0
   prefixBackup: -1
-  synchronization: 0
+  synchronization: 3
   onSerializeTransformOption: 3
   onSerializeRigidBodyOption: 2
   ownershipTransfer: 0
   ObservedComponents:
-  - {fileID: 0}
+  - {fileID: 282174291}
   ObservedComponentsFoldoutOpen: 1
   viewIdField: 1
   instantiationId: 1
@@ -845,103 +845,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isDebug: 0
   playerPrefabName: RemoteCamPrefab
---- !u!1001 &1439313868
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 400006, guid: 30362187a280cf44f9b89f9e8d28ad94, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 35.76
-      objectReference: {fileID: 0}
-    - target: {fileID: 400006, guid: 30362187a280cf44f9b89f9e8d28ad94, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 2.53
-      objectReference: {fileID: 0}
-    - target: {fileID: 400006, guid: 30362187a280cf44f9b89f9e8d28ad94, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 30.477028
-      objectReference: {fileID: 0}
-    - target: {fileID: 400006, guid: 30362187a280cf44f9b89f9e8d28ad94, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400006, guid: 30362187a280cf44f9b89f9e8d28ad94, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400006, guid: 30362187a280cf44f9b89f9e8d28ad94, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400006, guid: 30362187a280cf44f9b89f9e8d28ad94, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 400006, guid: 30362187a280cf44f9b89f9e8d28ad94, type: 2}
-      propertyPath: m_RootOrder
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400008, guid: 30362187a280cf44f9b89f9e8d28ad94, type: 2}
-      propertyPath: viewIdField
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400008, guid: 30362187a280cf44f9b89f9e8d28ad94, type: 2}
-      propertyPath: instantiationId
-      value: 2
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 30362187a280cf44f9b89f9e8d28ad94, type: 2}
-  m_IsPrefabAsset: 0
---- !u!1001 &2056651001
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 400006, guid: 255954ac3fbdb2a44afa02bc1b2f0b50, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 37.500957
-      objectReference: {fileID: 0}
-    - target: {fileID: 400006, guid: 255954ac3fbdb2a44afa02bc1b2f0b50, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 1.0284578
-      objectReference: {fileID: 0}
-    - target: {fileID: 400006, guid: 255954ac3fbdb2a44afa02bc1b2f0b50, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 30.477028
-      objectReference: {fileID: 0}
-    - target: {fileID: 400006, guid: 255954ac3fbdb2a44afa02bc1b2f0b50, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400006, guid: 255954ac3fbdb2a44afa02bc1b2f0b50, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400006, guid: 255954ac3fbdb2a44afa02bc1b2f0b50, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400006, guid: 255954ac3fbdb2a44afa02bc1b2f0b50, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 400006, guid: 255954ac3fbdb2a44afa02bc1b2f0b50, type: 2}
-      propertyPath: m_RootOrder
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400008, guid: 255954ac3fbdb2a44afa02bc1b2f0b50, type: 2}
-      propertyPath: viewIdField
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400008, guid: 255954ac3fbdb2a44afa02bc1b2f0b50, type: 2}
-      propertyPath: instantiationId
-      value: 3
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 255954ac3fbdb2a44afa02bc1b2f0b50, type: 2}
-  m_IsPrefabAsset: 0
