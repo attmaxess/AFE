@@ -3,9 +3,6 @@ using System.Collections;
 
 public class RemoteCamNetwork : Photon.MonoBehaviour
 {
-    [Header("Current Cam")]
-    public Transform SimulCam = null;
-
     private bool appliedInitialUpdate;
 
     void Awake()
@@ -18,11 +15,8 @@ public class RemoteCamNetwork : Photon.MonoBehaviour
         //TODO: Bugfix to allow .isMine and .owner from AWAKE!        
         if (photonView.isMine)
         {
-            if (SimulCam != null)
-            {
-                SimulCam.transform.position = Camera.main.transform.position;
-                SimulCam.transform.rotation = Camera.main.transform.rotation;
-            }
+            transform.position = Camera.main.transform.position;
+            transform.rotation = Camera.main.transform.rotation;
         }
 
         gameObject.name = gameObject.name + "_" + photonView.viewID;
@@ -38,8 +32,8 @@ public class RemoteCamNetwork : Photon.MonoBehaviour
         if (stream.isWriting)
         {
             //We own this player: send the others our data            
-            stream.SendNext(SimulCam.transform.position);
-            stream.SendNext(SimulCam.transform.rotation);
+            stream.SendNext(transform.position);
+            stream.SendNext(transform.rotation);
         }
         else
         {
@@ -50,8 +44,8 @@ public class RemoteCamNetwork : Photon.MonoBehaviour
             if (!appliedInitialUpdate)
             {
                 appliedInitialUpdate = true;
-                SimulCam.position = correctCamPos;
-                SimulCam.rotation = correctCamEuler;
+                transform.position = correctCamPos;
+                transform.rotation = correctCamEuler;
             }
         }
     }
@@ -61,18 +55,16 @@ public class RemoteCamNetwork : Photon.MonoBehaviour
 
     void Update()
     {
-        if (SimulCam == null) return;
-
         //Update remote player (smooth this, this looks good, at the cost of some accuracy)
         if (!photonView.isMine)
         {
-            SimulCam.position = Vector3.Lerp(SimulCam.position, correctCamPos, Time.deltaTime * 5);
-            SimulCam.rotation = Quaternion.Lerp(SimulCam.rotation, correctCamEuler, Time.deltaTime * 5);
+            transform.position = Vector3.Lerp(transform.position, correctCamPos, Time.deltaTime * 5);
+            transform.rotation = Quaternion.Lerp(transform.rotation, correctCamEuler, Time.deltaTime * 5);
         }
         else
         {
-            SimulCam.position = Vector3.Lerp(SimulCam.position, Camera.main.transform.position, Time.deltaTime * 5);
-            SimulCam.rotation = Quaternion.Lerp(SimulCam.rotation, Camera.main.transform.rotation, Time.deltaTime * 5);
+            transform.position = Vector3.Lerp(transform.position, Camera.main.transform.position, Time.deltaTime * 5);
+            transform.rotation = Quaternion.Lerp(transform.rotation, Camera.main.transform.rotation, Time.deltaTime * 5);
         }
     }
 
