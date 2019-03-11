@@ -14,6 +14,7 @@ public class ThirdPersonNetworkVik : Photon.MonoBehaviour
         controllerScript = GetComponent<ThirdPersonControllerNET>();
 
     }
+
     void Start()
     {
         //TODO: Bugfix to allow .isMine and .owner from AWAKE!
@@ -47,7 +48,6 @@ public class ThirdPersonNetworkVik : Photon.MonoBehaviour
             stream.SendNext(transform.position);
             stream.SendNext(transform.rotation);
             stream.SendNext(GetComponent<Rigidbody>().velocity);
-
         }
         else
         {

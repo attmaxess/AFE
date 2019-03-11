@@ -16,7 +16,7 @@ public class MainMenuVik : MonoBehaviour
         PhotonNetwork.playerName = PlayerPrefs.GetString("playerName", "Guest" + Random.Range(1, 9999));
 
         //Set camera clipping for nicer "main menu" background
-       // Camera.main.farClipPlane = Camera.main.nearClipPlane + 0.1f;
+        // Camera.main.farClipPlane = Camera.main.nearClipPlane + 0.1f;
 
     }
 

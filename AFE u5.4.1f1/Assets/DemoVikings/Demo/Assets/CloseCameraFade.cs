@@ -73,9 +73,12 @@ public class CloseCameraFade : MonoBehaviour
         {
             renderer.enabled = true;
             float alpha = 1.0f - (fadeDistance - distance) / (fadeDistance - hideDistance);
-            if (renderer.material.color.a != alpha)
+            if (renderer.material.HasProperty("_Color"))
             {
-                renderer.material.color = new Color(renderer.material.color.r, renderer.material.color.g, renderer.material.color.b, alpha);
+                if (renderer.material.color.a != alpha)
+                {
+                    renderer.material.color = new Color(renderer.material.color.r, renderer.material.color.g, renderer.material.color.b, alpha);
+                }
             }
         }
         else

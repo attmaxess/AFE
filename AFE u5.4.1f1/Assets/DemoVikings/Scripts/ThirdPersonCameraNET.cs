@@ -38,11 +38,9 @@ public class ThirdPersonCameraNET : MonoBehaviour
     private const float groundedDistance = 0.5f;
     // Tweak if the camera goes into ground mode too soon or late
 
-
     private Vector3 lastStationaryPosition;
     private float optimalDistance, targetDistance;
     private bool grounded = false;
-
 
     void Reset()
     // Run setup on component attach, so it is visually more clear which references are used
@@ -50,9 +48,8 @@ public class ThirdPersonCameraNET : MonoBehaviour
         Setup();
     }
 
-
-    void Setup()
     // If target and/or camera is not set, try using fallbacks
+    void Setup()
     {
         if (target == null)
         {
@@ -68,12 +65,11 @@ public class ThirdPersonCameraNET : MonoBehaviour
         }
     }
 
-
-    void Start()
     // Verify setup, initialise bookkeeping
+    void Start()
     {
-        Setup();
         // Retry setup if references were cleared post-add
+        Setup();
 
         if (target == null)
         {
@@ -93,9 +89,8 @@ public class ThirdPersonCameraNET : MonoBehaviour
         targetDistance = optimalDistance = (camera.transform.position - target.transform.position).magnitude;
     }
 
-
-    float ViewRadius
     // The minimum clear radius between the camera and the target
+    float ViewRadius
     {
         get
         {
@@ -107,9 +102,8 @@ public class ThirdPersonCameraNET : MonoBehaviour
         }
     }
 
-
-    Vector3 SnappedCameraForward
     // The camera forward vector, clamped to the target forward vector so only horizontal rotation is kept
+    Vector3 SnappedCameraForward
     {
         get
         {
@@ -120,9 +114,8 @@ public class ThirdPersonCameraNET : MonoBehaviour
         }
     }
 
-
-    void FixedUpdate()
     // See if the camera touches the ground and adjust the camera distance if an object blocks the view
+    void FixedUpdate()
     {
         grounded = Physics.Raycast(
             camera.transform.position + target.transform.up * -groundedCheckOffset,
@@ -135,8 +128,8 @@ public class ThirdPersonCameraNET : MonoBehaviour
         Vector3 inverseLineOfSight = camera.transform.position - target.transform.position;
 
         RaycastHit hit;
-        if (Physics.SphereCast(target.transform.position, ViewRadius, inverseLineOfSight, out hit, optimalDistance, obstacleLayers))
         // Cast a sphere from the target towards the camera - using the view radius - checking against the obstacle layers
+        if (Physics.SphereCast(target.transform.position, ViewRadius, inverseLineOfSight, out hit, optimalDistance, obstacleLayers))
         {
             targetDistance = Mathf.Min((hit.point - target.transform.position).magnitude, optimalDistance);
             // If something is hit, set the target distance to the hit position
@@ -148,9 +141,8 @@ public class ThirdPersonCameraNET : MonoBehaviour
         }
     }
 
-
-    void Update()
     // Update optimal distance based on scroll wheel input
+    void Update()
     {
         optimalDistance = Mathf.Clamp(
             optimalDistance + Input.GetAxis("Mouse ScrollWheel") * -zoomSpeed * Time.deltaTime,
@@ -159,9 +151,8 @@ public class ThirdPersonCameraNET : MonoBehaviour
         );
     }
 
-
-    void LateUpdate()
     // Update camera position - specifics are delegated to camera mode functions
+    void LateUpdate()
     {
         if (
             (Input.GetMouseButton(1)) &&    // Act if a mouse button is down
