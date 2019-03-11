@@ -15,9 +15,7 @@ public class RemoteCamNetwork : Photon.MonoBehaviour
 
     void Start()
     {
-        //TODO: Bugfix to allow .isMine and .owner from AWAKE!
-
-        //MINE: local player, simply enable the local scripts            
+        //TODO: Bugfix to allow .isMine and .owner from AWAKE!        
         if (photonView.isMine)
         {
             if (SimulCam != null)
