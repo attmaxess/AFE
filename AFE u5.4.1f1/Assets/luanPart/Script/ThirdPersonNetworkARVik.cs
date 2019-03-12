@@ -3,13 +3,13 @@
 public class ThirdPersonNetworkARVik : Photon.MonoBehaviour
 {
     ThirdPersonCameraNET cameraScript;
-    ThirdPersonControllerNET controllerScript;
+    ThirdPersonControllerARVik controllerScript;
     private bool appliedInitialUpdate;
 
     void Awake()
     {
         cameraScript = GetComponent<ThirdPersonCameraNET>();
-        controllerScript = GetComponent<ThirdPersonControllerNET>();
+        controllerScript = GetComponent<ThirdPersonControllerARVik>();
 
     }
     void Start()

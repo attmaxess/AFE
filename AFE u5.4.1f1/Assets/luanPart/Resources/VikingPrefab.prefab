@@ -310,11 +310,10 @@ GameObject:
   - component: {fileID: 136512392668964310}
   - component: {fileID: 54737333756911778}
   - component: {fileID: 114219644112509026}
-  - component: {fileID: 114554714486131724}
   - component: {fileID: 114237121465949068}
-  - component: {fileID: 114495931273094870}
   - component: {fileID: 114054249793271396}
   - component: {fileID: 114817034570833440}
+  - component: {fileID: 114023340216832774}
   m_Layer: 0
   m_Name: VikingPrefab
   m_TagString: Untagged
@@ -956,6 +955,30 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
+--- !u!114 &114023340216832774
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1735448285937578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e918395fb0ecb1741b164f46ecbacbc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 54737333756911778}
+  speed: 1
+  walkSpeedDownscale: 2
+  turnSpeed: 2
+  mouseTurnSpeed: 0.3
+  jumpSpeed: 1
+  groundLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  groundedCheckOffset: 0.7
+  showGizmos: 1
+  requireLock: 1
+  controlLock: 0
 --- !u!114 &114054249793271396
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1029,51 +1052,6 @@ MonoBehaviour:
   renderer: {fileID: 137774130249505700}
   fadeDistance: 1.5
   hideDistance: 1
---- !u!114 &114495931273094870
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1735448285937578}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75d12adc27cb2c240872471ed03dfdc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 111458968096102892}
-  rigidbody: {fileID: 54737333756911778}
-  root: {fileID: 4356567764147694}
-  spine: {fileID: 4751068985682238}
-  hub: {fileID: 4286909665146742}
-  walkSpeed: 0.2
-  runSpeed: 1.5
-  rotationSpeed: 5
-  shuffleSpeed: 7
-  runningLandingFactor: 0.2
---- !u!114 &114554714486131724
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1735448285937578}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2c7b9e828b49874882b1eb7db09a008, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 54737333756911778}
-  speed: 0.4
-  walkSpeedDownscale: 2
-  turnSpeed: 1.6207857
-  mouseTurnSpeed: 0.3
-  jumpSpeed: 6
-  groundLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  groundedCheckOffset: 0.7
-  showGizmos: 1
-  requireLock: 1
-  controlLock: 0
 --- !u!114 &114817034570833440
 MonoBehaviour:
   m_ObjectHideFlags: 1

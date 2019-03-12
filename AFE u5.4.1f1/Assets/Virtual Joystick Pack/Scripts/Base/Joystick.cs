@@ -17,6 +17,41 @@ public class Joystick : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointer
     public float Vertical { get { return inputVector.y; } }
     public Vector2 Direction { get { return new Vector2(Horizontal, Vertical); } }
 
+
+    static Joystick singleton;
+    public static Joystick Singleton
+    {
+        get
+        {
+            if (singleton == null)
+            {
+                Debug.LogError("Dont Have Joystick. Crate A Joystick");
+                return null;
+            }
+
+            return singleton;
+        }
+    }
+
+
+    void Awake()
+    {
+        if (singleton == null)
+        {
+            singleton = this;
+        }
+        else
+        {
+            Debug.LogWarning("Your scene have many Joystick. Destroy others");
+            DestroyImmediate(gameObject);
+        }
+    }
+
+    void OnDestroy()
+    {
+        singleton = null;
+    }
+
     public virtual void OnDrag(PointerEventData eventData)
     {
 
@@ -41,4 +76,4 @@ public class Joystick : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointer
     }
 }
 
-public enum JoystickMode { AllAxis, Horizontal, Vertical}
+public enum JoystickMode { AllAxis, Horizontal, Vertical }
