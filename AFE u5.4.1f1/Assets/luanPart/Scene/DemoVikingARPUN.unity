@@ -1857,33 +1857,6 @@ Prefab:
       propertyPath: text
       value: 
       objectReference: {fileID: 1361131290}
-    - target: {fileID: 1470505875531852, guid: 00ab02b5ea58b514ea94aab856b2e4a3, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1596502463869774, guid: 00ab02b5ea58b514ea94aab856b2e4a3, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1950990862098118, guid: 00ab02b5ea58b514ea94aab856b2e4a3, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 224987346858464306, guid: 00ab02b5ea58b514ea94aab856b2e4a3,
-        type: 2}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224987346858464306, guid: 00ab02b5ea58b514ea94aab856b2e4a3,
-        type: 2}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 223337875986236150, guid: 00ab02b5ea58b514ea94aab856b2e4a3,
-        type: 2}
-      propertyPath: m_SortingOrder
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 00ab02b5ea58b514ea94aab856b2e4a3, type: 2}
   m_IsPrefabAsset: 0
