@@ -25,7 +25,7 @@ public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
             joystick = Joystick.Singleton;
         if (rotateChar != null)
         {
-            rotateChar = GetComponent<ICharacterTranform>();
+            rotateChar = GameObject.FindObjectOfType<RotateChar>() as ICharacterTranform;
         }
     }
 
@@ -37,7 +37,7 @@ public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
 
         transform.localRotation = Quaternion.Euler(0, rot.eulerAngles.y, 0);
 
-        //  transform.Translate(moveVector * speed * Time.deltaTime, Space.World);
+        transform.Translate(moveVector * speed * Time.deltaTime, Space.World);
 
         child.localPosition = new Vector3(joystick.Horizontal / 2, 0.5f, joystick.Vertical / 2);
 
@@ -46,10 +46,15 @@ public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
 
             rotateChar.RotateBy(moveVector);
 
-            //  rotateChar.PositionBy(transform.position);
+            rotateChar.PositionBy(transform.position);
 
-            transform.position = rotateChar.transform.position;
+            //   transform.position = rotateChar.transform.position;
         }
+        else
+        {
+            rotateChar = GameObject.FindObjectOfType<RotateChar>() as ICharacterTranform;
+        }
+
     }
 }
 
