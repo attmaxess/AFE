@@ -3,7 +3,7 @@ using System.Collections;
 
 public delegate void JumpDelegate();
 
-public class ThirdPersonControllerNET : MonoBehaviour
+public class ThirdPersonControllerNET : MonoBehaviour, ICharacterTranform
 {
     public Rigidbody target;
     // The object we're steering
@@ -43,6 +43,12 @@ public class ThirdPersonControllerNET : MonoBehaviour
         {
             return grounded;
         }
+    }
+
+    public bool InCamera
+    {
+        get;
+        set;
     }
 
     public void SetIsRemotePlayer(bool val)
@@ -223,5 +229,17 @@ public class ThirdPersonControllerNET : MonoBehaviour
         Gizmos.color = grounded ? Color.blue : Color.red;
         Gizmos.DrawLine(target.transform.position + target.transform.up * -groundedCheckOffset,
             target.transform.position + target.transform.up * -(groundedCheckOffset + groundedDistance));
+    }
+
+    public bool IsMine { get { return GetComponent<PhotonView>().isMine; } }
+
+    public void PositionBy(Vector3 position)
+    {
+        transform.position = new Vector3(position.x, transform.position.y, position.z);
+    }
+
+    public void RotateBy(Vector3 moveVector)
+    {
+        transform.rotation = Quaternion.LookRotation(moveVector);
     }
 }

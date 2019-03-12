@@ -3,13 +3,13 @@
 public class ThirdPersonNetworkARVik : Photon.MonoBehaviour
 {
     ThirdPersonCameraNET cameraScript;
-    ThirdPersonControllerARVik controllerScript;
+    ThirdPersonControllerNET controllerScript;
     private bool appliedInitialUpdate;
 
     void Awake()
     {
         cameraScript = GetComponent<ThirdPersonCameraNET>();
-        controllerScript = GetComponent<ThirdPersonControllerARVik>();
+        controllerScript = GetComponent<ThirdPersonControllerNET>();
 
     }
     void Start()
@@ -17,13 +17,8 @@ public class ThirdPersonNetworkARVik : Photon.MonoBehaviour
         //TODO: Bugfix to allow .isMine and .owner from AWAKE!
         if (photonView.isMine)
         {
-            //MINE: local player, simply enable the local scripts
-            // cameraScript.enabled = true;
+            //MINE: local player, simply enable the local scripts            
             controllerScript.enabled = true;
-            // Camera.main.transform.parent = transform;
-            // Camera.main.transform.localPosition = new Vector3(0, 2, -10);
-            // Camera.main.transform.localEulerAngles = new Vector3(10, 0, 0);
-
         }
         else
         {

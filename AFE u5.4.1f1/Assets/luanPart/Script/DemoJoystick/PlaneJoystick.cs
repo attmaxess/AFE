@@ -5,6 +5,13 @@ using UnityEngine;
 
 public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
 {
+    [Header("Debug")]
+    public bool isDebug = false;
+
+    [Header("Process")]
+    public bool useUpdate = true;
+
+    [Header("Input")]
     public float speed = 1;
     public Joystick joystick;
     public Transform child;
@@ -53,6 +60,8 @@ public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
 
     void Update()
     {
+        if (!useUpdate) return;
+
         Vector3 moveVector = (transform.right * joystick.Horizontal + transform.forward * joystick.Vertical);
 
         var rot = Quaternion.LookRotation(Camera.main.transform.forward);
