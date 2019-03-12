@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
@@ -25,7 +26,28 @@ public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
             joystick = Joystick.Singleton;
         if (rotateChar != null)
         {
-            rotateChar = GameObject.FindObjectOfType<RotateChar>() as ICharacterTranform;
+
+            var mObjs = GameObject.FindObjectsOfType<MonoBehaviour>();
+            ICharacterTranform[] interfaceScripts = (from a in mObjs where a.GetType().GetInterfaces().Any(k => k == typeof(ICharacterTranform)) select (ICharacterTranform)a).ToArray();
+            if (interfaceScripts.Length > 0)
+            {
+                for (int i = 0; i < interfaceScripts.Length; i++)
+                {
+                    if (interfaceScripts[i].IsMine)
+                    {
+                        rotateChar = interfaceScripts[i];
+                        break;
+                    }
+                }
+                if (rotateChar == null)
+                {
+                    Debug.Log("Dont Have Local Character");
+                }
+            }
+            else
+            {
+                Debug.Log("Dont Find Any Gameobject Have ICharacterTranform");
+            }
         }
     }
 
@@ -52,7 +74,27 @@ public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
         }
         else
         {
-            rotateChar = GameObject.FindObjectOfType<RotateChar>() as ICharacterTranform;
+            var mObjs = GameObject.FindObjectsOfType<MonoBehaviour>();
+            ICharacterTranform[] interfaceScripts = (from a in mObjs where a.GetType().GetInterfaces().Any(k => k == typeof(ICharacterTranform)) select (ICharacterTranform)a).ToArray();
+            if (interfaceScripts.Length > 0)
+            {
+                for (int i = 0; i < interfaceScripts.Length; i++)
+                {
+                    if (interfaceScripts[i].IsMine)
+                    {
+                        rotateChar = interfaceScripts[i];
+                        break;
+                    }
+                }
+                if (rotateChar == null)
+                {
+                    Debug.Log("Dont Have Local Character");
+                }
+            }
+            else
+            {
+                Debug.Log("Dont Find Any Gameobject Have ICharacterTranform");
+            }
         }
 
     }
@@ -69,4 +111,5 @@ public interface ICharacterTranform
     void RotateBy(Vector3 moveVector);
     Transform transform { get; }
     bool IsMine { get; }
+    bool InCamera { get; set; }
 }

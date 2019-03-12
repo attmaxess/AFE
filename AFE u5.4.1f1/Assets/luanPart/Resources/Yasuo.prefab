@@ -35,14 +35,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4353409855080512}
   - component: {fileID: 95429267213413964}
+  - component: {fileID: 136537676470172492}
+  - component: {fileID: 54584789213436888}
   - component: {fileID: 114615823143006084}
   - component: {fileID: 114862934561301302}
-  - component: {fileID: 114508957298458700}
   - component: {fileID: 114204836091391366}
-  - component: {fileID: 54584789213436888}
-  - component: {fileID: 136537676470172492}
-  - component: {fileID: 114365258285065800}
-  - component: {fileID: 114550949560352406}
   m_Layer: 0
   m_Name: Yasuo
   m_TagString: Untagged
@@ -3466,80 +3463,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 54584789213436888}
-  speed: 1
-  walkSpeedDownscale: 2
-  turnSpeed: 2
-  mouseTurnSpeed: 0.3
-  jumpSpeed: 1
-  groundLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
   groundedCheckOffset: 0.7
   showGizmos: 1
   requireLock: 1
   controlLock: 0
---- !u!114 &114365258285065800
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1002664876452456}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce7a80d520cacc042b5fe14f373d8173, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_MovingTurnSpeed: 360
-  m_StationaryTurnSpeed: 180
-  m_JumpPower: 12
-  m_GravityMultiplier: 2
-  m_RunCycleLegOffset: 0.2
-  m_MoveSpeedMultiplier: 1
-  m_AnimSpeedMultiplier: 1
-  m_GroundCheckDistance: 0.1
---- !u!114 &114508957298458700
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1002664876452456}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 521a6423455b24049a19bf2f4bc7cef6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 136512392668964310, guid: 1394b4d2e380edd45baa7ab875a87895, type: 2}
-  camera: {fileID: 0}
-  obstacleLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  groundLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  groundedCheckOffset: 0.7
-  rotationUpdateSpeed: 60
-  lookUpSpeed: 20
-  distanceUpdateSpeed: 10
-  followUpdateSpeed: 10
-  maxForwardAngle: 80
-  minDistance: 0.1
-  maxDistance: 10
-  zoomSpeed: 500
-  showGizmos: 1
-  requireLock: 1
-  controlLock: 1
---- !u!114 &114550949560352406
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1002664876452456}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 521b611700410be45810047f0a74e899, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  InScreen: 0
 --- !u!114 &114615823143006084
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3560,7 +3487,7 @@ MonoBehaviour:
   onSerializeRigidBodyOption: 2
   ownershipTransfer: 0
   ObservedComponents:
-  - {fileID: 114817034570833440, guid: 1394b4d2e380edd45baa7ab875a87895, type: 2}
+  - {fileID: 0}
   ObservedComponentsFoldoutOpen: 1
   viewIdField: 0
   instantiationId: -1

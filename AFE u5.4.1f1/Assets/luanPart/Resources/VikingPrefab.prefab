@@ -309,11 +309,9 @@ GameObject:
   - component: {fileID: 4356567764147694}
   - component: {fileID: 136512392668964310}
   - component: {fileID: 54737333756911778}
-  - component: {fileID: 114219644112509026}
-  - component: {fileID: 114237121465949068}
   - component: {fileID: 114054249793271396}
-  - component: {fileID: 114817034570833440}
-  - component: {fileID: 114023340216832774}
+  - component: {fileID: 114906971693482658}
+  - component: {fileID: 114509263920561124}
   m_Layer: 0
   m_Name: VikingPrefab
   m_TagString: Untagged
@@ -955,30 +953,6 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
---- !u!114 &114023340216832774
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1735448285937578}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e918395fb0ecb1741b164f46ecbacbc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 54737333756911778}
-  speed: 1
-  walkSpeedDownscale: 2
-  turnSpeed: 2
-  mouseTurnSpeed: 0.3
-  jumpSpeed: 1
-  groundLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  groundedCheckOffset: 0.7
-  showGizmos: 1
-  requireLock: 1
-  controlLock: 0
 --- !u!114 &114054249793271396
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -999,60 +973,13 @@ MonoBehaviour:
   onSerializeRigidBodyOption: 2
   ownershipTransfer: 0
   ObservedComponents:
-  - {fileID: 114817034570833440}
+  - {fileID: 0}
   ObservedComponentsFoldoutOpen: 1
   viewIdField: 0
   instantiationId: -1
   currentMasterID: -1
   isRuntimeInstantiated: 0
---- !u!114 &114219644112509026
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1735448285937578}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 521a6423455b24049a19bf2f4bc7cef6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 136512392668964310}
-  camera: {fileID: 0}
-  obstacleLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  groundLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  groundedCheckOffset: 0.7
-  rotationUpdateSpeed: 60
-  lookUpSpeed: 20
-  distanceUpdateSpeed: 10
-  followUpdateSpeed: 10
-  maxForwardAngle: 80
-  minDistance: 0.1
-  maxDistance: 10
-  zoomSpeed: 500
-  showGizmos: 1
-  requireLock: 1
-  controlLock: 1
---- !u!114 &114237121465949068
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1735448285937578}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d3372ae4da3e8144b126a4cef944081, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  camera: {fileID: 0}
-  cameraTarget: {fileID: 4356567764147694}
-  renderer: {fileID: 137774130249505700}
-  fadeDistance: 1.5
-  hideDistance: 1
---- !u!114 &114817034570833440
+--- !u!114 &114509263920561124
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1063,6 +990,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 368a2ef587e966d42b3788c3b1acbd84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114906971693482658
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1735448285937578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e918395fb0ecb1741b164f46ecbacbc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 54737333756911778}
+  groundedCheckOffset: 0.7
+  showGizmos: 1
+  requireLock: 1
+  controlLock: 0
 --- !u!136 &136512392668964310
 CapsuleCollider:
   m_ObjectHideFlags: 1

@@ -14,6 +14,12 @@ public class RotateChar : MonoBehaviour, ICharacterTranform
         }
     }
 
+    public bool InCamera
+    {
+        get;
+        set;
+    }
+
     public void RotateBy(Vector3 dir)
     {
         transform.rotation = Quaternion.LookRotation(dir);
@@ -26,8 +32,8 @@ public class RotateChar : MonoBehaviour, ICharacterTranform
 
     private void Update()
     {
-      //  Vector3 moveVector = (transform.right * Joystick.Singleton.Horizontal + transform.forward * Joystick.Singleton.Vertical);
-      //  transform.Translate(moveVector * speed * Time.deltaTime, Space.World);
+        //  Vector3 moveVector = (transform.right * Joystick.Singleton.Horizontal + transform.forward * Joystick.Singleton.Vertical);
+        //  transform.Translate(moveVector * speed * Time.deltaTime, Space.World);
 
     }
 }
