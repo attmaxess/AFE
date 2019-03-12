@@ -1,7 +1,5 @@
 ﻿using System;
 using UnityEngine;
-using UnityStandardAssets;
-using UnityStandardAssets.CrossPlatformInput;
 
 public class ThirdPersonControllerARVik : MonoBehaviour, ICharacterTranform
 {
