@@ -82,8 +82,8 @@ public class GameManagerArVik : Photon.PunBehaviour
         }
 
         var newChar = PhotonNetwork.Instantiate(prefabName, pos, Quaternion.identity, 0);
-
-      //  photonView.RPC("RpcSpawnObject", PhotonTargets.MasterClient, pos, prefabName);
+        GameObject.Instantiate(Resources.Load("PlaneJoystick"), pos, Quaternion.identity);
+        //  photonView.RPC("RpcSpawnObject", PhotonTargets.MasterClient, pos, prefabName);
     }
 
     [PunRPC]

@@ -27,7 +27,11 @@ public class ThirdPersonControllerARVik : MonoBehaviour, ICharacterTranform
         }
     }
 
-
+    public bool InCamera
+    {
+        get;
+        set;
+    }
 
     void Reset()
     {
@@ -70,7 +74,7 @@ public class ThirdPersonControllerARVik : MonoBehaviour, ICharacterTranform
             target.transform.position + target.transform.up * -(groundedCheckOffset + groundedDistance));
     }
 
-    internal void SetIsRemotePlayer(bool v)
+    public void SetIsRemotePlayer(bool v)
     {
     }
 
@@ -78,11 +82,11 @@ public class ThirdPersonControllerARVik : MonoBehaviour, ICharacterTranform
 
     public void PositionBy(Vector3 position)
     {
-        throw new System.NotImplementedException();
+        transform.position = new Vector3(position.x, transform.position.y, position.z);
     }
 
     public void RotateBy(Vector3 moveVector)
     {
-        throw new System.NotImplementedException();
+        transform.rotation = Quaternion.LookRotation(moveVector);
     }
 }

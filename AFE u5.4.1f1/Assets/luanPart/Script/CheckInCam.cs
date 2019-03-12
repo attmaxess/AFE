@@ -8,21 +8,21 @@ using UnityStandardAssets.Characters.ThirdPerson;
 public class CheckInCam : MonoBehaviour
 {
 
-    ThirdPersonUserControl thirdPersonUserControl;
+    ICharacterTranform thirdPersonUserControl;
     private void Awake()
     {
-        thirdPersonUserControl = GetComponentInParent<ThirdPersonUserControl>();
+        thirdPersonUserControl = GetComponentInParent<ICharacterTranform>();
     }
 
     private void OnBecameVisible()
     {
+        thirdPersonUserControl.InCamera = true;
         Debug.Log("OnBecame Visible");
-        thirdPersonUserControl.InScreen = true;
     }
 
     private void OnBecameInvisible()
     {
+        thirdPersonUserControl.InCamera = false;
         Debug.Log("OnBecame Invisible");
-        thirdPersonUserControl.InScreen = false;
     }
 }
