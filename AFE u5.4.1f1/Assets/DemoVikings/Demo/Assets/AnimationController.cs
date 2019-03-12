@@ -4,14 +4,16 @@ using System.Collections;
 [RequireComponent (typeof (ThirdPersonControllerNET))]
 public class AnimationController : MonoBehaviour
 {
-	enum CharacterState
+    [Header("Debug")]
+    public bool isDebug = false;
+
+	public enum CharacterState
 	{
 		Normal,
 		Jumping,
 		Falling,
 		Landing
-	}
-	
+	}	
 	
 	public Animation target;
 		// The animation component being controlled
@@ -29,30 +31,32 @@ public class AnimationController : MonoBehaviour
 			// The speed at which the character shuffles his feet back into place after an on-the-spot rotation
 		runningLandingFactor = 0.2f;
 			// Reduces the duration of the landing animation when the rigidbody has hoizontal movement
-	
-	
+		
 	private ThirdPersonControllerNET controller;
-	private CharacterState state = CharacterState.Falling;
+	public CharacterState state = CharacterState.Falling;
 	private bool canLand = true;
 	private float currentRotation;
 	private Vector3 lastRootForward;
-	
-	
-	private Vector3 HorizontalMovement
+
+    [Header("Movement")]
+    public Vector3 _currentHoriMove = Vector3.zero;
+    public float _currentHoriMoveMag = 0f;
+
+    private Vector3 HorizontalMovement
 	{
 		get
 		{
-			return new Vector3 (rigidbody.velocity.x, 0.0f, rigidbody.velocity.z);
+            _currentHoriMove = new Vector3(rigidbody.velocity.x, 0.0f, rigidbody.velocity.z);
+            _currentHoriMoveMag = _currentHoriMove.magnitude;
+            return _currentHoriMove;
 		}
-	}
-	
+	}	
 	
 	void Reset ()
 	// Run setup on component attach, so it is visually more clear which references are used
 	{
 		Setup ();
-	}
-	
+	}	
 	
 	void Setup ()
 	// If target or rigidbody are not set, try using fallbacks
@@ -66,8 +70,7 @@ public class AnimationController : MonoBehaviour
 		{
 			rigidbody = GetComponent<Rigidbody> ();
 		}
-	}
-	
+	}	
 	
 	void Start ()
 	// Verify setup, configure
@@ -83,8 +86,7 @@ public class AnimationController : MonoBehaviour
 			currentRotation = 0.0f;
 			lastRootForward = root.forward;
 		}
-	}
-	
+	}	
 	
 	bool VerifySetup ()
 	{
@@ -93,8 +95,7 @@ public class AnimationController : MonoBehaviour
 			VerifySetup (root, "root") &&
 			VerifySetup (spine, "spine") &&
 			VerifySetup (hub, "hub");
-	}
-	
+	}	
 	
 	bool VerifySetup (Component component, string name)
 	{
@@ -107,54 +108,58 @@ public class AnimationController : MonoBehaviour
 		}
 		
 		return true;
-	}
-	
+	}	
 	
 	void OnJump ()
 	// Start a jump
 	{
+        if (isDebug) Debug.Log("OnJump" + transform.name);
 		canLand = false;
 		state = CharacterState.Jumping;
-		
-		Invoke ("Fall", target["Jump"].length);
-	}
-	
+
+        if (isDebug) Debug.Log("Invoke Fall in : " + target["Jump"].length);
+        Invoke ("Fall", target["Jump"].length);
+	}	
 	
 	void OnLand ()
 	// Start a landing
 	{
-		canLand = false;
+        if (isDebug) Debug.Log("OnLand" + transform.name);
+        canLand = false;
 		state = CharacterState.Landing;
-		
-		Invoke (
+
+        if (isDebug) Debug.Log("Invoke Land in " + target["Land"].length * (HorizontalMovement.magnitude < walkSpeed ? 1.0f : runningLandingFactor));
+        Invoke (
 			"Land",
 			target["Land"].length * (HorizontalMovement.magnitude < walkSpeed ? 1.0f : runningLandingFactor)
 				// Land quicker if we're moving enough horizontally to start walking after landing
 		);
-	}
-	
+	}	
 	
 	void Fall ()
 	// End a jump and transition to a falling state (ignore if already grounded)
 	{
-		if (controller.Grounded)
+        if (isDebug) Debug.Log("Fall" + transform.name);
+        if (isDebug) Debug.Log("Current controller.Grounded " + controller.Grounded);
+
+        state = CharacterState.Falling;
+
+        if (controller.Grounded)
 		{
 			return;
 		}
-		state = CharacterState.Falling;
-	}
-	
+	}	
 	
 	void Land ()
 	// End a landing and transition to normal animation state (ignore if not currently landing)
 	{
-		if (state != CharacterState.Landing)
+        if (isDebug) Debug.Log("Land" + transform.name);
+        if (state != CharacterState.Landing)
 		{
 			return;
 		}
 		state = CharacterState.Normal;
-	}
-	
+	}	
 	
 	void FixedUpdate ()
 	// Handle changes in groundedness
@@ -163,68 +168,86 @@ public class AnimationController : MonoBehaviour
 		{
 			if (state == CharacterState.Falling || (state == CharacterState.Jumping && canLand))
 			{
+                if (isDebug) Debug.Log("OnLand() because of state = " + state + "canLand = " + canLand);
 				OnLand ();
 			}
 		}
 		else if (state == CharacterState.Jumping)
 		{
-			canLand = true;
+            if (isDebug) Debug.Log("canLand = true because of state = " + state);
+            canLand = true;
 		}
 	}
-
-
+    
 	void Update ()
 	// Animation control
 	{
-		switch (state)
+        if (isDebug) Debug.Log("Current state : " + state);
+
+        switch (state)
 		{
 			case CharacterState.Normal:
-				Vector3 movement = HorizontalMovement; 
+                Vector3 movement = HorizontalMovement; 
 			
 				if (movement.magnitude < walkSpeed)
 				{
-					if (Vector3.Angle (lastRootForward, root.forward) > 1.0f)
+                    if (isDebug) Debug.Log("movement.magnitude : " + movement.magnitude + " < " + "walkSpeed : " + walkSpeed);
+
+                    if (Vector3.Angle (lastRootForward, root.forward) > 1.0f)
 					// If the character has rotated on the spot, shuffle his feet a bit
 					{
-						target.CrossFade ("Shuffle");
+                        if (isDebug) Debug.Log("target.CrossFade (Shuffle) because of Angle(lastRootForward, root.forward) > 1 : " + Vector3.Angle(lastRootForward, root.forward));
+                        target.CrossFade ("Shuffle");
 						
 						lastRootForward = Vector3.Slerp (lastRootForward, root.forward, Time.deltaTime * shuffleSpeed);
 					}
 					else
 					{
-						target.CrossFade ("Idle");
+                        if (isDebug) Debug.Log("target.CrossFade (Shuffle) because of Angle(lastRootForward, root.forward) <= 1 : " + Vector3.Angle(lastRootForward, root.forward));
+                        target.CrossFade ("Idle");
 					}
 				}
 				else
 				{
-					target["Walk"].speed = target["Run"].speed =
+                    if (isDebug) Debug.Log("movement.magnitude : " + movement.magnitude + " >= " + "walkSpeed : " + walkSpeed);
+
+                    target["Walk"].speed = target["Run"].speed =
 						Vector3.Angle (root.forward, movement) > 91.0f ? -1.0f : 1.0f;
 						// If the direction if backwards, play the animations backwards
 					
 					if (movement.magnitude < runSpeed)
 					{
-						target.CrossFade ("Walk");
+                        if (isDebug) Debug.Log("target.CrossFade (Walk) because " + movement.magnitude + " < " + "runSpeed : " + runSpeed);
+
+                        target.CrossFade ("Walk");
 					}
 					else
 					{
-						target.CrossFade ("Run");
+                        if (isDebug) Debug.Log("target.CrossFade (Run) because " + movement.magnitude + " > " + "runSpeed : " + runSpeed);
+
+                        target.CrossFade ("Run");
 					}
 					
 					lastRootForward = root.forward;
 				}
 			break;
+
 			case CharacterState.Jumping:
-				target.CrossFade ("Jump");
+                if (isDebug) Debug.Log("target.CrossFade (Jump) because state = " + state);
+                target.CrossFade ("Jump");
 			break;
+
 			case CharacterState.Falling:
-				target.CrossFade ("Fall");
+                if (isDebug) Debug.Log("target.CrossFade (Fall) because state = " + state);
+                target.CrossFade ("Fall");
 			break;
+
 			case CharacterState.Landing:
-				target.CrossFade ("Land");
+                if (isDebug) Debug.Log("target.CrossFade (Land) because state = " + state);
+                target.CrossFade ("Land");
 			break;
 		}
-	}
-	
+	}	
 	
 	void LateUpdate ()
 	// Apply directional rotation of lower body

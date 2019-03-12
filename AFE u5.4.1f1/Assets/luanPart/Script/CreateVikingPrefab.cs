@@ -40,7 +40,7 @@ public class CreateVikingPrefab : MonoBehaviour
 
         if (GameManagerArVik != null)
         {
-            GameManagerArVik.prefabName = "AhriPrefabs";
+            GameManagerArVik.prefabName = "AhriPrefab";
         }
     }
 
@@ -53,7 +53,20 @@ public class CreateVikingPrefab : MonoBehaviour
 
         if (GameManagerArVik != null)
         {
-            GameManagerArVik.prefabName = "Yasuo";
+            GameManagerArVik.prefabName = "YasuoPrefab";
+        }
+    }
+
+    public void ClickSpawn(string characterPrefab)
+    {
+        if (GameManagerArVik == null)
+        {
+            GameManagerArVik = GameObject.FindObjectOfType<GameManagerArVik>();
+        }
+
+        if (GameManagerArVik != null)
+        {
+            GameManagerArVik.prefabName = characterPrefab;
         }
     }
 }

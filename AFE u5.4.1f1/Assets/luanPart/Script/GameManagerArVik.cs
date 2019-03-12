@@ -23,7 +23,7 @@ public class GameManagerArVik : Photon.PunBehaviour
 
     private void Awake()
     {
-        // ArkitUIManager = GameObject.FindObjectOfType<ArkitUIManager>();
+        
     }
 
     IEnumerator OnLeftRoom()
@@ -38,7 +38,6 @@ public class GameManagerArVik : Photon.PunBehaviour
             yield return 0;
 
         UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
-
     }
 
     private void Start()
@@ -90,5 +89,6 @@ public class GameManagerArVik : Photon.PunBehaviour
     [PunRPC]
     public void RpcSpawnObject(Vector3 pos, string prefabName)
     {
+
     }
 }

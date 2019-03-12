@@ -26,7 +26,6 @@ public class RemoteCamManager : Photon.MonoBehaviour
             yield return 0;
 
         UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
-
     }
 
     void StartGame()

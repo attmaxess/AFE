@@ -257,7 +257,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1488891913554322
 GameObject:
   m_ObjectHideFlags: 1
@@ -949,7 +949,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c61418c8bf6f0343baf880e4ce53bbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabName: VikingPrefab
   text: {fileID: 0}
 --- !u!114 &114330202692850248
 MonoBehaviour:
@@ -1120,7 +1119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dacdafa4cccf08d44b67e1effb69cdf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabPlane100m: {fileID: 1573982225634346, guid: 4c087e8143a969146a256da67278b76d,
+  prefabPlane100m: {fileID: 1573982225634346, guid: 36fb68940f9445c46a37153b1405e001,
     type: 2}
 --- !u!114 &114531334358729182
 MonoBehaviour:
@@ -1495,7 +1494,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 30000
+  m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!224 &224107866868476856
 RectTransform:

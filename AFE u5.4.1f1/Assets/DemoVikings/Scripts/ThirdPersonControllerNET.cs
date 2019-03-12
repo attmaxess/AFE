@@ -32,8 +32,7 @@ public class ThirdPersonControllerNET : MonoBehaviour
     private const float groundedDistance = 0.5f;
     // Tweak if character lands too soon or gets stuck "in air" often
 
-
-    private bool grounded, walking;
+    public bool grounded, walking;
 
     private bool isRemotePlayer = true;
 
@@ -67,7 +66,6 @@ public class ThirdPersonControllerNET : MonoBehaviour
         }
     }
 
-
     void Start()
     // Verify setup, configure rigidbody
     {
@@ -85,7 +83,6 @@ public class ThirdPersonControllerNET : MonoBehaviour
         // We will be controlling the rotation of the target, so we tell the physics system to leave it be
         walking = false;
     }
-
 
     void Update()
     // Handle rotation here to ensure smooth application.
@@ -124,7 +121,6 @@ public class ThirdPersonControllerNET : MonoBehaviour
         }
     }
 
-
     float SidestepAxisInput
     // If the right mouse button is held, the horizontal axis also turns into sidestep handling
     {
@@ -145,7 +141,6 @@ public class ThirdPersonControllerNET : MonoBehaviour
         }
     }
 
-
     void FixedUpdate()
     // Handle movement here since physics will only be calculated in fixed frames anyway
     {
@@ -159,7 +154,6 @@ public class ThirdPersonControllerNET : MonoBehaviour
         // Shoot a ray downward to see if we're touching the ground
 
         if (isRemotePlayer) return;
-
 
         if (grounded)
         {
