@@ -17,6 +17,13 @@ public class RemoteCamNetwork : Photon.MonoBehaviour
         {
             transform.position = Camera.main.transform.position;
             transform.rotation = Camera.main.transform.rotation;
+
+#if UNITY_IOS
+            foreach (MeshRenderer mr in GetComponentsInChildren<MeshRenderer>())
+            {
+                mr.enabled = false;
+            }
+#endif
         }
 
         gameObject.name = gameObject.name + "_" + photonView.viewID;
