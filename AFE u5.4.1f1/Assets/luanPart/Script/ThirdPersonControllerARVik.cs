@@ -57,8 +57,6 @@ public class ThirdPersonControllerARVik : MonoBehaviour, ICharacterTranform
 
     }
 
-
-
     void OnDrawGizmos()
     // Use gizmos to gain information about the state of your setup
     {
@@ -74,6 +72,7 @@ public class ThirdPersonControllerARVik : MonoBehaviour, ICharacterTranform
 
     public void SetIsRemotePlayer(bool v)
     {
+
     }
 
     public bool IsMine { get { return GetComponent<PhotonView>().isMine; } }

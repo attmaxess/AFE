@@ -3,12 +3,15 @@
 public class ThirdPersonNetworkARVik : Photon.MonoBehaviour
 {
     ThirdPersonCameraNET cameraScript;
+    ThirdPersonCameraFocusNET cameraFocusScript;
+
     ThirdPersonControllerNET controllerScript;
     private bool appliedInitialUpdate;
 
     void Awake()
     {
         cameraScript = GetComponent<ThirdPersonCameraNET>();
+        cameraFocusScript = GetComponent<ThirdPersonCameraFocusNET>();
         controllerScript = GetComponent<ThirdPersonControllerNET>();
 
     }
@@ -17,15 +20,23 @@ public class ThirdPersonNetworkARVik : Photon.MonoBehaviour
         //TODO: Bugfix to allow .isMine and .owner from AWAKE!
         if (photonView.isMine)
         {
-            //MINE: local player, simply enable the local scripts            
+            //MINE: local player, simply enable the local scripts
+#if UNITY_EDITOR || UNITY_STANDALONE
+            //cameraScript.enabled = true;
+            cameraFocusScript.enabled = true;
+#elif UNITY_IOS
+            //cameraScript.enabled = false;
+            cameraFocusScript.enabled = false;
+#endif
             controllerScript.enabled = true;
         }
         else
         {
-            // cameraScript.enabled = false;
-            controllerScript.enabled = true;
-
+            //cameraScript.enabled = false;
+            cameraFocusScript.enabled = false;
+            controllerScript.enabled = false;
         }
+
         controllerScript.SetIsRemotePlayer(!photonView.isMine);
 
         gameObject.name = gameObject.name + photonView.viewID;
@@ -35,37 +46,29 @@ public class ThirdPersonNetworkARVik : Photon.MonoBehaviour
     {
         if (stream.isWriting)
         {
-            //We own this player: send the others our data
-            // stream.SendNext((int)controllerScript._characterState);
+            //We own this player: send the others our data            
             stream.SendNext(transform.position);
-            stream.SendNext(transform.rotation);
-          //  stream.SendNext(transform.localScale);
+            stream.SendNext(transform.rotation);          
             stream.SendNext(GetComponent<Rigidbody>().velocity);
-
         }
         else
-        {
-            //Network player, receive data
-            //controllerScript._characterState = (CharacterState)(int)stream.ReceiveNext();
+        {            
             correctPlayerPos = (Vector3)stream.ReceiveNext();
-            correctPlayerRot = (Quaternion)stream.ReceiveNext();
-           // correctPlayerScale = (Vector3)stream.ReceiveNext();
+            correctPlayerRot = (Quaternion)stream.ReceiveNext();           
             GetComponent<Rigidbody>().velocity = (Vector3)stream.ReceiveNext();
 
             if (!appliedInitialUpdate)
             {
                 appliedInitialUpdate = true;
                 transform.position = correctPlayerPos;
-                transform.rotation = correctPlayerRot;
-              //  transform.localScale = correctPlayerScale;
+                transform.rotation = correctPlayerRot;              
                 GetComponent<Rigidbody>().velocity = Vector3.zero;
             }
         }
     }
 
     private Vector3 correctPlayerPos = Vector3.zero; //We lerp towards this
-    private Quaternion correctPlayerRot = Quaternion.identity; //We lerp towards this
-    private Vector3 correctPlayerScale = Vector3.zero; //We lerp towards this
+    private Quaternion correctPlayerRot = Quaternion.identity; //We lerp towards this    
 
     void Update()
     {
@@ -73,21 +76,12 @@ public class ThirdPersonNetworkARVik : Photon.MonoBehaviour
         {
             //Update remote player (smooth this, this looks good, at the cost of some accuracy)
             transform.position = Vector3.Lerp(transform.position, correctPlayerPos, Time.deltaTime * 5);
-            transform.rotation = Quaternion.Lerp(transform.rotation, correctPlayerRot, Time.deltaTime * 5);
-       //     transform.localScale = Vector3.Lerp(transform.localScale, correctPlayerScale, Time.deltaTime * 5);
+            transform.rotation = Quaternion.Lerp(transform.rotation, correctPlayerRot, Time.deltaTime * 5);       
         }
     }
 
     void OnPhotonInstantiate(PhotonMessageInfo info)
-    {
-        //We know there should be instantiation data..get our bools from this PhotonView!
-        object[] objs = photonView.instantiationData; //The instantiate data..
-       // bool[] mybools = (bool[])objs[0];   //Our bools!
-
-        //disable the axe and shield meshrenderers based on the instantiate data
-        MeshRenderer[] rens = GetComponentsInChildren<MeshRenderer>();
-        //rens[0].enabled = mybools[0];//Axe
-       // rens[1].enabled = mybools[1];//Shield
+    {        
 
     }
 

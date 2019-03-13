@@ -10,7 +10,7 @@ GameObject:
   - component: {fileID: 400006}
   - component: {fileID: 114074924794337334}
   - component: {fileID: 11400008}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: RemoteCamPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -291,7 +291,7 @@ GameObject:
   - component: {fileID: 4008426965716028}
   - component: {fileID: 33812560649763764}
   - component: {fileID: 23837133377201666}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -308,7 +308,7 @@ GameObject:
   - component: {fileID: 4097577596957964}
   - component: {fileID: 33061131032469210}
   - component: {fileID: 23930815303726926}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}

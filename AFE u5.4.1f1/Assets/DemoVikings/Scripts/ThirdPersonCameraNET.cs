@@ -181,17 +181,20 @@ public class ThirdPersonCameraNET : MonoBehaviour
             if (new Vector2(movement.x, movement.z).magnitude > movementThreshold)
             // Only update follow camera if we moved sufficiently
             {
-                FollowUpdate();
+                if (boolFollowUpdate) FollowUpdate();
             }
         }
 
         DistanceUpdate();
-    }
-
+    }       
+    
+    public bool boolFollowUpdate = true;
 
     void FollowUpdate()
     // Have the camera follow behind the character
     {
+        if (!boolFollowUpdate) return;
+
         Vector3 cameraForward = target.transform.position - camera.transform.position;
         cameraForward = new Vector3(cameraForward.x, 0.0f, cameraForward.z);
         // Ignore camera elevation when calculating the angle
@@ -215,10 +218,19 @@ public class ThirdPersonCameraNET : MonoBehaviour
         camera.transform.RotateAround(target.transform.position, Vector3.up, rotationAmount);
     }
 
+    void FocusUpdate()
+    // Have the camera focus the character
+    {
+
+    }
+
+    public bool boolFreeUpdate = true;
 
     void FreeUpdate()
     // Control the camera via the mouse
     {
+        if (!boolFreeUpdate) return;
+
         float rotationAmount;
 
         // Horizontal rotation:
@@ -226,7 +238,7 @@ public class ThirdPersonCameraNET : MonoBehaviour
         if (Input.GetMouseButton(1))
         // If right mouse button is held, don't rotate horizontally - the character should do that
         {
-            FollowUpdate();
+            if (boolFollowUpdate) FollowUpdate();
         }
         else
         // If left mouse button it held, do horizontal rotation
@@ -271,14 +283,16 @@ public class ThirdPersonCameraNET : MonoBehaviour
         }
     }
 
+    public bool boolDistanceUpdate = true;
 
     void DistanceUpdate()
     // Apply any change in camera distance
     {
+        if (!boolDistanceUpdate) return;
+
         Vector3 targetPosition = target.transform.position + (camera.transform.position - target.transform.position).normalized * targetDistance;
         camera.transform.position = Vector3.Lerp(camera.transform.position, targetPosition, Time.deltaTime * distanceUpdateSpeed);
     }
-
 
     void OnDrawGizmosSelected()
     // Use gizmos to gain information about the state of your setup

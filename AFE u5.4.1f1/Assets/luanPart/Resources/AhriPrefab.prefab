@@ -461,6 +461,7 @@ GameObject:
   - component: {fileID: 114806360578573710}
   - component: {fileID: 114466363310965532}
   - component: {fileID: 114669498497164336}
+  - component: {fileID: 114849310652946328}
   m_Layer: 0
   m_Name: AhriPrefab
   m_TagString: Untagged
@@ -1745,7 +1746,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1323861124714244}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 1.183, y: 0.598, z: 2.004}
   m_LocalScale: {x: 0.005, y: 0.005, z: 0.005}
   m_Children:
   - {fileID: 4583087192256894}
@@ -2485,7 +2486,7 @@ Animation:
   - {fileID: 7400000, guid: 1ae72bec232366a4182a2c5ff788b42f, type: 2}
   - {fileID: 7400000, guid: f658508865b605042b4c3080a1f86455, type: 2}
   - {fileID: 7400000, guid: c140c16c126e7cc4abeeb63a95cccb0d, type: 2}
-  - {fileID: 7400000, guid: 693f17cf818e68045a650d3ff5a000e0, type: 2}
+  - {fileID: 7400000, guid: 69b71d74cdfad304a9b195f910dd8d30, type: 2}
   - {fileID: 7400000, guid: e4a5f542a38fe9947a5d7790cf6f8156, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 1
@@ -2608,9 +2609,32 @@ MonoBehaviour:
   minDistance: 0.1
   maxDistance: 10
   zoomSpeed: 500
-  showGizmos: 1
+  showGizmos: 0
   requireLock: 1
   controlLock: 1
+  boolFollowUpdate: 0
+  boolFreeUpdate: 1
+  boolDistanceUpdate: 1
+--- !u!114 &114849310652946328
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1323861124714244}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df52e28673fea0942b7b78135ab61705, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDebug: 0
+  useUpdate: 1
+  target: {fileID: 136960972442458488}
+  camera: {fileID: 0}
+  hToChar: 3
+  dToChar: 3
+  aToWorld: 45
+  distanceUpdateSpeed: 1
+  deltaPosDiffer: 0.1
 --- !u!136 &136960972442458488
 CapsuleCollider:
   m_ObjectHideFlags: 1

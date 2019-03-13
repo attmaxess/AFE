@@ -240,6 +240,7 @@ public class ThirdPersonControllerNET : MonoBehaviour, ICharacterTranform
 
     public void RotateBy(Vector3 moveVector)
     {
-        transform.rotation = Quaternion.LookRotation(moveVector);
+        if (moveVector != Vector3.zero)
+            transform.rotation = Quaternion.LookRotation(moveVector);
     }
 }

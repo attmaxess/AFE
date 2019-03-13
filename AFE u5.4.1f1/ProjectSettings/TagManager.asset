@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Projectile
+  - Plane100
   layers:
   - Default
   - TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   - Projectile1
   - Projectile2
   - 
-  - 
+  - CamRemote
   - 
   - 
   - 

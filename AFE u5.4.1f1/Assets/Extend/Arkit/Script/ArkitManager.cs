@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.iOS;
+
 /// <summary>
 /// Arkit manager. Use for convert acoordinate from vuforia to arkit
 /// </summary>
@@ -17,14 +18,17 @@ public class ArkitManager : MonoBehaviour, IArkitManager
         saveCallbackFoundPlane = callbackOnFoundPlane;
         isScan = true;
     }
+
     public virtual void StopScanPlane()
     {
         isScan = false;
     }
+
     public virtual void Start()
     {
         unityARAnchorManager = new UnityARAnchorManager();
     }
+
     void Update()
     {
         //Debug.Log("Scan -- " + unityARAnchorManager + "  isScan = " + isScan);
@@ -46,15 +50,17 @@ public class ArkitManager : MonoBehaviour, IArkitManager
             }
         }
     }
+
     void OnFoundFloor(GameObject floor)
     {
         if (saveCallbackFoundPlane != null)
         {
-          //  Debug.Log("Found Floor !!  " + floor);
+            //  Debug.Log("Found Floor !!  " + floor);
             ScanValues scan = ScanValues.GetData(floor);
             saveCallbackFoundPlane(scan);
         }
     }
+
     void OnDestroy()
     {
         if (unityARAnchorManager != null)
