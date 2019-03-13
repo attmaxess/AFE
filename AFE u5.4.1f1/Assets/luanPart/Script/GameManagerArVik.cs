@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ControlFreak2;
 
 public class GameManagerArVik : Photon.PunBehaviour
 {
@@ -23,7 +24,7 @@ public class GameManagerArVik : Photon.PunBehaviour
 
     private void Awake()
     {
-        
+
     }
 
     IEnumerator OnLeftRoom()
