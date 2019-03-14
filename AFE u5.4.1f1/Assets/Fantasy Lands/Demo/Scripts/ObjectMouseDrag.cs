@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[AddComponentMenu("Camera-Control/Mouse drag Orbit with zoom")]
-public class CameraMouseDrag : MonoBehaviour
+public class ObjectMouseDrag : MonoBehaviour
 {
     public Transform target;
     public float distance = 5.0f;
