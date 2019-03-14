@@ -1,4 +1,5 @@
-﻿using UniRx;
+﻿using ControlFreak2;
+using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
 using MonoBehaviour = Photon.MonoBehaviour;
@@ -12,7 +13,8 @@ public class TestTriggerAnimation : MonoBehaviour
     // Use this for initialization
     private void Start()
     {
-        if (!photonView.isMine) return;
+       // if (!photonView.isMine) return;
+      
 
         this.OnKeyDownAsObservable(KeyCode.Q)
             .Subscribe(_ => Animator.SetTrigger(Constant.Animation.Q));
@@ -33,6 +35,35 @@ public class TestTriggerAnimation : MonoBehaviour
         Observable.EveryUpdate()
             .Where(_ => Input.GetMouseButtonDown(1))
             .Subscribe(_ => Animator.SetTrigger(Constant.Animation.Run));
+    }
+
+    private void Update()
+    {
+        if (CF2Input.GetButtonDown("Pause"))
+        {
+            Debug.Log("Pause");
+        }
+        if (CF2Input.GetButtonDown("Attack"))
+        {
+            Debug.Log("Attack");
+        }
+
+        if (CF2Input.GetButtonDown("Skill1"))
+        {
+            Debug.Log("Skill1");
+        }
+        if (CF2Input.GetButtonDown("Skill2"))
+        {
+            Debug.Log("Skill4");
+        }
+        if (CF2Input.GetButtonDown("Skill3"))
+        {
+            Debug.Log("Skill4");
+        }
+        if (CF2Input.GetButtonDown("Skill4"))
+        {
+            Debug.Log("Skill4");
+        }
     }
 }
 
