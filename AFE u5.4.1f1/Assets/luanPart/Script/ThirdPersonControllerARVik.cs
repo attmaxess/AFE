@@ -1,6 +1,10 @@
 ﻿using System;
 using UnityEngine;
 
+/// <summary>
+/// ko dung script nay nua. su dung ThirdPersonControllerNET.cs
+/// </summary>
+
 public class ThirdPersonControllerARVik : MonoBehaviour, ICharacterTranform
 {
     public Rigidbody target;

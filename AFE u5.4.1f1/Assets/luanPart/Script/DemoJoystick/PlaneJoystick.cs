@@ -108,31 +108,7 @@ public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
             }
         }
 
-        if (CF2Input.GetButtonDown("Pause"))
-        {
-            Debug.Log("Pause");
-        }
-        if (CF2Input.GetButtonDown("Attack"))
-        {
-            Debug.Log("Attack");
-        }
-
-        if (CF2Input.GetButtonDown("Skill1"))
-        {
-            Debug.Log("Skill1");
-        }
-        if (CF2Input.GetButtonDown("Skill2"))
-        {
-            Debug.Log("Skill4");
-        }
-        if (CF2Input.GetButtonDown("Skill3"))
-        {
-            Debug.Log("Skill4");
-        }
-        if (CF2Input.GetButtonDown("Skill4"))
-        {
-            Debug.Log("Skill4");
-        }
+     
 
     }
 }

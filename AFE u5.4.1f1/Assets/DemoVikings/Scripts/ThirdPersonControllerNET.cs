@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.Collections;
+using System;
+using System.Collections.Generic;
 
 public delegate void JumpDelegate();
 
@@ -24,7 +26,6 @@ public class ThirdPersonControllerNET : MonoBehaviour, ICharacterTranform
     public JumpDelegate onJump = null;
     // Assign to this delegate to respond to the controller jumping
 
-
     private const float inputThreshold = 0.01f,
         groundDrag = 5.0f,
         directionalJumpFactor = 0.7f;
@@ -34,7 +35,20 @@ public class ThirdPersonControllerNET : MonoBehaviour, ICharacterTranform
 
     public bool grounded, walking;
 
+    #region player state 
+    protected BaseCharaterState currentStatePlayer;
+    Dictionary<StateCharacter, BaseCharaterState> listState = new Dictionary<StateCharacter, BaseCharaterState>();
+
+    #endregion
+
     private bool isRemotePlayer = true;
+
+    public event Action attack;
+    public event Action skill1;
+    public event Action skill2;
+    public event Action skill3;
+    public event Action skill4;
+    public event Action idle;
 
     public bool Grounded
     // Make our grounded status available for other components
@@ -88,6 +102,50 @@ public class ThirdPersonControllerNET : MonoBehaviour, ICharacterTranform
         target.freezeRotation = true;
         // We will be controlling the rotation of the target, so we tell the physics system to leave it be
         walking = false;
+
+        // resigter Event from ui controller
+        if (GetComponent<PhotonView>().isMine)
+        {
+            GameManagerArVik.Singleton.attack += Singleton_Attack;
+            GameManagerArVik.Singleton.skill1 += Singleton_skill1;
+            GameManagerArVik.Singleton.skill2 += Singleton_skill2;
+            GameManagerArVik.Singleton.skill3 += Singleton_skill3;
+            GameManagerArVik.Singleton.skill4 += Singleton_skill4;
+        }
+
+        #region initialize player state
+        var states = GetComponentsInChildren<BaseCharaterState>();
+        foreach (var item in states)
+        {
+            listState.Add(item.stateType, item);
+            item.Player = this;
+        }
+        #endregion
+    }
+
+    private void Singleton_skill4()
+    {
+        Debug.Log("Skill4");
+    }
+
+    private void Singleton_skill3()
+    {
+        Debug.Log("Skill3");
+    }
+
+    private void Singleton_skill2()
+    {
+        Debug.Log("Skill2");
+    }
+
+    private void Singleton_skill1()
+    {
+        Debug.Log("Skill1");
+    }
+
+    private void Singleton_Attack()
+    {
+        Debug.Log("Attack");
     }
 
     void Update()
