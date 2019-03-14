@@ -1,0 +1,90 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03f9522b1b0f53b4c87d047ac5c3794f, type: 3}
+  m_Name: Outro
+  m_EditorClassIdentifier: 
+  characterPrefab: {fileID: 100052, guid: ceeaecc0393d0fb438fde5457a24ead6, type: 2}
+  moveName: Outro
+  description: Outro
+  fps: 60
+  ignoreGravity: 0
+  useGauge: 0
+  armor: 0
+  gaugeUsage: 0
+  gaugeGainOnMiss: 0
+  gaugeGainOnHit: 0
+  gaugeGainOnBlock: 0
+  opGaugeGainOnBlock: 0
+  opGaugeGainOnParry: 0
+  possibleStates: 
+  attackType: 0
+  cancelMoveWheLanding: 0
+  animationClip: {fileID: 7400000, guid: d2a0638b855fb2c4bbe50d0b77bfebb2, type: 2}
+  wrapMode: 8
+  interpolationSpeed: 0
+  animationSpeed: 1
+  totalFrames: 88
+  startUpFrames: 5
+  activeFrames: 5
+  recoveryFrames: 5
+  chargeMove: 0
+  onRelease: 0
+  buttonSequence: 
+  buttonExecution: 
+  previousMoves: []
+  frameLink:
+    onlyOnHit: 0
+    activeFramesBegins: 0
+    activeFramesEnds: 0
+    linkableMoves: []
+  particleEffects: []
+  appliedForces: []
+  soundEffects:
+  - castingFrame: 5
+    sound: {fileID: 8300000, guid: 44a3d107d9991c2418abf6be4b4b52a3, type: 3}
+    casted: 0
+  cameraMovements:
+  - position: {x: 13.39, y: 4.1, z: 0}
+    rotation: {x: 0, y: -2.68, z: 0}
+    castingFrame: 3
+    duration: 3
+    fieldOfView: 20
+    camSpeed: 2
+    freezeGame: 0
+    freezeAnimation: 0
+    casted: 0
+    time: 0
+    startTime: 0
+  - position: {x: 13, y: 4.1, z: 0}
+    rotation: {x: 0, y: -2, z: 0}
+    castingFrame: 46
+    duration: 999
+    fieldOfView: 23
+    camSpeed: 1
+    freezeGame: 0
+    freezeAnimation: 1
+    casted: 0
+    time: 0
+    startTime: 0
+  hits: []
+  blockableArea:
+    activeFramesBegin: 0
+    activeFramesEnds: 0
+    bodyPart: 0
+    radius: 0
+    offSet: {x: 0, y: 0}
+    position: {fileID: 0}
+  invincibleBodyParts: []
+  projectiles: []
+  changeCombatStance: 0
+  cancelable: 0
+  kill: 0
+  currentFrame: 112

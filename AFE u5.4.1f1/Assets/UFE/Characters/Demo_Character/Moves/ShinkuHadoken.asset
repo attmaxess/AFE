@@ -1,0 +1,102 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03f9522b1b0f53b4c87d047ac5c3794f, type: 3}
+  m_Name: ShinkuHadoken
+  m_EditorClassIdentifier: 
+  characterPrefab: {fileID: 100052, guid: ceeaecc0393d0fb438fde5457a24ead6, type: 2}
+  moveName: Shinku Hadoken
+  description: Super Fire Ball
+  fps: 60
+  ignoreGravity: 0
+  useGauge: 1
+  armor: 0
+  gaugeUsage: 100
+  gaugeGainOnMiss: 0
+  gaugeGainOnHit: 10
+  gaugeGainOnBlock: 0
+  opGaugeGainOnBlock: 0
+  opGaugeGainOnParry: 0
+  possibleStates: 0000000001000000
+  attackType: 1
+  cancelMoveWheLanding: 0
+  animationClip: {fileID: 7400000, guid: 633a45f23eea08f418cb4e4182fbdc63, type: 2}
+  wrapMode: 0
+  interpolationSpeed: 0
+  animationSpeed: 0.6
+  totalFrames: 93
+  startUpFrames: 5
+  activeFrames: 5
+  recoveryFrames: 5
+  chargeMove: 0
+  onRelease: 0
+  buttonSequence: 03000000000000000300000000000000
+  buttonExecution: 04000000
+  previousMoves: []
+  frameLink:
+    onlyOnHit: 0
+    activeFramesBegins: 0
+    activeFramesEnds: 0
+    linkableMoves: []
+  particleEffects: []
+  appliedForces: []
+  soundEffects: []
+  cameraMovements:
+  - position: {x: 15, y: 5, z: -8}
+    rotation: {x: 3, y: 25, z: -37}
+    castingFrame: 8
+    duration: 2
+    fieldOfView: 20
+    camSpeed: 6
+    freezeGame: 1
+    freezeAnimation: 1
+    casted: 0
+    time: 1.0333331
+    startTime: 0.1
+  hits: []
+  blockableArea:
+    activeFramesBegin: 1
+    activeFramesEnds: 2
+    bodyPart: 0
+    radius: 0
+    offSet: {x: 0, y: 0}
+    position: {fileID: 0}
+  invincibleBodyParts: []
+  projectiles:
+  - castingFrame: 24
+    projectilePrefab: {fileID: 100004, guid: 7dfb51afaf6f37946820579b8532c705, type: 2}
+    impactPrefab: {fileID: 100008, guid: 143e055fde3ff3a4088e01d56bd51fe0, type: 2}
+    bodyPart: 9
+    type: 0
+    offSet: {x: 1, y: 0.5, z: 0}
+    totalHits: 5
+    projectileCollision: 0
+    resetPreviousHitStun: 0
+    hitStunOnHit: 40
+    hitStunOnBlock: 10
+    damageType: 1
+    damageOnHit: 60
+    damageOnBlock: 20
+    damageScaling: 1
+    speed: 20
+    directionAngle: 0
+    duration: 5
+    pushForce: {x: 12, y: 10}
+    hitRadius: 0
+    hitStrengh: 2
+    hitType: 0
+    damageOptionsToggle: 0
+    hitStunOptionsToggle: 1
+    casted: 0
+    position: {fileID: 0}
+  changeCombatStance: 0
+  cancelable: 0
+  kill: 0
+  currentFrame: 0

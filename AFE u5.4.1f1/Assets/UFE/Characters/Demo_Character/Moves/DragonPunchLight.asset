@@ -1,0 +1,125 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03f9522b1b0f53b4c87d047ac5c3794f, type: 3}
+  m_Name: DragonPunchLight
+  m_EditorClassIdentifier: 
+  characterPrefab: {fileID: 100052, guid: ceeaecc0393d0fb438fde5457a24ead6, type: 2}
+  moveName: Dragon Punch Light
+  description: Dragon Punch Light
+  fps: 60
+  ignoreGravity: 0
+  useGauge: 1
+  armor: 0
+  gaugeUsage: 0
+  gaugeGainOnMiss: 10
+  gaugeGainOnHit: 20
+  gaugeGainOnBlock: 22
+  opGaugeGainOnBlock: 0
+  opGaugeGainOnParry: 0
+  possibleStates: 0000000001000000
+  attackType: 1
+  cancelMoveWheLanding: 1
+  animationClip: {fileID: 7400000, guid: e4893169bcc6f434c876cd8c65ff7659, type: 2}
+  wrapMode: 8
+  interpolationSpeed: 0
+  animationSpeed: 1
+  totalFrames: 36
+  startUpFrames: 4
+  activeFrames: 11
+  recoveryFrames: 21
+  chargeMove: 0
+  onRelease: 0
+  buttonSequence: 000000000300000000000000
+  buttonExecution: 04000000
+  previousMoves: []
+  frameLink:
+    onlyOnHit: 0
+    activeFramesBegins: 0
+    activeFramesEnds: 0
+    linkableMoves: []
+  particleEffects: []
+  appliedForces:
+  - castingFrame: 9
+    resetPreviousVertical: 1
+    resetPreviousHorizontal: 1
+    force: {x: 0, y: 16}
+    casted: 0
+  soundEffects:
+  - castingFrame: 10
+    sound: {fileID: 8300000, guid: 7098083a20689cf48ba766f8921b945f, type: 3}
+    casted: 0
+  cameraMovements: []
+  hits:
+  - activeFramesBegin: 5
+    activeFramesEnds: 16
+    armorBreaker: 1
+    continuousHit: 0
+    resetPreviousHitStun: 1
+    hitStrengh: 2
+    hitStunType: 1
+    hitStunOnHit: 999
+    hitStunOnBlock: 10
+    frameAdvantageOnHit: 0
+    frameAdvantageOnBlock: 0
+    damageScaling: 1
+    damageType: 1
+    damageOnHit: 60
+    damageOnBlock: 20
+    hitType: 0
+    resetPreviousHorizontalPush: 1
+    resetPreviousVerticalPush: 1
+    pushForce: {x: 5, y: 26}
+    resetPreviousHorizontal: 0
+    resetPreviousVertical: 0
+    appliedForce: {x: 0, y: 0}
+    hurtBoxes:
+    - bodyPart: 7
+      radius: 0.5
+      offSet: {x: 0, y: 0}
+      position: {fileID: 0}
+    - bodyPart: 9
+      radius: 0.5
+      offSet: {x: 0, y: 0}
+      position: {fileID: 0}
+    pullEnemyIn:
+      speed: 100
+      characterBodyPart: 9
+      enemyBodyPart: 2
+      position: {fileID: 0}
+    pullSelfIn:
+      speed: 50
+      characterBodyPart: 0
+      enemyBodyPart: 0
+      position: {fileID: 0}
+    hasHit: 0
+    damageOptionsToggle: 0
+    hitStunOptionsToggle: 1
+    forceOptionsToggle: 1
+    pullInToggle: 0
+    hurtBoxesToggle: 0
+  blockableArea:
+    activeFramesBegin: 4
+    activeFramesEnds: 16
+    bodyPart: 2
+    radius: 6
+    offSet: {x: 0, y: 0}
+    position: {fileID: 0}
+  invincibleBodyParts:
+  - bodyParts: 
+    completelyInvincible: 1
+    activeFramesBegin: 1
+    activeFramesEnds: 5
+    hitBoxes: []
+  projectiles: []
+  changeCombatStance: 0
+  cancelable: 0
+  kill: 0
+  currentFrame: 0

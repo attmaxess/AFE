@@ -1,0 +1,73 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03f9522b1b0f53b4c87d047ac5c3794f, type: 3}
+  m_Name: DashBack
+  m_EditorClassIdentifier: 
+  characterPrefab: {fileID: 100052, guid: ceeaecc0393d0fb438fde5457a24ead6, type: 2}
+  moveName: Dash Back
+  description: Dash Back
+  fps: 60
+  ignoreGravity: 0
+  useGauge: 0
+  armor: 0
+  gaugeUsage: 0
+  gaugeGainOnMiss: 0
+  gaugeGainOnHit: 2
+  gaugeGainOnBlock: 0
+  opGaugeGainOnBlock: 0
+  opGaugeGainOnParry: 0
+  possibleStates: 00000000
+  attackType: 0
+  cancelMoveWheLanding: 1
+  animationClip: {fileID: 7400000, guid: d316df55663a14a4cba8e2b851af044e, type: 2}
+  wrapMode: 4
+  interpolationSpeed: 0
+  animationSpeed: -0.6
+  totalFrames: 11
+  startUpFrames: 5
+  activeFrames: 5
+  recoveryFrames: 5
+  chargeMove: 0
+  onRelease: 0
+  buttonSequence: 01000000
+  buttonExecution: 01000000
+  previousMoves: []
+  frameLink:
+    onlyOnHit: 0
+    activeFramesBegins: 0
+    activeFramesEnds: 0
+    linkableMoves: []
+  particleEffects: []
+  appliedForces:
+  - castingFrame: 0
+    resetPreviousVertical: 1
+    resetPreviousHorizontal: 1
+    force: {x: -16, y: 8}
+    casted: 0
+  soundEffects:
+  - castingFrame: 0
+    sound: {fileID: 8300000, guid: e49eb8fd2bdc27b49905d2c8c91c5058, type: 3}
+    casted: 0
+  cameraMovements: []
+  hits: []
+  blockableArea:
+    activeFramesBegin: 2
+    activeFramesEnds: 3
+    bodyPart: 0
+    radius: 0
+    offSet: {x: 0, y: 0}
+    position: {fileID: 0}
+  invincibleBodyParts: []
+  projectiles: []
+  changeCombatStance: 0
+  cancelable: 0
+  kill: 0
+  currentFrame: 0

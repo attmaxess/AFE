@@ -1,0 +1,386 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a72eb99efd94a347a4ab4cc0376dbb1, type: 3}
+  m_Name: UFE_Config
+  m_EditorClassIdentifier: 
+  selectedLanguage:
+    languageName: English
+    start: Start
+    options: Options
+    credits: Credits
+    selectYourCharacter: Select Your Character
+    selectYourStage: Select Your Stage
+    round: Round %round%
+    finalRound: Final Round
+    fight: Fight!
+    firstHit: First Hit!
+    combo: '%combo% hit combo!'
+    parry: Parry!
+    victory: '%character% wins!'
+    perfect: Perfect!
+    rematch: Rematch
+    quit: Quit
+  player1Character: {fileID: 0}
+  player2Character: {fileID: 0}
+  p1CharStorage: {fileID: 11400000, guid: 54057043117984643925ed339c232c0d, type: 2}
+  p2CharStorage: {fileID: 11400000, guid: 54057043117984643925ed339c232c0d, type: 2}
+  selectedStage:
+    stageName: Training Room
+    screenshot: {fileID: 2800000, guid: 08a565ac17d3e904d8d5f53e183b64d2, type: 3}
+    prefab: {fileID: 100000, guid: 064338a39a43ad647989c96c321658a2, type: 2}
+    music: {fileID: 8300000, guid: 78a0035e01d5f0346a8eb0fc22bb4fa2, type: 3}
+    leftBoundary: -38
+    rightBoundary: 38
+  currentRound: 1
+  lockInputs: 0
+  lockMovements: 0
+  trainingMode: 0
+  startGameImmediately: 0
+  gameName: UFE Training Room
+  introScreen: {fileID: 100000, guid: 44cc160b4e8cc674eabbc670b7548dcc, type: 2}
+  introMusic: {fileID: 8300000, guid: f677a794af65dfe46917f53cc9810eec, type: 3}
+  characterSelectScreen: {fileID: 100000, guid: 18140dd0136ee92409074010f03fcbeb,
+    type: 2}
+  characterSelectMusic: {fileID: 0}
+  stageSelectScreen: {fileID: 100000, guid: 6380a5e47f4bc0444961eb1208f4b80a, type: 2}
+  stageSelectMusic: {fileID: 0}
+  optionsScreen: {fileID: 0}
+  creditsScreen: {fileID: 100000, guid: 976d8aeefed697a40ba7b1e144649596, type: 2}
+  creditsMusic: {fileID: 0}
+  fps: 60
+  gameSpeed: 1
+  animationFlow: 0
+  storedExecutionDelay: 0.3
+  plinkingDelay: 0.05
+  gravity: 0.37
+  detect3D_Hits: 0
+  fontOptions:
+  - fontId: 0
+    fontPrefab: {fileID: 100000, guid: d6a06ff3a144b5148af77ae70804e898, type: 2}
+  - fontId: 1
+    fontPrefab: {fileID: 100000, guid: 248e291fec1f4294fb4724f2367ac5a2, type: 2}
+  - fontId: 2
+    fontPrefab: {fileID: 100000, guid: ce79c233ee8554e43b0a7843417545c5, type: 2}
+  - fontId: 3
+    fontPrefab: {fileID: 100000, guid: 20a241cf98105c54f9d149521c59919e, type: 2}
+  languages:
+  - languageName: English
+    start: Start
+    options: Options
+    credits: Credits
+    selectYourCharacter: Select Your Character
+    selectYourStage: Select Your Stage
+    round: Round %round%
+    finalRound: Final Round
+    fight: Fight!
+    firstHit: First Hit!
+    combo: '%combo% hit combo!'
+    parry: Parry!
+    victory: '%character% wins!'
+    perfect: Perfect!
+    rematch: Rematch
+    quit: Quit
+  cameraOptions:
+    initialDistance: {x: 0, y: 9, z: -34}
+    initialRotation: {x: 7, y: 0, z: 0}
+    initialFieldOfView: 16
+    smooth: 20
+    minZoom: 10
+    maxZoom: 50
+  roundOptions:
+    totalRounds: 3
+    timer: 99
+    p1XPosition: -5
+    p2XPosition: 5
+    delayBeforeEndGame: 4
+    victoryMusic: {fileID: 8300000, guid: 2067a21e6d6e0a345a9eac9c41ec5d33, type: 3}
+    resetLifePoints: 1
+    resetPositions: 1
+    allowMovement: 1
+    slowMotionKO: 1
+    cameraZoomKO: 1
+    freezeCamAfterOutro: 1
+  bounceOptions:
+    bounceForce: 2
+    bouncePrefab: {fileID: 100004, guid: 924022e18e7c7204f9d23e0f74948c51, type: 2}
+    minimumBounceForce: 30
+    maximumBounces: 1
+    bounceHitBoxes: 1
+  comboOptions:
+    hitStunDeterioration: 1
+    damageDeterioration: 1
+    airJuggleDeterioration: 0
+    minHitStun: 1
+    minDamage: 5
+    minPushForce: 5
+    neverAirRecover: 0
+    maxCombo: 99
+  blockOptions:
+    blockType: 1
+    blockPrefab: {fileID: 100002, guid: 7ac13993ffee9b146b0237c5ea03e13d, type: 2}
+    blockKillTime: 0.6
+    blockSound: {fileID: 8300000, guid: de89d708a053cb74d8701568c5ef36c9, type: 3}
+    allowAirBlock: 0
+    parryType: 2
+    parryTiming: 0.3
+    parryPrefab: {fileID: 100004, guid: 9b034fbb7ae3a9648bbe75eab0653f11, type: 2}
+    parryKillTime: 0.6
+    parrySound: {fileID: 8300000, guid: 5b3bea24171c6534b81c07a298e51803, type: 3}
+    parryColor: {r: 0.6911765, g: 0.6911765, b: 0.6911765, a: 0}
+    allowAirParry: 1
+    highlightWhenParry: 1
+    blockPushForce: 0
+    pushBlockButtons: 
+  knockDownOptions:
+    knockedOutTime: 1
+    getUpTime: 0.6
+    knockedOutHitBoxes: 0
+    quickStandButtons: 
+    minQuickStandTime: 0
+    delayedStandButtons: 
+    maxDelayedStandTime: 0
+  hitOptions:
+    weakHit:
+      hitParticle: {fileID: 100002, guid: 51188a3f15305b846bac6c56fbcde04b, type: 2}
+      killTime: 0.6
+      hitSound: {fileID: 8300000, guid: 0253626e7b9e1be46a11071d2b34958c, type: 3}
+      freezingTime: 0.16
+      shakeCharacterOnHit: 1
+      shakeCameraOnHit: 1
+      shakeDensity: 0.8
+      editorToggle: 1
+    mediumHit:
+      hitParticle: {fileID: 100006, guid: ee6250c696a2d5b46a72b83470cca35b, type: 2}
+      killTime: 0.6
+      hitSound: {fileID: 8300000, guid: 5faf1d9397b29c14b850d93a497dc825, type: 3}
+      freezingTime: 0.2
+      shakeCharacterOnHit: 1
+      shakeCameraOnHit: 1
+      shakeDensity: 0.8
+      editorToggle: 1
+    heavyHit:
+      hitParticle: {fileID: 100010, guid: 67108941c59ee4b488c979f22fa61b32, type: 2}
+      killTime: 0.6
+      hitSound: {fileID: 8300000, guid: f16a4b7377c8f7743b4892304dfae689, type: 3}
+      freezingTime: 0.24
+      shakeCharacterOnHit: 1
+      shakeCameraOnHit: 1
+      shakeDensity: 0.8
+      editorToggle: 1
+    crumpleHit:
+      hitParticle: {fileID: 100002, guid: 9cf7038e77fcda441a54cdb7e485ae95, type: 2}
+      killTime: 0.6
+      hitSound: {fileID: 8300000, guid: cb2782c81be7d634080146612802d65f, type: 3}
+      freezingTime: 0.5
+      shakeCharacterOnHit: 1
+      shakeCameraOnHit: 1
+      shakeDensity: 0.8
+      editorToggle: 1
+    customHit1:
+      hitParticle: {fileID: 0}
+      killTime: 0
+      hitSound: {fileID: 0}
+      freezingTime: 0
+      shakeCharacterOnHit: 1
+      shakeCameraOnHit: 1
+      shakeDensity: 0.8
+      editorToggle: 0
+    customHit2:
+      hitParticle: {fileID: 0}
+      killTime: 0
+      hitSound: {fileID: 0}
+      freezingTime: 0
+      shakeCharacterOnHit: 1
+      shakeCameraOnHit: 1
+      shakeDensity: 0.8
+      editorToggle: 0
+    customHit3:
+      hitParticle: {fileID: 0}
+      killTime: 0
+      hitSound: {fileID: 0}
+      freezingTime: 0
+      shakeCharacterOnHit: 1
+      shakeCameraOnHit: 1
+      shakeDensity: 0.8
+      editorToggle: 0
+  guiOptions:
+    alertFont: 3
+    characterNameFont: 0
+    menuFontBig: 0
+    menuFontSmall: 0
+    lifeBarOptions1:
+      editorToggle: 0
+      previewToggle: 0
+      flip: 0
+      backgroundImage: {fileID: 2800000, guid: 0ad584fc187eba14fbaa7587ab7b8524, type: 3}
+      backgroundColor: {r: 0, g: 0, b: 0, a: 0}
+      fillImage: {fileID: 2800000, guid: 4bca4cef65539aa488c0a0f74267b13d, type: 3}
+      fillColor: {r: 0, g: 0, b: 0, a: 0}
+      backgroundRect:
+        serializedVersion: 2
+        x: 10
+        y: 18
+        width: 596
+        height: 27
+      fillRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 596
+        height: 27
+      bgPreview: {fileID: 0}
+      fillPreview: {fileID: 0}
+    gaugeBarOptions1:
+      editorToggle: 0
+      previewToggle: 0
+      flip: 0
+      backgroundImage: {fileID: 2800000, guid: 117a9d725d05bd442b5539bfc4c8015b, type: 3}
+      backgroundColor: {r: 0, g: 0, b: 0, a: 0}
+      fillImage: {fileID: 2800000, guid: 9cb82af6fa9e6794ebd915a83eeef33c, type: 3}
+      fillColor: {r: 0, g: 0, b: 0, a: 0}
+      backgroundRect:
+        serializedVersion: 2
+        x: 10
+        y: 18
+        width: 596
+        height: 27
+      fillRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 596
+        height: 27
+      bgPreview: {fileID: 0}
+      fillPreview: {fileID: 0}
+    lifeBarOptions2:
+      editorToggle: 0
+      previewToggle: 0
+      flip: 0
+      backgroundImage: {fileID: 2800000, guid: 0ad584fc187eba14fbaa7587ab7b8524, type: 3}
+      backgroundColor: {r: 0, g: 0, b: 0, a: 0}
+      fillImage: {fileID: 2800000, guid: 4bca4cef65539aa488c0a0f74267b13d, type: 3}
+      fillColor: {r: 0, g: 0, b: 0, a: 0}
+      backgroundRect:
+        serializedVersion: 2
+        x: 10
+        y: 18
+        width: 596
+        height: 27
+      fillRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 596
+        height: 27
+      bgPreview: {fileID: 0}
+      fillPreview: {fileID: 0}
+    gaugeBarOptions2:
+      editorToggle: 0
+      previewToggle: 0
+      flip: 0
+      backgroundImage: {fileID: 2800000, guid: 117a9d725d05bd442b5539bfc4c8015b, type: 3}
+      backgroundColor: {r: 0, g: 0, b: 0, a: 0}
+      fillImage: {fileID: 2800000, guid: 9cb82af6fa9e6794ebd915a83eeef33c, type: 3}
+      fillColor: {r: 0, g: 0, b: 0, a: 0}
+      backgroundRect:
+        serializedVersion: 2
+        x: 10
+        y: 18
+        width: 596
+        height: 27
+      fillRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 596
+        height: 27
+      bgPreview: {fileID: 0}
+      fillPreview: {fileID: 0}
+  player1_Inputs:
+  - inputType: 0
+    inputButtonName: P1KeyboardHorizontal
+    engineRelatedButton: 1
+    heldDown: 1.7144738
+  - inputType: 1
+    inputButtonName: P1KeyboardVertical
+    engineRelatedButton: 3
+    heldDown: 1.738212
+  - inputType: 2
+    inputButtonName: P1Button1
+    engineRelatedButton: 4
+    heldDown: 0
+  - inputType: 2
+    inputButtonName: P1Button2
+    engineRelatedButton: 5
+    heldDown: 0
+  - inputType: 2
+    inputButtonName: P1Button3
+    engineRelatedButton: 6
+    heldDown: 0
+  - inputType: 2
+    inputButtonName: P1Button4
+    engineRelatedButton: 7
+    heldDown: 0
+  - inputType: 2
+    inputButtonName: P1Button5
+    engineRelatedButton: 8
+    heldDown: 0.082834214
+  - inputType: 2
+    inputButtonName: P1Button6
+    engineRelatedButton: 9
+    heldDown: 0
+  player2_Inputs:
+  - inputType: 0
+    inputButtonName: P2KeyboardHorizontal
+    engineRelatedButton: 0
+    heldDown: 0
+  - inputType: 1
+    inputButtonName: P2KeyboardVertical
+    engineRelatedButton: 3
+    heldDown: 0
+  - inputType: 2
+    inputButtonName: P2Button1
+    engineRelatedButton: 4
+    heldDown: 0
+  - inputType: 2
+    inputButtonName: P2Button2
+    engineRelatedButton: 5
+    heldDown: 0
+  - inputType: 2
+    inputButtonName: P2Button3
+    engineRelatedButton: 6
+    heldDown: 0
+  - inputType: 2
+    inputButtonName: P2Button4
+    engineRelatedButton: 7
+    heldDown: 0
+  - inputType: 2
+    inputButtonName: P2Button5
+    engineRelatedButton: 8
+    heldDown: 0
+  - inputType: 2
+    inputButtonName: P2Button6
+    engineRelatedButton: 9
+    heldDown: 0
+  stages:
+  - stageName: Training Room
+    screenshot: {fileID: 2800000, guid: 08a565ac17d3e904d8d5f53e183b64d2, type: 3}
+    prefab: {fileID: 100000, guid: 064338a39a43ad647989c96c321658a2, type: 2}
+    music: {fileID: 8300000, guid: 78a0035e01d5f0346a8eb0fc22bb4fa2, type: 3}
+    leftBoundary: -38
+    rightBoundary: 38
+  characters:
+  - {fileID: 11400000, guid: 54057043117984643925ed339c232c0d, type: 2}
+  - {fileID: 11400000, guid: 54057043117984643925ed339c232c0d, type: 2}
+  - {fileID: 11400000, guid: 54057043117984643925ed339c232c0d, type: 2}
+  - {fileID: 11400000, guid: 54057043117984643925ed339c232c0d, type: 2}
+  music: 1
+  soundfx: 1
