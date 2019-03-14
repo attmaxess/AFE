@@ -11,6 +11,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0414577f9c6b244e696949154859a4af, type: 3}
   m_Name: AhriAcademyPoster
   m_EditorClassIdentifier: 
-  imageName: unitylogoreferenceimage
+  imageName: AhriAcademyPoster
   imageTexture: {fileID: 2800000, guid: 4a1e2116b022bab4097755ae15298775, type: 3}
   physicalSize: 1

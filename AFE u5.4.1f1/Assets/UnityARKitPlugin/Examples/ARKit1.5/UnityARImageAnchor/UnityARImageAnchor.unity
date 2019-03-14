@@ -365,7 +365,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b2be1c5634b84e8080b2a2491eca344, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  referenceImage: {fileID: 11400000, guid: 769928d6273ca754cbf74435eb688994, type: 2}
+  referenceImage: {fileID: 11400000, guid: 9d6cedfb4c48647ca9007fb8cb8aa6b0, type: 2}
   prefabToGenerate: {fileID: 1483093577405612, guid: 9c8a1fc58df6b4d8c8c68e2883659c8a,
     type: 2}
 --- !u!4 &236723163
@@ -759,7 +759,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b2be1c5634b84e8080b2a2491eca344, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  referenceImage: {fileID: 11400000, guid: 769928d6273ca754cbf74435eb688994, type: 2}
+  referenceImage: {fileID: 11400000, guid: b2a442029fd3c418db4f3634bc525ee8, type: 2}
   prefabToGenerate: {fileID: 1323861124714244, guid: cdb95dbcd2316c64b924f498d927436d,
     type: 2}
 --- !u!4 &1728740854

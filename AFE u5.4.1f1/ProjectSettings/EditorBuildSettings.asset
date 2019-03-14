@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/UnityARKitPlugin/Examples/ARKit1.5/UnityARImageAnchor/UnityARImageAnchor.unity
+    guid: befc06ba4fe0046439ef5dac5a33c0e7
+  - enabled: 0
     path: Assets/luanPart/Scene/DemoVikingARPUN.unity
     guid: f23ac19ab82b9ea49a64dded57408827
   m_configObjects: {}
