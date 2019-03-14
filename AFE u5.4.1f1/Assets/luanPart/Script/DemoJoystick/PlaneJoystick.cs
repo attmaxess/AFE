@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using ControlFreak2;
+
 
 public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
 {
@@ -13,7 +15,6 @@ public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
 
     [Header("Input")]
     public float speed = 1;
-    public Joystick joystick;
     public Transform child;
     public ICharacterTranform rotateChar;
 
@@ -21,19 +22,16 @@ public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
     {
         get
         {
-            if (joystick != null)
-                return transform.right * joystick.Horizontal + transform.forward * joystick.Vertical;
-            return Vector3.zero;
+            var h = CF2Input.GetAxis("Horizontal");
+            var v = CF2Input.GetAxis("Vertical");
+            return transform.right * h + transform.forward * v;
         }
     }
 
     void Start()
     {
-        if (joystick == null)
-            joystick = Joystick.Singleton;
         if (rotateChar != null)
         {
-
             var mObjs = GameObject.FindObjectsOfType<MonoBehaviour>();
             ICharacterTranform[] interfaceScripts = (from a in mObjs where a.GetType().GetInterfaces().Any(k => k == typeof(ICharacterTranform)) select (ICharacterTranform)a).ToArray();
             if (interfaceScripts.Length > 0)
@@ -56,13 +54,17 @@ public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
                 Debug.Log("Dont Find Any Gameobject Have ICharacterTranform");
             }
         }
+
+        CF2Input.GetButton("Attack");
     }
 
     void Update()
     {
         if (!useUpdate) return;
 
-        Vector3 moveVector = (transform.right * joystick.Horizontal + transform.forward * joystick.Vertical);
+        var h = CF2Input.GetAxis("Horizontal");
+        var v = CF2Input.GetAxis("Vertical");
+        Vector3 moveVector = (transform.right * h + transform.forward * v);
 
         var rot = Quaternion.LookRotation(Camera.main.transform.forward);
 
@@ -70,7 +72,7 @@ public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
 
         transform.Translate(moveVector * speed * Time.deltaTime, Space.World);
 
-        child.localPosition = new Vector3(joystick.Horizontal / 2, 0.5f, joystick.Vertical / 2);
+        child.localPosition = new Vector3(h / 2, 0.5f, v / 2);
 
         if (rotateChar != null)
         {
@@ -104,6 +106,32 @@ public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
             {
                 Debug.Log("Dont Find Any Gameobject Have ICharacterTranform");
             }
+        }
+
+        if (CF2Input.GetButtonDown("Pause"))
+        {
+            Debug.Log("Pause");
+        }
+        if (CF2Input.GetButtonDown("Attack"))
+        {
+            Debug.Log("Attack");
+        }
+
+        if (CF2Input.GetButtonDown("Skill1"))
+        {
+            Debug.Log("Skill1");
+        }
+        if (CF2Input.GetButtonDown("Skill2"))
+        {
+            Debug.Log("Skill4");
+        }
+        if (CF2Input.GetButtonDown("Skill3"))
+        {
+            Debug.Log("Skill4");
+        }
+        if (CF2Input.GetButtonDown("Skill4"))
+        {
+            Debug.Log("Skill4");
         }
 
     }
