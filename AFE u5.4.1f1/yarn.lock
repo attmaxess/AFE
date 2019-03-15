@@ -2,6 +2,12 @@
 # yarn lockfile v1
 
 
+"@umm/extra_linq@umm/extra_linq":
+  version "1.2.2"
+  resolved "https://codeload.github.com/umm/extra_linq/tar.gz/c531078cf920495f8dfc71506ca345669a9af1ea"
+  dependencies:
+    "@umm/scripts" umm/scripts#^1.0.0
+
 "@umm/scripts@umm/scripts#^1.0.0":
   version "1.4.1"
   resolved "https://codeload.github.com/umm/scripts/tar.gz/53d1def490dbb897b27b84e918c6be8e4f50d958"

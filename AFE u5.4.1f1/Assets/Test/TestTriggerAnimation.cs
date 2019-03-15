@@ -10,11 +10,20 @@ public class TestTriggerAnimation : MonoBehaviour
 
     private Animator Animator => animator;
 
+    private int IndexAttack { get; set; } = 0;
+
     // Use this for initialization
     private void Start()
     {
-       // if (!photonView.isMine) return;
-      
+        // if (!photonView.isMine) return;
+
+        var attackSmb = Animator.GetBehaviour<ObservableAttackSmb>();
+        attackSmb.OnStateMachineEnterAsObservable()
+            .Subscribe(_ => Animator.SetInteger(Constant.Animation.AttackInt, ++IndexAttack));
+
+        attackSmb.OnStateEnterAsObservable()
+            .Where(_ => IndexAttack == Constant.Yasuo.AttackClipAmount)
+            .Subscribe(_ => IndexAttack = 0);
 
         this.OnKeyDownAsObservable(KeyCode.Q)
             .Subscribe(_ => Animator.SetTrigger(Constant.Animation.Q));
@@ -35,57 +44,5 @@ public class TestTriggerAnimation : MonoBehaviour
         Observable.EveryUpdate()
             .Where(_ => Input.GetMouseButtonDown(1))
             .Subscribe(_ => Animator.SetTrigger(Constant.Animation.Run));
-    }
-
-    private void Update()
-    {
-        if (CF2Input.GetButtonDown("Pause"))
-        {
-            Debug.Log("Pause");
-        }
-        if (CF2Input.GetButtonDown("Attack"))
-        {
-            Debug.Log("Attack");
-        }
-
-        if (CF2Input.GetButtonDown("Skill1"))
-        {
-            Debug.Log("Skill1");
-        }
-        if (CF2Input.GetButtonDown("Skill2"))
-        {
-            Debug.Log("Skill4");
-        }
-        if (CF2Input.GetButtonDown("Skill3"))
-        {
-            Debug.Log("Skill4");
-        }
-        if (CF2Input.GetButtonDown("Skill4"))
-        {
-            Debug.Log("Skill4");
-        }
-    }
-}
-
-public static class Constant
-{
-    public static class Animation
-    {
-        public static string Attack { get; } = "Attack";
-        public static string AttackToIdle { get; } = "Attack To Idle";
-
-        public static string Q { get; } = "Q";
-        public static string W { get; } = "W";
-        public static string E { get; } = "E";
-        public static string R { get; } = "R";
-
-        public static string Idle { get; } = "Idle";
-        public static string QToIdle { get; } = "Q To Idle";
-
-        public static string Run { get; } = "Run";
-        public static string EToRun { get; } = "E To Run";
-        public static string QToRun { get; } = "Q To Run";
-
-        public static string Death { get; } = "Death";
     }
 }
