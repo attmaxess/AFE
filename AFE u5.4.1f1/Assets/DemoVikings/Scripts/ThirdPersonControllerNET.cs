@@ -221,7 +221,7 @@ public class ThirdPersonControllerNET : Photon.MonoBehaviour, ICharacterTranform
             stream.SendNext(transform.position);
             stream.SendNext(transform.rotation);
             //  stream.SendNext(transform.localScale);
-            stream.SendNext(GetComponent<Rigidbody>().velocity);
+            //stream.SendNext(GetComponent<Rigidbody>().velocity);
 
             // input
             /* stream.SendNext(controllerScript.attack);
@@ -241,7 +241,7 @@ public class ThirdPersonControllerNET : Photon.MonoBehaviour, ICharacterTranform
             correctPlayerPos = (Vector3)stream.ReceiveNext();
             correctPlayerRot = (Quaternion)stream.ReceiveNext();
             // correctPlayerScale = (Vector3)stream.ReceiveNext();
-            GetComponent<Rigidbody>().velocity = (Vector3)stream.ReceiveNext();
+            //GetComponent<Rigidbody>().velocity = (Vector3)stream.ReceiveNext();
 
             /*   controllerScript.attack = (bool)stream.ReceiveNext();
                controllerScript.skill_1 = (bool)stream.ReceiveNext();
@@ -259,7 +259,7 @@ public class ThirdPersonControllerNET : Photon.MonoBehaviour, ICharacterTranform
                 transform.position = correctPlayerPos;
                 transform.rotation = correctPlayerRot;
                 //  transform.localScale = correctPlayerScale;
-                GetComponent<Rigidbody>().velocity = Vector3.zero;
+               // GetComponent<Rigidbody>().velocity = Vector3.zero;
             }
         }
     }
@@ -341,8 +341,6 @@ public class ThirdPersonControllerNET : Photon.MonoBehaviour, ICharacterTranform
 
     void Update()
     {
-        if (isRemotePlayer) return;
-
 
         if (!photonView.isMine)
         {
