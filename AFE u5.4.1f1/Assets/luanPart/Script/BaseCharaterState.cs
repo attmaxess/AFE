@@ -4,10 +4,13 @@ using UnityEngine;
 
 public enum StateCharacter
 {
+    None,
     Idle,
     Run,
     Attack,
-    Skill
+    Skill,
+    Death,
+    Hit
 }
 
 public interface IBaseCharacterState<T>
@@ -19,9 +22,9 @@ public interface IBaseCharacterState<T>
 }
 
 
-public class BaseCharaterState : IBaseCharacterState<StateCharacter>
+public abstract class BaseCharaterState : IBaseCharacterState<StateCharacter>
 {
-    StateCharacter nextState;
+    public StateCharacter nextState;
     public StateCharacter stateType;
     ThirdPersonControllerNET player;
     public ThirdPersonControllerNET Player
@@ -29,44 +32,146 @@ public class BaseCharaterState : IBaseCharacterState<StateCharacter>
         set { player = value; }
         get { return player; }
     }
-    public virtual void StartState()
-    {
-
-    }
+    public abstract void StartState();
 
     public virtual StateCharacter Update()
     {
+        Transtion();
         return nextState;
     }
 
-    public virtual void EndState()
-    {
+    public abstract void EndState();
 
-    }
+    public abstract void Transtion();
 
-    public virtual void Transtion()
-    {
-    }
 }
 
 public class IdleState : BaseCharaterState
 {
     public StateCharacter character;
 
+    public override void EndState()
+    {
+        Player.idle = false;
+    }
+
     public override void StartState()
     {
-        base.StartState();
+        Player.PlayAnim("Idle");
     }
 
     public override void Transtion()
     {
-        base.Transtion();
+        if (Player.attack)
+        {
+            nextState = StateCharacter.Attack;
+        }
+
+        if (Player.skill_1)
+        {
+            nextState = StateCharacter.Skill;
+        }
+
+        if (Player.skill_2)
+        {
+            nextState = StateCharacter.Skill;
+        }
+
+        if (Player.skill_3)
+        {
+            nextState = StateCharacter.Skill;
+        }
+
+        if (Player.skill_4)
+        {
+            nextState = StateCharacter.Skill;
+        }
+
+        if (Player.run)
+        {
+            nextState = StateCharacter.Run;
+        }
     }
 
     public override StateCharacter Update()
     {
-        Transtion();
-        return base.Update();
+        return nextState;
+    }
+}
+
+public class HitState : BaseCharaterState
+{
+    public override void EndState()
+    {
+        Player.hit = false;
+    }
+
+    public override void StartState()
+    {
+        Player.PlayAnim("Hit");
+    }
+
+    public override void Transtion()
+    {
+        if (Player.attack)
+        {
+            nextState = StateCharacter.Attack;
+        }
+
+        if (Player.skill_1)
+        {
+            nextState = StateCharacter.Skill;
+        }
+
+        if (Player.skill_2)
+        {
+            nextState = StateCharacter.Skill;
+        }
+
+        if (Player.skill_3)
+        {
+            nextState = StateCharacter.Skill;
+        }
+
+        if (Player.skill_4)
+        {
+            nextState = StateCharacter.Skill;
+        }
+
+        if (Player.run)
+        {
+            nextState = StateCharacter.Run;
+        }
+    }
+}
+
+public class SkillState : BaseCharaterState
+{
+    public override void EndState()
+    {
+
+    }
+
+    public override void StartState()
+    {
+        Player.PlayAnim("Skill");
+    }
+
+    public override void Transtion()
+    {
+        if (Player.run)
+        {
+            nextState = StateCharacter.Run;
+        }
+
+        if (Player.idle)
+        {
+            nextState = StateCharacter.Run;
+        }
+        if (Player.attack)
+        {
+            nextState = StateCharacter.Attack;
+        }
     }
 }
 

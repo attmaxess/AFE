@@ -82,7 +82,7 @@ public class ThirdPersonControllerARVik : MonoBehaviour, ICharacterTranform
 
     public bool IsMine { get { return GetComponent<PhotonView>().isMine; } }
 
-    public void PositionBy(Vector3 position)
+    public void PositionBy(Vector3 position, Vector3 joystick)
     {
         transform.position = new Vector3(position.x, transform.position.y, position.z);
     }

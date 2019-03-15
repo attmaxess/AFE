@@ -91,12 +91,12 @@ public class GameManagerArVik : Photon.PunBehaviour
         if (CF2Input.GetButtonDown("Skill2"))
         {
             if (skill2 != null) skill2();
-            Debug.Log("Skill4");
+            Debug.Log("Skill2");
         }
         if (CF2Input.GetButtonDown("Skill3"))
         {
             if (skill3 != null) skill3();
-            Debug.Log("Skill4");
+            Debug.Log("Skill3");
         }
         if (CF2Input.GetButtonDown("Skill4"))
         {

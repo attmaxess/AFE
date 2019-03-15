@@ -79,7 +79,7 @@ public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
 
             rotateChar.RotateBy(moveVector);
 
-            rotateChar.PositionBy(transform.position);
+            rotateChar.PositionBy(transform.position, moveVector);
 
             //   transform.position = rotateChar.transform.position;
         }
@@ -108,7 +108,7 @@ public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
             }
         }
 
-     
+
 
     }
 }
@@ -120,7 +120,7 @@ public interface IPlaneJoystickTranform
 
 public interface ICharacterTranform
 {
-    void PositionBy(Vector3 position);
+    void PositionBy(Vector3 position, Vector3 joystick);
     void RotateBy(Vector3 moveVector);
     Transform transform { get; }
     bool IsMine { get; }

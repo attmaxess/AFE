@@ -17,12 +17,12 @@ public class AnimatorManager : MonoBehaviour
 
         if (GetComponent<PhotonView>().isMine)
         {
-            controller.attack += attackAnim;
-            controller.skill1 += SkillAnim1;
-            controller.skill2 += SkillAnim2;
-            controller.skill3 += SkillAnim3;
-            controller.skill4 += SkillAnim4;
-            controller.idle += IdleAnim;
+            controller.OnAttack += attackAnim;
+            controller.OnSkill1 += SkillAnim1;
+            controller.OnSkill2 += SkillAnim2;
+            controller.OnSkill3 += SkillAnim3;
+            controller.OnSkill4 += SkillAnim4;
+            controller.OnIdle += IdleAnim;
 
         }
     }

@@ -25,7 +25,7 @@ public class RotateChar : MonoBehaviour, ICharacterTranform
         transform.rotation = Quaternion.LookRotation(dir);
     }
 
-    public void PositionBy(Vector3 pos)
+    public void PositionBy(Vector3 pos, Vector3 joystick)
     {
         transform.position = pos;
     }

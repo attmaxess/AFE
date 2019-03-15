@@ -38,17 +38,19 @@ public class ThirdPersonControllerNET : MonoBehaviour, ICharacterTranform
     #region player state 
     protected BaseCharaterState currentStatePlayer;
     Dictionary<StateCharacter, BaseCharaterState> listState = new Dictionary<StateCharacter, BaseCharaterState>();
+    [SerializeField]
+    StateCharacter _currentStateType;
 
     #endregion
 
     private bool isRemotePlayer = true;
 
-    public event Action attack;
-    public event Action skill1;
-    public event Action skill2;
-    public event Action skill3;
-    public event Action skill4;
-    public event Action idle;
+    public event Action OnAttack;
+    public event Action OnSkill1;
+    public event Action OnSkill2;
+    public event Action OnSkill3;
+    public event Action OnSkill4;
+    public event Action OnIdle;
 
     public bool Grounded
     // Make our grounded status available for other components
@@ -67,6 +69,7 @@ public class ThirdPersonControllerNET : MonoBehaviour, ICharacterTranform
 
     public void SetIsRemotePlayer(bool val)
     {
+        Debug.Log("SetIsRemotePlayer " + val);
         isRemotePlayer = val;
     }
 
@@ -114,76 +117,107 @@ public class ThirdPersonControllerNET : MonoBehaviour, ICharacterTranform
         }
 
         #region initialize player state
-        var states = GetComponentsInChildren<BaseCharaterState>();
-        foreach (var item in states)
-        {
-            listState.Add(item.stateType, item);
-            item.Player = this;
-        }
+        /*  var states = GetComponentsInChildren<BaseCharaterState>();
+          foreach (var item in states)
+          {
+              listState.Add(item.stateType, item);
+              item.Player = this;
+          }     */
         #endregion
     }
+
+    public bool skill_1;
+    public bool skill_2;
+    public bool skill_3;
+    public bool skill_4;
+    public bool attack;
+    public bool run;
+    public bool idle;
+    public bool hit;
 
     private void Singleton_skill4()
     {
         Debug.Log("Skill4");
+        skill_4 = true;
     }
 
     private void Singleton_skill3()
     {
         Debug.Log("Skill3");
+        skill_3 = true;
     }
 
     private void Singleton_skill2()
     {
         Debug.Log("Skill2");
+        skill_2 = true;
     }
 
     private void Singleton_skill1()
     {
         Debug.Log("Skill1");
+        skill_1 = true;
     }
 
     private void Singleton_Attack()
     {
         Debug.Log("Attack");
+        attack = true;
     }
 
     void Update()
-    // Handle rotation here to ensure smooth application.
     {
         if (isRemotePlayer) return;
 
-        float rotationAmount;
+        //    SwitchState(currentStatePlayer.Update());
 
-        if (Input.GetMouseButton(1) && (!requireLock || controlLock || Cursor.lockState == CursorLockMode.Locked))
-        // If the right mouse button is held, rotation is locked to the mouse
-        {
-            if (controlLock)
-            {
-                Cursor.visible = false;
-                Cursor.lockState = CursorLockMode.Locked;
-            }
+        // Handle rotation here to ensure smooth application.
+        /*  float rotationAmount;
 
-            rotationAmount = Input.GetAxis("Mouse X") * mouseTurnSpeed * Time.deltaTime;
-        }
-        else
-        {
-            if (controlLock)
-            {
-                Cursor.visible = true;
-                Cursor.lockState = CursorLockMode.None;
-            }
+          if (Input.GetMouseButton(1) && (!requireLock || controlLock || Cursor.lockState == CursorLockMode.Locked))
+          // If the right mouse button is held, rotation is locked to the mouse
+          {
+              if (controlLock)
+              {
+                  Cursor.visible = false;
+                  Cursor.lockState = CursorLockMode.Locked;
+              }
 
-            rotationAmount = Input.GetAxis("Horizontal") * turnSpeed * Time.deltaTime;
-        }
+              rotationAmount = Input.GetAxis("Mouse X") * mouseTurnSpeed * Time.deltaTime;
+          }
+          else
+          {
+              if (controlLock)
+              {
+                  Cursor.visible = true;
+                  Cursor.lockState = CursorLockMode.None;
+              }
 
-        target.transform.RotateAround(target.transform.up, rotationAmount);
+              rotationAmount = Input.GetAxis("Horizontal") * turnSpeed * Time.deltaTime;
+          }
 
-        if (Input.GetKeyDown(KeyCode.Backslash) || Input.GetKeyDown(KeyCode.Plus))
-        {
-            walking = !walking;
-        }
+          target.transform.RotateAround(target.transform.up, rotationAmount);
+
+          if (Input.GetKeyDown(KeyCode.Backslash) || Input.GetKeyDown(KeyCode.Plus))
+          {
+              walking = !walking;
+          }    */
     }
+
+    /* public void SwitchState(StateCharacter state)
+     {
+
+         if (state != currentStatePlayer.stateType && state != StateCharacter.None)
+         {
+             _currentStateType = state;
+
+             currentStatePlayer.EndState();
+
+             currentStatePlayer = listState[state];
+
+             currentStatePlayer.StartState();
+         }
+     }   */
 
     float SidestepAxisInput
     // If the right mouse button is held, the horizontal axis also turns into sidestep handling
@@ -205,75 +239,83 @@ public class ThirdPersonControllerNET : MonoBehaviour, ICharacterTranform
         }
     }
 
-    void FixedUpdate()
-    // Handle movement here since physics will only be calculated in fixed frames anyway
+    public bool IsMine
     {
-
-        grounded = Physics.Raycast(
-            target.transform.position + target.transform.up * -groundedCheckOffset,
-            target.transform.up * -1,
-            groundedDistance,
-            groundLayers
-        );
-        // Shoot a ray downward to see if we're touching the ground
-
-        if (isRemotePlayer) return;
-
-        if (grounded)
+        get
         {
-            target.drag = groundDrag;
-            // Apply drag when we're grounded
-
-            if (Input.GetButton("Jump"))
-            // Handle jumping
-            {
-                target.AddForce(
-                    jumpSpeed * target.transform.up +
-                        target.velocity.normalized * directionalJumpFactor,
-                    ForceMode.VelocityChange
-                );
-                // When jumping, we set the velocity upward with our jump speed
-                // plus some application of directional movement
-
-                if (onJump != null)
-                {
-                    onJump();
-                }
-            }
-            else
-            // Only allow movement controls if we did not just jump
-            {
-                Vector3 movement = Input.GetAxis("Vertical") * target.transform.forward +
-                    SidestepAxisInput * target.transform.right;
-
-                float appliedSpeed = walking ? speed / walkSpeedDownscale : speed;
-                // Scale down applied speed if in walk mode
-
-                if (Input.GetAxis("Vertical") < 0.0f)
-                // Scale down applied speed if walking backwards
-                {
-                    appliedSpeed /= walkSpeedDownscale;
-                }
-
-                if (movement.magnitude > inputThreshold)
-                // Only apply movement if we have sufficient input
-                {
-                    target.AddForce(movement.normalized * appliedSpeed, ForceMode.VelocityChange);
-                }
-                else
-                // If we are grounded and don't have significant input, just stop horizontal movement
-                {
-                    target.velocity = new Vector3(0.0f, target.velocity.y, 0.0f);
-                    return;
-                }
-            }
-        }
-        else
-        {
-            target.drag = 0.0f;
-            // If we're airborne, we should have no drag
+            return GetComponent<PhotonView>().isMine;
         }
     }
+
+    /* void FixedUpdate()
+     // Handle movement here since physics will only be calculated in fixed frames anyway
+     {
+
+         grounded = Physics.Raycast(
+             target.transform.position + target.transform.up * -groundedCheckOffset,
+             target.transform.up * -1,
+             groundedDistance,
+             groundLayers
+         );
+         // Shoot a ray downward to see if we're touching the ground
+
+         if (isRemotePlayer) return;
+
+         if (grounded)
+         {
+             target.drag = groundDrag;
+             // Apply drag when we're grounded
+
+             if (Input.GetButton("Jump"))
+             // Handle jumping
+             {
+                 target.AddForce(
+                     jumpSpeed * target.transform.up +
+                         target.velocity.normalized * directionalJumpFactor,
+                     ForceMode.VelocityChange
+                 );
+                 // When jumping, we set the velocity upward with our jump speed
+                 // plus some application of directional movement
+
+                 if (onJump != null)
+                 {
+                     onJump();
+                 }
+             }
+             else
+             // Only allow movement controls if we did not just jump
+             {
+                 Vector3 movement = Input.GetAxis("Vertical") * target.transform.forward +
+                     SidestepAxisInput * target.transform.right;
+
+                 float appliedSpeed = walking ? speed / walkSpeedDownscale : speed;
+                 // Scale down applied speed if in walk mode
+
+                 if (Input.GetAxis("Vertical") < 0.0f)
+                 // Scale down applied speed if walking backwards
+                 {
+                     appliedSpeed /= walkSpeedDownscale;
+                 }
+
+                 if (movement.magnitude > inputThreshold)
+                 // Only apply movement if we have sufficient input
+                 {
+                     target.AddForce(movement.normalized * appliedSpeed, ForceMode.VelocityChange);
+                 }
+                 else
+                 // If we are grounded and don't have significant input, just stop horizontal movement
+                 {
+                     target.velocity = new Vector3(0.0f, target.velocity.y, 0.0f);
+                     return;
+                 }
+             }
+         }
+         else
+         {
+             target.drag = 0.0f;
+             // If we're airborne, we should have no drag
+         }
+     }     */
 
 
     void OnDrawGizmos()
@@ -289,15 +331,32 @@ public class ThirdPersonControllerNET : MonoBehaviour, ICharacterTranform
             target.transform.position + target.transform.up * -(groundedCheckOffset + groundedDistance));
     }
 
-    public bool IsMine { get { return GetComponent<PhotonView>().isMine; } }
 
-    public void PositionBy(Vector3 position)
+    public void PositionBy(Vector3 position, Vector3 joystick)
     {
+        if (joystick != Vector3.zero)
+        {
+            run = true;
+            idle = false;
+        }
+        else
+        {
+            run = false;
+            idle = true;
+        }
+
+
         transform.position = new Vector3(position.x, transform.position.y, position.z);
     }
 
     public void RotateBy(Vector3 moveVector)
     {
-        transform.rotation = Quaternion.LookRotation(moveVector);
+        if (moveVector != Vector3.zero)
+            transform.rotation = Quaternion.LookRotation(moveVector);
+    }
+
+    public void PlayAnim(string name)
+    {
+        Debug.Log("Play Anim " + name);
     }
 }
