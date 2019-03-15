@@ -1,24 +1,25 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
-public class RemoteCamManager : Photon.MonoBehaviour
+public class RemoteAxisCubeNetInstance : Photon.MonoBehaviour
 {
     [Header("Debug")]
     public bool isDebug = false;
 
     // this is a object name (must be in any Resources folder) of the prefab to spawn as player avatar.
     // read the documentation for info how to spawn dynamically loaded game objects at runtime (not using Resources folders)
-    public string playerPrefabName = "RemoteCamPrefab";
+    public string playerPrefabName = "RemoteAxisCube";
 
     void OnJoinedRoom()
     {
-        if (isDebug) Debug.Log("RemoteCamManager OnJoinedRoom");
+        if (isDebug) Debug.Log("RemoteAxisCubeNetInstance OnJoinedRoom");
         StartGame();
     }
 
     IEnumerator OnLeftRoom()
     {
-        if (isDebug) Debug.Log("RemoteCamManager OnLeftRoom");
+        if (isDebug) Debug.Log("RemoteAxisCubeNetInstance OnLeftRoom");
         //Easy way to reset the level: Otherwise we'd manually reset the camera
 
         //Wait untill Photon is properly disconnected (empty room, and connected back to main server)
@@ -30,14 +31,14 @@ public class RemoteCamManager : Photon.MonoBehaviour
 
     void StartGame()
     {
-        if (isDebug) Debug.Log("RemoteCamManager StartGame");
+        if (isDebug) Debug.Log("RemoteAxisCubeNetInstance StartGame");
 
         // Spawn our local player
         PhotonNetwork.Instantiate(this.playerPrefabName, transform.position, Quaternion.identity, 0);
-    }    
+    }
 
     void OnDisconnectedFromPhoton()
     {
-        Debug.LogWarning("RemoteCamManager OnDisconnectedFromPhoton");
+        Debug.LogWarning("RemoteAxisCubeNetInstance OnDisconnectedFromPhoton");
     }
 }
