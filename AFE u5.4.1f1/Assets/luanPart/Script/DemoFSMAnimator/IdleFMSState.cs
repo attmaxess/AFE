@@ -7,7 +7,7 @@ public class IdleFMSState : BaseFMSAnimator
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         base.OnStateEnter(animator, stateInfo, layerIndex);
-        Debug.Log("Idle OnStateEnter " + character.attack + " - " + character.idle);
+        Debug.Log("Idle OnStateEnter " + character.AttackRpc + " - " + character.idleRpc);
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -16,39 +16,39 @@ public class IdleFMSState : BaseFMSAnimator
 
 
         // condition transition
-        if (character.attack)
+        if (character.AttackRpc)
         {
             animator.SetTrigger("Attack");
             return;
         }
-        if (character.run)
+        if (character.runRpc)
         {
             animator.SetTrigger("Run");
             return;
         }
 
-        if (character.hit)
+        if (character.hitRpc)
         {
             animator.SetTrigger("Hit");
             return;
         }
 
-        if (character.skill_1)
+        if (character.skill_1Rpc)
         {
             animator.SetTrigger("Skill1");
             return;
         }
-        if (character.skill_2)
+        if (character.skill_2Rpc)
         {
             animator.SetTrigger("Skill2");
             return;
         }
-        if (character.skill_3)
+        if (character.skill_3Rpc)
         {
             animator.SetTrigger("Skill3");
             return;
         }
-        if (character.skill_4)
+        if (character.skill_4Rpc)
         {
             animator.SetTrigger("Skill4");
             return;
@@ -58,15 +58,15 @@ public class IdleFMSState : BaseFMSAnimator
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         base.OnStateExit(animator, stateInfo, layerIndex);
-        character.attack = false;
-        character.hit = false;
-        character.run = false;
-        character.skill_1 = false;
-        character.skill_2 = false;
-        character.skill_3 = false;
-        character.skill_4 = false;
+        character.AttackRpc = false;
+        character.hitRpc = false;
+        character.runRpc = false;
+        character.skill_1Rpc = false;
+        character.skill_2Rpc = false;
+        character.skill_3Rpc = false;
+        character.skill_4Rpc = false;
 
-        Debug.Log("Idle OnStateExit " + character.attack + " - " + character.idle);
+        Debug.Log("Idle OnStateExit " + character.AttackRpc + " - " + character.idleRpc);
     }
 
     public override void OnStateMachineEnter(Animator animator, int stateMachinePathHash)

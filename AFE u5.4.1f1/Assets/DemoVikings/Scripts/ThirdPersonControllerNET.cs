@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public delegate void JumpDelegate();
 
-public class ThirdPersonControllerNET : MonoBehaviour, ICharacterTranform
+public class ThirdPersonControllerNET : Photon.MonoBehaviour, ICharacterTranform
 {
     public Rigidbody target;
     // The object we're steering
@@ -126,48 +126,231 @@ public class ThirdPersonControllerNET : MonoBehaviour, ICharacterTranform
         #endregion
     }
 
-    public bool skill_1;
-    public bool skill_2;
-    public bool skill_3;
-    public bool skill_4;
-    public bool attack;
-    public bool run;
-    public bool idle;
-    public bool hit;
+    private Vector3 correctPlayerPos = Vector3.zero; //We lerp towards this
+    private Quaternion correctPlayerRot = Quaternion.identity; //We lerp towards this
+    private Vector3 correctPlayerScale = Vector3.zero; //We lerp towards this
+    private bool appliedInitialUpdate;
+
+    bool skill_1;
+    public bool skill_1Rpc
+    {
+        get { return skill_1; }
+        set
+        {
+            skill_1 = value;
+            photonView.RPC("RpcSkill_1", PhotonTargets.All, value);
+        }
+    }
+    bool skill_2;
+    public bool skill_2Rpc
+    {
+        get { return skill_2; }
+        set
+        {
+            skill_2 = value;
+            photonView.RPC("RpcSkill_2", PhotonTargets.All, value);
+        }
+    }
+    bool skill_3;
+    public bool skill_3Rpc
+    {
+        get { return skill_3; }
+        set
+        {
+            skill_3 = value;
+            photonView.RPC("RpcSkill_3", PhotonTargets.All, value);
+        }
+    }
+    bool skill_4;
+    public bool skill_4Rpc
+    {
+        get { return skill_4; }
+        set
+        {
+            skill_4 = value;
+            photonView.RPC("RpcSkill_4", PhotonTargets.All, value);
+        }
+    }
+    bool attack;
+    public bool AttackRpc
+    {
+        get { return attack; }
+        set
+        {
+            attack = value;
+            photonView.RPC("RpcAttack", PhotonTargets.All, value);
+        }
+    }
+    bool run;
+    public bool runRpc
+    {
+        get { return run; }
+        set
+        {
+            run = value;
+            photonView.RPC("RpcRun", PhotonTargets.All, value);
+        }
+    }
+    bool idle;
+    public bool idleRpc
+    {
+        get { return idle; }
+        set
+        {
+            idle = value;
+            photonView.RPC("RpcIdle", PhotonTargets.All, value);
+        }
+    }
+    bool hit;
+    public bool hitRpc
+    {
+        get { return hit; }
+        set
+        {
+            hit = value;
+            photonView.RPC("RpcHit", PhotonTargets.All, value);
+        }
+    }
+
+    void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.isWriting)
+        {
+            //We own this player: send the others our data
+            // stream.SendNext((int)controllerScript._characterState);
+            stream.SendNext(transform.position);
+            stream.SendNext(transform.rotation);
+            //  stream.SendNext(transform.localScale);
+            stream.SendNext(GetComponent<Rigidbody>().velocity);
+
+            // input
+            /* stream.SendNext(controllerScript.attack);
+             stream.SendNext(controllerScript.skill_1);
+             stream.SendNext(controllerScript.skill_2);
+             stream.SendNext(controllerScript.skill_3);
+             stream.SendNext(controllerScript.skill_4);
+             stream.SendNext(controllerScript.run);
+             stream.SendNext(controllerScript.idle);
+             stream.SendNext(controllerScript.hit);   */
+
+        }
+        else
+        {
+            //Network player, receive data
+            //controllerScript._characterState = (CharacterState)(int)stream.ReceiveNext();
+            correctPlayerPos = (Vector3)stream.ReceiveNext();
+            correctPlayerRot = (Quaternion)stream.ReceiveNext();
+            // correctPlayerScale = (Vector3)stream.ReceiveNext();
+            GetComponent<Rigidbody>().velocity = (Vector3)stream.ReceiveNext();
+
+            /*   controllerScript.attack = (bool)stream.ReceiveNext();
+               controllerScript.skill_1 = (bool)stream.ReceiveNext();
+               controllerScript.skill_2 = (bool)stream.ReceiveNext();
+               controllerScript.skill_3 = (bool)stream.ReceiveNext();
+               controllerScript.skill_4 = (bool)stream.ReceiveNext();
+               controllerScript.run = (bool)stream.ReceiveNext();
+               controllerScript.idle = (bool)stream.ReceiveNext();
+               controllerScript.hit = (bool)stream.ReceiveNext();  */
+
+
+            if (!appliedInitialUpdate)
+            {
+                appliedInitialUpdate = true;
+                transform.position = correctPlayerPos;
+                transform.rotation = correctPlayerRot;
+                //  transform.localScale = correctPlayerScale;
+                GetComponent<Rigidbody>().velocity = Vector3.zero;
+            }
+        }
+    }
+
+
 
     private void Singleton_skill4()
     {
         Debug.Log("Skill4");
-        skill_4 = true;
+        skill_4Rpc = true;
     }
 
     private void Singleton_skill3()
     {
         Debug.Log("Skill3");
-        skill_3 = true;
+        skill_3Rpc = true;
     }
 
     private void Singleton_skill2()
     {
         Debug.Log("Skill2");
-        skill_2 = true;
+        skill_2Rpc = true;
     }
 
     private void Singleton_skill1()
     {
         Debug.Log("Skill1");
-        skill_1 = true;
+        skill_1Rpc = true;
     }
 
     private void Singleton_Attack()
     {
         Debug.Log("Attack");
-        attack = true;
+        AttackRpc = true;
     }
+
+    #region PUN RPC
+    [PunRPC]
+    public void RpcAttack(bool value)
+    {
+        attack = value;
+    }
+    [PunRPC]
+    public void RpcIdle(bool value)
+    {
+        idle = value;
+    }
+    [PunRPC]
+    public void RpcRun(bool value)
+    {
+        run = value;
+    }
+    [PunRPC]
+    public void RpcHit(bool value)
+    {
+        hit = value;
+    }
+    [PunRPC]
+    public void RpcSkill_4(bool value)
+    {
+        skill_4 = value;
+    }
+    [PunRPC]
+    public void RpcSkill_3(bool value)
+    {
+        skill_3 = value;
+    }
+    [PunRPC]
+    public void RpcSkill_2(bool value)
+    {
+        skill_2 = value;
+    }
+    [PunRPC]
+    public void RpcSkill_1(bool value)
+    {
+        skill_1 = value;
+    }
+    #endregion
 
     void Update()
     {
         if (isRemotePlayer) return;
+
+
+        if (!photonView.isMine)
+        {
+            //Update remote player (smooth this, this looks good, at the cost of some accuracy)
+            transform.position = Vector3.Lerp(transform.position, correctPlayerPos, Time.deltaTime * 5);
+            transform.rotation = Quaternion.Lerp(transform.rotation, correctPlayerRot, Time.deltaTime * 5);
+            //     transform.localScale = Vector3.Lerp(transform.localScale, correctPlayerScale, Time.deltaTime * 5);
+        }
 
         //    SwitchState(currentStatePlayer.Update());
 
@@ -336,13 +519,13 @@ public class ThirdPersonControllerNET : MonoBehaviour, ICharacterTranform
     {
         if (joystick != Vector3.zero)
         {
-            run = true;
-            idle = false;
+            runRpc = true;
+            idleRpc = false;
         }
         else
         {
-            run = false;
-            idle = true;
+            runRpc = false;
+            idleRpc = true;
         }
 
 

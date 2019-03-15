@@ -15,6 +15,6 @@ public class Skill_3FMSState : BaseFMSAnimator
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         base.OnStateExit(animator, stateInfo, layerIndex);
-        Debug.Log("Attack OnStateExit " + character.attack + " - " + character.idle);
+        Debug.Log("Attack OnStateExit " + character.AttackRpc + " - " + character.idleRpc);
     }
 }

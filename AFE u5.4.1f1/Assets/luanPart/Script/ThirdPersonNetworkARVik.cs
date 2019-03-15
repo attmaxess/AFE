@@ -43,14 +43,14 @@ public class ThirdPersonNetworkARVik : Photon.MonoBehaviour
             stream.SendNext(GetComponent<Rigidbody>().velocity);
 
             // input
-            stream.SendNext(controllerScript.attack);
+           /* stream.SendNext(controllerScript.attack);
             stream.SendNext(controllerScript.skill_1);
             stream.SendNext(controllerScript.skill_2);
             stream.SendNext(controllerScript.skill_3);
             stream.SendNext(controllerScript.skill_4);
             stream.SendNext(controllerScript.run);
             stream.SendNext(controllerScript.idle);
-            stream.SendNext(controllerScript.hit);
+            stream.SendNext(controllerScript.hit);   */
 
         }
         else
@@ -62,14 +62,14 @@ public class ThirdPersonNetworkARVik : Photon.MonoBehaviour
            // correctPlayerScale = (Vector3)stream.ReceiveNext();
             GetComponent<Rigidbody>().velocity = (Vector3)stream.ReceiveNext();
 
-            controllerScript.attack = (bool)stream.ReceiveNext();
+         /*   controllerScript.attack = (bool)stream.ReceiveNext();
             controllerScript.skill_1 = (bool)stream.ReceiveNext();
             controllerScript.skill_2 = (bool)stream.ReceiveNext();
             controllerScript.skill_3 = (bool)stream.ReceiveNext();
             controllerScript.skill_4 = (bool)stream.ReceiveNext();
             controllerScript.run = (bool)stream.ReceiveNext();
             controllerScript.idle = (bool)stream.ReceiveNext();
-            controllerScript.hit = (bool)stream.ReceiveNext();
+            controllerScript.hit = (bool)stream.ReceiveNext();  */
 
 
             if (!appliedInitialUpdate)

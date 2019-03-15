@@ -52,7 +52,7 @@ public class IdleState : BaseCharaterState
 
     public override void EndState()
     {
-        Player.idle = false;
+        Player.idleRpc = false;
     }
 
     public override void StartState()
@@ -62,32 +62,32 @@ public class IdleState : BaseCharaterState
 
     public override void Transtion()
     {
-        if (Player.attack)
+        if (Player.AttackRpc)
         {
             nextState = StateCharacter.Attack;
         }
 
-        if (Player.skill_1)
+        if (Player.skill_1Rpc)
         {
             nextState = StateCharacter.Skill;
         }
 
-        if (Player.skill_2)
+        if (Player.skill_2Rpc)
         {
             nextState = StateCharacter.Skill;
         }
 
-        if (Player.skill_3)
+        if (Player.skill_3Rpc)
         {
             nextState = StateCharacter.Skill;
         }
 
-        if (Player.skill_4)
+        if (Player.skill_4Rpc)
         {
             nextState = StateCharacter.Skill;
         }
 
-        if (Player.run)
+        if (Player.runRpc)
         {
             nextState = StateCharacter.Run;
         }
@@ -103,7 +103,7 @@ public class HitState : BaseCharaterState
 {
     public override void EndState()
     {
-        Player.hit = false;
+        Player.hitRpc = false;
     }
 
     public override void StartState()
@@ -113,32 +113,32 @@ public class HitState : BaseCharaterState
 
     public override void Transtion()
     {
-        if (Player.attack)
+        if (Player.AttackRpc)
         {
             nextState = StateCharacter.Attack;
         }
 
-        if (Player.skill_1)
+        if (Player.skill_1Rpc)
         {
             nextState = StateCharacter.Skill;
         }
 
-        if (Player.skill_2)
+        if (Player.skill_2Rpc)
         {
             nextState = StateCharacter.Skill;
         }
 
-        if (Player.skill_3)
+        if (Player.skill_3Rpc)
         {
             nextState = StateCharacter.Skill;
         }
 
-        if (Player.skill_4)
+        if (Player.skill_4Rpc)
         {
             nextState = StateCharacter.Skill;
         }
 
-        if (Player.run)
+        if (Player.runRpc)
         {
             nextState = StateCharacter.Run;
         }
@@ -159,16 +159,16 @@ public class SkillState : BaseCharaterState
 
     public override void Transtion()
     {
-        if (Player.run)
+        if (Player.runRpc)
         {
             nextState = StateCharacter.Run;
         }
 
-        if (Player.idle)
+        if (Player.idleRpc)
         {
             nextState = StateCharacter.Run;
         }
-        if (Player.attack)
+        if (Player.AttackRpc)
         {
             nextState = StateCharacter.Attack;
         }
