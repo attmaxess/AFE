@@ -9,49 +9,49 @@ using AOT;
 namespace UnityEngine.XR.iOS
 {
 
-	public enum UnityAREnvironmentTexturing
-	{
-		UnityAREnvironmentTexturingNone,
-		UnityAREnvironmentTexturingManual,
-		UnityAREnvironmentTexturingAutomatic
-	};
+    public enum UnityAREnvironmentTexturing
+    {
+        UnityAREnvironmentTexturingNone,
+        UnityAREnvironmentTexturingManual,
+        UnityAREnvironmentTexturingAutomatic
+    };
 
-   public enum UnityAREnvironmentTextureFormat : long
-   {
-       // NOTE: Not a complete set, but an initial mapping that matches an internal set of texture readback mappings.
-       UnityAREnvironmentTextureFormatR16,
-       UnityAREnvironmentTextureFormatRG16,
-       UnityAREnvironmentTextureFormatBGRA32,
-       UnityAREnvironmentTextureFormatRGBA32,
-       UnityAREnvironmentTextureFormatRGBAFloat,
-       UnityAREnvironmentTextureFormatRGBAHalf,
-       UnityAREnvironmentTextureFormatDefault = UnityAREnvironmentTextureFormatBGRA32
-   };
+    public enum UnityAREnvironmentTextureFormat : long
+    {
+        // NOTE: Not a complete set, but an initial mapping that matches an internal set of texture readback mappings.
+        UnityAREnvironmentTextureFormatR16,
+        UnityAREnvironmentTextureFormatRG16,
+        UnityAREnvironmentTextureFormatBGRA32,
+        UnityAREnvironmentTextureFormatRGBA32,
+        UnityAREnvironmentTextureFormatRGBAFloat,
+        UnityAREnvironmentTextureFormatRGBAHalf,
+        UnityAREnvironmentTextureFormatDefault = UnityAREnvironmentTextureFormatBGRA32
+    };
 
-   public struct UnityAREnvironmentProbeCubemapData
-   {
-       public IntPtr cubemapPtr;
-       public UnityAREnvironmentTextureFormat textureFormat;
-       public int width;
-       public int height;
-       public int mipmapCount;
-   };
+    public struct UnityAREnvironmentProbeCubemapData
+    {
+        public IntPtr cubemapPtr;
+        public UnityAREnvironmentTextureFormat textureFormat;
+        public int width;
+        public int height;
+        public int mipmapCount;
+    };
 
-	public struct UnityAREnvironmentProbeAnchorData 
-	{
+    public struct UnityAREnvironmentProbeAnchorData
+    {
 
-		public IntPtr ptrIdentifier;
+        public IntPtr ptrIdentifier;
 
-		/**
+        /**
 	 		The transformation matrix that defines the anchor's rotation, translation and scale in world coordinates.
 			 */
-		public UnityARMatrix4x4 transform;
+        public UnityARMatrix4x4 transform;
 
-		public UnityAREnvironmentProbeCubemapData cubemapData;
+        public UnityAREnvironmentProbeCubemapData cubemapData;
 
-		public Vector3 probeExtent;
+        public Vector3 probeExtent;
 
-	};
+    };
 
     public static class UnityAREnvironmentProbeCubemapDataMethods
     {
@@ -76,84 +76,89 @@ namespace UnityEngine.XR.iOS
         }
     }
 
-	public class AREnvironmentProbeAnchor 
-	{
+    public class AREnvironmentProbeAnchor
+    {
 
-		UnityAREnvironmentProbeAnchorData envProbeAnchorData;
+        UnityAREnvironmentProbeAnchorData envProbeAnchorData;
 
-		public AREnvironmentProbeAnchor(UnityAREnvironmentProbeAnchorData uarepad)
-		{
-			envProbeAnchorData = uarepad;
-		}
+        public AREnvironmentProbeAnchor(UnityAREnvironmentProbeAnchorData uarepad)
+        {
+            envProbeAnchorData = uarepad;
+        }
 
-		public string identifier { get { return Marshal.PtrToStringAuto(envProbeAnchorData.ptrIdentifier); } }
+        public string identifier { get { return Marshal.PtrToStringAuto(envProbeAnchorData.ptrIdentifier); } }
 
-		public Matrix4x4 transform { 
-			get { 
-				Matrix4x4 matrix = new Matrix4x4 ();
-				matrix.SetColumn (0, envProbeAnchorData.transform.column0);
-				matrix.SetColumn (1, envProbeAnchorData.transform.column1);
-				matrix.SetColumn (2, envProbeAnchorData.transform.column2);
-				matrix.SetColumn (3, envProbeAnchorData.transform.column3);
-				return matrix;
-			}
-		}
+        public Matrix4x4 transform
+        {
+            get
+            {
+                Matrix4x4 matrix = new Matrix4x4();
+                matrix.SetColumn(0, envProbeAnchorData.transform.column0);
+                matrix.SetColumn(1, envProbeAnchorData.transform.column1);
+                matrix.SetColumn(2, envProbeAnchorData.transform.column2);
+                matrix.SetColumn(3, envProbeAnchorData.transform.column3);
+                return matrix;
+            }
+        }
 
-		public Cubemap Cubemap
-		{
-			get 
-			{ 
-                if (envProbeAnchorData.cubemapData.cubemapPtr != IntPtr.Zero) {
+        public Cubemap Cubemap
+        {
+            get
+            {
+                if (envProbeAnchorData.cubemapData.cubemapPtr != IntPtr.Zero)
+                {
                     Cubemap cubemap = Cubemap.CreateExternalTexture(envProbeAnchorData.cubemapData.width,
                                                                     envProbeAnchorData.cubemapData.textureFormat.GetTextureFormat(),
                                                                     (envProbeAnchorData.cubemapData.mipmapCount > 1),
                                                                     envProbeAnchorData.cubemapData.cubemapPtr);
                     cubemap.filterMode = FilterMode.Trilinear;
                     return cubemap;
-				} else {
-					return null;
-				}
-			}
+                }
+                else
+                {
+                    return null;
+                }
+            }
 
-		}
+        }
 
-		public Vector3 Extent
-		{
-			get { return envProbeAnchorData.probeExtent; }
-		}
-	}
-
-
-	public partial class UnityARSessionNativeInterface
-	{
-		// Object Anchors
-		public delegate void AREnvironmentProbeAnchorAdded(AREnvironmentProbeAnchor anchorData);
-		public static event AREnvironmentProbeAnchorAdded AREnvironmentProbeAnchorAddedEvent;
-
-		public delegate void AREnvironmentProbeAnchorUpdated(AREnvironmentProbeAnchor anchorData);
-		public static event AREnvironmentProbeAnchorUpdated AREnvironmentProbeAnchorUpdatedEvent;
-
-		public delegate void AREnvironmentProbeAnchorRemoved(AREnvironmentProbeAnchor anchorData);
-		public static event AREnvironmentProbeAnchorRemoved AREnvironmentProbeAnchorRemovedEvent;
+        public Vector3 Extent
+        {
+            get { return envProbeAnchorData.probeExtent; }
+        }
+    }
 
 
-		delegate void internal_AREnvironmentProbeAnchorAdded(UnityAREnvironmentProbeAnchorData anchorData);
-		delegate void internal_AREnvironmentProbeAnchorUpdated(UnityAREnvironmentProbeAnchorData anchorData);
-		delegate void internal_AREnvironmentProbeAnchorRemoved(UnityAREnvironmentProbeAnchorData anchorData);
+    public partial class UnityARSessionNativeInterface
+    {
+        // Object Anchors
+        public delegate void AREnvironmentProbeAnchorAdded(AREnvironmentProbeAnchor anchorData);
+        public static event AREnvironmentProbeAnchorAdded AREnvironmentProbeAnchorAddedEvent;
 
-		public UnityAREnvironmentProbeAnchorData AddEnvironmentProbeAnchor(UnityAREnvironmentProbeAnchorData anchorData)
-		{
-			#if !UNITY_EDITOR && UNITY_IOS
+        public delegate void AREnvironmentProbeAnchorUpdated(AREnvironmentProbeAnchor anchorData);
+        public static event AREnvironmentProbeAnchorUpdated AREnvironmentProbeAnchorUpdatedEvent;
+
+        public delegate void AREnvironmentProbeAnchorRemoved(AREnvironmentProbeAnchor anchorData);
+        public static event AREnvironmentProbeAnchorRemoved AREnvironmentProbeAnchorRemovedEvent;
+
+
+        delegate void internal_AREnvironmentProbeAnchorAdded(UnityAREnvironmentProbeAnchorData anchorData);
+        delegate void internal_AREnvironmentProbeAnchorUpdated(UnityAREnvironmentProbeAnchorData anchorData);
+        delegate void internal_AREnvironmentProbeAnchorRemoved(UnityAREnvironmentProbeAnchorData anchorData);
+
+        public UnityAREnvironmentProbeAnchorData AddEnvironmentProbeAnchor(UnityAREnvironmentProbeAnchorData anchorData)
+        {
+#if !UNITY_EDITOR && UNITY_IOS
 			return SessionAddEnvironmentProbeAnchor(m_NativeARSession, anchorData);
-			#else
-			return new UnityAREnvironmentProbeAnchorData();
-			#endif
-		}
+#else
+            return new UnityAREnvironmentProbeAnchorData();
+#endif
+        }
 
 
 #if !UNITY_EDITOR && UNITY_IOS
 
-		#region Environment Probe Anchors
+        #region Environment Probe Anchors
 		[MonoPInvokeCallback(typeof(internal_AREnvironmentProbeAnchorAdded))]
 		static void _envprobe_anchor_added(UnityAREnvironmentProbeAnchorData anchor)
 		{
@@ -183,7 +188,7 @@ namespace UnityEngine.XR.iOS
 				AREnvironmentProbeAnchorRemovedEvent(arEnvProbeAnchor);
 			}
 		}
-		#endregion
+        #endregion
 
 		[DllImport("__Internal")]
 		private static extern void session_SetEnvironmentProbeAnchorCallbacks(IntPtr nativeSession, internal_AREnvironmentProbeAnchorAdded envprobeAnchorAddedCallback, 
@@ -199,5 +204,5 @@ namespace UnityEngine.XR.iOS
 
 
 
-	}
+    }
 }

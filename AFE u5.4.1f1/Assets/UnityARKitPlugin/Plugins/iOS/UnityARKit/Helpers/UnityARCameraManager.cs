@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.iOS;
 
-public class UnityARCameraManager : MonoBehaviour {
+public class UnityARCameraManager : MonoBehaviour
+{
 
     public Camera m_camera;
     private UnityARSessionNativeInterface m_session;
@@ -15,7 +16,7 @@ public class UnityARCameraManager : MonoBehaviour {
     public bool getPointCloud = true;
     public bool enableLightEstimation = true;
     public bool enableAutoFocus = true;
-	public UnityAREnvironmentTexturing environmentTexturing = UnityAREnvironmentTexturing.UnityAREnvironmentTexturingNone;
+    public UnityAREnvironmentTexturing environmentTexturing = UnityAREnvironmentTexturing.UnityAREnvironmentTexturingNone;
 
     [Header("Image Tracking")]
     public ARReferenceImagesSet detectionImages = null;
@@ -29,7 +30,7 @@ public class UnityARCameraManager : MonoBehaviour {
     {
         get
         {
-            ARKitWorldTrackingSessionConfiguration config = new ARKitWorldTrackingSessionConfiguration ();
+            ARKitWorldTrackingSessionConfiguration config = new ARKitWorldTrackingSessionConfiguration();
             config.planeDetection = planeDetection;
             config.alignment = startAlignment;
             config.getPointCloudData = getPointCloud;
@@ -40,30 +41,33 @@ public class UnityARCameraManager : MonoBehaviour {
             if (detectionImages != null)
                 config.referenceImagesGroupName = detectionImages.resourceGroupName;
 
-			if (detectionObjects != null) 
-			{
-				config.referenceObjectsGroupName = "";  //lets not read from XCode asset catalog right now
-				config.dynamicReferenceObjectsPtr = m_session.CreateNativeReferenceObjectsSet(detectionObjects.LoadReferenceObjectsInSet());
-			}
+            if (detectionObjects != null)
+            {
+                config.referenceObjectsGroupName = "";  //lets not read from XCode asset catalog right now
+                config.dynamicReferenceObjectsPtr = m_session.CreateNativeReferenceObjectsSet(detectionObjects.LoadReferenceObjectsInSet());
+            }
 
             return config;
         }
     }
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
 
         m_session = UnityARSessionNativeInterface.GetARSessionNativeInterface();
 
         Application.targetFrameRate = 60;
-        
+
         var config = sessionConfiguration;
-        if (config.IsSupported) {
-            m_session.RunWithConfig (config);
+        if (config.IsSupported)
+        {
+            m_session.RunWithConfig(config);
             UnityARSessionNativeInterface.ARFrameUpdatedEvent += FirstFrameUpdate;
         }
 
-        if (m_camera == null) {
+        if (m_camera == null)
+        {
             m_camera = Camera.main;
         }
     }
@@ -81,43 +85,48 @@ public class UnityARCameraManager : MonoBehaviour {
 
     public void SetCamera(Camera newCamera)
     {
-        if (m_camera != null) {
-            UnityARVideo oldARVideo = m_camera.gameObject.GetComponent<UnityARVideo> ();
-            if (oldARVideo != null) {
+        if (m_camera != null)
+        {
+            UnityARVideo oldARVideo = m_camera.gameObject.GetComponent<UnityARVideo>();
+            if (oldARVideo != null)
+            {
                 savedClearMaterial = oldARVideo.m_ClearMaterial;
-                Destroy (oldARVideo);
+                Destroy(oldARVideo);
             }
         }
-        SetupNewCamera (newCamera);
+        SetupNewCamera(newCamera);
     }
 
     private void SetupNewCamera(Camera newCamera)
     {
         m_camera = newCamera;
 
-        if (m_camera != null) {
-            UnityARVideo unityARVideo = m_camera.gameObject.GetComponent<UnityARVideo> ();
-            if (unityARVideo != null) {
+        if (m_camera != null)
+        {
+            UnityARVideo unityARVideo = m_camera.gameObject.GetComponent<UnityARVideo>();
+            if (unityARVideo != null)
+            {
                 savedClearMaterial = unityARVideo.m_ClearMaterial;
-                Destroy (unityARVideo);
+                Destroy(unityARVideo);
             }
-            unityARVideo = m_camera.gameObject.AddComponent<UnityARVideo> ();
+            unityARVideo = m_camera.gameObject.AddComponent<UnityARVideo>();
             unityARVideo.m_ClearMaterial = savedClearMaterial;
         }
     }
 
     // Update is called once per frame
 
-    void Update () {
-        
+    void Update()
+    {
+
         if (m_camera != null && sessionStarted)
         {
             // JUST WORKS!
             Matrix4x4 matrix = m_session.GetCameraPose();
             m_camera.transform.localPosition = UnityARMatrixOps.GetPosition(matrix);
-            m_camera.transform.localRotation = UnityARMatrixOps.GetRotation (matrix);
+            m_camera.transform.localRotation = UnityARMatrixOps.GetRotation(matrix);
 
-            m_camera.projectionMatrix = m_session.GetCameraProjection ();
+            m_camera.projectionMatrix = m_session.GetCameraProjection();
         }
 
     }

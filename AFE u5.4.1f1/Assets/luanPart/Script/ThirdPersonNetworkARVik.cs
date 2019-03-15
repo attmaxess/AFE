@@ -13,8 +13,8 @@ public class ThirdPersonNetworkARVik : Photon.MonoBehaviour
         cameraScript = GetComponent<ThirdPersonCameraNET>();
         cameraFocusScript = GetComponent<ThirdPersonCameraFocusNET>();
         controllerScript = GetComponent<ThirdPersonControllerNET>();
-
     }
+
     void Start()
     {
         //TODO: Bugfix to allow .isMine and .owner from AWAKE!
