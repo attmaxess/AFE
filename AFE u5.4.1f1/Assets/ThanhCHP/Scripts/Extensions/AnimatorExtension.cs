@@ -12,26 +12,47 @@ namespace AFE.Extensions
     public static partial class AnimatorExtension
     {
         public static IObservable<ObservableStateMachineTrigger.OnStateInfo> OnStateEnterAsObservable(
-            this ObservableStateMachineTrigger observableStateMachineTrigger, string name)
+            this ObservableStateMachineTrigger observableStateMachineTrigger, int shortNameHash)
         {
-            return observableStateMachineTrigger.OnStateEnterAsObservable().TakeWhile(x => x.StateInfo.IsName(name));
+            return observableStateMachineTrigger.OnStateEnterAsObservable()
+                .TakeWhile(x => x.StateInfo.shortNameHash == shortNameHash);
         }
 
         public static IObservable<ObservableStateMachineTrigger.OnStateInfo> OnStateExitAsObservable(
-            this ObservableStateMachineTrigger observableStateMachineTrigger, string name)
+            this ObservableStateMachineTrigger observableStateMachineTrigger, int shortNameHash)
         {
-            return observableStateMachineTrigger.OnStateExitAsObservable().TakeWhile(x => x.StateInfo.IsName(name));
+            return observableStateMachineTrigger.OnStateExitAsObservable()
+                .TakeWhile(x => x.StateInfo.shortNameHash == shortNameHash);
         }
 
-        public static IObservable<ObservableStateMachineTrigger.OnStateInfo> OnStateIkAsObservable(
-            this ObservableStateMachineTrigger observableStateMachineTrigger, string name)
+        public static IObservable<ObservableStateMachineTrigger.OnStateInfo> OnStateIKAsObservable(
+            this ObservableStateMachineTrigger observableStateMachineTrigger, int shortNameHash)
         {
-            return observableStateMachineTrigger.OnStateExitAsObservable().TakeWhile(x => x.StateInfo.IsName(name));
+            return observableStateMachineTrigger.OnStateIKAsObservable()
+                .TakeWhile(x => x.StateInfo.shortNameHash == shortNameHash);
         }
 
-        public static List<ObservableStateMachineTrigger> GetObservableBehaviours(this Animator animator)
+        public static List<IObservable<ObservableStateMachineTrigger.OnStateInfo>> OnStateEnterAsObservables(
+            this Animator animator, int shortNameHash)
         {
-            return animator.GetBehaviours<ObservableStateMachineTrigger>().ToList();
+            return animator.GetObservableBehaviours().Select(x => x.OnStateEnterAsObservable(shortNameHash)).ToList();
+        }
+
+        public static List<IObservable<ObservableStateMachineTrigger.OnStateInfo>> OnStateExitAsObservables(
+            this Animator animator, int shortNameHash)
+        {
+            return animator.GetObservableBehaviours().Select(x => x.OnStateExitAsObservable(shortNameHash)).ToList();
+        }
+
+        public static List<IObservable<ObservableStateMachineTrigger.OnStateInfo>> OnStateIKAsObservables(
+            this Animator animator, int shortNameHash)
+        {
+            return animator.GetObservableBehaviours().Select(x => x.OnStateIKAsObservable(shortNameHash)).ToList();
+        }
+
+        public static IEnumerable<ObservableStateMachineTrigger> GetObservableBehaviours(this Animator animator)
+        {
+            return animator.GetBehaviours<ObservableStateMachineTrigger>();
         }
     }
 }
