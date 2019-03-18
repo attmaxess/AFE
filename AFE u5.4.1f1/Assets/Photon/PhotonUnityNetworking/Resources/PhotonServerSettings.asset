@@ -18,7 +18,7 @@ MonoBehaviour:
     AppVersion: V1.0.1
     UseNameServer: 1
     FixedRegion: Asia
-    Server: Photon Cloud
+    Server: 
     Port: 0
     Protocol: 0
     EnableLobbyStatistics: 0
