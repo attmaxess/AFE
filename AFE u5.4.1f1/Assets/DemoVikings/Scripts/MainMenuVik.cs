@@ -154,5 +154,5 @@ public class MainMenuVik : MonoBehaviour, ILobbyCallbacks
     {
     }
 
-    public List<RoomInfo> roomList;
+    public List<RoomInfo> roomList = new List<RoomInfo>();
 }
