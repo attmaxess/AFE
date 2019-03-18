@@ -460,7 +460,6 @@ GameObject:
   - component: {fileID: 114367237096475018}
   - component: {fileID: 114806360578573710}
   - component: {fileID: 114466363310965532}
-  - component: {fileID: 114669498497164336}
   m_Layer: 0
   m_Name: AhriPrefab
   m_TagString: Untagged
@@ -491,7 +490,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4583087192256894}
-  - component: {fileID: 111485242799174300}
+  - component: {fileID: 95242452410329446}
   m_Layer: 0
   m_Name: Ahri
   m_TagString: Untagged
@@ -1745,7 +1744,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1323861124714244}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.561, z: 0}
   m_LocalScale: {x: 0.005, y: 0.005, z: 0.005}
   m_Children:
   - {fileID: 4583087192256894}
@@ -2470,27 +2469,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!111 &111485242799174300
-Animation:
+--- !u!95 &95242452410329446
+Animator:
+  serializedVersion: 3
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1333222036355748}
   m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 0}
-  m_Animations:
-  - {fileID: 7400000, guid: 3aa385c7a3e2ad940a6e1838e19c945b, type: 2}
-  - {fileID: 7400000, guid: df1122e5dd736ac4792ac79daf37b7a5, type: 2}
-  - {fileID: 7400000, guid: 1ae72bec232366a4182a2c5ff788b42f, type: 2}
-  - {fileID: 7400000, guid: f658508865b605042b4c3080a1f86455, type: 2}
-  - {fileID: 7400000, guid: c140c16c126e7cc4abeeb63a95cccb0d, type: 2}
-  - {fileID: 7400000, guid: 693f17cf818e68045a650d3ff5a000e0, type: 2}
-  - {fileID: 7400000, guid: e4a5f542a38fe9947a5d7790cf6f8156, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 94f5e62b7bb8305498185f877a504143, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114367237096475018
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2544,6 +2540,15 @@ MonoBehaviour:
   controlLock: 0
   grounded: 0
   walking: 0
+  _currentStateType: 0
+  skill_1: 0
+  skill_2: 0
+  skill_3: 0
+  skill_4: 0
+  attack: 0
+  run: 0
+  idle: 0
+  hit: 0
 --- !u!114 &114525663020894754
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2555,31 +2560,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 368a2ef587e966d42b3788c3b1acbd84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114669498497164336
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1323861124714244}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75d12adc27cb2c240872471ed03dfdc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isDebug: 0
-  target: {fileID: 111485242799174300}
-  rigidbody: {fileID: 54739016302440534}
-  root: {fileID: 4456108198576652}
-  spine: {fileID: 4044995622590226}
-  hub: {fileID: 4736920207822194}
-  walkSpeed: 0.2
-  runSpeed: 1.5
-  rotationSpeed: 5
-  shuffleSpeed: 7
-  runningLandingFactor: 0.2
-  state: 2
-  _currentHoriMove: {x: 0, y: 0, z: 0}
-  _currentHoriMoveMag: 0
 --- !u!114 &114806360578573710
 MonoBehaviour:
   m_ObjectHideFlags: 1

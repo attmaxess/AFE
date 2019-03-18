@@ -8,10 +8,27 @@ https://doc.photonengine.com
 http://forum.photonengine.com
 
 
+*** Version 4.1.2.10 (11. March 2019 - rev5023)
+    Fixed: A timeout issue for WS / WSS transport protocols by sending a ping.
+LoadBalancing:
+    Changed: The cached "best region" is cleared whenever a region's pinging finishes. This fixes a potential issue when the BestRegion value is used before the pinging is done. Then, you end up with a wrong selection.
+
+
+*** Version 4.1.2.9 (20. February 2019 - rev5003)
+    Note: Release .Net and Unity SDK from our page. 
+*** Version 4.1.2.9 (13. February 2019 - rev4985)
+    Removed: Setting of Thread.Name for internally used threads. This was used for debugging only (since a while) but caused issues on a console platform (due to an issue in Unity IL2CPP exports).
+
+*** Version 4.1.2.8 (31. January 2019 - rev4975)
+    Fixed: The cap for the lastRoundtripTime. When the current roundTripTime was very low this meant the rtt wasn't going up again. This was a problem with local servers.
+    Fixed: Setting the roundTripTime when the connect-command gets acknowledged. This sets a minimum of 15ms now. Before, a local server could get a 0ms roundTripTime (due to using Environment.TickCount).
+
+*** Version 4.1.2.7 (25. January 2019 - rev4954)
+    Removed: CommandBufferSize and LimitOfUnreliableCommands. Technically, those are "Obsolete" but no longer used anywhere. See comments.
+    Fixed: MessageBufferPoolTrim() was not using a lock(), so this wasn't thread safe.
 
 *** Version 4.1.2.6 (12. December 2018 - rev4935)
     Changed: Unsequenced delivery is now available in all builds. Internally, this was wrapped in compile conditions.
-
 
 *** Version 4.1.2.5 (10. December 2018 - rev4911)
     Added: PhotonPeer.SentReliableCommandsCount - reliable commands sent but not yet acknowledged. This can be used as indicator for the quality of service, aslong with ResentReliableCommands.
@@ -75,26 +92,7 @@ LoadBalancing:
     Changes: The room list for lobbies is no longer part of the LoadBalancingClient. Instead, implement the callback for the changed room list.
     Added: AppSettings, a base class to host AppId and some settings for a title. This will help make it available across products. Right now, the LoadBalancingClient is not using it yet.
     Changed: Player.ID is now .ActorNumber, which mirrors the server's naming.
-    Fixed: Unity compile defines to support Unity 2018.
-
-*** Version 4.1.1.21 (26. October 2018 - rev4874)
-    Changed: SocketUdpAsync is now the same as in trunk. Send blocking, receiving via BeginReceive and EndReceive.
-    Adde: SocketTcpAsync.
-    Note: Both async Socket classes are a workaround for Unity with C# 4.x in Mono, which makes Socket.Receive() block.
-    Changed: TPeer.ReceiveIncomingCommands() will now use dataLength as indicator how much was received.
-    Changed: TPeer.ReceiveIncomingCommands() currently copies dataLength-bytes of the in-buffer to a message "enqueued" buffer. To be replaced with pooled buffers.
-    Changed: EnetPeer.SendOutgoingCommands() will EnqueueStatusCallback(StatusCode.TimeoutDisconnect) for timeouts. This keeps the sequence of events correct.
-	Changed: CalculateCrc() now uses a cached lookup table, which gives it much better performance (mostly for longer datagrams).
-	Changed: EventData (in Protocol .cs) now has a Sender and a CustomData property. Same as in trunk.
-	Added: List<object> support for Protocol16. Same as in the trunk.
-	Added: Special case to deserialize byte[] and int[], which should be more effective than before. Same as in trunk.
-	Changed: Arranged this. for some cases in IPhotonSocket.
-	Changed: Enet execution of a read Disconnect command. As in trunk, the state change is enqueued and Disconnect gets called right away.
-	Changed: The TPeer resets the last receive time in more cases: InitPeerBase() and OnConnect(). Same as in trunk.
-
-*** Version 4.1.1.20 (19. September 2018 - rev4808)
-    Added: SendOperation() with SendOptions to v4.1.1.x library. This minimizes the gap between this library branch and the new trunk.
-    Added: Third parameter to PhotonPeer.InitDatagramEncryption() which is not used but only present to make this API compatible with released from another branch. This feature requires v4.1.2.0 and up.
+    Fixed: Unity compile defines to support Unity 2018,
 
 *** Version 4.1.1.19 (9. April 2018 - rev4590)
     Fixed: WSS now sends an operation "ping" in SendAcksOnly() (and SendOutgoingCommands()) to avoid getting timed out. This happens right away, while other commands/operations stay in queue.

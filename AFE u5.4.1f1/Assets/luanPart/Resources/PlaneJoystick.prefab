@@ -67,7 +67,7 @@ Transform:
   m_GameObject: {fileID: 1461120020394378}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10, y: 0.5, z: 10}
+  m_LocalScale: {x: 2, y: 0.5, z: 2}
   m_Children:
   - {fileID: 4158980802741552}
   m_Father: {fileID: 0}
@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f354f15511843aa47b434c5dc5237b1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDebug: 0
+  useUpdate: 1
   speed: 1
-  joystick: {fileID: 0}
   child: {fileID: 4158980802741552}
-  rotateChar: {fileID: 0}

@@ -79,7 +79,7 @@ public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
 
             rotateChar.RotateBy(moveVector);
 
-            rotateChar.PositionBy(transform.position);
+            rotateChar.PositionBy(transform.position, moveVector);
 
             //   transform.position = rotateChar.transform.position;
         }
@@ -108,31 +108,7 @@ public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
             }
         }
 
-        if (CF2Input.GetButtonDown("Pause"))
-        {
-            Debug.Log("Pause");
-        }
-        if (CF2Input.GetButtonDown("Attack"))
-        {
-            Debug.Log("Attack");
-        }
 
-        if (CF2Input.GetButtonDown("Skill1"))
-        {
-            Debug.Log("Skill1");
-        }
-        if (CF2Input.GetButtonDown("Skill2"))
-        {
-            Debug.Log("Skill4");
-        }
-        if (CF2Input.GetButtonDown("Skill3"))
-        {
-            Debug.Log("Skill4");
-        }
-        if (CF2Input.GetButtonDown("Skill4"))
-        {
-            Debug.Log("Skill4");
-        }
 
     }
 }
@@ -144,7 +120,7 @@ public interface IPlaneJoystickTranform
 
 public interface ICharacterTranform
 {
-    void PositionBy(Vector3 position);
+    void PositionBy(Vector3 position, Vector3 joystick);
     void RotateBy(Vector3 moveVector);
     Transform transform { get; }
     bool IsMine { get; }

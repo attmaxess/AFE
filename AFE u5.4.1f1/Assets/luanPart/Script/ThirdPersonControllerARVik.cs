@@ -1,5 +1,10 @@
-﻿using System;
+﻿using Photon.Pun;
+using System;
 using UnityEngine;
+
+/// <summary>
+/// ko dung script nay nua. su dung ThirdPersonControllerNET.cs
+/// </summary>
 
 public class ThirdPersonControllerARVik : MonoBehaviour, ICharacterTranform
 {
@@ -76,9 +81,9 @@ public class ThirdPersonControllerARVik : MonoBehaviour, ICharacterTranform
     {
     }
 
-    public bool IsMine { get { return GetComponent<PhotonView>().isMine; } }
+    public bool IsMine { get { return GetComponent<PhotonView>().IsMine; } }
 
-    public void PositionBy(Vector3 position)
+    public void PositionBy(Vector3 position, Vector3 joystick)
     {
         transform.position = new Vector3(position.x, transform.position.y, position.z);
     }

@@ -2,19 +2,36 @@
 using System.Collections.Generic;
 using UnityEngine;
 using ControlFreak2;
+using Photon.Pun;
 
-public class GameManagerArVik : Photon.PunBehaviour
+public class GameManagerArVik : MonoBehaviourPunCallbacks
 {
     public string prefabName = "VikingPrefab";
     public ArkitUIManager ArkitUIManager;
     bool isJoinedRoom = false;
     public List<PhotonView> listCharacter = new List<PhotonView>();
 
+    public static GameManagerArVik instance = null;
+
+    public event System.Action attack;
+    public event System.Action skill1;
+    public event System.Action skill2;
+    public event System.Action skill3;
+    public event System.Action skill4;
+
+    public static GameManagerArVik Singleton
+    {
+        get
+        {
+            return instance;
+        }
+    }
+
     public PhotonView GetIsMineChar()
     {
         for (int i = 0; i < listCharacter.Count; i++)
         {
-            if (listCharacter[i].isMine)
+            if (listCharacter[i].IsMine)
             {
                 return listCharacter[i];
             }
@@ -24,7 +41,19 @@ public class GameManagerArVik : Photon.PunBehaviour
 
     private void Awake()
     {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            DestroyImmediate(gameObject);
+        }
+    }
 
+    private void OnDestroy()
+    {
     }
 
     IEnumerator OnLeftRoom()
@@ -35,10 +64,46 @@ public class GameManagerArVik : Photon.PunBehaviour
         //Easy way to reset the level: Otherwise we'd manually reset the camera
 
         //Wait untill Photon is properly disconnected (empty room, and connected back to main server)
-        while (PhotonNetwork.room != null || PhotonNetwork.connected == false)
+        while (PhotonNetwork.CurrentRoom != null || PhotonNetwork.IsConnected == false)
             yield return 0;
 
         UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
+    }
+
+    private void Update()
+    {
+        if (!photonView.IsMine) return;
+
+        if (CF2Input.GetButtonDown("Pause"))
+        {
+            Debug.Log("Pause");
+        }
+        if (CF2Input.GetButtonDown("Attack"))
+        {
+            Debug.Log("Attack");
+            if (attack != null) attack();
+        }
+
+        if (CF2Input.GetButtonDown("Skill1"))
+        {
+            if (skill1 != null) skill1();
+            Debug.Log("Skill1");
+        }
+        if (CF2Input.GetButtonDown("Skill2"))
+        {
+            if (skill2 != null) skill2();
+            Debug.Log("Skill2");
+        }
+        if (CF2Input.GetButtonDown("Skill3"))
+        {
+            if (skill3 != null) skill3();
+            Debug.Log("Skill3");
+        }
+        if (CF2Input.GetButtonDown("Skill4"))
+        {
+            if (skill4 != null) skill4();
+            Debug.Log("Skill4");
+        }
     }
 
     private void Start()
@@ -55,7 +120,7 @@ public class GameManagerArVik : Photon.PunBehaviour
 
     void OnGUI()
     {
-        if (PhotonNetwork.room == null) return; //Only display this GUI when inside a room
+        if (PhotonNetwork.CurrentRoom == null) return; //Only display this GUI when inside a room
 
         if (GUILayout.Button("Leave Room"))
         {
@@ -74,8 +139,8 @@ public class GameManagerArVik : Photon.PunBehaviour
         var aa = GameObject.FindObjectsOfType<ThirdPersonNetworkARVik>();
         for (int i = 0; i < aa.Length; i++)
         {
-            Debug.Log("a[i].gameObject " + aa[i].gameObject.GetPhotonView().isMine);
-            if (aa[i].gameObject.GetPhotonView().isMine)
+            Debug.Log("a[i].gameObject " + aa[i].gameObject.GetPhotonView().IsMine);
+            if (aa[i].gameObject.GetPhotonView().IsMine)
             {
                 isSpawn = true;
                 return;
