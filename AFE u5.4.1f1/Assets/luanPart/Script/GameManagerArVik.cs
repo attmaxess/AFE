@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using ControlFreak2;
+using Photon.Pun;
 
-public class GameManagerArVik : Photon.PunBehaviour
+public class GameManagerArVik : MonoBehaviourPunCallbacks
 {
     public string prefabName = "VikingPrefab";
     public ArkitUIManager ArkitUIManager;
@@ -30,7 +31,7 @@ public class GameManagerArVik : Photon.PunBehaviour
     {
         for (int i = 0; i < listCharacter.Count; i++)
         {
-            if (listCharacter[i].isMine)
+            if (listCharacter[i].IsMine)
             {
                 return listCharacter[i];
             }
@@ -63,7 +64,7 @@ public class GameManagerArVik : Photon.PunBehaviour
         //Easy way to reset the level: Otherwise we'd manually reset the camera
 
         //Wait untill Photon is properly disconnected (empty room, and connected back to main server)
-        while (PhotonNetwork.room != null || PhotonNetwork.connected == false)
+        while (PhotonNetwork.CurrentRoom != null || PhotonNetwork.IsConnected == false)
             yield return 0;
 
         UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
@@ -71,7 +72,7 @@ public class GameManagerArVik : Photon.PunBehaviour
 
     private void Update()
     {
-        if (!photonView.isMine) return;
+        if (!photonView.IsMine) return;
 
         if (CF2Input.GetButtonDown("Pause"))
         {
@@ -119,7 +120,7 @@ public class GameManagerArVik : Photon.PunBehaviour
 
     void OnGUI()
     {
-        if (PhotonNetwork.room == null) return; //Only display this GUI when inside a room
+        if (PhotonNetwork.CurrentRoom == null) return; //Only display this GUI when inside a room
 
         if (GUILayout.Button("Leave Room"))
         {
@@ -138,8 +139,8 @@ public class GameManagerArVik : Photon.PunBehaviour
         var aa = GameObject.FindObjectsOfType<ThirdPersonNetworkARVik>();
         for (int i = 0; i < aa.Length; i++)
         {
-            Debug.Log("a[i].gameObject " + aa[i].gameObject.GetPhotonView().isMine);
-            if (aa[i].gameObject.GetPhotonView().isMine)
+            Debug.Log("a[i].gameObject " + aa[i].gameObject.GetPhotonView().IsMine);
+            if (aa[i].gameObject.GetPhotonView().IsMine)
             {
                 isSpawn = true;
                 return;

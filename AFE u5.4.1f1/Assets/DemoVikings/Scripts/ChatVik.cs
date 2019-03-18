@@ -1,11 +1,12 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
 
 /// <summary>
 /// This simple chat example showcases the use of RPC targets and targetting certain players via RPCs.
 /// </summary>
-public class ChatVik : Photon.MonoBehaviour
+public class ChatVik : Photon.Pun.MonoBehaviourPunCallbacks
 {
 
     public static ChatVik SP;
@@ -45,7 +46,7 @@ public class ChatVik : Photon.MonoBehaviour
         if (Event.current.type == EventType.KeyDown && Event.current.character == '\n'){
             if (GUI.GetNameOfFocusedControl() == "ChatField")
             {                
-                SendChat(PhotonTargets.All);
+                SendChat(Photon.Pun.RpcTarget.All);
                 lastUnfocusTime = Time.time;
                 GUI.FocusControl("");
                 GUI.UnfocusWindow();
@@ -80,10 +81,10 @@ public class ChatVik : Photon.MonoBehaviour
     [PunRPC]
     void SendChatMessage(string text, PhotonMessageInfo info)
     {
-        AddMessage("[" + info.sender + "] " + text);
+        AddMessage("[" + info.Sender + "] " + text);
     }
 
-    void SendChat(PhotonTargets target)
+    void SendChat(Photon.Pun.RpcTarget target)
     {
         if (chatInput != "")
         {
@@ -92,7 +93,7 @@ public class ChatVik : Photon.MonoBehaviour
         }
     }
 
-    void SendChat(PhotonPlayer target)
+    void SendChat(Photon.Realtime.Player target)
     {
         if (chatInput != "")
         {

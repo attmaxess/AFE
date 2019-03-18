@@ -1,7 +1,8 @@
 using UnityEngine;
 using System.Collections;
+using Photon.Pun;
 
-public class RemoteCamNetwork : Photon.MonoBehaviour
+public class RemoteCamNetwork : MonoBehaviourPunCallbacks
 {
     private bool appliedInitialUpdate;
 
@@ -13,7 +14,7 @@ public class RemoteCamNetwork : Photon.MonoBehaviour
     void Start()
     {
         //TODO: Bugfix to allow .isMine and .owner from AWAKE!        
-        if (photonView.isMine)
+        if (photonView.IsMine)
         {
             transform.position = Camera.main.transform.position;
             transform.rotation = Camera.main.transform.rotation;
@@ -26,7 +27,7 @@ public class RemoteCamNetwork : Photon.MonoBehaviour
 #endif
         }
 
-        gameObject.name = gameObject.name + "_" + photonView.viewID;
+        gameObject.name = gameObject.name + "_" + photonView.ViewID;
 
 #if UNITY_EDITOR
         gameObject.name += "_" + Application.dataPath;
@@ -36,7 +37,7 @@ public class RemoteCamNetwork : Photon.MonoBehaviour
 
     void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-        if (stream.isWriting)
+        if (stream.IsWriting)
         {
             //We own this player: send the others our data            
             stream.SendNext(transform.position);
@@ -63,7 +64,7 @@ public class RemoteCamNetwork : Photon.MonoBehaviour
     void Update()
     {
         //Update remote player (smooth this, this looks good, at the cost of some accuracy)
-        if (!photonView.isMine)
+        if (!photonView.IsMine)
         {
             transform.position = Vector3.Lerp(transform.position, correctCamPos, Time.deltaTime * 5);
             transform.rotation = Quaternion.Lerp(transform.rotation, correctCamEuler, Time.deltaTime * 5);

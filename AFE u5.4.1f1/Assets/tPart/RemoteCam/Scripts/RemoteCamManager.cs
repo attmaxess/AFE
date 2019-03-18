@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Photon.Pun;
 
-public class RemoteCamManager : Photon.MonoBehaviour
+public class RemoteCamManager : MonoBehaviourPunCallbacks
 {
     [Header("Debug")]
     public bool isDebug = false;
@@ -22,7 +23,7 @@ public class RemoteCamManager : Photon.MonoBehaviour
         //Easy way to reset the level: Otherwise we'd manually reset the camera
 
         //Wait untill Photon is properly disconnected (empty room, and connected back to main server)
-        while (PhotonNetwork.room != null || PhotonNetwork.connected == false)
+        while (PhotonNetwork.CurrentRoom != null || PhotonNetwork.IsConnected == false)
             yield return 0;
 
         UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);

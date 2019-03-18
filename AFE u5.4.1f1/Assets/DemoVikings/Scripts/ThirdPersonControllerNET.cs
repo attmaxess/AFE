@@ -2,10 +2,11 @@ using UnityEngine;
 using System.Collections;
 using System;
 using System.Collections.Generic;
+using Photon.Pun;
 
 public delegate void JumpDelegate();
 
-public class ThirdPersonControllerNET : Photon.MonoBehaviour, ICharacterTranform
+public class ThirdPersonControllerNET : MonoBehaviourPunCallbacks, ICharacterTranform
 {
     public Rigidbody target;
     // The object we're steering
@@ -107,7 +108,7 @@ public class ThirdPersonControllerNET : Photon.MonoBehaviour, ICharacterTranform
         walking = false;
 
         // resigter Event from ui controller
-        if (GetComponent<PhotonView>().isMine)
+        if (GetComponent<PhotonView>().IsMine)
         {
             GameManagerArVik.Singleton.attack += Singleton_Attack;
             GameManagerArVik.Singleton.skill1 += Singleton_skill1;
@@ -138,7 +139,7 @@ public class ThirdPersonControllerNET : Photon.MonoBehaviour, ICharacterTranform
         set
         {
             skill_1 = value;
-            photonView.RPC("RpcSkill_1", PhotonTargets.All, value);
+            photonView.RPC("RpcSkill_1", Photon.Pun.RpcTarget.All, value);
         }
     }
     bool skill_2;
@@ -148,7 +149,7 @@ public class ThirdPersonControllerNET : Photon.MonoBehaviour, ICharacterTranform
         set
         {
             skill_2 = value;
-            photonView.RPC("RpcSkill_2", PhotonTargets.All, value);
+            photonView.RPC("RpcSkill_2", Photon.Pun.RpcTarget.All, value);
         }
     }
     bool skill_3;
@@ -158,7 +159,7 @@ public class ThirdPersonControllerNET : Photon.MonoBehaviour, ICharacterTranform
         set
         {
             skill_3 = value;
-            photonView.RPC("RpcSkill_3", PhotonTargets.All, value);
+            photonView.RPC("RpcSkill_3", Photon.Pun.RpcTarget.All, value);
         }
     }
     bool skill_4;
@@ -168,7 +169,7 @@ public class ThirdPersonControllerNET : Photon.MonoBehaviour, ICharacterTranform
         set
         {
             skill_4 = value;
-            photonView.RPC("RpcSkill_4", PhotonTargets.All, value);
+            photonView.RPC("RpcSkill_4", Photon.Pun.RpcTarget.All, value);
         }
     }
     bool attack;
@@ -178,7 +179,7 @@ public class ThirdPersonControllerNET : Photon.MonoBehaviour, ICharacterTranform
         set
         {
             attack = value;
-            photonView.RPC("RpcAttack", PhotonTargets.All, value);
+            photonView.RPC("RpcAttack", Photon.Pun.RpcTarget.All, value);
         }
     }
     bool run;
@@ -188,7 +189,7 @@ public class ThirdPersonControllerNET : Photon.MonoBehaviour, ICharacterTranform
         set
         {
             run = value;
-            photonView.RPC("RpcRun", PhotonTargets.All, value);
+            photonView.RPC("RpcRun", Photon.Pun.RpcTarget.All, value);
         }
     }
     bool idle;
@@ -198,7 +199,7 @@ public class ThirdPersonControllerNET : Photon.MonoBehaviour, ICharacterTranform
         set
         {
             idle = value;
-            photonView.RPC("RpcIdle", PhotonTargets.All, value);
+            photonView.RPC("RpcIdle", Photon.Pun.RpcTarget.All, value);
         }
     }
     bool hit;
@@ -208,20 +209,20 @@ public class ThirdPersonControllerNET : Photon.MonoBehaviour, ICharacterTranform
         set
         {
             hit = value;
-            photonView.RPC("RpcHit", PhotonTargets.All, value);
+            photonView.RPC("RpcHit", Photon.Pun.RpcTarget.All, value);
         }
     }
 
     void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-        if (stream.isWriting)
+        if (stream.IsWriting)
         {
             //We own this player: send the others our data
             // stream.SendNext((int)controllerScript._characterState);
             stream.SendNext(transform.position);
             stream.SendNext(transform.rotation);
             //  stream.SendNext(transform.localScale);
-            //stream.SendNext(GetComponent<Rigidbody>().velocity);
+          //  stream.SendNext(GetComponent<Rigidbody>().velocity);
 
             // input
             /* stream.SendNext(controllerScript.attack);
@@ -241,7 +242,7 @@ public class ThirdPersonControllerNET : Photon.MonoBehaviour, ICharacterTranform
             correctPlayerPos = (Vector3)stream.ReceiveNext();
             correctPlayerRot = (Quaternion)stream.ReceiveNext();
             // correctPlayerScale = (Vector3)stream.ReceiveNext();
-            //GetComponent<Rigidbody>().velocity = (Vector3)stream.ReceiveNext();
+           // GetComponent<Rigidbody>().velocity = (Vector3)stream.ReceiveNext();
 
             /*   controllerScript.attack = (bool)stream.ReceiveNext();
                controllerScript.skill_1 = (bool)stream.ReceiveNext();
@@ -253,14 +254,14 @@ public class ThirdPersonControllerNET : Photon.MonoBehaviour, ICharacterTranform
                controllerScript.hit = (bool)stream.ReceiveNext();  */
 
 
-            if (!appliedInitialUpdate)
+          /*  if (!appliedInitialUpdate)
             {
                 appliedInitialUpdate = true;
                 transform.position = correctPlayerPos;
                 transform.rotation = correctPlayerRot;
                 //  transform.localScale = correctPlayerScale;
                // GetComponent<Rigidbody>().velocity = Vector3.zero;
-            }
+            }   */
         }
     }
 
@@ -342,8 +343,10 @@ public class ThirdPersonControllerNET : Photon.MonoBehaviour, ICharacterTranform
     void Update()
     {
 
-        if (!photonView.isMine)
+        if (!photonView.IsMine)
         {
+            Debug.Log("Update   transform.position " + photonView.IsMine + " - " + correctPlayerPos);
+
             //Update remote player (smooth this, this looks good, at the cost of some accuracy)
             transform.position = Vector3.Lerp(transform.position, correctPlayerPos, Time.deltaTime * 5);
             transform.rotation = Quaternion.Lerp(transform.rotation, correctPlayerRot, Time.deltaTime * 5);
@@ -424,7 +427,7 @@ public class ThirdPersonControllerNET : Photon.MonoBehaviour, ICharacterTranform
     {
         get
         {
-            return GetComponent<PhotonView>().isMine;
+            return GetComponent<PhotonView>().IsMine;
         }
     }
 
@@ -515,6 +518,7 @@ public class ThirdPersonControllerNET : Photon.MonoBehaviour, ICharacterTranform
 
     public void PositionBy(Vector3 position, Vector3 joystick)
     {
+        Debug.Log("PositionBy " + position + "-" + joystick);
         if (joystick != Vector3.zero)
         {
             runRpc = true;

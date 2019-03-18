@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using Photon.Pun;
+using UnityEngine;
 
-public class ThirdPersonNetworkARVik : Photon.MonoBehaviour
+public class ThirdPersonNetworkARVik : MonoBehaviourPunCallbacks
 {
     ThirdPersonCameraNET cameraScript;
     ThirdPersonControllerNET controllerScript;
@@ -15,7 +16,7 @@ public class ThirdPersonNetworkARVik : Photon.MonoBehaviour
     void Start()
     {
         //TODO: Bugfix to allow .isMine and .owner from AWAKE!
-        if (photonView.isMine)
+        if (photonView.IsMine)
         {
             //MINE: local player, simply enable the local scripts            
             controllerScript.enabled = true;
@@ -26,14 +27,14 @@ public class ThirdPersonNetworkARVik : Photon.MonoBehaviour
             controllerScript.enabled = true;
 
         }
-        controllerScript.SetIsRemotePlayer(!photonView.isMine);
+        controllerScript.SetIsRemotePlayer(!photonView.IsMine);
 
-        gameObject.name = gameObject.name + photonView.viewID;
+        gameObject.name = gameObject.name + photonView.ViewID;
     }
 
     void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-        if (stream.isWriting)
+        if (stream.IsWriting)
         {
             //We own this player: send the others our data
             // stream.SendNext((int)controllerScript._characterState);
@@ -89,7 +90,7 @@ public class ThirdPersonNetworkARVik : Photon.MonoBehaviour
 
     void Update()
     {
-        if (!photonView.isMine)
+        if (!photonView.IsMine)
         {
             //Update remote player (smooth this, this looks good, at the cost of some accuracy)
             transform.position = Vector3.Lerp(transform.position, correctPlayerPos, Time.deltaTime * 5);
@@ -101,7 +102,7 @@ public class ThirdPersonNetworkARVik : Photon.MonoBehaviour
     void OnPhotonInstantiate(PhotonMessageInfo info)
     {
         //We know there should be instantiation data..get our bools from this PhotonView!
-        object[] objs = photonView.instantiationData; //The instantiate data..
+        object[] objs = photonView.InstantiationData; //The instantiate data..
        // bool[] mybools = (bool[])objs[0];   //Our bools!
 
         //disable the axe and shield meshrenderers based on the instantiate data

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Photon.Pun;
+using System;
 using UnityEngine;
 
 /// <summary>
@@ -80,7 +81,7 @@ public class ThirdPersonControllerARVik : MonoBehaviour, ICharacterTranform
     {
     }
 
-    public bool IsMine { get { return GetComponent<PhotonView>().isMine; } }
+    public bool IsMine { get { return GetComponent<PhotonView>().IsMine; } }
 
     public void PositionBy(Vector3 position, Vector3 joystick)
     {

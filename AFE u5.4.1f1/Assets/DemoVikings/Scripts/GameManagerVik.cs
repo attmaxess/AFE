@@ -1,7 +1,9 @@
 using UnityEngine;
 using System.Collections;
+using Photon.Realtime;
+using Photon.Pun;
 
-public class GameManagerVik : Photon.MonoBehaviour
+public class GameManagerVik : MonoBehaviourPunCallbacks
 {
 
     // this is a object name (must be in any Resources folder) of the prefab to spawn as player avatar.
@@ -18,7 +20,7 @@ public class GameManagerVik : Photon.MonoBehaviour
         //Easy way to reset the level: Otherwise we'd manually reset the camera
 
         //Wait untill Photon is properly disconnected (empty room, and connected back to main server)
-        while (PhotonNetwork.room != null || PhotonNetwork.connected == false)
+        while (PhotonNetwork.CurrentRoom != null || PhotonNetwork.IsConnected == false)
             yield return 0;
 
         UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
@@ -43,7 +45,7 @@ public class GameManagerVik : Photon.MonoBehaviour
 
     void OnGUI()
     {
-        if (PhotonNetwork.room == null) return; //Only display this GUI when inside a room
+        if (PhotonNetwork.CurrentRoom == null) return; //Only display this GUI when inside a room
 
         if (GUILayout.Button("Leave Room"))
         {

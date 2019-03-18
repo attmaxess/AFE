@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Photon.Pun;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,7 +16,7 @@ public class AnimatorManager : MonoBehaviour
             animator = GetComponentInChildren<Animator>();
         controller = GetComponent<ThirdPersonControllerNET>();
 
-        if (GetComponent<PhotonView>().isMine)
+        if (GetComponent<PhotonView>().IsMine)
         {
             controller.OnAttack += attackAnim;
             controller.OnSkill1 += SkillAnim1;
