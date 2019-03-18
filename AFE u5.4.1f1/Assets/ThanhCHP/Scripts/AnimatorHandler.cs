@@ -5,7 +5,6 @@ using ExtraLinq;
 using UniRx;
 using UnityEngine;
 using AnimationState = AFE.Enumerables.AnimationState;
-using MonoBehaviour = Photon.MonoBehaviour;
 using Random = UnityEngine.Random;
 
 namespace Com.Beetsoft.AFE
@@ -89,7 +88,6 @@ namespace Com.Beetsoft.AFE
 
         private void SwitchToStateWeaponIn()
         {
-            Debug.Log("Weapon In");
             Animator.SetInteger(Constant.AnimationPram.IdleInInt, (int) AnimationState.IdleIn.IdleIn);
             Animator.SetInteger(Constant.AnimationPram.RunOutInt, (int) AnimationState.RunOut.None);
             Animator.SetInteger(Constant.AnimationPram.IdleOutInt, (int) AnimationState.IdleOut.None);
@@ -185,7 +183,11 @@ namespace Com.Beetsoft.AFE
         {
             var spell2Smb = Animator.GetBehaviour<ObservableSpell2Smb>();
             spell2Smb.OnStateMachineEnterAsObservable()
-                .Subscribe(_ => IsInStateSpell2.Value = true);
+                .Subscribe(_ =>
+                {
+                    IsInStateSpell2.Value = true;
+                    SwitchToStateWeaponOut();
+                });
             spell2Smb.OnStateMachineExitAsObservable()
                 .Subscribe(_ => IsInStateSpell2.Value = false);
         }

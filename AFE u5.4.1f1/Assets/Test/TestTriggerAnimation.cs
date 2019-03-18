@@ -5,7 +5,6 @@ using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
 using AnimationState = AFE.Enumerables.AnimationState;
-using MonoBehaviour = Photon.MonoBehaviour;
 
 public class TestTriggerAnimation : MonoBehaviour
 {
