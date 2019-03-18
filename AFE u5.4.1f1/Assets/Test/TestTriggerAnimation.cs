@@ -1,12 +1,13 @@
 ﻿using AFE.Enumerables;
 using Com.Beetsoft.AFE;
 using ControlFreak2;
+using Photon.Pun;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
 using AnimationState = AFE.Enumerables.AnimationState;
 
-public class TestTriggerAnimation : MonoBehaviour
+public class TestTriggerAnimation : MonoBehaviourPun
 {
     [SerializeField] private Animator animator;
     [SerializeField] private JoystickInputFilter joystickInputFilter;
@@ -26,7 +27,7 @@ public class TestTriggerAnimation : MonoBehaviour
     // Use this for initialization
     private void Start()
     {
-        // if (!photonView.isMine) return;
+        if (!photonView.IsMine) return;
 
         this.OnKeyDownAsObservable(KeyCode.Q)
             .Subscribe(_ => JoystickInputFilter.Spell1(Vector3.zero));

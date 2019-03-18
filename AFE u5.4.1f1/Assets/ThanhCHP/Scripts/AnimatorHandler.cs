@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using AFE.Extensions;
 using ExtraLinq;
+using Photon.Pun;
 using UniRx;
 using UnityEngine;
 using AnimationState = AFE.Enumerables.AnimationState;
@@ -9,7 +10,7 @@ using Random = UnityEngine.Random;
 
 namespace Com.Beetsoft.AFE
 {
-    public class AnimatorHandler : MonoBehaviour
+    public class AnimatorHandler : MonoBehaviourPun
     {
         [SerializeField] private Animator animator;
 
@@ -34,11 +35,7 @@ namespace Com.Beetsoft.AFE
 
         private void Start()
         {
-//            var behaviours = Animator.GetObservableBehaviours();
-//
-//            var enterObservables = behaviours.Select(x => x.OnStateEnterAsObservable()).ToList();
-//
-//            enterObservables.ForEach(x => x.Subscribe());
+            if (!photonView.IsMine) return;
 
             InputFilterObserver.OnRunAsObservable()
                 .Where(_ => !IsNotExitState)
