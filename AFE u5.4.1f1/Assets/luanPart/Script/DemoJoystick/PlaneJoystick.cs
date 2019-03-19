@@ -28,6 +28,10 @@ public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
         }
     }
 
+void FindCharacter(){
+    
+}
+
     void Start()
     {
         if (rotateChar != null)
