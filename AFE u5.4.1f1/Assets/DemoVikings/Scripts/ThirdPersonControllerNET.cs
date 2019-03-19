@@ -219,6 +219,7 @@ public class ThirdPersonControllerNET : MonoBehaviourPunCallbacks, ICharacterTra
         {
             //We own this player: send the others our data
             // stream.SendNext((int)controllerScript._characterState);
+            Debug.Log("transform.position - " + transform.position + " - " + transform.rotation);
             stream.SendNext(transform.position);
             stream.SendNext(transform.rotation);
             //  stream.SendNext(transform.localScale);
@@ -241,6 +242,9 @@ public class ThirdPersonControllerNET : MonoBehaviourPunCallbacks, ICharacterTra
             //controllerScript._characterState = (CharacterState)(int)stream.ReceiveNext();
             correctPlayerPos = (Vector3)stream.ReceiveNext();
             correctPlayerRot = (Quaternion)stream.ReceiveNext();
+
+            Debug.Log("correctPlayerPos - " + correctPlayerPos + " - correctPlayerRot - " + correctPlayerRot);
+
             // correctPlayerScale = (Vector3)stream.ReceiveNext();
             // GetComponent<Rigidbody>().velocity = (Vector3)stream.ReceiveNext();
 
@@ -348,60 +352,12 @@ public class ThirdPersonControllerNET : MonoBehaviourPunCallbacks, ICharacterTra
             Debug.Log("Update   transform.position " + photonView.IsMine + " - " + correctPlayerPos);
 
             //Update remote player (smooth this, this looks good, at the cost of some accuracy)
-            transform.position = Vector3.Lerp(transform.position, correctPlayerPos, Time.deltaTime * 5);
-            transform.rotation = Quaternion.Lerp(transform.rotation, correctPlayerRot, Time.deltaTime * 5);
+            /*  transform.position = Vector3.Lerp(transform.position, correctPlayerPos, Time.deltaTime * 5);
+              transform.rotation = Quaternion.Lerp(transform.rotation, correctPlayerRot, Time.deltaTime * 5);   */
             //     transform.localScale = Vector3.Lerp(transform.localScale, correctPlayerScale, Time.deltaTime * 5);
         }
 
-        //    SwitchState(currentStatePlayer.Update());
-
-        // Handle rotation here to ensure smooth application.
-        /*  float rotationAmount;
-
-          if (Input.GetMouseButton(1) && (!requireLock || controlLock || Cursor.lockState == CursorLockMode.Locked))
-          // If the right mouse button is held, rotation is locked to the mouse
-          {
-              if (controlLock)
-              {
-                  Cursor.visible = false;
-                  Cursor.lockState = CursorLockMode.Locked;
-              }
-
-              rotationAmount = Input.GetAxis("Mouse X") * mouseTurnSpeed * Time.deltaTime;
-          }
-          else
-          {
-              if (controlLock)
-              {
-                  Cursor.visible = true;
-                  Cursor.lockState = CursorLockMode.None;
-              }
-
-              rotationAmount = Input.GetAxis("Horizontal") * turnSpeed * Time.deltaTime;
-          }
-
-          target.transform.RotateAround(target.transform.up, rotationAmount);
-
-          if (Input.GetKeyDown(KeyCode.Backslash) || Input.GetKeyDown(KeyCode.Plus))
-          {
-              walking = !walking;
-          }    */
     }
-
-    /* public void SwitchState(StateCharacter state)
-     {
-
-         if (state != currentStatePlayer.stateType && state != StateCharacter.None)
-         {
-             _currentStateType = state;
-
-             currentStatePlayer.EndState();
-
-             currentStatePlayer = listState[state];
-
-             currentStatePlayer.StartState();
-         }
-     }   */
 
     float SidestepAxisInput
     // If the right mouse button is held, the horizontal axis also turns into sidestep handling
@@ -430,76 +386,6 @@ public class ThirdPersonControllerNET : MonoBehaviourPunCallbacks, ICharacterTra
             return GetComponent<PhotonView>().IsMine;
         }
     }
-
-    /* void FixedUpdate()
-     // Handle movement here since physics will only be calculated in fixed frames anyway
-     {
-
-         grounded = Physics.Raycast(
-             target.transform.position + target.transform.up * -groundedCheckOffset,
-             target.transform.up * -1,
-             groundedDistance,
-             groundLayers
-         );
-         // Shoot a ray downward to see if we're touching the ground
-
-         if (isRemotePlayer) return;
-
-         if (grounded)
-         {
-             target.drag = groundDrag;
-             // Apply drag when we're grounded
-
-             if (Input.GetButton("Jump"))
-             // Handle jumping
-             {
-                 target.AddForce(
-                     jumpSpeed * target.transform.up +
-                         target.velocity.normalized * directionalJumpFactor,
-                     ForceMode.VelocityChange
-                 );
-                 // When jumping, we set the velocity upward with our jump speed
-                 // plus some application of directional movement
-
-                 if (onJump != null)
-                 {
-                     onJump();
-                 }
-             }
-             else
-             // Only allow movement controls if we did not just jump
-             {
-                 Vector3 movement = Input.GetAxis("Vertical") * target.transform.forward +
-                     SidestepAxisInput * target.transform.right;
-
-                 float appliedSpeed = walking ? speed / walkSpeedDownscale : speed;
-                 // Scale down applied speed if in walk mode
-
-                 if (Input.GetAxis("Vertical") < 0.0f)
-                 // Scale down applied speed if walking backwards
-                 {
-                     appliedSpeed /= walkSpeedDownscale;
-                 }
-
-                 if (movement.magnitude > inputThreshold)
-                 // Only apply movement if we have sufficient input
-                 {
-                     target.AddForce(movement.normalized * appliedSpeed, ForceMode.VelocityChange);
-                 }
-                 else
-                 // If we are grounded and don't have significant input, just stop horizontal movement
-                 {
-                     target.velocity = new Vector3(0.0f, target.velocity.y, 0.0f);
-                     return;
-                 }
-             }
-         }
-         else
-         {
-             target.drag = 0.0f;
-             // If we're airborne, we should have no drag
-         }
-     }     */
 
 
     void OnDrawGizmos()

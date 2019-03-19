@@ -45,15 +45,15 @@ public class ThirdPersonNetworkVik : MonoBehaviourPunCallbacks , IPunObservable
         {
             //We own this player: send the others our data
             // stream.SendNext((int)controllerScript._characterState);
-            stream.SendNext(transform.position);
+         /*   stream.SendNext(transform.position);
             stream.SendNext(transform.rotation);
-            stream.SendNext(GetComponent<Rigidbody>().velocity);
+            stream.SendNext(GetComponent<Rigidbody>().velocity);   */
         }
         else
         {
             //Network player, receive data
             //controllerScript._characterState = (CharacterState)(int)stream.ReceiveNext();
-            correctPlayerPos = (Vector3)stream.ReceiveNext();
+           /* correctPlayerPos = (Vector3)stream.ReceiveNext();
             correctPlayerRot = (Quaternion)stream.ReceiveNext();
             GetComponent<Rigidbody>().velocity = (Vector3)stream.ReceiveNext();
 
@@ -63,7 +63,7 @@ public class ThirdPersonNetworkVik : MonoBehaviourPunCallbacks , IPunObservable
                 transform.position = correctPlayerPos;
                 transform.rotation = correctPlayerRot;
                 GetComponent<Rigidbody>().velocity = Vector3.zero;
-            }
+            }                                                       */
         }
     }
 
@@ -72,12 +72,12 @@ public class ThirdPersonNetworkVik : MonoBehaviourPunCallbacks , IPunObservable
 
     void Update()
     {
-        if (!photonView.IsMine)
+      /*  if (!photonView.IsMine)
         {
             //Update remote player (smooth this, this looks good, at the cost of some accuracy)
             transform.position = Vector3.Lerp(transform.position, correctPlayerPos, Time.deltaTime * 5);
             transform.rotation = Quaternion.Lerp(transform.rotation, correctPlayerRot, Time.deltaTime * 5);
-        }
+        }   */
     }
 
     void OnPhotonInstantiate(PhotonMessageInfo info)
