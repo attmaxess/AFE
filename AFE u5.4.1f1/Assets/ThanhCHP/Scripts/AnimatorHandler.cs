@@ -39,31 +39,31 @@ namespace Com.Beetsoft.AFE
 
             InputFilterObserver.OnRunAsObservable()
                 .Where(_ => !IsNotExitState)
-                .Subscribe(_ => Animator.SetTrigger(Constant.AnimationPram.Run));
+                .Subscribe(_ => Animator.SetTriggerWithBool(Constant.AnimationPram.Run));
 
             InputFilterObserver.OnIdleAsObservable()
                 .Where(_ => !IsNotExitState)
-                .Subscribe(_ => Animator.SetTrigger(Constant.AnimationPram.Idle));
+                .Subscribe(_ => Animator.SetTriggerWithBool(Constant.AnimationPram.Idle));
 
             InputFilterObserver.OnBasicAttackAsObservable()
                 .Where(_ => !IsNotExitState)
-                .Subscribe(_ => Animator.SetTrigger(Constant.AnimationPram.Attack));
+                .Subscribe(_ => Animator.SetTriggerWithBool(Constant.AnimationPram.Attack));
 
             InputFilterObserver.OnSpell1AsObservable()
                 .Where(_ => !IsNotExitState)
-                .Subscribe(_ => Animator.SetTrigger(Constant.AnimationPram.Q));
+                .Subscribe(_ => Animator.SetTriggerWithBool(Constant.AnimationPram.Q));
 
             InputFilterObserver.OnSpell2AsObservable()
                 .Where(_ => !(IsInStateSpell3.Value || IsInStateSpell4.Value))
-                .Subscribe(_ => Animator.SetTrigger(Constant.AnimationPram.W));
+                .Subscribe(_ => Animator.SetTriggerWithBool(Constant.AnimationPram.W));
 
             InputFilterObserver.OnSpell3AsObservable()
                 .Where(_ => !IsInStateSpell4.Value)
-                .Subscribe(_ => Animator.SetTrigger(Constant.AnimationPram.E));
+                .Subscribe(_ => Animator.SetTriggerWithBool(Constant.AnimationPram.E));
 
             InputFilterObserver.OnSpell4AsObservable()
                 .Where(_ => !(IsInStateSpell1.Value || IsInStateSpell3.Value))
-                .Subscribe(_ => Animator.SetTrigger(Constant.AnimationPram.R));
+                .Subscribe(_ => Animator.SetTriggerWithBool(Constant.AnimationPram.R));
 
             HandleIdleState();
             HandleSwitchToStateWeaponIn();

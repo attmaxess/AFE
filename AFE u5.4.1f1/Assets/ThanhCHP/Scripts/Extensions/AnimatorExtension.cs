@@ -54,5 +54,19 @@ namespace AFE.Extensions
         {
             return animator.GetBehaviours<ObservableStateMachineTrigger>();
         }
+
+        public static void SetTriggerWithBool(this Animator animator, int id)
+        {
+            animator.SetBool(id, true);
+            Observable.Timer(TimeSpan.FromMilliseconds(100))
+                .Subscribe(_ => animator.SetBool(id, false));
+        }
+
+        public static void SetTriggerWithBool(this Animator animator, string name)
+        {
+            animator.SetBool(name, true);
+            Observable.Timer(TimeSpan.FromMilliseconds(100))
+                .Subscribe(_ => animator.SetBool(name, false));
+        }
     }
 }
