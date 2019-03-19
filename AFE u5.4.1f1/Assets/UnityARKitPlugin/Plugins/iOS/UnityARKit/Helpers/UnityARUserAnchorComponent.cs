@@ -38,13 +38,7 @@ public class UnityARUserAnchorComponent : MonoBehaviour {
 
 	private void GameObjectAnchorUpdated(ARUserAnchor anchor)
 	{
-		if (anchor.identifier.Equals(m_AnchorId))
-		{
-			transform.position = UnityARMatrixOps.GetPosition(anchor.transform);
-			transform.rotation = UnityARMatrixOps.GetRotation(anchor.transform);
-			
-			Console.WriteLine("Updated: pos = " + transform.position + m_AnchorId);
-		}
+		
 	}
 }
 }

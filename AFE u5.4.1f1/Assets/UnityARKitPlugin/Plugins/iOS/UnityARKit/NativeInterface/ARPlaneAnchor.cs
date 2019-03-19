@@ -47,10 +47,13 @@ namespace UnityEngine.XR.iOS
         The geometry that describes more accurately the surface found.
          */
 		public UnityARPlaneGeometry planeGeometry;
+
+		public string identifierStr { get { return Marshal.PtrToStringAuto(this.ptrIdentifier); } }
+
 	}
 
 
-#if !UNITY_EDITOR
+	#if !UNITY_EDITOR
 	public class ARPlaneGeometry
 	{
 		private UnityARPlaneGeometry uPlaneGeometry;
@@ -131,14 +134,13 @@ namespace UnityEngine.XR.iOS
 	{
 		private UnityARAnchorData planeAnchorData;
 
-        public string identifierStr { get; }
-        public string identifier { get { return identifierStr; } }
+		public ARPlaneAnchor (UnityARAnchorData ufad)
+		{
+			planeAnchorData = ufad;
+		}
 
-        public ARPlaneAnchor (UnityARAnchorData ufad)
-        {
-            planeAnchorData = ufad;
-            identifierStr = Marshal.PtrToStringAuto(planeAnchorData.ptrIdentifier);
-        }
+
+		public string identifier { get { return planeAnchorData.identifierStr; } }
 
 		public Matrix4x4 transform { 
 			get { 
@@ -172,6 +174,6 @@ namespace UnityEngine.XR.iOS
 		public ARPlaneGeometry planeGeometry { get { return new ARPlaneGeometry (planeAnchorData.planeGeometry);	} }
 
 	}
-#endif
+	#endif 
 }
 
