@@ -47,7 +47,7 @@ namespace Com.Beetsoft.AFE
 
             InputFilterObserver.OnBasicAttackAsObservable()
                 .Where(_ => !IsNotExitState)
-                .Subscribe(_ => Animator.SetTriggerWithBool(Constant.AnimationPram.Attack));
+                .Subscribe(_ => WillEnterStateAttack());
 
             InputFilterObserver.OnSpell1AsObservable()
                 .Where(_ => !IsNotExitState)
@@ -85,6 +85,7 @@ namespace Com.Beetsoft.AFE
 
         private void SwitchToStateWeaponIn()
         {
+            BasicAttackIndex = AnimationState.BasicAttack.Hit1;
             Animator.SetInteger(Constant.AnimationPram.IdleInInt, (int) AnimationState.IdleIn.IdleIn);
             Animator.SetInteger(Constant.AnimationPram.RunOutInt, (int) AnimationState.RunOut.None);
             Animator.SetInteger(Constant.AnimationPram.IdleOutInt, (int) AnimationState.IdleOut.None);
@@ -117,17 +118,22 @@ namespace Com.Beetsoft.AFE
 
         #region HandleAttackState
 
+        private AnimationState.BasicAttack BasicAttackIndex { get; set; } = AnimationState.BasicAttack.Hit1;
+
         private void HandleAttackState()
         {
-            var attackTypeList = Enum.GetValues(typeof(AnimationState.BasicAttack)).Cast<int>();
             var attackSmb = Animator.GetBehaviour<ObservableAttackSmb>();
             attackSmb.OnStateMachineEnterAsObservable()
-                .Subscribe(_ =>
-                {
-                    attackTypeList = attackTypeList.Shuffle();
-                    Animator.SetInteger(Constant.AnimationPram.AttackInt, attackTypeList.First());
-                    SwitchToStateWeaponOut();
-                });
+                .Subscribe(_ => { SwitchToStateWeaponOut(); });
+        }
+
+        private void WillEnterStateAttack()
+        {
+            Animator.SetTriggerWithBool(Constant.AnimationPram.Attack);
+            Animator.SetInteger(Constant.AnimationPram.AttackInt, (int) BasicAttackIndex);
+            BasicAttackIndex++;
+            if (BasicAttackIndex > AnimationState.BasicAttack.Hit4)
+                BasicAttackIndex = AnimationState.BasicAttack.Hit1;
         }
 
         #endregion

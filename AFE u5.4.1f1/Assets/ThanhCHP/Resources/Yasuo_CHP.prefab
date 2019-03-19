@@ -4126,55 +4126,55 @@ MonoBehaviour:
   ShowParameterInspector: 1
   m_SynchronizeParameters:
   - Type: 9
-    SynchronizeType: 1
+    SynchronizeType: 2
     Name: Idle
   - Type: 4
-    SynchronizeType: 1
+    SynchronizeType: 2
     Name: Idle Bool
   - Type: 3
-    SynchronizeType: 1
+    SynchronizeType: 2
     Name: Idle Int
   - Type: 3
-    SynchronizeType: 1
+    SynchronizeType: 2
     Name: Idle Out Int
   - Type: 3
-    SynchronizeType: 1
+    SynchronizeType: 2
     Name: Idle In Int
   - Type: 9
-    SynchronizeType: 1
+    SynchronizeType: 2
     Name: Death
   - Type: 9
-    SynchronizeType: 1
+    SynchronizeType: 2
     Name: Q
   - Type: 3
-    SynchronizeType: 1
+    SynchronizeType: 2
     Name: Q Int
   - Type: 3
-    SynchronizeType: 1
+    SynchronizeType: 2
     Name: Q Out Int
   - Type: 9
-    SynchronizeType: 1
+    SynchronizeType: 2
     Name: E
   - Type: 9
-    SynchronizeType: 1
+    SynchronizeType: 2
     Name: W
   - Type: 9
-    SynchronizeType: 1
+    SynchronizeType: 2
     Name: R
   - Type: 9
-    SynchronizeType: 1
+    SynchronizeType: 2
     Name: Attack
   - Type: 3
-    SynchronizeType: 1
+    SynchronizeType: 2
     Name: Attack Int
   - Type: 9
-    SynchronizeType: 1
+    SynchronizeType: 2
     Name: Run
   - Type: 3
-    SynchronizeType: 1
+    SynchronizeType: 2
     Name: Run Out Int
   m_SynchronizeLayers:
-  - SynchronizeType: 1
+  - SynchronizeType: 0
     LayerIndex: 0
 --- !u!137 &137490055118385072
 SkinnedMeshRenderer:
