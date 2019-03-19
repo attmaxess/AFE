@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4465782, g: 0.49641252, b: 0.5748167, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4690,11 +4690,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1658590496}
   - component: {fileID: 1658590494}
-  - component: {fileID: 1658590495}
-  - component: {fileID: 1658590493}
   - component: {fileID: 1658590492}
-  - component: {fileID: 1658590491}
-  - component: {fileID: 1658590490}
   m_Layer: 0
   m_Name: Code
   m_TagString: Untagged
@@ -4702,28 +4698,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1658590490
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1658590489}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c064e6d46a889146a62999decd6ea26, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1658590491
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1658590489}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b25189afcc5d4254c9c2c2a9aaf02a27, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1658590492
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4735,28 +4709,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ae63a6c5483c484083fa20d07b97f21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1658590493
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1658590489}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  Synchronization: 0
-  OwnershipTransfer: 0
-  ObservedComponents:
-  - {fileID: 0}
-  viewIdField: 2
-  InstantiationId: 2
-  isRuntimeInstantiated: 0
-  isMine: 0
 --- !u!114 &1658590494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4769,20 +4721,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabName: VikingPrefab
-  ArkitUIManager: {fileID: 2054562842}
   listCharacter: []
---- !u!114 &1658590495
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1658590489}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b49a136d12d95b45aae363ccc115943, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  messages: []
 --- !u!4 &1658590496
 Transform:
   m_ObjectHideFlags: 0
@@ -4790,7 +4729,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1658590489}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 50.23516, y: 3.4326248, z: 47.232513}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -5100,12 +5039,6 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1948010610}
   m_CullTransparentMesh: 0
---- !u!114 &2054562842 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 114549259525833482, guid: 00ab02b5ea58b514ea94aab856b2e4a3,
-    type: 2}
-  m_PrefabInternal: {fileID: 1216373952}
-  m_Script: {fileID: 11500000, guid: 9991690a8ab35fe44b6257ac64e4d537, type: 3}
 --- !u!1 &2061186718
 GameObject:
   m_ObjectHideFlags: 0

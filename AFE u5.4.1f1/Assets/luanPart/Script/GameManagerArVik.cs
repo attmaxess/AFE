@@ -148,8 +148,24 @@ public class GameManagerArVik : MonoBehaviourPunCallbacks
         }
 
         var newChar = PhotonNetwork.Instantiate(prefabName, pos, Quaternion.identity, 0);
-        GameObject.Instantiate(Resources.Load("PlaneJoystick"), pos, Quaternion.identity);
-        //  photonView.RPC("RpcSpawnObject", PhotonTargets.MasterClient, pos, prefabName);
+        GameObject.Instantiate(Resources.Load("PlaneJoystick"), pos, Quaternion.identity);        
+    }
+
+    [ContextMenu("SpawnObjectAtZero")]
+    public void SpawnObjectAtZero(float offsetY = 0.5f)
+    {        
+        var currentCharacter = GameObject.FindObjectsOfType<ThirdPersonNetworkARVik>();
+        for (int i = 0; i < currentCharacter.Length; i++)
+        {
+            Debug.Log("a[i].gameObject " + currentCharacter[i].gameObject.GetPhotonView().IsMine);
+            if (currentCharacter[i].gameObject.GetPhotonView().IsMine)
+            {                
+                return;
+            }
+        }
+
+        var newChar = PhotonNetwork.Instantiate(prefabName, new Vector3(0, offsetY, 0), Quaternion.identity, 0);
+        GameObject.Instantiate(Resources.Load("PlaneJoystick"), Vector3.zero, Quaternion.identity);        
     }
 
     [PunRPC]
