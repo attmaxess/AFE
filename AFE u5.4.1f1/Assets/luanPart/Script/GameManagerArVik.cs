@@ -7,7 +7,7 @@ using Photon.Pun;
 public class GameManagerArVik : MonoBehaviourPunCallbacks
 {
     public string prefabName = "VikingPrefab";
-    public ArkitUIManager ArkitUIManager;
+    //public ArkitUIManager ArkitUIManager;
     bool isJoinedRoom = false;
     public List<PhotonView> listCharacter = new List<PhotonView>();
 
@@ -108,14 +108,14 @@ public class GameManagerArVik : MonoBehaviourPunCallbacks
 
     private void Start()
     {
-        ArkitUIManager.gameObject.SetActive(isJoinedRoom);
+        //ArkitUIManager.gameObject.SetActive(isJoinedRoom);
     }
 
     public override void OnJoinedRoom()
     {
         isJoinedRoom = true;
         Debug.Log("OnJoinedRoom");
-        ArkitUIManager.gameObject.SetActive(isJoinedRoom);
+        //ArkitUIManager.gameObject.SetActive(isJoinedRoom);
     }
 
     void OnGUI()
