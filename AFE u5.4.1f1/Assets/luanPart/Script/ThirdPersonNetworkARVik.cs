@@ -1,7 +1,7 @@
 ﻿using Photon.Pun;
 using UnityEngine;
 
-public class ThirdPersonNetworkARVik : MonoBehaviourPunCallbacks
+public class ThirdPersonNetworkARVik : MonoBehaviourPunCallbacks, IPunObservable
 {
     ThirdPersonCameraNET cameraScript;
     ThirdPersonControllerNET controllerScript;
@@ -32,7 +32,7 @@ public class ThirdPersonNetworkARVik : MonoBehaviourPunCallbacks
         gameObject.name = gameObject.name + photonView.ViewID;
     }
 
-    void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.IsWriting)
         {

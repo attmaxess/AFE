@@ -491,6 +491,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4583087192256894}
   - component: {fileID: 95242452410329446}
+  - component: {fileID: 114810184607699660}
+  - component: {fileID: 114156064066021218}
   m_Layer: 0
   m_Name: Ahri
   m_TagString: Untagged
@@ -2487,6 +2489,101 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114156064066021218
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1333222036355748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b8c4a61274f60b4ea5fb4299cfdbf14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowLayerWeightsInspector: 1
+  ShowParameterInspector: 1
+  m_SynchronizeParameters:
+  - Type: 9
+    SynchronizeType: 0
+    Name: trig_Ahri_idle1
+  - Type: 9
+    SynchronizeType: 0
+    Name: trig_Ahri_idle2
+  - Type: 9
+    SynchronizeType: 0
+    Name: trig_Ahri_idle3
+  - Type: 9
+    SynchronizeType: 0
+    Name: trig_Ahri_idle4
+  - Type: 9
+    SynchronizeType: 0
+    Name: trig_Ahri_idle5
+  - Type: 9
+    SynchronizeType: 0
+    Name: trig_Ahri_crit
+  - Type: 9
+    SynchronizeType: 0
+    Name: trig_Ahri_taunt
+  - Type: 4
+    SynchronizeType: 0
+    Name: Ahri_run
+  - Type: 4
+    SynchronizeType: 0
+    Name: channel
+  - Type: 4
+    SynchronizeType: 0
+    Name: Ahri_channel
+  - Type: 4
+    SynchronizeType: 0
+    Name: Ahri_channel_windup
+  - Type: 4
+    SynchronizeType: 0
+    Name: relax
+  - Type: 4
+    SynchronizeType: 0
+    Name: Ahri_joke
+  - Type: 4
+    SynchronizeType: 0
+    Name: Ahri_dance
+  - Type: 9
+    SynchronizeType: 0
+    Name: trig_Ahri_attack1
+  - Type: 9
+    SynchronizeType: 1
+    Name: Idle
+  - Type: 9
+    SynchronizeType: 1
+    Name: Attack
+  - Type: 9
+    SynchronizeType: 1
+    Name: Run
+  - Type: 9
+    SynchronizeType: 1
+    Name: Hit
+  - Type: 1
+    SynchronizeType: 1
+    Name: Blend
+  - Type: 9
+    SynchronizeType: 1
+    Name: Skill1
+  - Type: 9
+    SynchronizeType: 1
+    Name: Skill2
+  - Type: 9
+    SynchronizeType: 1
+    Name: Skill3
+  - Type: 9
+    SynchronizeType: 1
+    Name: Skill4
+  - Type: 9
+    SynchronizeType: 1
+    Name: test
+  - Type: 9
+    SynchronizeType: 1
+    Name: test2
+  m_SynchronizeLayers:
+  - SynchronizeType: 0
+    LayerIndex: 0
 --- !u!114 &114367237096475018
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2498,22 +2595,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ownerId: 0
-  group: 0
-  OwnerShipWasTransfered: 0
-  prefixBackup: -1
-  synchronization: 2
-  onSerializeTransformOption: 2
-  onSerializeRigidBodyOption: 2
-  ownershipTransfer: 0
-  ObservedComponents:
-  - {fileID: 114525663020894754}
-  - {fileID: 4456108198576652}
   ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  ObservedComponents:
+  - {fileID: 114466363310965532}
   viewIdField: 0
-  instantiationId: -1
-  currentMasterID: -1
+  InstantiationId: -1
   isRuntimeInstantiated: 0
+  isMine: 0
 --- !u!114 &114466363310965532
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2541,14 +2633,6 @@ MonoBehaviour:
   grounded: 0
   walking: 0
   _currentStateType: 0
-  skill_1: 0
-  skill_2: 0
-  skill_3: 0
-  skill_4: 0
-  attack: 0
-  run: 0
-  idle: 0
-  hit: 0
 --- !u!114 &114525663020894754
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2591,6 +2675,28 @@ MonoBehaviour:
   showGizmos: 1
   requireLock: 1
   controlLock: 1
+--- !u!114 &114810184607699660
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1333222036355748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  ObservedComponents:
+  - {fileID: 114156064066021218}
+  viewIdField: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+  isMine: 0
 --- !u!136 &136960972442458488
 CapsuleCollider:
   m_ObjectHideFlags: 1

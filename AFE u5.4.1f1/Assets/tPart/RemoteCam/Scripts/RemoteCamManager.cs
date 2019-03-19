@@ -2,7 +2,7 @@
 using System.Collections;
 using Photon.Pun;
 
-public class RemoteCamManager : MonoBehaviourPunCallbacks
+public class RemoteCamManager : MonoBehaviourPunCallbacks     , IPunObservable
 {
     [Header("Debug")]
     public bool isDebug = false;
@@ -51,5 +51,9 @@ public class RemoteCamManager : MonoBehaviourPunCallbacks
     void OnDisconnectedFromPhoton()
     {
         Debug.LogWarning("RemoteCamManager OnDisconnectedFromPhoton");
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
     }
 }

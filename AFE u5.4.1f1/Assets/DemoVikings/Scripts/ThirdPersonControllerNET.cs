@@ -6,7 +6,7 @@ using Photon.Pun;
 
 public delegate void JumpDelegate();
 
-public class ThirdPersonControllerNET : MonoBehaviourPunCallbacks, ICharacterTranform
+public class ThirdPersonControllerNET : MonoBehaviourPunCallbacks, ICharacterTranform, IPunObservable
 {
     public Rigidbody target;
     // The object we're steering
@@ -213,7 +213,7 @@ public class ThirdPersonControllerNET : MonoBehaviourPunCallbacks, ICharacterTra
         }
     }
 
-    void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.IsWriting)
         {
@@ -222,7 +222,7 @@ public class ThirdPersonControllerNET : MonoBehaviourPunCallbacks, ICharacterTra
             stream.SendNext(transform.position);
             stream.SendNext(transform.rotation);
             //  stream.SendNext(transform.localScale);
-          //  stream.SendNext(GetComponent<Rigidbody>().velocity);
+            //  stream.SendNext(GetComponent<Rigidbody>().velocity);
 
             // input
             /* stream.SendNext(controllerScript.attack);
@@ -242,7 +242,7 @@ public class ThirdPersonControllerNET : MonoBehaviourPunCallbacks, ICharacterTra
             correctPlayerPos = (Vector3)stream.ReceiveNext();
             correctPlayerRot = (Quaternion)stream.ReceiveNext();
             // correctPlayerScale = (Vector3)stream.ReceiveNext();
-           // GetComponent<Rigidbody>().velocity = (Vector3)stream.ReceiveNext();
+            // GetComponent<Rigidbody>().velocity = (Vector3)stream.ReceiveNext();
 
             /*   controllerScript.attack = (bool)stream.ReceiveNext();
                controllerScript.skill_1 = (bool)stream.ReceiveNext();
@@ -254,14 +254,14 @@ public class ThirdPersonControllerNET : MonoBehaviourPunCallbacks, ICharacterTra
                controllerScript.hit = (bool)stream.ReceiveNext();  */
 
 
-          /*  if (!appliedInitialUpdate)
-            {
-                appliedInitialUpdate = true;
-                transform.position = correctPlayerPos;
-                transform.rotation = correctPlayerRot;
-                //  transform.localScale = correctPlayerScale;
-               // GetComponent<Rigidbody>().velocity = Vector3.zero;
-            }   */
+            /*  if (!appliedInitialUpdate)
+              {
+                  appliedInitialUpdate = true;
+                  transform.position = correctPlayerPos;
+                  transform.rotation = correctPlayerRot;
+                  //  transform.localScale = correctPlayerScale;
+                 // GetComponent<Rigidbody>().velocity = Vector3.zero;
+              }   */
         }
     }
 
