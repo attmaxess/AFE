@@ -305,42 +305,42 @@ public class ThirdPersonControllerNET : MonoBehaviourPunCallbacks, ICharacterTra
     [PunRPC]
     public void RpcAttack(bool value)
     {
-        attack = value;
+      //  attack = value;
     }
     [PunRPC]
     public void RpcIdle(bool value)
     {
-        idle = value;
+      //  idle = value;
     }
     [PunRPC]
     public void RpcRun(bool value)
     {
-        run = value;
+      //  run = value;
     }
     [PunRPC]
     public void RpcHit(bool value)
     {
-        hit = value;
+      //  hit = value;
     }
     [PunRPC]
     public void RpcSkill_4(bool value)
     {
-        skill_4 = value;
+      //  skill_4 = value;
     }
     [PunRPC]
     public void RpcSkill_3(bool value)
     {
-        skill_3 = value;
+       // skill_3 = value;
     }
     [PunRPC]
     public void RpcSkill_2(bool value)
     {
-        skill_2 = value;
+      //  skill_2 = value;
     }
     [PunRPC]
     public void RpcSkill_1(bool value)
     {
-        skill_1 = value;
+       // skill_1 = value;
     }
     #endregion
 
@@ -349,11 +349,11 @@ public class ThirdPersonControllerNET : MonoBehaviourPunCallbacks, ICharacterTra
 
         if (!photonView.IsMine)
         {
-            Debug.Log("Update   transform.position " + photonView.IsMine + " - " + correctPlayerPos);
+           // Debug.Log("Update   transform.position " + photonView.IsMine + " - " + correctPlayerPos);
 
             //Update remote player (smooth this, this looks good, at the cost of some accuracy)
-            /*  transform.position = Vector3.Lerp(transform.position, correctPlayerPos, Time.deltaTime * 5);
-              transform.rotation = Quaternion.Lerp(transform.rotation, correctPlayerRot, Time.deltaTime * 5);   */
+              transform.position = Vector3.Lerp(transform.position, correctPlayerPos, Time.deltaTime * 5);
+              transform.rotation = Quaternion.Lerp(transform.rotation, correctPlayerRot, Time.deltaTime * 5);   
             //     transform.localScale = Vector3.Lerp(transform.localScale, correctPlayerScale, Time.deltaTime * 5);
         }
 
