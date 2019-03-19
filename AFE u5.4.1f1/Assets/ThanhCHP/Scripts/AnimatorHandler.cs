@@ -10,7 +10,20 @@ using Random = UnityEngine.Random;
 
 namespace Com.Beetsoft.AFE
 {
-    public class AnimatorHandler : MonoBehaviourPun
+    public enum AnimatorTrigger
+    {
+        None = (byte) 0,
+        Run,
+        Idle,
+        Attack,
+        Spell1,
+        Spell2,
+        Spell3,
+        Spell4,
+        Death,
+    }
+
+    public class AnimatorHandler : MonoBehaviourPun, IPunObservable
     {
         [SerializeField] private Animator animator;
 
@@ -28,6 +41,8 @@ namespace Com.Beetsoft.AFE
                                        || IsInStateSpell3.Value
                                        || IsInStateSpell4.Value;
 
+        private AnimatorTrigger InternalAnimatorTrigger { get; set; } = AnimatorTrigger.None;
+
         public void SetInputFilterObserver(IJoystickInputFilterObserver joystickInputFilterObserver)
         {
             InputFilterObserver = joystickInputFilterObserver;
@@ -39,31 +54,59 @@ namespace Com.Beetsoft.AFE
 
             InputFilterObserver.OnRunAsObservable()
                 .Where(_ => !IsNotExitState)
-                .Subscribe(_ => Animator.SetTrigger(Constant.AnimationPram.Run));
+                .Subscribe(_ =>
+                {
+                    Animator.SetTrigger(Constant.AnimationPram.Run);
+                    InternalAnimatorTrigger = AnimatorTrigger.Run;
+                });
 
             InputFilterObserver.OnIdleAsObservable()
                 .Where(_ => !IsNotExitState)
-                .Subscribe(_ => Animator.SetTrigger(Constant.AnimationPram.Idle));
+                .Subscribe(_ =>
+                {
+                    Animator.SetTrigger(Constant.AnimationPram.Idle);
+                    InternalAnimatorTrigger = AnimatorTrigger.Idle;
+                });
 
             InputFilterObserver.OnBasicAttackAsObservable()
                 .Where(_ => !IsNotExitState)
-                .Subscribe(_ => Animator.SetTrigger(Constant.AnimationPram.Attack));
+                .Subscribe(_ =>
+                {
+                    Animator.SetTrigger(Constant.AnimationPram.Attack);
+                    InternalAnimatorTrigger = AnimatorTrigger.Attack;
+                });
 
             InputFilterObserver.OnSpell1AsObservable()
                 .Where(_ => !IsNotExitState)
-                .Subscribe(_ => Animator.SetTrigger(Constant.AnimationPram.Q));
+                .Subscribe(_ =>
+                {
+                    Animator.SetTrigger(Constant.AnimationPram.Q);
+                    InternalAnimatorTrigger = AnimatorTrigger.Spell1;
+                });
 
             InputFilterObserver.OnSpell2AsObservable()
                 .Where(_ => !(IsInStateSpell3.Value || IsInStateSpell4.Value))
-                .Subscribe(_ => Animator.SetTrigger(Constant.AnimationPram.W));
+                .Subscribe(_ =>
+                {
+                    Animator.SetTrigger(Constant.AnimationPram.W);
+                    InternalAnimatorTrigger = AnimatorTrigger.Spell2;
+                });
 
             InputFilterObserver.OnSpell3AsObservable()
                 .Where(_ => !IsInStateSpell4.Value)
-                .Subscribe(_ => Animator.SetTrigger(Constant.AnimationPram.E));
+                .Subscribe(_ =>
+                {
+                    Animator.SetTrigger(Constant.AnimationPram.E);
+                    InternalAnimatorTrigger = AnimatorTrigger.Spell3;
+                });
 
             InputFilterObserver.OnSpell4AsObservable()
                 .Where(_ => !(IsInStateSpell1.Value || IsInStateSpell3.Value))
-                .Subscribe(_ => Animator.SetTrigger(Constant.AnimationPram.R));
+                .Subscribe(_ =>
+                {
+                    Animator.SetTrigger(Constant.AnimationPram.R);
+                    InternalAnimatorTrigger = AnimatorTrigger.Spell4;
+                });
 
             HandleIdleState();
             HandleSwitchToStateWeaponIn();
@@ -226,5 +269,50 @@ namespace Com.Beetsoft.AFE
         }
 
         #endregion
+
+        public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+        {
+            if (stream.IsWriting)
+            {
+                if (InternalAnimatorTrigger == AnimatorTrigger.None) return;
+                stream.SendNext(InternalAnimatorTrigger);
+                InternalAnimatorTrigger = AnimatorTrigger.None;
+            }
+            else if (stream.IsReading)
+            {
+                SetAnimatorTrigger((AnimatorTrigger) stream.ReceiveNext());
+            }
+        }
+
+        private void SetAnimatorTrigger(AnimatorTrigger trigger)
+        {
+            switch (trigger)
+            {
+                case AnimatorTrigger.Run:
+                    Animator.SetTrigger(Constant.AnimationPram.Run);
+                    break;
+                case AnimatorTrigger.Idle:
+                    Animator.SetTrigger(Constant.AnimationPram.Idle);
+                    break;
+                case AnimatorTrigger.Attack:
+                    Animator.SetTrigger(Constant.AnimationPram.Attack);
+                    break;
+                case AnimatorTrigger.Spell1:
+                    Animator.SetTrigger(Constant.AnimationPram.Q);
+                    break;
+                case AnimatorTrigger.Spell2:
+                    Animator.SetTrigger(Constant.AnimationPram.W);
+                    break;
+                case AnimatorTrigger.Spell3:
+                    Animator.SetTrigger(Constant.AnimationPram.E);
+                    break;
+                case AnimatorTrigger.Spell4:
+                    Animator.SetTrigger(Constant.AnimationPram.R);
+                    break;
+                case AnimatorTrigger.Death:
+                    Animator.SetTrigger(Constant.AnimationPram.Death);
+                    break;
+            }
+        }
     }
 }
