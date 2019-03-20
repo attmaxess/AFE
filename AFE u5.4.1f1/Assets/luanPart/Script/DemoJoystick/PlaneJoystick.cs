@@ -105,7 +105,7 @@ public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
         get { return skill_1; }
         set
         {
-            joystickCharacter.Spell1(Vector3.zero);
+            joystickCharacter.Spell1(new SkillMessage());
             skill_1 = value;
         }
     }
@@ -115,7 +115,7 @@ public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
         get { return skill_2; }
         set
         {
-            joystickCharacter.Spell2(Vector3.zero);
+            joystickCharacter.Spell2(new SkillMessage());
             skill_2 = value;
         }
     }
@@ -125,7 +125,7 @@ public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
         get { return skill_3; }
         set
         {
-            joystickCharacter.Spell3(Vector3.zero);
+            joystickCharacter.Spell3(new SkillMessage());
             skill_3 = value;
         }
     }
@@ -135,7 +135,7 @@ public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
         get { return skill_4; }
         set
         {
-            joystickCharacter.Spell4(Vector3.zero);
+            joystickCharacter.Spell4(new SkillMessage());
             skill_4 = value;
         }
     }
@@ -145,7 +145,7 @@ public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
         get { return attack; }
         set
         {
-            joystickCharacter.BasicAttack(gameObject);
+            joystickCharacter.BasicAttack(new SkillMessage());
             attack = value;
         }
     }
@@ -227,12 +227,11 @@ public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
             //   rotateChar.RotateBy(moveVector);
 
             // rotateChar.PositionBy(transform.position, moveVector);
-
-
+            
             if (moveVector == Vector3.zero)
-                joystickCharacter.Idle(Vector3.zero);
+                joystickCharacter.Idle(new RunMessage(Vector3.zero));
             else
-                joystickCharacter.Run(transform.position);
+                joystickCharacter.Run(new RunMessage(transform.position));
 
             //   transform.position = rotateChar.transform.position;
         }

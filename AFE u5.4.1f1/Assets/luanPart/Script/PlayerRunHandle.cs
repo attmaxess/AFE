@@ -6,7 +6,6 @@ using UniRx;
 
 public class PlayerRunHandle : MonoBehaviour
 {
-
     private IJoystickInputFilterObserver joystickInputFilterObserver;
 
     private void Awake()
@@ -18,17 +17,11 @@ public class PlayerRunHandle : MonoBehaviour
     void Start()
     {
         joystickInputFilterObserver.OnRunAsObservable()
-            .Subscribe(dir =>
-            {
-                transform.position = dir;
-            });
-
+            .Subscribe(message => { transform.position = message.Direction; });
     }
 
     // Update is called once per frame
     void Update()
     {
-
     }
 }
-

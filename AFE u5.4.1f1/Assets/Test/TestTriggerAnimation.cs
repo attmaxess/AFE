@@ -30,26 +30,26 @@ public class TestTriggerAnimation : MonoBehaviourPun
         if (!photonView.IsMine) return;
 
         this.OnKeyDownAsObservable(KeyCode.Q)
-            .Subscribe(_ => JoystickInputFilter.Spell1(Vector3.zero));
+            .Subscribe(_ => JoystickInputFilter.Spell1(new SkillMessage()));
 
         this.OnKeyDownAsObservable(KeyCode.W)
-            .Subscribe(_ => JoystickInputFilter.Spell2(Vector3.zero));
+            .Subscribe(_ => JoystickInputFilter.Spell2(new SkillMessage()));
 
         this.OnKeyDownAsObservable(KeyCode.E)
-            .Subscribe(_ => JoystickInputFilter.Spell3(Vector3.zero));
+            .Subscribe(_ => JoystickInputFilter.Spell3(new SkillMessage()));
 
         this.OnKeyDownAsObservable(KeyCode.R)
-            .Subscribe(_ => JoystickInputFilter.Spell4(Vector3.zero));
+            .Subscribe(_ => JoystickInputFilter.Spell4(new SkillMessage()));
 
-        Observable.EveryUpdate()
-            .Where(_ => Input.GetMouseButtonDown(0))
-            .Subscribe(_ => JoystickInputFilter.BasicAttack(gameObject));
+//        Observable.EveryUpdate()
+//            .Where(_ => Input.GetMouseButtonDown(0))
+//            .Subscribe(_ => JoystickInputFilter.BasicAttack(gameObject));
 
         Observable.EveryUpdate()
             .Where(_ => Input.GetMouseButtonDown(1))
-            .Subscribe(_ => JoystickInputFilter.Run(Vector3.zero));
+            .Subscribe(_ => JoystickInputFilter.Run(new RunMessage(Vector3.forward)));
 
         this.OnKeyDownAsObservable(KeyCode.Space)
-            .Subscribe(_ => JoystickInputFilter.Idle(Vector3.zero));
+            .Subscribe(_ => JoystickInputFilter.Idle(new RunMessage(Vector3.zero)));
     }
 }
