@@ -45,11 +45,11 @@ public class TestTriggerAnimation : MonoBehaviourPun
 //            .Where(_ => Input.GetMouseButtonDown(0))
 //            .Subscribe(_ => JoystickInputFilter.BasicAttack(gameObject));
 
-        Observable.EveryUpdate()
+       /* Observable.EveryUpdate()
             .Where(_ => Input.GetMouseButtonDown(1))
             .Subscribe(_ => JoystickInputFilter.Run(new RunMessage(Vector3.forward)));
 
         this.OnKeyDownAsObservable(KeyCode.Space)
-            .Subscribe(_ => JoystickInputFilter.Idle(new RunMessage(Vector3.zero)));
+            .Subscribe(_ => JoystickInputFilter.Idle(new RunMessage(Vector3.zero)));  */
     }
 }
