@@ -6,113 +6,113 @@ namespace Com.Beetsoft.AFE
 {
     public class JoystickInputFilter : MonoBehaviour, IJoystickInputFilter, IJoystickInputFilterObserver
     {
-        private Subject<Vector3> RunSubject { get; } = new Subject<Vector3>();
-        private Subject<Vector3> IdleSubject { get; } = new Subject<Vector3>();
-        private Subject<GameObject> BasicAttackSubject { get; } = new Subject<GameObject>();
-        private Subject<Vector3> Spell1Subject { get; } = new Subject<Vector3>();
-        private Subject<Vector3> Spell2Subject { get; } = new Subject<Vector3>();
-        private Subject<Vector3> Spell3Subject { get; } = new Subject<Vector3>();
-        private Subject<Vector3> Spell4Subject { get; } = new Subject<Vector3>();
-        private Subject<Vector3> RecallSubject { get; } = new Subject<Vector3>();
-        private Subject<Vector3> DefaultSpellASubject { get; } = new Subject<Vector3>();
-        private Subject<Vector3> DefaultSpellBSubject { get; } = new Subject<Vector3>();
+        private Subject<IRunMessage> RunSubject { get; } = new Subject<IRunMessage>();
+        private Subject<IRunMessage> IdleSubject { get; } = new Subject<IRunMessage>();
+        private Subject<ISkillMessage> BasicAttackSubject { get; } = new Subject<ISkillMessage>();
+        private Subject<ISkillMessage> Spell1Subject { get; } = new Subject<ISkillMessage>();
+        private Subject<ISkillMessage> Spell2Subject { get; } = new Subject<ISkillMessage>();
+        private Subject<ISkillMessage> Spell3Subject { get; } = new Subject<ISkillMessage>();
+        private Subject<ISkillMessage> Spell4Subject { get; } = new Subject<ISkillMessage>();
+        private Subject<ISkillMessage> RecallSubject { get; } = new Subject<ISkillMessage>();
+        private Subject<ISkillMessage> DefaultSpellASubject { get; } = new Subject<ISkillMessage>();
+        private Subject<ISkillMessage> DefaultSpellBSubject { get; } = new Subject<ISkillMessage>();
 
-        public void Run(Vector3 dir)
+        public void Run(IRunMessage message)
         {
-            RunSubject.OnNext(dir);
+            RunSubject.OnNext(message);
         }
 
-        public void Idle(Vector3 position)
+        public void Idle(IRunMessage message)
         {
-            IdleSubject.OnNext(position);
+            IdleSubject.OnNext(message);
         }
 
-        public void BasicAttack(GameObject target)
+        public void BasicAttack(ISkillMessage message)
         {
-            BasicAttackSubject.OnNext(target);
+            BasicAttackSubject.OnNext(message);
         }
 
-        public void Spell1(Vector3 dir)
+        public void Spell1(ISkillMessage message)
         {
-            Spell1Subject.OnNext(dir);
+            Spell1Subject.OnNext(message);
         }
 
-        public void Spell2(Vector3 dir)
+        public void Spell2(ISkillMessage message)
         {
-            Spell2Subject.OnNext(dir);
+            Spell2Subject.OnNext(message);
         }
 
-        public void Spell3(Vector3 dir)
+        public void Spell3(ISkillMessage message)
         {
-            Spell3Subject.OnNext(dir);
+            Spell3Subject.OnNext(message);
         }
 
-        public void Spell4(Vector3 dir)
+        public void Spell4(ISkillMessage message)
         {
-            Spell4Subject.OnNext(dir);
+            Spell4Subject.OnNext(message);
         }
 
-        public void Recall(Vector3 dir)
+        public void Recall(ISkillMessage message)
         {
-            RecallSubject.OnNext(dir);
+            RecallSubject.OnNext(message);
         }
 
-        public void DefaultSpellA(Vector3 dir)
+        public void DefaultSpellA(ISkillMessage message)
         {
-            DefaultSpellASubject.OnNext(dir);
+            DefaultSpellASubject.OnNext(message);
         }
 
-        public void DefaultSpellB(Vector3 dir)
+        public void DefaultSpellB(ISkillMessage message)
         {
-            DefaultSpellBSubject.OnNext(dir);
+            DefaultSpellBSubject.OnNext(message);
         }
 
-        public IObservable<Vector3> OnRunAsObservable()
+        public IObservable<IRunMessage> OnRunAsObservable()
         {
             return RunSubject;
         }
 
-        public IObservable<Vector3> OnIdleAsObservable()
+        public IObservable<IRunMessage> OnIdleAsObservable()
         {
             return IdleSubject;
         }
 
-        public IObservable<GameObject> OnBasicAttackAsObservable()
+        public IObservable<ISkillMessage> OnBasicAttackAsObservable()
         {
             return BasicAttackSubject;
         }
 
-        public IObservable<Vector3> OnSpell1AsObservable()
+        public IObservable<ISkillMessage> OnSpell1AsObservable()
         {
             return Spell1Subject;
         }
 
-        public IObservable<Vector3> OnSpell2AsObservable()
+        public IObservable<ISkillMessage> OnSpell2AsObservable()
         {
             return Spell2Subject;
         }
 
-        public IObservable<Vector3> OnSpell3AsObservable()
+        public IObservable<ISkillMessage> OnSpell3AsObservable()
         {
             return Spell3Subject;
         }
 
-        public IObservable<Vector3> OnSpell4AsObservable()
+        public IObservable<ISkillMessage> OnSpell4AsObservable()
         {
             return Spell4Subject;
         }
 
-        public IObservable<Vector3> OnRecallAsObservable()
+        public IObservable<ISkillMessage> OnRecallAsObservable()
         {
             return RecallSubject;
         }
 
-        public IObservable<Vector3> OnDefaultSpellAAsObservable()
+        public IObservable<ISkillMessage> OnDefaultSpellAAsObservable()
         {
             return DefaultSpellASubject;
         }
 
-        public IObservable<Vector3> OnDefaultSpellBAsObservable()
+        public IObservable<ISkillMessage> OnDefaultSpellBAsObservable()
         {
             return DefaultSpellBSubject;
         }
