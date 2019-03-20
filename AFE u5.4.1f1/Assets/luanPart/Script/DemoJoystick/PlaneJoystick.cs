@@ -16,7 +16,8 @@ public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
 
     [Header("Input")]
     public float speed = 1;
-    public Transform child;
+    public Transform directionPlayer;
+    public Transform directionSkill;
     public ICharacterTranform rotateChar;
     public IJoystickInputFilter joystickCharacter;
 
@@ -190,7 +191,35 @@ public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
 
         transform.Translate(moveVector * speed * Time.deltaTime, Space.World);
 
-        child.localPosition = new Vector3(h / 2, 0.5f, v / 2);
+        directionPlayer.localPosition = new Vector3(h / 2, 0.5f, v / 2);
+        directionPlayer.localPosition = new Vector3(h / 2, 0.5f, v / 2);
+
+        // direction skill
+        float h1, v1 = 0;
+
+        h1 = CF2Input.GetAxis("Skill_1H");
+        v1 = CF2Input.GetAxis("Skill_1V");
+
+        Vector3 dirSkill = (transform.right * h1 + transform.forward * v1);
+
+        if (CF2Input.GetAxis("Skill_1H") != 0 && CF2Input.GetAxis("Skill_1V") != 0)
+        {
+            joystickCharacter.Spell1(dirSkill);
+        }
+        if (CF2Input.GetAxis("Skill_2H") != 0 && CF2Input.GetAxis("Skill_2V") != 0)
+        {
+            joystickCharacter.Spell2(dirSkill);
+        }
+        if (CF2Input.GetAxis("Skill_3H") != 0 && CF2Input.GetAxis("Skill_3V") != 0)
+        {
+            joystickCharacter.Spell3(dirSkill);
+        }
+        if (CF2Input.GetAxis("Skill_4H") != 0 && CF2Input.GetAxis("Skill_4V") != 0)
+        {
+            joystickCharacter.Spell4(dirSkill);
+        }
+
+        directionPlayer.localPosition = new Vector3(h1 / 2, 0.5f, v1 / 2);
 
         if (joystickCharacter != null)
         {

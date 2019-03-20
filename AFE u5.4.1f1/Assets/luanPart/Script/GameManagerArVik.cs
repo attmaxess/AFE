@@ -72,6 +72,14 @@ public class GameManagerArVik : MonoBehaviourPunCallbacks
 
     private void Update()
     {
+
+        Debug.Log(CF2Input.GetButtonDown("BtnTest"));
+        Debug.Log(CF2Input.GetButtonUp("BtnTest"));
+        Debug.Log(CF2Input.GetButton("BtnTest"));   
+        Debug.Log(CF2Input.GetAxis("HozTest"));
+        Debug.Log(CF2Input.GetAxis("VerTest"));    
+   /*     Debug.Log(CF2Input.GetAxis("Horizontal"));
+        Debug.Log(CF2Input.GetAxis("Vertical"));  */
         if (!photonView.IsMine) return;
 
         if (CF2Input.GetButtonDown("Pause"))
