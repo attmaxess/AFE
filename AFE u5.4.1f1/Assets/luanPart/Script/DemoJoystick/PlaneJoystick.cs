@@ -97,6 +97,7 @@ public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
     {
         Debug.Log("Attack");
         AttackRpc = true;
+        joystickCharacter.BasicAttack(new SkillMessage());
     }
 
     bool skill_1;

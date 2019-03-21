@@ -96,7 +96,7 @@ public class GameManagerArVik : MonoBehaviourPunCallbacks
              Debug.Log(CF2Input.GetAxis("Vertical"));  */
         if (!photonView.IsMine) return;
 
-      /*  if (CF2Input.GetButtonDown("Pause"))
+        if (CF2Input.GetButtonDown("Pause"))
         {
             Debug.Log("Pause");
         }
@@ -106,7 +106,7 @@ public class GameManagerArVik : MonoBehaviourPunCallbacks
             if (attack != null) attack();
         }
 
-        if (CF2Input.GetButtonDown("Skill1"))
+       /* if (CF2Input.GetButtonDown("Skill1"))
         {
             if (skill1 != null) skill1();
             Debug.Log("Skill1");

@@ -3,11 +3,18 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using ControlFreak2;
 using UniRx;
+using UniRx.Triggers;
 
 public struct MessagePlayerData
 {
     public int hp;
     public int isAttack;
+
+    public MessagePlayerData(int hp, int isAttack)
+    {
+        this.hp = hp;
+        this.isAttack = isAttack;
+    }
 }
 
 public class BtnSkillUI : MonoBehaviour
@@ -20,9 +27,17 @@ public class BtnSkillUI : MonoBehaviour
 
     private void Start()
     {
-        MessageBroker messageBroker = new MessageBroker();
-       // messageBroker.Receive<MessagePlayerData>().Subscribe(_m = >{ return _m; });
+        MessageBroker.Default.Receive<MessagePlayerData>().Subscribe(_ =>
+        {
+            Debug.Log(_.hp + " - " + _.isAttack);
+        });
 
+        this.OnKeyDownAsObservable(KeyCode.A)
+            .Subscribe(_ =>
+            {
+               // Debug.Log(_);
+                //MessageBroker.Default.Publish<MessagePlayerData>(new MessagePlayerData(10, 100));
+            });
 
         var btns = GetComponents<BtnSkillBase>();
         foreach (var item in btns)
