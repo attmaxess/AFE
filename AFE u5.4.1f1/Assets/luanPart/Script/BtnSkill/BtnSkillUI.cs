@@ -4,6 +4,7 @@ using UnityEngine.EventSystems;
 using ControlFreak2;
 using UniRx;
 using UniRx.Triggers;
+using TMPro;
 
 public struct MessagePlayerData
 {
@@ -24,21 +25,13 @@ public class BtnSkillUI : MonoBehaviour
 
     public bool canUseSkill;
     public bool isCountTime;
+    public TextMeshProUGUI number;
 
     private void Start()
     {
-        MessageBroker.Default.Receive<MessagePlayerData>().Subscribe(_ =>
-        {
-            Debug.Log(_.hp + " - " + _.isAttack);
-        });
 
-        this.OnKeyDownAsObservable(KeyCode.A)
-            .Subscribe(_ =>
-            {
-               // Debug.Log(_);
-                //MessageBroker.Default.Publish<MessagePlayerData>(new MessagePlayerData(10, 100));
-            });
-
+        //var a = MessageBroker.Default.Receive<MessagePlayerData>().Subscribe(_ => { });
+        //MessageBroker.Default.Publish<MessagePlayerData>(new MessagePlayerData(10, 100));
         var btns = GetComponents<BtnSkillBase>();
         foreach (var item in btns)
         {
