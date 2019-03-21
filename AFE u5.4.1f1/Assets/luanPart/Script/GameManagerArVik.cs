@@ -6,8 +6,7 @@ using Photon.Pun;
 
 public class GameManagerArVik : MonoBehaviourPunCallbacks
 {
-    public string prefabName = "VikingPrefab";
-    //public ArkitUIManager ArkitUIManager;
+    public string prefabName = "VikingPrefab";    
     bool isJoinedRoom = false;
     public List<PhotonView> listCharacter = new List<PhotonView>();
 
@@ -54,6 +53,7 @@ public class GameManagerArVik : MonoBehaviourPunCallbacks
 
     private void OnDestroy()
     {
+
     }
 
     IEnumerator OnLeftRoom()
@@ -108,14 +108,13 @@ public class GameManagerArVik : MonoBehaviourPunCallbacks
 
     private void Start()
     {
-        //ArkitUIManager.gameObject.SetActive(isJoinedRoom);
+        
     }
 
     public override void OnJoinedRoom()
     {
         isJoinedRoom = true;
-        Debug.Log("OnJoinedRoom");
-        //ArkitUIManager.gameObject.SetActive(isJoinedRoom);
+        Debug.Log("OnJoinedRoom");        
     }
 
     void OnGUI()
@@ -131,42 +130,7 @@ public class GameManagerArVik : MonoBehaviourPunCallbacks
     void OnDisconnectedFromPhoton()
     {
         Debug.LogWarning("OnDisconnectedFromPhoton");
-    }
-
-    public void SpawnObject(Vector3 pos, GameObject hitObject)
-    {
-        bool isSpawn = false;
-        var aa = GameObject.FindObjectsOfType<ThirdPersonNetworkARVik>();
-        for (int i = 0; i < aa.Length; i++)
-        {
-            Debug.Log("a[i].gameObject " + aa[i].gameObject.GetPhotonView().IsMine);
-            if (aa[i].gameObject.GetPhotonView().IsMine)
-            {
-                isSpawn = true;
-                return;
-            }
-        }
-
-        var newChar = PhotonNetwork.Instantiate(prefabName, pos, Quaternion.identity, 0);
-        GameObject.Instantiate(Resources.Load("PlaneJoystick"), pos, Quaternion.identity);        
-    }
-
-    [ContextMenu("SpawnObjectAtZero")]
-    public void SpawnObjectAtZero(float offsetY = 0.5f)
-    {        
-        var currentCharacter = GameObject.FindObjectsOfType<ThirdPersonNetworkARVik>();
-        for (int i = 0; i < currentCharacter.Length; i++)
-        {
-            Debug.Log("a[i].gameObject " + currentCharacter[i].gameObject.GetPhotonView().IsMine);
-            if (currentCharacter[i].gameObject.GetPhotonView().IsMine)
-            {                
-                return;
-            }
-        }
-
-        var newChar = PhotonNetwork.Instantiate(prefabName, new Vector3(0, offsetY, 0), Quaternion.identity, 0);
-        GameObject.Instantiate(Resources.Load("PlaneJoystick"), Vector3.zero, Quaternion.identity);        
-    }
+    }        
 
     [PunRPC]
     public void RpcSpawnObject(Vector3 pos, string prefabName)

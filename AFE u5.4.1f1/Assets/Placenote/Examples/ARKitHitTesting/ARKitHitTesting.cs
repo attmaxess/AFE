@@ -86,11 +86,14 @@ namespace ARKitHitTesting
 
                 LibPlacenote.MapMetadataSettable metadata = CreateMetaDataObject();
 
-                LibPlacenote.Instance.SetMetadata(mapId, metadata, (success) => {
-                    if (success) {
+                LibPlacenote.Instance.SetMetadata(mapId, metadata, (success) =>
+                {
+                    if (success)
+                    {
                         Debug.Log("Meta data successfully saved");
                     }
-                    else {
+                    else
+                    {
                         Debug.Log("Meta data failed to save");
                     }
                 });
@@ -100,14 +103,17 @@ namespace ARKitHitTesting
             },
             (completed, faulted, percentage) =>
             {
-                if (completed) {
+                if (completed)
+                {
                     notifications.text = "Upload Complete:" + savedMapID;
 
                 }
-                else if (faulted) {
+                else if (faulted)
+                {
                     notifications.text = "Upload of Map: " + savedMapID + " failed";
                 }
-                else {
+                else
+                {
                     notifications.text = "Upload Progress: " + percentage.ToString("F2") + "/1.0)";
                 }
             }
@@ -141,7 +147,7 @@ namespace ARKitHitTesting
             metadata.userdata = userdata;
             return metadata;
         }
-         
+
 
         // Load map and relocalize. Check OnStatusChange function for behaviour upon relocalization
         public void OnLoadMapClicked()
@@ -165,16 +171,18 @@ namespace ARKitHitTesting
                 if (completed)
                 {
                     // Get the meta data as soon as the map is downloaded
-                    LibPlacenote.Instance.GetMetadata(savedMapID,(LibPlacenote.MapMetadata obj) => 
-                    {
-                        if (obj!=null) {
-                            downloadedMetaData = obj;
-                        }
-                        else {
-                            notifications.text = "Failed to download meta data";
-                            return;
-                        }
-                    });
+                    LibPlacenote.Instance.GetMetadata(savedMapID, (LibPlacenote.MapMetadata obj) =>
+                     {
+                         if (obj != null)
+                         {
+                             downloadedMetaData = obj;
+                         }
+                         else
+                         {
+                             notifications.text = "Failed to download meta data";
+                             return;
+                         }
+                     });
 
                     // Now try to localize the map
                     LibPlacenote.Instance.StartSession();

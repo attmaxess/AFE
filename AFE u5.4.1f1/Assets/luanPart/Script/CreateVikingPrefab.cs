@@ -22,7 +22,7 @@ public class CreateVikingPrefab : MonoBehaviour
 
         if (GameManagerArVik != null)
         {
-            GameManagerArVik.SpawnObject(pos, hitObject);
+            //GameManagerArVik.SpawnCharacter(pos, hitObject);
         }
     }
 

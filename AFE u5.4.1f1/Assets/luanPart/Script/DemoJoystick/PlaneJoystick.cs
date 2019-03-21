@@ -4,7 +4,6 @@ using System.Linq;
 using UnityEngine;
 using ControlFreak2;
 
-
 public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
 {
     [Header("Debug")]
@@ -28,35 +27,36 @@ public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
         }
     }
 
-void FindCharacter(){
-    
-}
+    void FindCharacter()
+    {
+        var mObjs = GameObject.FindObjectsOfType<MonoBehaviour>();
+        ICharacterTranform[] interfaceScripts = (from a in mObjs where a.GetType().GetInterfaces().Any(k => k == typeof(ICharacterTranform)) select (ICharacterTranform)a).ToArray();
+        if (interfaceScripts.Length > 0)
+        {
+            for (int i = 0; i < interfaceScripts.Length; i++)
+            {
+                if (interfaceScripts[i].IsMine)
+                {
+                    rotateChar = interfaceScripts[i];
+                    break;
+                }
+            }
+            if (rotateChar == null)
+            {
+                Debug.Log("Dont Have Local Character");
+            }
+        }
+        else
+        {
+            Debug.Log("Dont Find Any Gameobject Have ICharacterTranform");
+        }
+    }
 
     void Start()
     {
         if (rotateChar != null)
         {
-            var mObjs = GameObject.FindObjectsOfType<MonoBehaviour>();
-            ICharacterTranform[] interfaceScripts = (from a in mObjs where a.GetType().GetInterfaces().Any(k => k == typeof(ICharacterTranform)) select (ICharacterTranform)a).ToArray();
-            if (interfaceScripts.Length > 0)
-            {
-                for (int i = 0; i < interfaceScripts.Length; i++)
-                {
-                    if (interfaceScripts[i].IsMine)
-                    {
-                        rotateChar = interfaceScripts[i];
-                        break;
-                    }
-                }
-                if (rotateChar == null)
-                {
-                    Debug.Log("Dont Have Local Character");
-                }
-            }
-            else
-            {
-                Debug.Log("Dont Find Any Gameobject Have ICharacterTranform");
-            }
+            FindCharacter();
         }
 
         CF2Input.GetButton("Attack");
@@ -82,39 +82,13 @@ void FindCharacter(){
         {
 
             rotateChar.RotateBy(moveVector);
-
-            rotateChar.PositionBy(transform.position, moveVector);
-
-            //   transform.position = rotateChar.transform.position;
+            rotateChar.PositionBy(transform.position, moveVector);            
         }
         else
         {
-            var mObjs = GameObject.FindObjectsOfType<MonoBehaviour>();
-            ICharacterTranform[] interfaceScripts = (from a in mObjs where a.GetType().GetInterfaces().Any(k => k == typeof(ICharacterTranform)) select (ICharacterTranform)a).ToArray();
-            if (interfaceScripts.Length > 0)
-            {
-                for (int i = 0; i < interfaceScripts.Length; i++)
-                {
-                    if (interfaceScripts[i].IsMine)
-                    {
-                        rotateChar = interfaceScripts[i];
-                        break;
-                    }
-                }
-                if (rotateChar == null)
-                {
-                    Debug.Log("Dont Have Local Character");
-                }
-            }
-            else
-            {
-                Debug.Log("Dont Find Any Gameobject Have ICharacterTranform");
-            }
+            FindCharacter();
         }
-
-
-
-    }
+    }    
 }
 
 public interface IPlaneJoystickTranform
