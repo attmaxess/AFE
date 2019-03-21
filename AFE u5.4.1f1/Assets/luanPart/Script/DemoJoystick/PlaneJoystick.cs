@@ -71,112 +71,29 @@ public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
 
     private void Singleton_skill4()
     {
-        Debug.Log("Skill4");
-        skill_4Rpc = true;
+        joystickCharacter.Spell4(new SkillMessage());
     }
 
     private void Singleton_skill3()
     {
-        Debug.Log("Skill3");
-        skill_3Rpc = true;
+        joystickCharacter.Spell3(new SkillMessage());
     }
 
     private void Singleton_skill2()
     {
-        Debug.Log("Skill2");
-        skill_2Rpc = true;
+        joystickCharacter.Spell2(new SkillMessage());
     }
 
     private void Singleton_skill1()
     {
-        Debug.Log("Skill1");
-        skill_1Rpc = true;
+        joystickCharacter.Spell1(new SkillMessage());
     }
 
     private void Singleton_Attack()
     {
-        Debug.Log("Attack");
-        AttackRpc = true;
         joystickCharacter.BasicAttack(new SkillMessage());
     }
 
-    bool skill_1;
-    public bool skill_1Rpc
-    {
-        get { return skill_1; }
-        set
-        {
-            joystickCharacter.Spell1(new SkillMessage());
-            skill_1 = value;
-        }
-    }
-    bool skill_2;
-    public bool skill_2Rpc
-    {
-        get { return skill_2; }
-        set
-        {
-            joystickCharacter.Spell2(new SkillMessage());
-            skill_2 = value;
-        }
-    }
-    bool skill_3;
-    public bool skill_3Rpc
-    {
-        get { return skill_3; }
-        set
-        {
-            joystickCharacter.Spell3(new SkillMessage());
-            skill_3 = value;
-        }
-    }
-    bool skill_4;
-    public bool skill_4Rpc
-    {
-        get { return skill_4; }
-        set
-        {
-            joystickCharacter.Spell4(new SkillMessage());
-            skill_4 = value;
-        }
-    }
-    bool attack;
-    public bool AttackRpc
-    {
-        get { return attack; }
-        set
-        {
-            joystickCharacter.BasicAttack(new SkillMessage());
-            attack = value;
-        }
-    }
-    bool run;
-    public bool runRpc
-    {
-        get { return run; }
-        set
-        {
-            run = value;
-        }
-    }
-    bool idle;
-    public bool idleRpc
-    {
-        get { return idle; }
-        set
-        {
-            idle = value;
-        }
-    }
-    bool hit;
-    public bool hitRpc
-    {
-        get { return hit; }
-        set
-        {
-            hit = value;
-        }
-    }
 
     float previousV1_Skill, previousH1_Skill;
 
@@ -251,17 +168,11 @@ public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
 
         if (joystickCharacter != null)
         {
-
-            //   rotateChar.RotateBy(moveVector);
-
-            // rotateChar.PositionBy(transform.position, moveVector);
-
             if (moveVector == Vector3.zero)
                 joystickCharacter.Idle(new RunMessage(transform.position, Vector3.zero));
             else
                 joystickCharacter.Run(new RunMessage(transform.position, moveVector));
 
-            //   transform.position = rotateChar.transform.position;
         }
         else
         {
