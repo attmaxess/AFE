@@ -4,6 +4,7 @@ using UnityEngine.Serialization;
 
 namespace Com.Beetsoft.AFE
 {
+    [CreateAssetMenu(fileName = "ChampionModel", menuName = "AFE/Champion", order = 1)]
     public class ChampionModel : ScriptableObject, IChampionConfig
     {
         [SerializeField] private FloatReactiveProperty health;
@@ -27,6 +28,7 @@ namespace Com.Beetsoft.AFE
         [SerializeField] private float magicResistPerLevel;
         [SerializeField] private FloatReactiveProperty critical;
         [SerializeField] private FloatReactiveProperty moveSpeed;
+        [SerializeField] private FloatReactiveProperty cooldownSkillBonus;
 
         FloatReactiveProperty IChampionConfig.Health => health;
 
@@ -69,5 +71,7 @@ namespace Com.Beetsoft.AFE
         FloatReactiveProperty IChampionConfig.Critical => critical;
 
         FloatReactiveProperty IChampionConfig.MoveSpeed => moveSpeed;
+
+        FloatReactiveProperty IChampionConfig.CooldownSkillBonus => cooldownSkillBonus;
     }
 }

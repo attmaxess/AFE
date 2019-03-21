@@ -10,7 +10,9 @@ using Random = UnityEngine.Random;
 
 namespace Com.Beetsoft.AFE
 {
-    public class AnimatorHandler : MonoBehaviourPun, IInitialize<IJoystickInputFilterObserver>
+    public class AnimatorHandler : MonoBehaviourPun,
+        IAnimationStateChecker,
+        IInitialize<IJoystickInputFilterObserver>
     {
         [SerializeField] private Animator animator;
 
@@ -18,19 +20,19 @@ namespace Com.Beetsoft.AFE
 
         private IJoystickInputFilterObserver InputFilterObserver { get; set; }
 
-        private IReactiveProperty<bool> IsRun { get; } = new ReactiveProperty<bool>();
-        private IReactiveProperty<bool> IsBasicAttack { get; } = new ReactiveProperty<bool>();
-        private IReactiveProperty<bool> IsInStateSpell1 { get; } = new ReactiveProperty<bool>();
-        private IReactiveProperty<bool> IsInStateSpell2 { get; } = new ReactiveProperty<bool>();
-        private IReactiveProperty<bool> IsInStateSpell3 { get; } = new ReactiveProperty<bool>();
-        private IReactiveProperty<bool> IsInStateSpell4 { get; } = new ReactiveProperty<bool>();
+        public IReactiveProperty<bool> IsRun { get; } = new ReactiveProperty<bool>();
+        public IReactiveProperty<bool> IsBasicAttack { get; } = new ReactiveProperty<bool>();
+        public IReactiveProperty<bool> IsInStateSpell1 { get; } = new ReactiveProperty<bool>();
+        public IReactiveProperty<bool> IsInStateSpell2 { get; } = new ReactiveProperty<bool>();
+        public IReactiveProperty<bool> IsInStateSpell3 { get; } = new ReactiveProperty<bool>();
+        public IReactiveProperty<bool> IsInStateSpell4 { get; } = new ReactiveProperty<bool>();
 
         private bool IsAnyStateCanNotExit => IsInStateSpell1.Value
                                              || IsInStateSpell2.Value
                                              || IsInStateSpell3.Value
                                              || IsInStateSpell4.Value;
 
-        public void Initialize(IJoystickInputFilterObserver joystickInputFilterObserver)
+        void IInitialize<IJoystickInputFilterObserver>.Initialize(IJoystickInputFilterObserver joystickInputFilterObserver)
         {
             InputFilterObserver = joystickInputFilterObserver;
         }

@@ -21,7 +21,7 @@ public class TestTriggerAnimation : MonoBehaviourPun
 
     private void Awake()
     {
-        AnimatorHandler.Initialize(JoystickInputFilter);
+        //AnimatorHandler.Initialize(JoystickInputFilter);
     }
 
     // Use this for initialization
