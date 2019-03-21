@@ -177,6 +177,8 @@ public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
         }
     }
 
+    float previousV1_Skill, previousH1_Skill;
+
     void Update()
     {
         if (!useUpdate) return;
@@ -196,63 +198,53 @@ public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
         // direction skill
         float h1 = 0, v1 = 0;
 
-
-
         if ((CF2Input.GetAxis("S_1_Hoz") != 0 || CF2Input.GetAxis("S_1_Ver") != 0) && CF2Input.GetButton("Skill1"))
         {
             h1 = CF2Input.GetAxis("S_1_Hoz");
             v1 = CF2Input.GetAxis("S_1_Ver");
-            //  joystickCharacter.Spell1(new SkillMessage());
-            Debug.Log("-" + CF2Input.GetButton("Skill1") + CF2Input.GetButtonDown("Skill1") + CF2Input.GetButtonUp("Skill1"));
 
         }
         if ((CF2Input.GetAxis("S_2_Hoz") != 0 || CF2Input.GetAxis("S_2_Ver") != 0) && CF2Input.GetButton("Skill2"))
         {
             h1 = CF2Input.GetAxis("S_2_Hoz");
             v1 = CF2Input.GetAxis("S_2_Ver");
-            //joystickCharacter.Spell2(new SkillMessage());
         }
         if ((CF2Input.GetAxis("S_3_Hoz") != 0 || CF2Input.GetAxis("S_3_Ver") != 0) && CF2Input.GetButton("Skill3"))
         {
             h1 = CF2Input.GetAxis("S_3_Hoz");
             v1 = CF2Input.GetAxis("S_3_Ver");
-            //  joystickCharacter.Spell3(new SkillMessage());
         }
         if ((CF2Input.GetAxis("S_4_Hoz") != 0 || CF2Input.GetAxis("S_4_Ver") != 0) && CF2Input.GetButton("Skill4"))
         {
             h1 = CF2Input.GetAxis("S_4_Hoz");
             v1 = CF2Input.GetAxis("S_4_Ver");
-            // joystickCharacter.Spell4(new SkillMessage());
         }
+        Vector3 dirSkill = (transform.right * previousH1_Skill + transform.forward * previousV1_Skill);
+
 
         if (CF2Input.GetButtonUp("Skill1"))
         {
-            Debug.Log("-" + CF2Input.GetButtonUp("Skill1"));
-            joystickCharacter.Spell1(new SkillMessage());
+            joystickCharacter.Spell1(new SkillMessage(dirSkill));
         }
 
         if (CF2Input.GetButtonUp("Skill2"))
         {
-            Debug.Log("-" + CF2Input.GetButtonUp("Skill2"));
-            joystickCharacter.Spell2(new SkillMessage());
+            joystickCharacter.Spell2(new SkillMessage(dirSkill));
         }
 
 
         if (CF2Input.GetButtonUp("Skill3"))
         {
-            Debug.Log("-" + CF2Input.GetButtonUp("Skill3"));
-            joystickCharacter.Spell3(new SkillMessage());
+            joystickCharacter.Spell3(new SkillMessage(dirSkill));
         }
 
         if (CF2Input.GetButtonUp("Skill4"))
         {
-            Debug.Log("-" + CF2Input.GetButtonUp("Skill4"));
-            joystickCharacter.Spell4(new SkillMessage());
+            joystickCharacter.Spell4(new SkillMessage(dirSkill));
         }
 
-        Vector3 dirSkill = (transform.right * h1 + transform.forward * v1);
 
-        directionSkill.localPosition = new Vector3(h1 / 2, 0.5f, v1 / 2);
+        directionSkill.localPosition = new Vector3(previousH1_Skill / 2, 0.5f, previousV1_Skill / 2);
 
         //----------
 
@@ -297,6 +289,8 @@ public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
 
         }
 
+        previousV1_Skill = v1;
+        previousH1_Skill = h1;
     }
 }
 

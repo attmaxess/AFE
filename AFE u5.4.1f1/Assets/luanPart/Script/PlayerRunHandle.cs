@@ -17,7 +17,12 @@ public class PlayerRunHandle : MonoBehaviour
     void Start()
     {
         joystickInputFilterObserver.OnRunAsObservable()
-            .Subscribe(message => { transform.position = message.Direction; });
+            .Subscribe(message =>
+            {
+                transform.position = message.Direction;
+                if (message.Rotation != Vector3.zero)
+                    transform.rotation = Quaternion.LookRotation(message.Rotation);
+            });
     }
 
     // Update is called once per frame

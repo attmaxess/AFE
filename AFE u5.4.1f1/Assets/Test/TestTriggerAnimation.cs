@@ -41,6 +41,7 @@ public class TestTriggerAnimation : MonoBehaviourPun
         this.OnKeyDownAsObservable(KeyCode.R)
             .Subscribe(_ => JoystickInputFilter.Spell4(new SkillMessage()));
 
+
 //        Observable.EveryUpdate()
 //            .Where(_ => Input.GetMouseButtonDown(0))
 //            .Subscribe(_ => JoystickInputFilter.BasicAttack(gameObject));
