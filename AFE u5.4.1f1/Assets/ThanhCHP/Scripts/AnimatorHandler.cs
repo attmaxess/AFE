@@ -10,7 +10,7 @@ using Random = UnityEngine.Random;
 
 namespace Com.Beetsoft.AFE
 {
-    public class AnimatorHandler : MonoBehaviourPun
+    public class AnimatorHandler : MonoBehaviourPun, IInitialize<IJoystickInputFilterObserver>
     {
         [SerializeField] private Animator animator;
 
@@ -30,7 +30,7 @@ namespace Com.Beetsoft.AFE
                                              || IsInStateSpell3.Value
                                              || IsInStateSpell4.Value;
 
-        public void SetInputFilterObserver(IJoystickInputFilterObserver joystickInputFilterObserver)
+        public void Initialize(IJoystickInputFilterObserver joystickInputFilterObserver)
         {
             InputFilterObserver = joystickInputFilterObserver;
         }
@@ -64,7 +64,7 @@ namespace Com.Beetsoft.AFE
                 .Subscribe(_ => WillEnterStateSpell3());
 
             InputFilterObserver.OnSpell4AsObservable()
-                .Where(_ => !(IsInStateSpell1.Value || IsInStateSpell3.Value))
+                .Where(_ => !(IsInStateSpell3.Value))
                 .Subscribe(_ => WillEnterStateSpell4());
 
             HandleIdleState();

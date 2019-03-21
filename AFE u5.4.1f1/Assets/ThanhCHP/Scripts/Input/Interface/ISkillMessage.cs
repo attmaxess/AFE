@@ -1,23 +1,16 @@
-using UnityEngine;
-
 namespace Com.Beetsoft.AFE
 {
     public interface ISkillMessage
     {
+        IReceiveDamageable ObjectReceive { get; }
+        float PhysicDamage { get; }
+        float MagicDamage { get; }
     }
 
     public class SkillMessage : ISkillMessage
     {
-
-        public SkillMessage()
-        {
-        }
-
-        public SkillMessage(Vector3 dir)
-        {
-            this.dir = dir;
-        }
-
-        public Vector3 dir { get; }
+        public IReceiveDamageable ObjectReceive { get; }
+        public float PhysicDamage { get; }
+        public float MagicDamage { get; }
     }
 }
