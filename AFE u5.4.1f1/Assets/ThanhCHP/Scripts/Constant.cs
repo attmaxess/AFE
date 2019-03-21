@@ -54,8 +54,8 @@ namespace Com.Beetsoft.AFE
         {
             public static int AttackClipAmount { get; } = 4;
             public static int QClipAmount { get; } = 4;
-
             public static float OffsetTimeSpell3AndSpell1 { get; } = 1.2f;
+            public static int TimeDelayApplyDamageAttackBasicMilliseconds { get; } = 100;
         }
     }
 }
