@@ -25,5 +25,6 @@ namespace Com.Beetsoft.AFE
         float MagicResistPerLevel { get; }
         FloatReactiveProperty Critical { get; }
         FloatReactiveProperty MoveSpeed { get; }
+        FloatReactiveProperty CooldownSkillBonus { get; }
     }
 }

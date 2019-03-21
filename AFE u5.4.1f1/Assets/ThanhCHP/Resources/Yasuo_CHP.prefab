@@ -470,13 +470,15 @@ GameObject:
   m_Component:
   - component: {fileID: 4228432612657856}
   - component: {fileID: 95781607689699482}
-  - component: {fileID: 114058647981329404}
-  - component: {fileID: 114203845982398960}
+  - component: {fileID: 114092411545148480}
+  - component: {fileID: 114218586144303770}
   - component: {fileID: 114285160370677164}
   - component: {fileID: 114366626602675422}
   - component: {fileID: 114338453396253636}
   - component: {fileID: 114773152827730594}
   - component: {fileID: 114315601636423302}
+  - component: {fileID: 114337711945045802}
+  - component: {fileID: 114250188246287544}
   m_Layer: 0
   m_Name: Yasuo_CHP
   m_TagString: Untagged
@@ -4039,7 +4041,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &114058647981329404
+--- !u!114 &114092411545148480
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4047,13 +4049,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1174075871233712}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45b155f862c697b45afbea2fe15aec68, type: 3}
+  m_Script: {fileID: 11500000, guid: ba9cbf2349da486c8969896c80efe221, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 95781607689699482}
+  championModel: {fileID: 11400000, guid: c27aa9838b137744c97785c959173d79, type: 2}
   joystickInputFilter: {fileID: 114285160370677164}
-  animatorHandler: {fileID: 114203845982398960}
---- !u!114 &114203845982398960
+  animatorHandler: {fileID: 114218586144303770}
+--- !u!114 &114218586144303770
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4065,6 +4067,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 95781607689699482}
+--- !u!114 &114250188246287544
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1174075871233712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e94efe5a6af4fa49422b1a56a68ee94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114285160370677164
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4087,6 +4100,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed495d856f3f94940b72bb31e1eacd45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114337711945045802
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1174075871233712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c71ff27ab1d440ebf5c2074b1d56ba1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillConfig: {fileID: 11400000, guid: 18234a120e0bf644083efacea99e9255, type: 2}
 --- !u!114 &114338453396253636
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4119,6 +4144,7 @@ MonoBehaviour:
   OwnershipTransfer: 0
   ObservedComponents:
   - {fileID: 114338453396253636}
+  - {fileID: 114250188246287544}
   - {fileID: 114773152827730594}
   viewIdField: 0
   InstantiationId: 1
