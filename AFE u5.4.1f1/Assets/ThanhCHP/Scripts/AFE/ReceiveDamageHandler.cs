@@ -16,7 +16,7 @@ namespace Com.Beetsoft.AFE
 
         Transform IReceiveDamageable.GetTransform => transform;
 
-        public void TakeDamage(IDamageMessage message)
+        void IReceiveDamageable.TakeDamage(IDamageMessage message)
         {
             DamageMessageSubject.OnNext(message);
         }
@@ -33,6 +33,9 @@ namespace Com.Beetsoft.AFE
 
         private void Start()
         {
+            this.ChampionConfig.Health
+                .Subscribe(x => Debug.Log(x));
+            
             if (!photonView.IsMine) return;
 
             this.OnTakeDamageAsObservable()
@@ -52,11 +55,6 @@ namespace Com.Beetsoft.AFE
         {
             ChampionConfig.Health.Value -= physicDamageReceive;
             ChampionConfig.Health.Value -= magicDamageReceive;
-        }
-
-        void IReceiveDamageable.TakeDamage(IDamageMessage message)
-        {
-            throw new NotImplementedException();
         }
     }
 }
