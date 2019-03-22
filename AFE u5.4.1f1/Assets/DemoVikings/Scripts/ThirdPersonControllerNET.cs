@@ -110,11 +110,11 @@ public class ThirdPersonControllerNET : MonoBehaviourPunCallbacks, ICharacterTra
         // resigter Event from ui controller
         if (GetComponent<PhotonView>().IsMine)
         {
-            GameManagerArVik.Singleton.attack += Singleton_Attack;
-            GameManagerArVik.Singleton.skill1 += Singleton_skill1;
-            GameManagerArVik.Singleton.skill2 += Singleton_skill2;
-            GameManagerArVik.Singleton.skill3 += Singleton_skill3;
-            GameManagerArVik.Singleton.skill4 += Singleton_skill4;
+            //GameManagerArVik.Singleton.attack += Singleton_Attack;
+            //GameManagerArVik.Singleton.skill1 += Singleton_skill1;
+            //GameManagerArVik.Singleton.skill2 += Singleton_skill2;
+            //GameManagerArVik.Singleton.skill3 += Singleton_skill3;
+            //GameManagerArVik.Singleton.skill4 += Singleton_skill4;
         }
 
         #region initialize player state
