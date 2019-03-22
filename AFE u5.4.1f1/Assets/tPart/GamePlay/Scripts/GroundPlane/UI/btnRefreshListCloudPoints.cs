@@ -44,8 +44,7 @@ public class btnRefreshListCloudPoints : MonoBehaviour
         currentContent.name = "Content";
         currentContent.gameObject.SetActive(true);
         scrollView.content = currentContent.GetComponent<RectTransform>();        
-
-        Vector3[] points = new Vector3[map.Length];
+                
         for (int i = 0; i < map.Length; i++)
         {
             btnCloudPointSnapGround cp = Instantiate(btnCloudPointPrefab, Vector3.zero, Quaternion.identity, currentContent).GetComponent<btnCloudPointSnapGround>();
