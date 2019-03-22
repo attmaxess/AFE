@@ -47,12 +47,12 @@ public class btnGroundToLowestCenter : MonoBehaviour
         if (points.Length == 0) return;
                 
         Vector2 centerXZ = Vector2.zero;
-        float lowestY = -Mathf.Infinity;
+        float lowestY = Mathf.Infinity;
 
         for (int i = 0; i < points.Length; i++)
         {
             centerXZ += new Vector2(points[i].x, points[i].z);
-            if (lowestY < points[i].y) lowestY = points[i].y;
+            if (lowestY > points[i].y) lowestY = points[i].y;
         }
         centerXZ /= points.Length;
 
