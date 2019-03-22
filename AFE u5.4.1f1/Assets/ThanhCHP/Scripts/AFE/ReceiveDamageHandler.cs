@@ -1,6 +1,7 @@
 using System;
 using Photon.Pun;
 using UniRx;
+using UnityEngine;
 
 namespace Com.Beetsoft.AFE
 {
@@ -13,6 +14,8 @@ namespace Com.Beetsoft.AFE
         private Subject<IDamageMessage> DamageMessageSubject { get; } = new Subject<IDamageMessage>();
 
         private IChampionConfig ChampionConfig { get; set; }
+
+        Transform IReceiveDamageable.GetTransform => transform;
 
         public void TakeDamage(IDamageMessage message)
         {
@@ -31,8 +34,8 @@ namespace Com.Beetsoft.AFE
 
         private void Start()
         {
-            if(!photonView.IsMine) return;
-            
+            if (!photonView.IsMine) return;
+
             this.OnTakeDamageAsObservable()
                 .Subscribe(HandleWhenReceiveDamage);
         }
@@ -56,6 +59,11 @@ namespace Com.Beetsoft.AFE
                 var health = (float)stream.ReceiveNext();
                 ChampionConfig.Health.Value = health;
             }
+        }
+
+        void IReceiveDamageable.TakeDamage(IDamageMessage message)
+        {
+            throw new NotImplementedException();
         }
     }
 }

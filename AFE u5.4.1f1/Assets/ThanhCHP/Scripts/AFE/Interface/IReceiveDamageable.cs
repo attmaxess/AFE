@@ -1,10 +1,13 @@
 using System;
+using System.Collections.Generic;
+using UnityEngine;
 
 namespace Com.Beetsoft.AFE
 {
     public interface IReceiveDamageable
     {
         void TakeDamage(IDamageMessage message);
+        Transform GetTransform { get; }
     }
 
     public interface IReceiveDamageObserver
