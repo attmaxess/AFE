@@ -12,7 +12,7 @@ public class btnGroundToLowestCenter : MonoBehaviour
     public FeaturesVisualizer fv = null;
 
     [Header("Output")]
-    public Vector3 CurrentLowestPos = Vector3.zero;
+    public Vector3 CurrentLowestPos = Vector3.zero;    
 
     PhotonGroundPlane _currentPhotonGroundPlane = null;
     PhotonGroundPlane currentPhotonGroundPlane
@@ -67,7 +67,30 @@ public class btnGroundToLowestCenter : MonoBehaviour
 
         if (fv == null) return;
 
-        if (fv.delAfter_SnapGroud == null) fv.delAfter_SnapGroud += SnapToLowestCenter;
-        else fv.delAfter_SnapGroud = null;
+        if (fv.delAfter_SnapGroud == null)
+        {
+            if (isDebug) Debug.Log("fv.delAfter_SnapGroud == null");
+            fv.delAfter_SnapGroud += SnapToLowestCenter;
+        }
+        else
+        {
+            if (isDebug) Debug.Log("fv.delAfter_SnapGroud != null");
+            fv.delAfter_SnapGroud = null;
+            CurrentLowestPos = Vector3.zero;
+        }
+
+        Invoke("DebugCurrentLowestPos", 1f);
+    }
+
+    [ContextMenu("DebugCurrentLowestPos")]
+    public void DebugCurrentLowestPos()
+    {
+        Debug.Log("CurrentLowestPos : " + CurrentLowestPos);
+    }
+
+    [ContextMenu("DebugCurrentPhotonPos")]
+    public void DebugCurrentPhotonPos()
+    {
+        Debug.Log("DebugCurrentPhotonPos : " + currentPhotonGroundPlane.transform.position);
     }
 }

@@ -112,6 +112,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 4296608085047550}
   - {fileID: 4172009952173538}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -250,7 +251,7 @@ MonoBehaviour:
   - {fileID: 114592694680206450}
   - {fileID: 114337587402887338}
   viewIdField: 0
-  InstantiationId: 6
+  InstantiationId: 5
   isRuntimeInstantiated: 0
   isMine: 0
 --- !u!1002 &11400009
@@ -279,6 +280,23 @@ Prefab:
 --- !u!1002 &100100001
 EditorExtensionImpl:
   serializedVersion: 6
+--- !u!1 &1185018911220116
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4296608085047550}
+  - component: {fileID: 33052360160159296}
+  - component: {fileID: 64432080945408726}
+  m_Layer: 0
+  m_Name: Collider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1567493718551620
 GameObject:
   m_ObjectHideFlags: 0
@@ -288,10 +306,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4172009952173538}
   - component: {fileID: 33664421098852346}
-  - component: {fileID: 64432080945408726}
   - component: {fileID: 23240263070907182}
   m_Layer: 0
-  m_Name: PhotonGroundPlane
+  m_Name: Renderer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -303,6 +320,19 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1567493718551620}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 400006}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4296608085047550
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1185018911220116}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 100, y: 100, z: 100}
@@ -345,6 +375,13 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!33 &33052360160159296
+MeshFilter:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1185018911220116}
+  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!33 &33664421098852346
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -357,7 +394,7 @@ MeshCollider:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1567493718551620}
+  m_GameObject: {fileID: 1185018911220116}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
@@ -391,3 +428,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fe3f4e575567f64bb0a759a5cf9e097, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mc: {fileID: 64432080945408726}
+  mr: {fileID: 23240263070907182}

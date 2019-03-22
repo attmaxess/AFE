@@ -29,8 +29,6 @@ public class ShapeList
     public ShapeInfo[] shapes;
 }
 
-
-
  // Main Class for Managing Markers
 
 public class ShapeManager : MonoBehaviour {
@@ -140,25 +138,25 @@ public class ShapeManager : MonoBehaviour {
 
     public void AddShape(Vector3 shapePosition, Quaternion shapeRotation)
     {
-        System.Random rnd = new System.Random();
-        PrimitiveType type = (PrimitiveType)rnd.Next(0, 4);
+        //System.Random rnd = new System.Random();
+        //PrimitiveType type = (PrimitiveType)rnd.Next(0, 4);
 
-        int colorType =  rnd.Next(0, 3);
+        //int colorType =  rnd.Next(0, 3);
 
-        ShapeInfo shapeInfo = new ShapeInfo();
-        shapeInfo.px = shapePosition.x;
-        shapeInfo.py = shapePosition.y;
-        shapeInfo.pz = shapePosition.z;
-        shapeInfo.qx = shapeRotation.x;
-        shapeInfo.qy = shapeRotation.y;
-        shapeInfo.qz = shapeRotation.z;
-        shapeInfo.qw = shapeRotation.w;
-        shapeInfo.shapeType = type.GetHashCode();
-        shapeInfo.colorType = colorType;
-        shapeInfoList.Add(shapeInfo);
+        //ShapeInfo shapeInfo = new ShapeInfo();
+        //shapeInfo.px = shapePosition.x;
+        //shapeInfo.py = shapePosition.y;
+        //shapeInfo.pz = shapePosition.z;
+        //shapeInfo.qx = shapeRotation.x;
+        //shapeInfo.qy = shapeRotation.y;
+        //shapeInfo.qz = shapeRotation.z;
+        //shapeInfo.qw = shapeRotation.w;
+        //shapeInfo.shapeType = type.GetHashCode();
+        //shapeInfo.colorType = colorType;
+        //shapeInfoList.Add(shapeInfo);
 
-        GameObject shape = ShapeFromInfo(shapeInfo);
-        shapeObjList.Add(shape);
+        //GameObject shape = ShapeFromInfo(shapeInfo);
+        //shapeObjList.Add(shape);
     }
 
 
