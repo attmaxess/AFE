@@ -11,6 +11,9 @@ public class btnGroundToLowestCenter : MonoBehaviour
     [Header("Input")]
     public FeaturesVisualizer fv = null;
 
+    [Header("Output")]
+    public Vector3 CurrentLowestPos = Vector3.zero;
+
     PhotonGroundPlane _currentPhotonGroundPlane = null;
     PhotonGroundPlane currentPhotonGroundPlane
     {
@@ -36,33 +39,35 @@ public class btnGroundToLowestCenter : MonoBehaviour
         }
         if (isDebug) Debug.Log("Can't find PhotonGroundPlane!!");
     }
-
-    [ContextMenu("SnapToLowestCenter")]
-    public void SnapToLowestCenter()
-    {
-        if (isDebug) Debug.Log("SnapToLowestCenter");
-
-        if (LibPlacenote.Instance.GetStatus() != LibPlacenote.MappingStatus.RUNNING)
-        {
-            return;
-        }
         
+    public void SnapToLowestCenter(Transform fv, Vector3[] points)
+    {
         Mesh m = Application.isPlaying ? fv.GetComponent<MeshFilter>().mesh : fv.GetComponent<MeshFilter>().sharedMesh;
-
-        Vector3[] vert = m.vertices;
-        if (vert.Length == 0) return;
+                
+        if (points.Length == 0) return;
                 
         Vector2 centerXZ = Vector2.zero;
         float lowestY = -Mathf.Infinity;
 
-        for (int i = 0; i < vert.Length; i++)
+        for (int i = 0; i < points.Length; i++)
         {
-            centerXZ += new Vector2(vert[i].x, vert[i].z);
-            if (lowestY < vert[i].y) lowestY = vert[i].y;
+            centerXZ += new Vector2(points[i].x, points[i].z);
+            if (lowestY < points[i].y) lowestY = points[i].y;
         }
-        centerXZ /= vert.Length;
+        centerXZ /= points.Length;
 
-        currentPhotonGroundPlane.transform.position = fv.transform.TransformPoint(new Vector3(centerXZ.x, lowestY, centerXZ.y));
-        if (isDebug) Debug.Log("Lowest center " + currentPhotonGroundPlane.transform.position);
+        currentPhotonGroundPlane.transform.position = fv.TransformPoint(new Vector3(centerXZ.x, lowestY, centerXZ.y));
+        CurrentLowestPos = currentPhotonGroundPlane.transform.position;
+    }
+
+    [ContextMenu("OnClick")]
+    public void OnClick()
+    {
+        if (isDebug) Debug.Log("btnGroundToLowestCenter SnapToLowestCenter");
+
+        if (fv == null) return;
+
+        if (fv.delAfter_SnapGroud == null) fv.delAfter_SnapGroud += SnapToLowestCenter;
+        else fv.delAfter_SnapGroud = null;
     }
 }

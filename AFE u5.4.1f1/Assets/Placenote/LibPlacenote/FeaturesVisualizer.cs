@@ -79,8 +79,11 @@ public class FeaturesVisualizer : MonoBehaviour, PlacenoteListener
         }
     }
 
+    public delegate void delAfterDrawMap_SnapGroundToLowestCenter(Transform fv, Vector3[] points);
+    public delAfterDrawMap_SnapGroundToLowestCenter delAfter_SnapGroud = null;
+
     public void DrawMap()
-    {
+    {        
         if (LibPlacenote.Instance.GetStatus() != LibPlacenote.MappingStatus.RUNNING)
         {
             return;
@@ -139,7 +142,9 @@ public class FeaturesVisualizer : MonoBehaviour, PlacenoteListener
         {
             mr = mMap.AddComponent<MeshRenderer>();
         }
-        mr.material = mPtCloudMat;        
+        mr.material = mPtCloudMat;
+
+        if (delAfter_SnapGroud != null) delAfter_SnapGroud.Invoke(this.transform, points);
     }
 
 #if UNITY_EDITOR
