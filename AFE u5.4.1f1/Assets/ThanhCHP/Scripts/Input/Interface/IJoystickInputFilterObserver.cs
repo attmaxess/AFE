@@ -24,8 +24,7 @@ namespace Com.Beetsoft.AFE
         public static IObservable<ISkillMessage> RequestApplySkill<T1, T2>(this IObservable<ISkillMessage> request,
             [NotNull] IObservable<T1> applyAfter, [NotNull] IObservable<T2> requestCancer)
         {
-            return request.SelectMany(message => applyAfter.Select(_ => message))
-                .TakeUntil(requestCancer);
+            return request.SelectMany(message => applyAfter.Select(_ => message).TakeUntil(requestCancer));
         }
     }
 }

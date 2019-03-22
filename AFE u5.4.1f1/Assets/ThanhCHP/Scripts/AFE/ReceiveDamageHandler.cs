@@ -33,13 +33,13 @@ namespace Com.Beetsoft.AFE
 
         private void Start()
         {
-            this.ChampionConfig.Health
-                .Subscribe(x => Debug.Log(x));
-            
-            if (!photonView.IsMine) return;
-
             this.OnTakeDamageAsObservable()
                 .Subscribe(HandleWhenReceiveDamage);
+            
+            if (!photonView.IsMine) return;
+            
+            this.ChampionConfig.Health
+                .Subscribe(x => Debug.Log(x));
         }
 
         private void HandleWhenReceiveDamage(IDamageMessage damageMessage)
