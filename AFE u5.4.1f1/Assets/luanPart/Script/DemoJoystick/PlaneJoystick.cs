@@ -60,33 +60,12 @@ public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
 
         }
 
-        GameManagerArVik.Singleton.attack += Singleton_Attack;
-        GameManagerArVik.Singleton.skill1 += Singleton_skill1;
-        GameManagerArVik.Singleton.skill2 += Singleton_skill2;
-        GameManagerArVik.Singleton.skill3 += Singleton_skill3;
-        GameManagerArVik.Singleton.skill4 += Singleton_skill4;
+        //GameManagerArVik.Singleton.attack += Singleton_Attack;
+        //GameManagerArVik.Singleton.skill1 += Singleton_skill1;
+        //GameManagerArVik.Singleton.skill2 += Singleton_skill2;
+        //GameManagerArVik.Singleton.skill3 += Singleton_skill3;
+        //GameManagerArVik.Singleton.skill4 += Singleton_skill4;
 
-        CF2Input.GetButton("Attack");
-    }
-
-    private void Singleton_skill4()
-    {
-        joystickCharacter.Spell4(new SkillMessage());
-    }
-
-    private void Singleton_skill3()
-    {
-        joystickCharacter.Spell3(new SkillMessage());
-    }
-
-    private void Singleton_skill2()
-    {
-        joystickCharacter.Spell2(new SkillMessage());
-    }
-
-    private void Singleton_skill1()
-    {
-        joystickCharacter.Spell1(new SkillMessage());
     }
 
     private void Singleton_Attack()
@@ -100,6 +79,17 @@ public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
     void Update()
     {
         if (!useUpdate) return;
+
+        if (CF2Input.GetButtonDown("Pause"))
+        {
+            Debug.Log("Pause");
+        }
+        if (CF2Input.GetButtonDown("Attack"))
+        {
+            Debug.Log("Attack");
+            Singleton_Attack();
+        }
+
 
         var h = CF2Input.GetAxis("Horizontal");
         var v = CF2Input.GetAxis("Vertical");
