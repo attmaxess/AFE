@@ -4,7 +4,8 @@ namespace Com.Beetsoft.AFE
     {
         protected override void ApplyDamage(ISkillMessage message)
         {
-            message.ObjectReceive.TakeDamage(this.CreateDamageMessage(message));
+            var newMessage = new SkillMessage(message.ObjectReceive, GetPhysicDamageBonus(), GetMagicDamageBonus(), message.Direction);
+            message.ObjectReceive.TakeDamage(this.CreateDamageMessage(newMessage));
         }
     }
 }

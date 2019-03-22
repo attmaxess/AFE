@@ -5,7 +5,6 @@ using UniRx;
 namespace Com.Beetsoft.AFE
 {
     public class ReceiveDamageHandler : MonoBehaviourPun,
-        IPunObservable,
         IReceiveDamageable,
         IReceiveDamageObserver,
         IInitialize<IChampionConfig>
@@ -41,21 +40,15 @@ namespace Com.Beetsoft.AFE
         {
             var physicDamageReceive = this.GetDamageReceive(damageMessage.PhysicDamage, ChampionConfig.Armor.Value);
             var magicDamageReceive = this.GetDamageReceive(damageMessage.MagicDamage, ChampionConfig.MagicResist.Value);
-            ChampionConfig.Health.Value -= physicDamageReceive;
-            ChampionConfig.Health.Value -= magicDamageReceive;
+            
+            photonView.RPC("HandleHealth", RpcTarget.All, physicDamageReceive, magicDamageReceive);
         }
 
-        public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+        [PunRPC]
+        private void HandleHealth(float physicDamageReceive, float magicDamageReceive)
         {
-            if (stream.IsWriting)
-            {
-                stream.SendNext(ChampionConfig.Health.Value);
-            }
-            else if (stream.IsReading)
-            {
-                var health = (float)stream.ReceiveNext();
-                ChampionConfig.Health.Value = health;
-            }
+            ChampionConfig.Health.Value -= physicDamageReceive;
+            ChampionConfig.Health.Value -= magicDamageReceive;
         }
     }
 }

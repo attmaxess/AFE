@@ -43,4 +43,6 @@ MonoBehaviour:
   critical:
     value: 0
   moveSpeed:
-    value: 345
+    value: 3.45
+  cooldownSkillBonus:
+    value: 0
