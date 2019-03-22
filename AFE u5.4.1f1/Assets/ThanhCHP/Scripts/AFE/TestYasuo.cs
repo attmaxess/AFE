@@ -36,3 +36,4 @@ namespace Com.Beetsoft.AFE
         }
     }
 }
+
