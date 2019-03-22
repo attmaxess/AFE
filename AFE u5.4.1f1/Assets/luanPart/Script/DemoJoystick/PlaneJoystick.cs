@@ -18,7 +18,6 @@ public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
     public float speed = 1;
     public Transform directionPlayer;
     public Transform directionSkill;
-    public ICharacterTranform rotateChar;
     public IJoystickInputFilter joystickCharacter;
 
     public Vector3 directionRotate
@@ -194,11 +193,17 @@ public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
         previousV1_Skill = v1;
         previousH1_Skill = h1;
     }
+
+    public Transform GetTransform()
+    {
+        return transform;
+    }
 }
 
 public interface IPlaneJoystickTranform
 {
     Vector3 directionRotate { get; }
+    Transform GetTransform();
 }
 
 public interface ICharacterTranform
