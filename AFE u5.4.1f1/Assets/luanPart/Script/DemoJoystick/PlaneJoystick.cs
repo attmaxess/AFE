@@ -140,23 +140,23 @@ public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
         Vector3 dirSkill = (transform.right * previousH1_Skill + transform.forward * previousV1_Skill);
 
 
-        if (CF2Input.GetButtonUp("Skill1"))
+        if (CF2Input.GetButtonUp("Skill1") && joystickCharacter != null)
         {
             joystickCharacter.Spell1(new SkillMessage(dirSkill));
         }
 
-        if (CF2Input.GetButtonUp("Skill2"))
+        if (CF2Input.GetButtonUp("Skill2") && joystickCharacter != null)
         {
             joystickCharacter.Spell2(new SkillMessage(dirSkill));
         }
 
 
-        if (CF2Input.GetButtonUp("Skill3"))
+        if (CF2Input.GetButtonUp("Skill3") && joystickCharacter != null)
         {
             joystickCharacter.Spell3(new SkillMessage(dirSkill));
         }
 
-        if (CF2Input.GetButtonUp("Skill4"))
+        if (CF2Input.GetButtonUp("Skill4") && joystickCharacter != null)
         {
             joystickCharacter.Spell4(new SkillMessage(dirSkill));
         }
