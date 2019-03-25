@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "@umm/extra_linq": "umm/extra_linq",
-    "@umm/unirx_observablekeyevent": "umm/unirx_observablekeyevent"
+    "@umm/unirx_observablekeyevent": "umm/unirx_observablekeyevent",
+    "@umm/unirx_observabletween": "umm/unirx_observabletween"
   }
 }

@@ -41,5 +41,6 @@ MonoBehaviour:
   - RpcSkill_4
   - RpcSpawnObject
   - SendChatMessage
+  - HandleHealth
   DisableAutoOpenWizard: 1
   ShowSettings: 1

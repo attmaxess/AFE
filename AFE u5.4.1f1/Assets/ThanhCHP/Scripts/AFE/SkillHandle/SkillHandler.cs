@@ -32,5 +32,25 @@ namespace Com.Beetsoft.AFE
         {
             ChampionConfig = init;
         }
+
+        protected float GetPhysicDamageCurrent()
+        {
+            return SkillConfig.PhysicDamage.Value + GetPhysicDamageBonus();
+        }
+
+        protected float GetPhysicDamageBonus()
+        {
+            return ChampionConfig.AttackDamage.Value * SkillConfig.PhysicDamageBonus;
+        }
+
+        protected float GetMagicDamageCurrent()
+        {
+            return SkillConfig.MagicDamage.Value + GetMagicDamageBonus();
+        }
+
+        protected float GetMagicDamageBonus()
+        {
+            return ChampionConfig.AbilityPower.Value * SkillConfig.MagicDamageBonus;
+        }
     }
 }

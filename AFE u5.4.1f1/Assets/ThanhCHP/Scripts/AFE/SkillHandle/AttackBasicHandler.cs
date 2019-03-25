@@ -14,7 +14,6 @@ namespace Com.Beetsoft.AFE
 
             JoystickInputFilterObserver.OnBasicAttackAsObservable()
                 .RequestApplySkill(applySkillTimer, AnimationStateChecker.IsBasicAttack.Where(x => !x))
-                .RepeatUntilDestroy(this)
                 .Subscribe(ApplyDamage);
         }
 

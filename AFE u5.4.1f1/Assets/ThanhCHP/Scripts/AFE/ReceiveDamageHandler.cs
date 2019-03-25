@@ -6,7 +6,6 @@ using UnityEngine;
 namespace Com.Beetsoft.AFE
 {
     public class ReceiveDamageHandler : MonoBehaviourPun,
-        IPunObservable,
         IReceiveDamageable,
         IReceiveDamageObserver,
         IInitialize<IChampionConfig>
@@ -17,7 +16,7 @@ namespace Com.Beetsoft.AFE
 
         Transform IReceiveDamageable.GetTransform => transform;
 
-        public void TakeDamage(IDamageMessage message)
+        void IReceiveDamageable.TakeDamage(IDamageMessage message)
         {
             DamageMessageSubject.OnNext(message);
         }
@@ -34,36 +33,28 @@ namespace Com.Beetsoft.AFE
 
         private void Start()
         {
-            if (!photonView.IsMine) return;
-
             this.OnTakeDamageAsObservable()
                 .Subscribe(HandleWhenReceiveDamage);
+            
+            if (!photonView.IsMine) return;
+            
+            this.ChampionConfig.Health
+                .Subscribe(x => Debug.Log(x));
         }
 
         private void HandleWhenReceiveDamage(IDamageMessage damageMessage)
         {
             var physicDamageReceive = this.GetDamageReceive(damageMessage.PhysicDamage, ChampionConfig.Armor.Value);
             var magicDamageReceive = this.GetDamageReceive(damageMessage.MagicDamage, ChampionConfig.MagicResist.Value);
+            
+            photonView.RPC("HandleHealth", RpcTarget.All, physicDamageReceive, magicDamageReceive);
+        }
+
+        [PunRPC]
+        private void HandleHealth(float physicDamageReceive, float magicDamageReceive)
+        {
             ChampionConfig.Health.Value -= physicDamageReceive;
             ChampionConfig.Health.Value -= magicDamageReceive;
-        }
-
-        public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-        {
-            if (stream.IsWriting)
-            {
-                stream.SendNext(ChampionConfig.Health.Value);
-            }
-            else if (stream.IsReading)
-            {
-                var health = (float)stream.ReceiveNext();
-                ChampionConfig.Health.Value = health;
-            }
-        }
-
-        void IReceiveDamageable.TakeDamage(IDamageMessage message)
-        {
-            throw new NotImplementedException();
         }
     }
 }
