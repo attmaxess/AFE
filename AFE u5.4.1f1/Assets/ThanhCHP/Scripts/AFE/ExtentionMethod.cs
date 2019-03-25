@@ -31,7 +31,6 @@ namespace Com.Beetsoft.AFE
             return receiveDamageable;
         }
 
-
         public static IReceiveDamageable ReceiverDamageNearest(this GameObject go, IChampionConfig championConfig, out Transform nearestGameObject)
         {
             IReceiveDamageable receiveDamageable = null;
@@ -51,6 +50,38 @@ namespace Com.Beetsoft.AFE
             nearestGameObject = collider.transform;
             return receiveDamageable;
         }
+
+        public static IReceiveDamageable ReceiverDamageNearestByRayCast(this GameObject go, IChampionConfig championConfig, Vector3 direction)
+        {
+            IReceiveDamageable receiveDamageable = null;
+            RaycastHit hit;
+            Debug.DrawRay(go.transform.position, direction * championConfig.Range.Value, Color.red, 1);
+            if (Physics.Raycast(go.transform.position, direction, out hit, championConfig.Range.Value))
+            {
+                receiveDamageable = hit.transform.GetComponent<IReceiveDamageable>();
+            }
+            return receiveDamageable;
+        }
+
+        public static IReceiveDamageable ReceiverDamageNearestByRayCastAll(this GameObject go, IChampionConfig championConfig, Vector3 direction)
+        {
+            IReceiveDamageable receiveDamageable = null;
+            Debug.DrawRay(go.transform.position, direction * championConfig.Range.Value, Color.blue, 0.5f);
+            var _all = Physics.RaycastAll(go.transform.position, direction, championConfig.Range.Value);
+            float _dis = -1;
+            for (int i = 0; i < _all.Length; i++)
+            {
+                var _receiver = _all[i].transform.GetComponent<IReceiveDamageable>();
+                if (_receiver != null && Vector3.Distance(_receiver.GetTransform.position, go.transform.position) > _dis)
+                {
+                    receiveDamageable = _receiver;
+                    _dis = Vector3.Distance(_receiver.GetTransform.position, go.transform.position);
+                }
+            }
+
+            return receiveDamageable;
+        }
+
     }
 }
 
