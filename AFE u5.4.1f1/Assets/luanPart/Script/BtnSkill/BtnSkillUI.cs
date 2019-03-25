@@ -5,6 +5,8 @@ using ControlFreak2;
 using UniRx;
 using UniRx.Triggers;
 using TMPro;
+using UnityEngine.UI;
+using Com.Beetsoft.AFE;
 
 public struct MessagePlayerData
 {
@@ -18,18 +20,24 @@ public struct MessagePlayerData
     }
 }
 
-public class BtnSkillUI : MonoBehaviour
+public class BtnSkillUI : MonoBehaviour, IInitialize<ISkillData>
 {
     public Dictionary<BtnState, BtnSkillBase> btnSkillBase = new Dictionary<BtnState, BtnSkillBase>();
     BtnSkillBase curState;
-
+    public BtnState btnState;
     public bool canUseSkill;
     public bool isCountTime;
     public TextMeshProUGUI number;
+    public TouchJoystickSpriteAnimator touchJoystickSprite;
+    private ISkillData skillData;
+
+    [HideInInspector]
+    public float countTime;
 
     private void Start()
     {
-
+        canUseSkill = true;
+        isCountTime = false;
         //var a = MessageBroker.Default.Receive<MessagePlayerData>().Subscribe(_ => { });
         //MessageBroker.Default.Publish<MessagePlayerData>(new MessagePlayerData(10, 100));
         var btns = GetComponents<BtnSkillBase>();
@@ -42,24 +50,52 @@ public class BtnSkillUI : MonoBehaviour
         {
             if (item.Key == BtnState.Enable)
             {
+                btnState = BtnState.Enable;
                 curState = item.Value;
                 curState.StartState();
             }
         }
+
+        skillData.CountTime.Where(_count => _count > 0).Subscribe(_ =>
+        {
+            countTime = _;
+        });
+        skillData.Disable.Subscribe(_ =>
+        {
+            canUseSkill = !_;
+        });
+        skillData.SpriteCurrent.Subscribe(_ =>
+        {
+            touchJoystickSprite.SetSprite(_);
+        });
+
     }
 
     private void Update()
     {
-        SwitchState(curState.Update());
+        SwitchState(curState.UpdateState());
     }
 
     void SwitchState(BtnState nextState)
     {
         if (nextState != BtnState.None && nextState != curState.state)
         {
+            btnState = nextState;
             curState.StopState();
             curState = btnSkillBase[nextState];
             curState.StartState();
         }
+    }
+
+    public void ReceiveMessage(Sprite sprite, float countTime, bool canUseSkill)
+    {
+        this.countTime = countTime > 0 ? countTime : 0;
+        this.canUseSkill = canUseSkill;
+        touchJoystickSprite.SetSprite(sprite);
+    }
+
+    public void Initialize(ISkillData init)
+    {
+        skillData = init;
     }
 }

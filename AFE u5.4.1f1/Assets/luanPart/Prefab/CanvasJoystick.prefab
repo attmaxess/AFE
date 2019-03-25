@@ -811,6 +811,8 @@ MonoBehaviour:
   canUseSkill: 0
   isCountTime: 0
   number: {fileID: 114047739042535820}
+  touchJoystickSprite: {fileID: 114865732417697230}
+  countTime: 0
 --- !u!114 &114047739042535820
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4154,6 +4156,8 @@ MonoBehaviour:
   canUseSkill: 0
   isCountTime: 0
   number: {fileID: 114498981489415002}
+  touchJoystickSprite: {fileID: 114348490424636130}
+  countTime: 0
 --- !u!114 &114283324747315286
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6053,13 +6057,13 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 21300000, guid: b2b8f148ac872b44da92bbc5ac63b2d9, type: 3}
-  m_Type: 0
+  m_Type: 3
   m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
   m_FillClockwise: 1
-  m_FillOrigin: 0
+  m_FillOrigin: 2
 --- !u!114 &114599385984749702
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6754,6 +6758,8 @@ MonoBehaviour:
   canUseSkill: 0
   isCountTime: 0
   number: {fileID: 114888907272546138}
+  touchJoystickSprite: {fileID: 114029802699864500}
+  countTime: 0
 --- !u!114 &114806030721578114
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7417,6 +7423,8 @@ MonoBehaviour:
   canUseSkill: 0
   isCountTime: 0
   number: {fileID: 114168482991537502}
+  touchJoystickSprite: {fileID: 114352840625542598}
+  countTime: 0
 --- !u!114 &114992466841467558
 MonoBehaviour:
   m_ObjectHideFlags: 1
