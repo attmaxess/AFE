@@ -24,7 +24,7 @@ MonoBehaviour:
     value: 0
   manaRegenPerLevel: 0
   range:
-    value: 175
+    value: 1.75
   rangePerLevel: 0
   attackDamage:
     value: 60

@@ -9,19 +9,19 @@ namespace Com.Beetsoft.AFE
     {
         IObservable<IRunMessage> OnRunAsObservable();
         IObservable<IRunMessage> OnIdleAsObservable();
-        IObservable<ISkillMessage> OnBasicAttackAsObservable();
-        IObservable<ISkillMessage> OnSpell1AsObservable();
-        IObservable<ISkillMessage> OnSpell2AsObservable();
-        IObservable<ISkillMessage> OnSpell3AsObservable();
-        IObservable<ISkillMessage> OnSpell4AsObservable();
-        IObservable<ISkillMessage> OnRecallAsObservable();
-        IObservable<ISkillMessage> OnDefaultSpellAAsObservable();
-        IObservable<ISkillMessage> OnDefaultSpellBAsObservable();
+        IObservable<IInputMessage> OnBasicAttackAsObservable();
+        IObservable<IInputMessage> OnSpell1AsObservable();
+        IObservable<IInputMessage> OnSpell2AsObservable();
+        IObservable<IInputMessage> OnSpell3AsObservable();
+        IObservable<IInputMessage> OnSpell4AsObservable();
+        IObservable<IInputMessage> OnRecallAsObservable();
+        IObservable<IInputMessage> OnDefaultSpellAAsObservable();
+        IObservable<IInputMessage> OnDefaultSpellBAsObservable();
     }
 
     public static class JoystickInputFilterObserverExtension
     {
-        public static IObservable<ISkillMessage> RequestApplySkill<T1, T2>(this IObservable<ISkillMessage> request,
+        public static IObservable<IInputMessage> RequestApplySkill<T1, T2>(this IObservable<IInputMessage> request,
             [NotNull] IObservable<T1> applyAfter, [NotNull] IObservable<T2> requestCancer)
         {
             return request.SelectMany(message => applyAfter.Select(_ => message).TakeUntil(requestCancer));

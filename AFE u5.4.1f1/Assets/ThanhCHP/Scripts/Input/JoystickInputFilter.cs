@@ -12,14 +12,14 @@ namespace Com.Beetsoft.AFE
     {
         private Subject<IRunMessage> RunSubject { get; } = new Subject<IRunMessage>();
         private Subject<IRunMessage> IdleSubject { get; } = new Subject<IRunMessage>();
-        private Subject<ISkillMessage> BasicAttackSubject { get; } = new Subject<ISkillMessage>();
-        private Subject<ISkillMessage> Spell1Subject { get; } = new Subject<ISkillMessage>();
-        private Subject<ISkillMessage> Spell2Subject { get; } = new Subject<ISkillMessage>();
-        private Subject<ISkillMessage> Spell3Subject { get; } = new Subject<ISkillMessage>();
-        private Subject<ISkillMessage> Spell4Subject { get; } = new Subject<ISkillMessage>();
-        private Subject<ISkillMessage> RecallSubject { get; } = new Subject<ISkillMessage>();
-        private Subject<ISkillMessage> DefaultSpellASubject { get; } = new Subject<ISkillMessage>();
-        private Subject<ISkillMessage> DefaultSpellBSubject { get; } = new Subject<ISkillMessage>();
+        private Subject<IInputMessage> BasicAttackSubject { get; } = new Subject<IInputMessage>();
+        private Subject<IInputMessage> Spell1Subject { get; } = new Subject<IInputMessage>();
+        private Subject<IInputMessage> Spell2Subject { get; } = new Subject<IInputMessage>();
+        private Subject<IInputMessage> Spell3Subject { get; } = new Subject<IInputMessage>();
+        private Subject<IInputMessage> Spell4Subject { get; } = new Subject<IInputMessage>();
+        private Subject<IInputMessage> RecallSubject { get; } = new Subject<IInputMessage>();
+        private Subject<IInputMessage> DefaultSpellASubject { get; } = new Subject<IInputMessage>();
+        private Subject<IInputMessage> DefaultSpellBSubject { get; } = new Subject<IInputMessage>();
 
         private IChampionConfig ChampionConfig { get; set; }
 
@@ -38,68 +38,68 @@ namespace Com.Beetsoft.AFE
             IdleSubject.OnNext(message);
         }
 
-        public void BasicAttack(ISkillMessage message)
+        public void BasicAttack(IInputMessage message)
         {
             var ireceiver = gameObject.ReceiverDamageNearest(ChampionConfig);
 
-            var mes = new SkillMessage(ireceiver,
+            var mes = new InputMessage(ireceiver,
                 ChampionConfig.AttackDamage.Value,
                 ChampionConfig.AttackDamagePerLevel,
                 message.Direction);
             BasicAttackSubject.OnNext(mes);
         }
 
-        public void Spell1(ISkillMessage message)
+        public void Spell1(IInputMessage message)
         {
             var ireceiver = gameObject.ReceiverDamageNearest(ChampionConfig);
-            var mes = new SkillMessage(ireceiver,
+            var mes = new InputMessage(ireceiver,
                 ChampionConfig.AttackDamage.Value,
                 ChampionConfig.AttackDamagePerLevel,
                 message.Direction);
             Spell1Subject.OnNext(mes);
         }
 
-        public void Spell2(ISkillMessage message)
+        public void Spell2(IInputMessage message)
         {
             var ireceiver = gameObject.ReceiverDamageNearest(ChampionConfig);
-            var mes = new SkillMessage(ireceiver,
+            var mes = new InputMessage(ireceiver,
                 ChampionConfig.AttackDamage.Value,
                 ChampionConfig.AttackDamagePerLevel,
                 message.Direction);
             Spell2Subject.OnNext(mes);
         }
 
-        public void Spell3(ISkillMessage message)
+        public void Spell3(IInputMessage message)
         {
             var ireceiver = gameObject.ReceiverDamageNearest(ChampionConfig);
-            var mes = new SkillMessage(ireceiver,
+            var mes = new InputMessage(ireceiver,
                 ChampionConfig.AttackDamage.Value,
                 ChampionConfig.AttackDamagePerLevel,
                 message.Direction);
             Spell3Subject.OnNext(mes);
         }
 
-        public void Spell4(ISkillMessage message)
+        public void Spell4(IInputMessage message)
         {
             var ireceiver = gameObject.ReceiverDamageNearest(ChampionConfig);
-            var mes = new SkillMessage(ireceiver,
+            var mes = new InputMessage(ireceiver,
                 ChampionConfig.AttackDamage.Value,
                 ChampionConfig.AttackDamagePerLevel,
                 message.Direction);
             Spell4Subject.OnNext(mes);
         }
 
-        public void Recall(ISkillMessage message)
+        public void Recall(IInputMessage message)
         {
             RecallSubject.OnNext(message);
         }
 
-        public void DefaultSpellA(ISkillMessage message)
+        public void DefaultSpellA(IInputMessage message)
         {
             DefaultSpellASubject.OnNext(message);
         }
 
-        public void DefaultSpellB(ISkillMessage message)
+        public void DefaultSpellB(IInputMessage message)
         {
             DefaultSpellBSubject.OnNext(message);
         }
@@ -114,42 +114,42 @@ namespace Com.Beetsoft.AFE
             return IdleSubject;
         }
 
-        public IObservable<ISkillMessage> OnBasicAttackAsObservable()
+        public IObservable<IInputMessage> OnBasicAttackAsObservable()
         {
             return BasicAttackSubject;
         }
 
-        public IObservable<ISkillMessage> OnSpell1AsObservable()
+        public IObservable<IInputMessage> OnSpell1AsObservable()
         {
             return Spell1Subject;
         }
 
-        public IObservable<ISkillMessage> OnSpell2AsObservable()
+        public IObservable<IInputMessage> OnSpell2AsObservable()
         {
             return Spell2Subject;
         }
 
-        public IObservable<ISkillMessage> OnSpell3AsObservable()
+        public IObservable<IInputMessage> OnSpell3AsObservable()
         {
             return Spell3Subject;
         }
 
-        public IObservable<ISkillMessage> OnSpell4AsObservable()
+        public IObservable<IInputMessage> OnSpell4AsObservable()
         {
             return Spell4Subject;
         }
 
-        public IObservable<ISkillMessage> OnRecallAsObservable()
+        public IObservable<IInputMessage> OnRecallAsObservable()
         {
             return RecallSubject;
         }
 
-        public IObservable<ISkillMessage> OnDefaultSpellAAsObservable()
+        public IObservable<IInputMessage> OnDefaultSpellAAsObservable()
         {
             return DefaultSpellASubject;
         }
 
-        public IObservable<ISkillMessage> OnDefaultSpellBAsObservable()
+        public IObservable<IInputMessage> OnDefaultSpellBAsObservable()
         {
             return DefaultSpellBSubject;
         }

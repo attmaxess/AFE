@@ -21,7 +21,7 @@ namespace Com.Beetsoft.AFE
             var monoPuns = GetComponents<MonoBehaviourPun>();
 
             var initChampionConfigList = monoPuns.OfType<IInitialize<IChampionConfig>>().ToList();
-            initChampionConfigList.ForEach(x => x.Initialize(ChampionModel));
+            initChampionConfigList.ForEach(x => x.Initialize(Instantiate(ChampionModel)));
 
             var initJoystick = monoPuns.OfType<IInitialize<IJoystickInputFilterObserver>>().ToList();
             initJoystick.ForEach(x => x.Initialize(JoystickInputFilter));
