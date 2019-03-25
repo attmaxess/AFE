@@ -5,7 +5,7 @@ using UnityEngine;
 using UniRx;
 using Photon.Pun;
 
-public class PlayerRunHandle : MonoBehaviourPun,
+public class PlayerRunHandler : MonoBehaviourPun,
     IInitialize<IChampionConfig>
 {
     private IJoystickInputFilterObserver joystickInputFilterObserver;
