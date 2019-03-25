@@ -49,7 +49,7 @@ public class btnRefreshListCloudPoints : MonoBehaviour
         {
             btnCloudPointSnapGround cp = Instantiate(btnCloudPointPrefab, Vector3.zero, Quaternion.identity, currentContent).GetComponent<btnCloudPointSnapGround>();
             cp.gameObject.SetActive(true);
-            cp.SetCurrentCordinate(new Vector3(map[i].point.x, map[i].point.y, map[i].point.z));
+            cp.SetCurrentCordinate(new Vector3(map[i].point.x, map[i].point.y, -map[i].point.z));
         }
     }
 
@@ -71,7 +71,7 @@ public class btnRefreshListCloudPoints : MonoBehaviour
         {
             btnCloudPointSnapGround cp = Instantiate(btnCloudPointPrefab, Vector3.zero, Quaternion.identity, currentContent).GetComponent<btnCloudPointSnapGround>();
             cp.gameObject.SetActive(true);
-            cp.SetCurrentCordinate(new Vector3(Random.Range(0, 100f), Random.Range(0, 100f), Random.Range(0, 100f)));
+            cp.SetCurrentCordinate(new Vector3(Random.Range(0, 100f), Random.Range(0, 100f), -Random.Range(0, 100f)));
         }
     }
 }

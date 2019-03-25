@@ -51,7 +51,7 @@ public class btnGroundToHighestCenter : MonoBehaviour
 
         for (int i = 0; i < points.Length; i++)
         {
-            centerXZ += new Vector2(points[i].x, points[i].z);
+            centerXZ += new Vector2(points[i].x, -points[i].z);
             if (HighestY < points[i].y) HighestY = points[i].y;
         }
         centerXZ /= points.Length;
