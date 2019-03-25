@@ -6,13 +6,13 @@ namespace Com.Beetsoft.AFE
     {
         void Run(IRunMessage message);
         void Idle(IRunMessage message);
-        void BasicAttack(ISkillMessage message);
-        void Spell1(ISkillMessage message);
-        void Spell2(ISkillMessage message);
-        void Spell3(ISkillMessage message);
-        void Spell4(ISkillMessage message);
-        void Recall(ISkillMessage message);
-        void DefaultSpellA(ISkillMessage message);
-        void DefaultSpellB(ISkillMessage message);
+        void BasicAttack(IInputMessage message);
+        void Spell1(IInputMessage message);
+        void Spell2(IInputMessage message);
+        void Spell3(IInputMessage message);
+        void Spell4(IInputMessage message);
+        void Recall(IInputMessage message);
+        void DefaultSpellA(IInputMessage message);
+        void DefaultSpellB(IInputMessage message);
     }
 }

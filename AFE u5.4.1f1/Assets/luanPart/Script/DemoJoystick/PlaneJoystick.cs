@@ -69,7 +69,7 @@ public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
 
     private void Singleton_Attack()
     {
-        joystickCharacter.BasicAttack(new SkillMessage());
+        joystickCharacter.BasicAttack(new InputMessage());
     }
 
 
@@ -131,23 +131,23 @@ public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
 
         if (CF2Input.GetButtonUp("Skill1") && joystickCharacter != null)
         {
-            joystickCharacter.Spell1(new SkillMessage(dirSkill));
+            joystickCharacter.Spell1(new InputMessage(dirSkill));
         }
 
         if (CF2Input.GetButtonUp("Skill2") && joystickCharacter != null)
         {
-            joystickCharacter.Spell2(new SkillMessage(dirSkill));
+            joystickCharacter.Spell2(new InputMessage(dirSkill));
         }
 
 
         if (CF2Input.GetButtonUp("Skill3") && joystickCharacter != null)
         {
-            joystickCharacter.Spell3(new SkillMessage(dirSkill));
+            joystickCharacter.Spell3(new InputMessage(dirSkill));
         }
 
         if (CF2Input.GetButtonUp("Skill4") && joystickCharacter != null)
         {
-            joystickCharacter.Spell4(new SkillMessage(dirSkill));
+            joystickCharacter.Spell4(new InputMessage(dirSkill));
         }
 
 
@@ -157,9 +157,9 @@ public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
 
         if (joystickCharacter != null)
         {
-            if (moveVector == Vector3.zero)
-                joystickCharacter.Idle(new RunMessage(transform.position, Vector3.zero));
-            else
+//            if (moveVector == Vector3.zero)
+//                joystickCharacter.Idle(new RunMessage(transform.position, Vector3.zero));
+//            else
                 joystickCharacter.Run(new RunMessage(transform.position, moveVector));
 
         }

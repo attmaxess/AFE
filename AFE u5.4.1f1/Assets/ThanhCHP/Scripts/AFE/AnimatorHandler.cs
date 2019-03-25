@@ -41,33 +41,33 @@ namespace Com.Beetsoft.AFE
         {
             if (!photonView.IsMine) return;
 
-            InputFilterObserver.OnRunAsObservable()
-                .Where(_ => !IsAnyStateCanNotExit && !IsRun.Value)
-                .Subscribe(_ => WillEnterStateRun());
-
-            InputFilterObserver.OnIdleAsObservable()
-                .Where(_ => !IsAnyStateCanNotExit && IsRun.Value)
-                .Subscribe(_ => WillEnterStateIdle());
-
-            InputFilterObserver.OnBasicAttackAsObservable()
-                .Where(_ => !IsAnyStateCanNotExit)
-                .Subscribe(_ => WillEnterStateAttack());
-
-            InputFilterObserver.OnSpell1AsObservable()
-                .Where(_ => !(IsInStateSpell3.Value || IsInStateSpell4.Value))
-                .Subscribe(_ => WillEnterStateSpell1());
-
-            InputFilterObserver.OnSpell2AsObservable()
-                .Where(_ => !IsAnyStateCanNotExit)
-                .Subscribe(_ => WillEnterStateSpell2());
-
-            InputFilterObserver.OnSpell3AsObservable()
-                .Where(_ => !IsInStateSpell4.Value)
-                .Subscribe(_ => WillEnterStateSpell3());
-
-            InputFilterObserver.OnSpell4AsObservable()
-                .Where(_ => !(IsInStateSpell3.Value))
-                .Subscribe(_ => WillEnterStateSpell4());
+//            InputFilterObserver.OnRunAsObservable()
+//                .Where(_ => !IsAnyStateCanNotExit && !IsRun.Value)
+//                .Subscribe(_ => WillEnterStateRun());
+//
+//            InputFilterObserver.OnIdleAsObservable()
+//                .Where(_ => !IsAnyStateCanNotExit && IsRun.Value)
+//                .Subscribe(_ => WillEnterStateIdle());
+//
+//            InputFilterObserver.OnBasicAttackAsObservable()
+//                .Where(_ => !IsAnyStateCanNotExit)
+//                .Subscribe(_ => WillEnterStateAttack());
+//
+//            InputFilterObserver.OnSpell1AsObservable()
+//                .Where(_ => !(IsInStateSpell3.Value || IsInStateSpell4.Value))
+//                .Subscribe(_ => WillEnterStateSpell1());
+//
+//            InputFilterObserver.OnSpell2AsObservable()
+//                .Where(_ => !IsAnyStateCanNotExit)
+//                .Subscribe(_ => WillEnterStateSpell2());
+//
+//            InputFilterObserver.OnSpell3AsObservable()
+//                .Where(_ => !IsInStateSpell4.Value)
+//                .Subscribe(_ => WillEnterStateSpell3());
+//
+//            InputFilterObserver.OnSpell4AsObservable()
+//                .Where(_ => !(IsInStateSpell3.Value))
+//                .Subscribe(_ => WillEnterStateSpell4());
 
             HandleIdleState();
             HandleSwitchToStateWeaponIn();
@@ -144,14 +144,14 @@ namespace Com.Beetsoft.AFE
         {
             var attackSmb = Animator.GetBehaviour<ObservableAttackSmb>();
 
-            attackSmb.OnStateMachineEnterAsObservable()
+            attackSmb.OnStateEnterAsObservable()
                 .Subscribe(_ =>
                 {
                     SwitchToStateWeaponOut();
                     IsBasicAttack.Value = true;
                 });
 
-            attackSmb.OnStateMachineExitAsObservable()
+            attackSmb.OnStateExitAsObservable()
                 .Subscribe(_ => IsBasicAttack.Value = false);
         }
 

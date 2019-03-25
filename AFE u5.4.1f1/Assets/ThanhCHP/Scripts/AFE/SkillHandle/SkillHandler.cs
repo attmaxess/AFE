@@ -1,3 +1,4 @@
+using System;
 using Photon.Pun;
 using UnityEngine;
 
@@ -18,10 +19,7 @@ namespace Com.Beetsoft.AFE
 
         protected ISkillConfig SkillConfig => skillConfig;
 
-        void IInitialize<IJoystickInputFilterObserver>.Initialize(IJoystickInputFilterObserver init)
-        {
-            JoystickInputFilterObserver = init;
-        }
+        protected Animator Animator { get; private set; }
 
         void IInitialize<IAnimationStateChecker>.Initialize(IAnimationStateChecker init)
         {
@@ -31,6 +29,11 @@ namespace Com.Beetsoft.AFE
         void IInitialize<IChampionConfig>.Initialize(IChampionConfig init)
         {
             ChampionConfig = init;
+        }
+
+        void IInitialize<IJoystickInputFilterObserver>.Initialize(IJoystickInputFilterObserver init)
+        {
+            JoystickInputFilterObserver = init;
         }
 
         protected float GetPhysicDamageCurrent()
@@ -51,6 +54,21 @@ namespace Com.Beetsoft.AFE
         protected float GetMagicDamageBonus()
         {
             return ChampionConfig.AbilityPower.Value * SkillConfig.MagicDamageBonus;
+        }
+
+        private void Awake()
+        {
+            Animator = GetComponent<Animator>();
+        }
+
+        public ISkillOutputMessage SkillMessageOutputCurrent()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IObservable<ISkillOutputMessage> OnReceiveSkillMessageOutputAsObservable()
+        {
+            throw new NotImplementedException();
         }
     }
 }

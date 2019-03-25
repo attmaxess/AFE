@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Com.Beetsoft.AFE
 {
-    public interface ISkillMessage
+    public interface IInputMessage
     {
         IReceiveDamageable ObjectReceive { get; }
         float PhysicDamage { get; }
@@ -10,14 +10,14 @@ namespace Com.Beetsoft.AFE
         Vector3 Direction { get; }
     }
 
-    public class SkillMessage : ISkillMessage
+    public class InputMessage : IInputMessage
     {
         public IReceiveDamageable ObjectReceive { get; }
         public float PhysicDamage { get; }
         public float MagicDamage { get; }
         public Vector3 Direction { get; }
 
-        public SkillMessage(IReceiveDamageable objectReceive, float physicDamage, float magicDamage, Vector3 direction)
+        public InputMessage(IReceiveDamageable objectReceive, float physicDamage, float magicDamage, Vector3 direction)
         {
             ObjectReceive = objectReceive;
             PhysicDamage = physicDamage;
@@ -25,12 +25,12 @@ namespace Com.Beetsoft.AFE
             Direction = direction;
         }
 
-        public SkillMessage(Vector3 direction)
+        public InputMessage(Vector3 direction)
         {
             Direction = direction;
         }
 
-        public SkillMessage()
+        public InputMessage()
         {
 
         }

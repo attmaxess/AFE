@@ -30,16 +30,16 @@ public class TestTriggerAnimation : MonoBehaviourPun
         if (!photonView.IsMine) return;
 
         this.OnKeyDownAsObservable(KeyCode.Q)
-            .Subscribe(_ => JoystickInputFilter.Spell1(new SkillMessage()));
+            .Subscribe(_ => JoystickInputFilter.Spell1(new InputMessage()));
 
         this.OnKeyDownAsObservable(KeyCode.W)
-            .Subscribe(_ => JoystickInputFilter.Spell2(new SkillMessage()));
+            .Subscribe(_ => JoystickInputFilter.Spell2(new InputMessage()));
 
         this.OnKeyDownAsObservable(KeyCode.E)
-            .Subscribe(_ => JoystickInputFilter.Spell3(new SkillMessage()));
+            .Subscribe(_ => JoystickInputFilter.Spell3(new InputMessage()));
 
         this.OnKeyDownAsObservable(KeyCode.R)
-            .Subscribe(_ => JoystickInputFilter.Spell4(new SkillMessage()));
+            .Subscribe(_ => JoystickInputFilter.Spell4(new InputMessage()));
 
 
 //        Observable.EveryUpdate()

@@ -1,10 +1,18 @@
 using System;
+using AFE.Extensions;
 using UniRx;
+using UnityEngine;
+using AnimationState = AFE.Enumerables.AnimationState;
 
 namespace Com.Beetsoft.AFE
 {
     public abstract class AttackBasicHandler : SkillHandler
     {
+        [SerializeField] private AnimationState.BasicAttack maxHit = AnimationState.BasicAttack.Hit4;
+        private AnimationState.BasicAttack BasicAttackIndex { get; set; } = AnimationState.BasicAttack.Hit1;
+
+        private AnimationState.BasicAttack MaxHit => maxHit;
+
         protected virtual void Start()
         {
             if (!photonView.IsMine) return;
@@ -13,10 +21,26 @@ namespace Com.Beetsoft.AFE
                 Observable.Timer(TimeSpan.FromMilliseconds(Constant.Yasuo.TimeDelayApplyDamageAttackBasicMilliseconds));
 
             JoystickInputFilterObserver.OnBasicAttackAsObservable()
-                .RequestApplySkill(applySkillTimer, AnimationStateChecker.IsBasicAttack.Where(x => !x))
+                .Do(_ => WillEnterStateAttack())
+                .SelectMany(message =>
+                    applySkillTimer.Select(_ => message))
+                .Do(_ => WillExitStateAttack())
                 .Subscribe(ApplyDamage);
         }
 
-        protected abstract void ApplyDamage(ISkillMessage message);
+        protected abstract void ApplyDamage(IInputMessage message);
+
+        protected virtual void WillEnterStateAttack()
+        {
+            Animator.SetTriggerWithBool(Constant.AnimationPram.Attack);
+            Animator.SetInteger(Constant.AnimationPram.AttackInt, (int) BasicAttackIndex);
+        }
+
+        protected virtual void WillExitStateAttack()
+        {
+            BasicAttackIndex++;
+            if (BasicAttackIndex > maxHit)
+                BasicAttackIndex = AnimationState.BasicAttack.Hit1;
+        }
     }
 }

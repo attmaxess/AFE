@@ -1,52 +1,66 @@
-﻿using Com.Beetsoft.AFE;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UniRx;
+﻿using AFE.Extensions;
+using Com.Beetsoft.AFE;
 using Photon.Pun;
+using UniRx;
+using UnityEngine;
 
 public class PlayerRunHandler : MonoBehaviourPun,
-    IInitialize<IChampionConfig>
+    IInitialize<IChampionConfig>,
+    IInitialize<IJoystickInputFilterObserver>
 {
-    private IJoystickInputFilterObserver joystickInputFilterObserver;
+    public float speedSmooth = 100;
+    private IJoystickInputFilterObserver JoystickInputFilterObserver { get; set; }
 
     private IChampionConfig ChampionConfig { get; set; }
 
-    public float speedSmooth = 100;
-
-    private void Awake()
-    {
-        joystickInputFilterObserver = GetComponent<JoystickInputFilter>();
-    }
+    private Animator Animator { get; set; }
 
     void IInitialize<IChampionConfig>.Initialize(IChampionConfig init)
     {
         ChampionConfig = init;
     }
 
-    // Use this for initialization
-    void Start()
+    void IInitialize<IJoystickInputFilterObserver>.Initialize(IJoystickInputFilterObserver init)
     {
-        Vector3 rotateTarget = Vector3.zero;
-        joystickInputFilterObserver.OnRunAsObservable()
+        JoystickInputFilterObserver = init;
+    }
+
+    private void Awake()
+    {
+        Animator = GetComponent<Animator>();
+    }
+
+    // Use this for initialization
+    private void Start()
+    {
+        var rotateTarget = Vector3.zero;
+        JoystickInputFilterObserver.OnRunAsObservable()
             .Subscribe(message =>
             {
                 transform.position = message.Direction * ChampionConfig.MoveSpeed.Value;
                 rotateTarget = message.Rotation;
-                /*     if (message.Rotation != Vector3.zero)
-                         transform.rotation = Quaternion.LookRotation(message.Rotation);*/
             });
 
         Observable.EveryUpdate().Subscribe(x =>
         {
             if (rotateTarget != Vector3.zero)
-                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(rotateTarget), speedSmooth * Time.deltaTime);
+                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(rotateTarget),
+                    speedSmooth * Time.deltaTime);
         });
 
+        JoystickInputFilterObserver.OnRunAsObservable()
+            .Select(message => IsRun(message.Rotation))
+            .DistinctUntilChanged()
+            .Subscribe(HandleAnimationRun);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void HandleAnimationRun(bool isRun)
     {
+        Animator.SetTriggerWithBool(isRun ? Constant.AnimationPram.Run : Constant.AnimationPram.Idle);
+    }
+
+    private bool IsRun(Vector3 direction)
+    {
+        return direction != Vector3.zero;
     }
 }

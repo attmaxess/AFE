@@ -6,7 +6,8 @@ namespace Com.Beetsoft.AFE
 {
     public static class ExtentionMethod
     {
-        public static List<IReceiveDamageable> ListReceiverDamageables(this GameObject go, IChampionConfig championConfig)
+        public static List<IReceiveDamageable> ListReceiverDamageables(this GameObject go,
+            IChampionConfig championConfig)
         {
             var _objects = Physics.OverlapSphere(go.transform.position, championConfig.Range.Value);
             var _l = _objects.OfType<IReceiveDamageable>().ToList();
@@ -17,7 +18,9 @@ namespace Com.Beetsoft.AFE
         {
             IReceiveDamageable receiveDamageable = null;
             var _objects = Physics.OverlapSphere(go.transform.position, championConfig.Range.Value);
-            var _l = _objects.Where(_ => _.GetComponent<IReceiveDamageable>() != null && _.transform.GetInstanceID() != go.transform.GetInstanceID()).ToList();
+            var _l = _objects.Where(_ =>
+                _.GetComponent<IReceiveDamageable>() != null &&
+                _.transform.GetInstanceID() != go.transform.GetInstanceID()).ToList();
             float tempDis = -1;
             foreach (var item in _l)
             {
@@ -31,12 +34,15 @@ namespace Com.Beetsoft.AFE
             return receiveDamageable;
         }
 
-        public static IReceiveDamageable ReceiverDamageNearest(this GameObject go, IChampionConfig championConfig, out Transform nearestGameObject)
+        public static IReceiveDamageable ReceiverDamageNearest(this GameObject go, IChampionConfig championConfig,
+            out Transform nearestGameObject)
         {
             IReceiveDamageable receiveDamageable = null;
             Collider collider = null;
             var _objects = Physics.OverlapSphere(go.transform.position, championConfig.Range.Value);
-            var _l = _objects.Where(_ => _.GetComponent<IReceiveDamageable>() != null && _.transform.GetInstanceID() != go.transform.GetInstanceID()).ToList();
+            var _l = _objects.Where(_ =>
+                _.GetComponent<IReceiveDamageable>() != null &&
+                _.transform.GetInstanceID() != go.transform.GetInstanceID()).ToList();
             float tempDis = -1;
             foreach (var item in _l)
             {
@@ -47,32 +53,41 @@ namespace Com.Beetsoft.AFE
                     collider = item;
                 }
             }
+
             nearestGameObject = collider.transform;
             return receiveDamageable;
         }
 
-        public static IReceiveDamageable ReceiverDamageNearestByRayCast(this GameObject go, IChampionConfig championConfig, Vector3 direction)
+        public static IReceiveDamageable ReceiverDamageNearestByRayCast(this GameObject go,
+            Vector3 direction, float distance, LayerMask layerMask = default(LayerMask),
+            QueryTriggerInteraction queryTriggerInteraction = QueryTriggerInteraction.UseGlobal)
         {
             IReceiveDamageable receiveDamageable = null;
             RaycastHit hit;
-            Debug.DrawRay(go.transform.position, direction * championConfig.Range.Value, Color.red, 1);
-            if (Physics.Raycast(go.transform.position, direction, out hit, championConfig.Range.Value))
+            Debug.DrawRay(go.transform.position, direction * distance, Color.red, 1);
+            if (Physics.Raycast(go.transform.position, direction, out hit, distance, layerMask,
+                queryTriggerInteraction))
             {
                 receiveDamageable = hit.transform.GetComponent<IReceiveDamageable>();
             }
+
             return receiveDamageable;
         }
 
-        public static IReceiveDamageable ReceiverDamageNearestByRayCastAll(this GameObject go, IChampionConfig championConfig, Vector3 direction)
+        public static IReceiveDamageable ReceiverDamageNearestByRayCastAll(this GameObject go,
+            Vector3 direction, float distance, LayerMask layerMask = default(LayerMask),
+            QueryTriggerInteraction queryTriggerInteraction = QueryTriggerInteraction.UseGlobal)
         {
             IReceiveDamageable receiveDamageable = null;
-            Debug.DrawRay(go.transform.position, direction * championConfig.Range.Value, Color.blue, 0.5f);
-            var _all = Physics.RaycastAll(go.transform.position, direction, championConfig.Range.Value);
+            Debug.DrawRay(go.transform.position, direction * distance, Color.blue, 0.5f);
+            var _all = Physics.RaycastAll(go.transform.position, direction, distance, layerMask,
+                queryTriggerInteraction);
             float _dis = -1;
             for (int i = 0; i < _all.Length; i++)
             {
                 var _receiver = _all[i].transform.GetComponent<IReceiveDamageable>();
-                if (_receiver != null && Vector3.Distance(_receiver.GetTransform.position, go.transform.position) > _dis)
+                if (_receiver != null &&
+                    Vector3.Distance(_receiver.GetTransform.position, go.transform.position) > _dis)
                 {
                     receiveDamageable = _receiver;
                     _dis = Vector3.Distance(_receiver.GetTransform.position, go.transform.position);
@@ -81,7 +96,5 @@ namespace Com.Beetsoft.AFE
 
             return receiveDamageable;
         }
-
     }
 }
-
