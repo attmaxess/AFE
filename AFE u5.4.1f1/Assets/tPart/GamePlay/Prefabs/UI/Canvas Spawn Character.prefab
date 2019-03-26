@@ -388,7 +388,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boolCreatePlaneJoystick: 1
-  characterPrefab: YasuoPrefab
+  characterPrefab: Yasuo_CHP
 --- !u!114 &114225906668011730
 MonoBehaviour:
   m_ObjectHideFlags: 1
