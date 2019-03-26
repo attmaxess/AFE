@@ -30,7 +30,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1033060079923030
 GameObject:
   m_ObjectHideFlags: 1
@@ -138,7 +138,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1244853152716122
 GameObject:
   m_ObjectHideFlags: 1
@@ -296,6 +296,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4726241352908478}
   - component: {fileID: 114138605539553172}
+  - component: {fileID: 114949160871607858}
   m_Layer: 0
   m_Name: CanvasJoystick
   m_TagString: Untagged
@@ -402,6 +403,21 @@ GameObject:
   - component: {fileID: 114519307876379620}
   m_Layer: 0
   m_Name: Joystick-Move
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1741697600680956
+GameObject:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 224270925583815166}
+  m_Layer: 0
+  m_Name: HealthBarPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -566,7 +582,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1929364672985428
 GameObject:
   m_ObjectHideFlags: 1
@@ -808,9 +824,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baba7c0008fd7c54ab542f6e0293e591, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  btnState: 0
   canUseSkill: 0
   isCountTime: 0
   number: {fileID: 114047739042535820}
+  touchJoystickSprite: {fileID: 114865732417697230}
+  skillType: 2
+  skillHandler: {fileID: 0}
+  countTime: 0
 --- !u!114 &114047739042535820
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -906,11 +927,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -3918,11 +3939,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -4151,9 +4172,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baba7c0008fd7c54ab542f6e0293e591, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  btnState: 0
   canUseSkill: 0
   isCountTime: 0
   number: {fileID: 114498981489415002}
+  touchJoystickSprite: {fileID: 114348490424636130}
+  skillType: 1
+  skillHandler: {fileID: 0}
+  countTime: 0
 --- !u!114 &114283324747315286
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5373,11 +5399,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -6053,13 +6079,13 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 21300000, guid: b2b8f148ac872b44da92bbc5ac63b2d9, type: 3}
-  m_Type: 0
+  m_Type: 3
   m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
   m_FillClockwise: 1
-  m_FillOrigin: 0
+  m_FillOrigin: 2
 --- !u!114 &114599385984749702
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6751,9 +6777,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baba7c0008fd7c54ab542f6e0293e591, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  btnState: 0
   canUseSkill: 0
   isCountTime: 0
   number: {fileID: 114888907272546138}
+  touchJoystickSprite: {fileID: 114029802699864500}
+  skillType: 0
+  skillHandler: {fileID: 0}
+  countTime: 0
 --- !u!114 &114806030721578114
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7211,6 +7242,18 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114949160871607858
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1540684374436754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a98b3edd66af7640b6ca41196673752, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  barPlayer: {fileID: 224270925583815166}
 --- !u!114 &114954368113512734
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7414,9 +7457,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baba7c0008fd7c54ab542f6e0293e591, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  btnState: 0
   canUseSkill: 0
   isCountTime: 0
   number: {fileID: 114168482991537502}
+  touchJoystickSprite: {fileID: 114352840625542598}
+  skillType: 3
+  skillHandler: {fileID: 0}
+  countTime: 0
 --- !u!114 &114992466841467558
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7621,6 +7669,7 @@ RectTransform:
   - {fileID: 224398013838964324}
   - {fileID: 224851879571215014}
   - {fileID: 224383176569196264}
+  - {fileID: 224270925583815166}
   m_Father: {fileID: 224722092546683478}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7742,6 +7791,24 @@ RectTransform:
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!224 &224270925583815166
+RectTransform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1741697600680956}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 224051068614214234}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: -31.354}
+  m_SizeDelta: {x: 0, y: 62.709}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224301357386168186
 RectTransform:

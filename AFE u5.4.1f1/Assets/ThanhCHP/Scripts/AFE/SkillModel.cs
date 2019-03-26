@@ -49,4 +49,5 @@ namespace Com.Beetsoft.AFE
 
         float ISkillConfig.CooldownPerLevel => cooldownPerLevel;
     }
+
 }

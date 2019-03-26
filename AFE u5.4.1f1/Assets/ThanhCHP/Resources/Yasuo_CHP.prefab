@@ -4068,6 +4068,8 @@ MonoBehaviour:
   championModel: {fileID: 11400000, guid: c27aa9838b137744c97785c959173d79, type: 2}
   joystickInputFilter: {fileID: 114285160370677164}
   animatorHandler: {fileID: 114218586144303770}
+  barPlayer: {fileID: 114681016319380998, guid: e53a0e6b970edf0499e0e7fa8bbd148f,
+    type: 2}
 --- !u!114 &114218586144303770
 MonoBehaviour:
   m_ObjectHideFlags: 1

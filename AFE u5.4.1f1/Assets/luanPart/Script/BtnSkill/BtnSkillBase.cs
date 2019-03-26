@@ -12,7 +12,7 @@ public interface IBtnSkillBase<T>
 {
     void Input();
     void StartState();
-    T Update();
+    T UpdateState();
     void StopState();
 }
 
@@ -23,7 +23,7 @@ public abstract class BtnSkillBase : MonoBehaviour, IBtnSkillBase<BtnState>
     public BtnSkillUI btnSkillUI { get { return _btnSkillUI; } set { _btnSkillUI = value; } }
 
     public BtnState state;
-    
+
     protected BtnState nextState;
 
     public virtual void StartState()
@@ -35,7 +35,7 @@ public abstract class BtnSkillBase : MonoBehaviour, IBtnSkillBase<BtnState>
     {
     }
 
-    public virtual BtnState Update()
+    public virtual BtnState UpdateState()
     {
         return nextState;
     }
