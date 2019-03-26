@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using ControlFreak2;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class BtnSkill_CounttimeState : BtnSkillBase
@@ -7,6 +8,9 @@ public class BtnSkill_CounttimeState : BtnSkillBase
     public override void StartState()
     {
         base.StartState();
+
+        btnSkillUI.EnableBtn(false);
+
         countmax = btnSkillUI.countTime;
         btnSkillUI.number.gameObject.SetActive(true);
     }
@@ -31,6 +35,8 @@ public class BtnSkill_CounttimeState : BtnSkillBase
     {
         btnSkillUI.canUseSkill = true;
         btnSkillUI.isCountTime = false;
+
+        btnSkillUI.EnableBtn(true);
 
         btnSkillUI.touchJoystickSprite.GetComponent<Image>().fillAmount = 1;
         base.StopState();

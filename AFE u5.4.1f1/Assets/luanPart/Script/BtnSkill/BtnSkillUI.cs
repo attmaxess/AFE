@@ -173,4 +173,12 @@ public class BtnSkillUI : MonoBehaviour
         this.canUseSkill = canUseSkill;
         touchJoystickSprite.SetSprite(sprite);
     }
+
+    public void EnableBtn(bool enable)
+    {
+
+        touchJoystickSprite.GetComponentInParent<TouchJoystick>().touchPressureBinding.enabled = enable;
+        touchJoystickSprite.GetComponentInParent<TouchJoystick>().joyStateBinding.enabled = enable;
+    }
+
 }
