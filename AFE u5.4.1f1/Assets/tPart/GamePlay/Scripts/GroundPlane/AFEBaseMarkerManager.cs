@@ -162,7 +162,7 @@ namespace AFE.BaseGround
 
             for (int i = 0; i < map.Length; i++)
             {
-                Vector3 pointPos = new Vector3(map[i].point.x, map[i].point.y, map[i].point.z);
+                Vector3 pointPos = new Vector3(map[i].point.x, map[i].point.y, -map[i].point.z);
                 float distance = (pointPos - modelPos).magnitude;
                 if (distance < minDistance)
                 {
