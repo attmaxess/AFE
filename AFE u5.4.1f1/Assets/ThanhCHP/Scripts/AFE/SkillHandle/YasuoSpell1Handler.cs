@@ -1,9 +1,14 @@
 using UnityEngine;
-using  UniRx;
+using UniRx;
 
 namespace Com.Beetsoft.AFE
 {
-    public class YasuoSpell1Handler : SkillHandler
+    public interface ISkillSpell_1
+    {
+
+    }
+
+    public class YasuoSpell1Handler : SkillHandler,ISkillSpell_1
     {
         [SerializeField] private SkillReader skillReader;
 

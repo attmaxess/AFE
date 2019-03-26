@@ -20,7 +20,7 @@ public struct MessagePlayerData
     }
 }
 
-public class BtnSkillUI : MonoBehaviour, IInitialize<ISkillData>
+public class BtnSkillUI : MonoBehaviour
 {
     public Dictionary<BtnState, BtnSkillBase> btnSkillBase = new Dictionary<BtnState, BtnSkillBase>();
     BtnSkillBase curState;
@@ -29,7 +29,16 @@ public class BtnSkillUI : MonoBehaviour, IInitialize<ISkillData>
     public bool isCountTime;
     public TextMeshProUGUI number;
     public TouchJoystickSpriteAnimator touchJoystickSprite;
-    private ISkillData skillData;
+    public enum SkillType
+    {
+        Skill_1,
+        Skill_2,
+        Skill_3,
+        Skill_4
+    }
+
+    public SkillType skillType;
+    private SkillReader skillReader;
 
     [HideInInspector]
     public float countTime;
@@ -71,6 +80,13 @@ public class BtnSkillUI : MonoBehaviour, IInitialize<ISkillData>
 
     }
 
+    void FinDSkillReader()
+    {
+        if (skillReader != null) return;
+        TestYasuo[] _listTestYasuo = FindObjectsOfType<TestYasuo>();
+        //  _listTestYasuo.where()
+    }
+
     private void Update()
     {
         SwitchState(curState.UpdateState());
@@ -92,10 +108,5 @@ public class BtnSkillUI : MonoBehaviour, IInitialize<ISkillData>
         this.countTime = countTime > 0 ? countTime : 0;
         this.canUseSkill = canUseSkill;
         touchJoystickSprite.SetSprite(sprite);
-    }
-
-    public void Initialize(ISkillData init)
-    {
-        skillData = init;
     }
 }
