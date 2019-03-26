@@ -285,7 +285,12 @@ ModelImporter:
     9500000: //RootNode
     13700000: Model
     2186277476908879412: ImportLogs
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: DefaultMaterial
+    second: {fileID: 2100000, guid: 7f3b79feb149eb849b8192a76dd0d5b8, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -357,6 +362,7 @@ ModelImporter:
     legStretch: 0.05
     feetSpacing: 0
     rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1

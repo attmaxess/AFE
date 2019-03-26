@@ -72,19 +72,31 @@ public class GameManagerArVik : MonoBehaviourPunCallbacks
 
     private void Update()
     {
-        if (!photonView.IsMine) return;
 
-        if (CF2Input.GetButtonDown("Pause"))
+       /* if (CF2Input.GetAxis("S_1_Hoz") != 0 && CF2Input.GetAxis("S_1_Ver") != 0 && (CF2Input.GetButton("Skill1") || CF2Input.GetButtonUp("Skill1")))
         {
-            Debug.Log("Pause");
-        }
-        if (CF2Input.GetButtonDown("Attack"))
-        {
-            Debug.Log("Attack");
-            if (attack != null) attack();
-        }
+            //      h1 = CF2Input.GetAxis("S_1_Hoz");
+            //    v1 = CF2Input.GetAxis("S_1_Ver");
+            //  joystickCharacter.Spell1(new SkillMessage());
+            Debug.Log("-" + CF2Input.GetButton("Skill1") + CF2Input.GetButtonDown("Skill1") + CF2Input.GetButtonUp("Skill1"));
 
-        if (CF2Input.GetButtonDown("Skill1"))
+        }   */
+
+        /*if (CF2Input.GetButtonUp("Skill1"))
+        {
+            Debug.Log("-" + CF2Input.GetButtonUp("Skill1"));
+        }    */
+
+        /* Debug.Log(CF2Input.GetButtonDown("BtnTest"));
+         Debug.Log(CF2Input.GetButtonUp("BtnTest"));
+         Debug.Log(CF2Input.GetButton("BtnTest"));   
+         Debug.Log(CF2Input.GetAxis("HozTest"));
+         Debug.Log(CF2Input.GetAxis("VerTest"));       */
+        /*     Debug.Log(CF2Input.GetAxis("Horizontal"));
+             Debug.Log(CF2Input.GetAxis("Vertical"));  */
+
+
+       /* if (CF2Input.GetButtonDown("Skill1"))
         {
             if (skill1 != null) skill1();
             Debug.Log("Skill1");
@@ -103,7 +115,7 @@ public class GameManagerArVik : MonoBehaviourPunCallbacks
         {
             if (skill4 != null) skill4();
             Debug.Log("Skill4");
-        }
+        }                     */
     }
 
     private void Start()

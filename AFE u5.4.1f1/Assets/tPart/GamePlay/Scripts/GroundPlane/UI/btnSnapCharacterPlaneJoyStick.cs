@@ -22,18 +22,18 @@ public class btnSnapCharacterPlaneJoyStick : MonoBehaviour
             return;
         }
 
-        Rigidbody rb = pj.rotateChar.transform.GetComponent<Rigidbody>();
+        //Rigidbody rb = pj.joystickCharacter.transform.GetComponent<Rigidbody>();
 
-        bool lastKinematic = rb.isKinematic;
-        bool lastUseGravity = rb.useGravity;
-        rb.isKinematic = true;
-        rb.useGravity = false;
+        //bool lastKinematic = rb.isKinematic;
+        //bool lastUseGravity = rb.useGravity;
+        //rb.isKinematic = true;
+        //rb.useGravity = false;
 
-        rb.velocity = Vector3.zero;        
+        //rb.velocity = Vector3.zero;        
 
-        pj.rotateChar.transform.position = pj.transform.position + new Vector3(0, offsetY, 0);
+        //pj.rotateChar.transform.position = pj.transform.position + new Vector3(0, offsetY, 0);
 
-        rb.isKinematic = lastKinematic;
-        rb.useGravity = lastUseGravity;
+        //rb.isKinematic = lastKinematic;
+        //rb.useGravity = lastUseGravity;
     }
 }

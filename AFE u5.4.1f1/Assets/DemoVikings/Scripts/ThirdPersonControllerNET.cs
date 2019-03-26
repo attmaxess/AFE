@@ -8,9 +8,6 @@ public delegate void JumpDelegate();
 
 public class ThirdPersonControllerNET : MonoBehaviourPunCallbacks, ICharacterTranform, IPunObservable
 {
-    [Header("Debug")]
-    public bool isDebug = false;
-
     public Rigidbody target;
     // The object we're steering
     public float speed = 1.0f, walkSpeedDownscale = 2.0f, turnSpeed = 2.0f, mouseTurnSpeed = 0.3f, jumpSpeed = 1.0f;
@@ -113,11 +110,11 @@ public class ThirdPersonControllerNET : MonoBehaviourPunCallbacks, ICharacterTra
         // resigter Event from ui controller
         if (GetComponent<PhotonView>().IsMine)
         {
-            GameManagerArVik.Singleton.attack += Singleton_Attack;
-            GameManagerArVik.Singleton.skill1 += Singleton_skill1;
-            GameManagerArVik.Singleton.skill2 += Singleton_skill2;
-            GameManagerArVik.Singleton.skill3 += Singleton_skill3;
-            GameManagerArVik.Singleton.skill4 += Singleton_skill4;
+            //GameManagerArVik.Singleton.attack += Singleton_Attack;
+            //GameManagerArVik.Singleton.skill1 += Singleton_skill1;
+            //GameManagerArVik.Singleton.skill2 += Singleton_skill2;
+            //GameManagerArVik.Singleton.skill3 += Singleton_skill3;
+            //GameManagerArVik.Singleton.skill4 += Singleton_skill4;
         }
 
         #region initialize player state
@@ -308,42 +305,42 @@ public class ThirdPersonControllerNET : MonoBehaviourPunCallbacks, ICharacterTra
     [PunRPC]
     public void RpcAttack(bool value)
     {
-        //  attack = value;
+        attack = value;
     }
     [PunRPC]
     public void RpcIdle(bool value)
     {
-        //  idle = value;
+        idle = value;
     }
     [PunRPC]
     public void RpcRun(bool value)
     {
-        //  run = value;
+        run = value;
     }
     [PunRPC]
     public void RpcHit(bool value)
     {
-        //  hit = value;
+        hit = value;
     }
     [PunRPC]
     public void RpcSkill_4(bool value)
     {
-        //  skill_4 = value;
+       skill_4 = value;
     }
     [PunRPC]
     public void RpcSkill_3(bool value)
     {
-        // skill_3 = value;
+        skill_3 = value;
     }
     [PunRPC]
     public void RpcSkill_2(bool value)
     {
-        //  skill_2 = value;
+        skill_2 = value;
     }
     [PunRPC]
     public void RpcSkill_1(bool value)
     {
-        // skill_1 = value;
+        skill_1 = value;
     }
     #endregion
 
@@ -352,11 +349,11 @@ public class ThirdPersonControllerNET : MonoBehaviourPunCallbacks, ICharacterTra
 
         if (!photonView.IsMine)
         {
-            // Debug.Log("Update   transform.position " + photonView.IsMine + " - " + correctPlayerPos);
+           // Debug.Log("Update   transform.position " + photonView.IsMine + " - " + correctPlayerPos);
 
             //Update remote player (smooth this, this looks good, at the cost of some accuracy)
-            transform.position = Vector3.Lerp(transform.position, correctPlayerPos, Time.deltaTime * 5);
-            transform.rotation = Quaternion.Lerp(transform.rotation, correctPlayerRot, Time.deltaTime * 5);
+              transform.position = Vector3.Lerp(transform.position, correctPlayerPos, Time.deltaTime * 5);
+              transform.rotation = Quaternion.Lerp(transform.rotation, correctPlayerRot, Time.deltaTime * 5);   
             //     transform.localScale = Vector3.Lerp(transform.localScale, correctPlayerScale, Time.deltaTime * 5);
         }
 
@@ -407,8 +404,7 @@ public class ThirdPersonControllerNET : MonoBehaviourPunCallbacks, ICharacterTra
 
     public void PositionBy(Vector3 position, Vector3 joystick)
     {
-        if (isDebug) Debug.Log("PositionBy " + position + "-" + joystick);
-
+        Debug.Log("PositionBy " + position + "-" + joystick);
         if (joystick != Vector3.zero)
         {
             runRpc = true;
