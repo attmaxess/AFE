@@ -1,11 +1,11 @@
-﻿using AFE.Enumerables;
+﻿using Com.Beetsoft.AFE.Enumerables;
 using Com.Beetsoft.AFE;
 using ControlFreak2;
 using Photon.Pun;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
-using AnimationState = AFE.Enumerables.AnimationState;
+using AnimationState = Com.Beetsoft.AFE.Enumerables.AnimationState;
 
 public class TestTriggerAnimation : MonoBehaviourPun
 {

@@ -1,10 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using ExtraLinq;
 using UniRx;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace Com.Beetsoft.AFE
 {
@@ -26,14 +24,23 @@ namespace Com.Beetsoft.AFE
     {
         [SerializeField] private List<SkillBehaviour> skillBehaviours;
 
-        private List<SkillBehaviour> SkillBehaviours => skillBehaviours;
+        public List<SkillBehaviour> SkillBehaviours => skillBehaviours;
 
-        private int SkillIndex { get; set; } = 0;
+        private int SkillIndex { get; set; } = -1;
+
+        private ReactiveProperty<ISkillBehaviour> SkillBehaviourCurrent { get; } = new ReactiveProperty<ISkillBehaviour>();
+
+        public IObservable<ISkillBehaviour> OnChangeSkillBehaviourAsObservable() => SkillBehaviourCurrent;
+
+        public void Initialize()
+        {
+            SendNext();
+        }
 
         public void SendNext()
         {
-            SkillIndex++;
-            SkillBehaviourCurrent.Value = skillBehaviours[SkillIndex];
+            SkillIndex = Mathf.Min(SkillBehaviours.Count - 1, SkillIndex + 1);
+            SkillBehaviourCurrent.Value = SkillBehaviours[SkillIndex];
         }
 
         public void SendNextLastIndex()
@@ -48,11 +55,13 @@ namespace Com.Beetsoft.AFE
             SkillBehaviourCurrent.Value = SkillBehaviours.First();
         }
 
-        private ReactiveProperty<ISkillBehaviour> SkillBehaviourCurrent { get; } =
-            new ReactiveProperty<ISkillBehaviour>();
+        public ISkillBehaviour GetSkillBehaviourCurrent()
+        {
+            return SkillBehaviourCurrent.Value;
+        }
 
-        public ISkillBehaviour GetSkillBehaviourCurrent() => SkillBehaviourCurrent.Value;
-
-        public IObservable<ISkillBehaviour> OnChangeSkillBehaviourAsObservable => SkillBehaviourCurrent;
+        public SkillReader()
+        {
+        }
     }
 }

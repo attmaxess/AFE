@@ -10,14 +10,15 @@ namespace Com.Beetsoft.AFE
         [SerializeField] private JoystickInputFilter joystickInputFilter;
         [SerializeField] private AnimatorHandler animatorHandler;
         [SerializeField] private HealthBarPlayer barPlayer;
+        private IChampionConfig championModelCache = null;
 
-        private ChampionModel ChampionModel => championModel;
+        private IChampionConfig ChampionModel =>
+            championModelCache ?? (championModelCache = Instantiate(championModel));
 
         private JoystickInputFilter JoystickInputFilter => joystickInputFilter;
 
         private AnimatorHandler AnimatorHandler => animatorHandler;
 
-        private ChampionModel ChampionCopy;
 
 
         private void Awake()
@@ -25,10 +26,8 @@ namespace Com.Beetsoft.AFE
             var monoPuns = GetComponents<MonoBehaviourPun>();
 
             // edit
-            ChampionCopy = Instantiate(ChampionModel);
-
             var initChampionConfigList = monoPuns.OfType<IInitialize<IChampionConfig>>().ToList();
-            initChampionConfigList.ForEach(x => x.Initialize(ChampionCopy));
+            initChampionConfigList.ForEach(x => x.Initialize(ChampionModel));
 
             var initJoystick = monoPuns.OfType<IInitialize<IJoystickInputFilterObserver>>().ToList();
             initJoystick.ForEach(x => x.Initialize(JoystickInputFilter));
@@ -40,7 +39,7 @@ namespace Com.Beetsoft.AFE
 
         private void Start()
         {
-            CreateHealthBar(ChampionCopy, photonView.IsMine);
+            CreateHealthBar(ChampionModel, photonView.IsMine);
             if (!photonView.IsMine) return;
         }
 
@@ -51,4 +50,3 @@ namespace Com.Beetsoft.AFE
         }
     }
 }
-

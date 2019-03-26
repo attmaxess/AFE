@@ -1,5 +1,6 @@
 using System;
 using Photon.Pun;
+using UniRx;
 using UnityEngine;
 
 namespace Com.Beetsoft.AFE
@@ -11,6 +12,8 @@ namespace Com.Beetsoft.AFE
         IInitialize<IChampionConfig>
     {
         [SerializeField] private SkillModel skillConfig;
+
+        [SerializeField] private SkillReader skillReader;
         protected IJoystickInputFilterObserver JoystickInputFilterObserver { get; private set; }
 
         protected IAnimationStateChecker AnimationStateChecker { get; private set; }
@@ -20,6 +23,10 @@ namespace Com.Beetsoft.AFE
         protected ISkillConfig SkillConfig => skillConfig;
 
         protected Animator Animator { get; private set; }
+
+        protected ReactiveProperty<ISkillOutputMessage> SkillMessageOutputReactiveProperty { get; } = new ReactiveProperty<ISkillOutputMessage>();
+
+        protected SkillReader SkillReader => skillReader;
 
         void IInitialize<IAnimationStateChecker>.Initialize(IAnimationStateChecker init)
         {
@@ -34,6 +41,16 @@ namespace Com.Beetsoft.AFE
         void IInitialize<IJoystickInputFilterObserver>.Initialize(IJoystickInputFilterObserver init)
         {
             JoystickInputFilterObserver = init;
+        }
+
+        public ISkillOutputMessage SkillMessageOutputCurrent()
+        {
+            return SkillMessageOutputReactiveProperty.Value;
+        }
+
+        public IObservable<ISkillOutputMessage> OnReceiveSkillMessageOutputAsObservable()
+        {
+            return SkillMessageOutputReactiveProperty;
         }
 
         protected float GetPhysicDamageCurrent()
@@ -56,19 +73,14 @@ namespace Com.Beetsoft.AFE
             return ChampionConfig.AbilityPower.Value * SkillConfig.MagicDamageBonus;
         }
 
+        protected float GetCooldownSkill()
+        {
+            return ChampionConfig.CooldownSkillBonus.Value * SkillConfig.Cooldown.Value;
+        }
+
         private void Awake()
         {
             Animator = GetComponent<Animator>();
-        }
-
-        public ISkillOutputMessage SkillMessageOutputCurrent()
-        {
-            throw new NotImplementedException();
-        }
-
-        public IObservable<ISkillOutputMessage> OnReceiveSkillMessageOutputAsObservable()
-        {
-            throw new NotImplementedException();
         }
     }
 }

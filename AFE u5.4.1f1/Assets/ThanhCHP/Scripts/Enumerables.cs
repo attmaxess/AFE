@@ -1,4 +1,4 @@
-namespace AFE.Enumerables
+namespace Com.Beetsoft.AFE.Enumerables
 {
     public static class AnimationState
     {
