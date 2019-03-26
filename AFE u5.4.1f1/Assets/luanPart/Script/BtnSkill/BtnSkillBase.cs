@@ -28,7 +28,6 @@ public abstract class BtnSkillBase : MonoBehaviour, IBtnSkillBase<BtnState>
 
     public virtual void StartState()
     {
-        Debug.Log("StartState - " + nextState);
         nextState = state;
     }
 
@@ -38,7 +37,6 @@ public abstract class BtnSkillBase : MonoBehaviour, IBtnSkillBase<BtnState>
 
     public virtual BtnState UpdateState()
     {
-        Debug.Log("Update - " + nextState + " - "+ gameObject.name + " - "+ this);
         return nextState;
     }
 

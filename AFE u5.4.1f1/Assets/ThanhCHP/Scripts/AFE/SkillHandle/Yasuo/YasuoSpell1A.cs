@@ -9,7 +9,7 @@ namespace Com.Beetsoft.AFE
         {
             var receive = gameObject.ReceiverDamageNearestByRayCast(inputMessage.Direction, SkillConfig.Range.Value);
             receive?.TakeDamage(new DamageMessage(SkillConfig.PhysicDamage.Value, SkillConfig.MagicDamage.Value));
-            ActiveSkillSubject.OnNext(new[] {receive});
+            ActiveSkillSubject.OnNext(new[] { receive });
         }
     }
 }

@@ -24,14 +24,14 @@ public class BtnSkill_CounttimeState : BtnSkillBase
         if (btnSkillUI.canUseSkill)
             nextState = BtnState.Enable;
 
-        if (!btnSkillUI.canUseSkill)
-            nextState = BtnState.Disable;
-
         return base.UpdateState();
     }
 
     public override void StopState()
     {
+        btnSkillUI.canUseSkill = true;
+        btnSkillUI.isCountTime = false;
+
         btnSkillUI.touchJoystickSprite.GetComponent<Image>().fillAmount = 1;
         base.StopState();
         btnSkillUI.number.gameObject.SetActive(false);

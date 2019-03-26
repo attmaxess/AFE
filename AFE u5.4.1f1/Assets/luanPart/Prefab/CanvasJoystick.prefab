@@ -829,6 +829,8 @@ MonoBehaviour:
   isCountTime: 0
   number: {fileID: 114047739042535820}
   touchJoystickSprite: {fileID: 114865732417697230}
+  skillType: 2
+  skillHandler: {fileID: 0}
   countTime: 0
 --- !u!114 &114047739042535820
 MonoBehaviour:
@@ -4175,6 +4177,8 @@ MonoBehaviour:
   isCountTime: 0
   number: {fileID: 114498981489415002}
   touchJoystickSprite: {fileID: 114348490424636130}
+  skillType: 1
+  skillHandler: {fileID: 0}
   countTime: 0
 --- !u!114 &114283324747315286
 MonoBehaviour:
@@ -6778,6 +6782,8 @@ MonoBehaviour:
   isCountTime: 0
   number: {fileID: 114888907272546138}
   touchJoystickSprite: {fileID: 114029802699864500}
+  skillType: 0
+  skillHandler: {fileID: 0}
   countTime: 0
 --- !u!114 &114806030721578114
 MonoBehaviour:
@@ -7456,6 +7462,8 @@ MonoBehaviour:
   isCountTime: 0
   number: {fileID: 114168482991537502}
   touchJoystickSprite: {fileID: 114352840625542598}
+  skillType: 3
+  skillHandler: {fileID: 0}
   countTime: 0
 --- !u!114 &114992466841467558
 MonoBehaviour:

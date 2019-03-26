@@ -39,9 +39,8 @@ public class BtnSkillUI : MonoBehaviour
     }
 
     public SkillType skillType;
-    private SkillHandler skillHandler;
+    public SkillHandler skillHandler;
 
-    [HideInInspector]
     public float countTime;
 
     private void Start()
@@ -80,45 +79,81 @@ public class BtnSkillUI : MonoBehaviour
            });   */
 
 
+
         FinDSkillReader();
-        skillHandler.SkillMessageOutputCurrent().ObserveEveryValueChanged(_ =>
-        {
-            Debug.Log("Have Change");
-            countTime = _.Cooldown;
-            touchJoystickSprite.SetSprite(_.Icon);
-            return true;
-        });
+
+
     }
 
     void FinDSkillReader()
     {
         if (skillHandler != null) return;
         TestYasuo[] _listTestYasuo = FindObjectsOfType<TestYasuo>();
+        if (_listTestYasuo.Length <= 0) return;
 
-        var yasuoMine = _listTestYasuo.Where(_ => _.photonView.IsMine).Single();
-
+        var yasuoMine = _listTestYasuo.Single(_ => _.photonView.IsMine);
         if (skillType == SkillType.Skill_1)
         {
-            skillHandler = yasuoMine.GetComponents<SkillHandler>().Where(_ => _.GetComponent<ISkillSpell_1>() != null).Single();
+            var _l = yasuoMine.GetComponents<SkillHandler>();
+            foreach (var item in _l)
+            {
+                if (item.GetComponent<ISkillSpell_1>() != null)
+                    skillHandler = item;
+            }
         }
         if (skillType == SkillType.Skill_2)
         {
-            skillHandler = yasuoMine.GetComponents<SkillHandler>().Where(_ => _.GetComponent<ISkillSpell_2>() != null).Single();
+            var _l = yasuoMine.GetComponents<SkillHandler>();
+            foreach (var item in _l)
+            {
+                if (item.GetComponent<ISkillSpell_2>() != null)
+                    skillHandler = item;
+            }
         }
         if (skillType == SkillType.Skill_3)
         {
-            skillHandler = yasuoMine.GetComponents<SkillHandler>().Where(_ => _.GetComponent<ISkillSpell_3>() != null).Single();
+            var _l = yasuoMine.GetComponents<SkillHandler>();
+            foreach (var item in _l)
+            {
+                if (item.GetComponent<ISkillSpell_3>() != null)
+                    skillHandler = item;
+            }
         }
         if (skillType == SkillType.Skill_4)
         {
-            skillHandler = yasuoMine.GetComponents<SkillHandler>().Where(_ => _.GetComponent<ISkillSpell_4>() != null).Single();
+            var _l = yasuoMine.GetComponents<SkillHandler>();
+            foreach (var item in _l)
+            {
+                if (item.GetComponent<ISkillSpell_4>() != null)
+                    skillHandler = item;
+            }
         }
 
+        skillHandler.OnReceiveSkillMessageOutputAsObservable()
+           .Subscribe(_skillHandle =>
+           {
+               if (_skillHandle == null)
+               {
+                   Debug.Log("_skillHandle == null");
+                   return;
+               }
+               else
+               {
+                   Debug.Log(_skillHandle.Cooldown);
+                   isCountTime = true;
+                   canUseSkill = false;
+                   countTime = _skillHandle.Cooldown;
+                   if (_skillHandle.Icon != null)
+                       touchJoystickSprite.SetSprite(_skillHandle.Icon);
+               }
+           });
     }
 
     private void Update()
     {
         SwitchState(curState.UpdateState());
+        FinDSkillReader();
+
     }
 
     void SwitchState(BtnState nextState)
