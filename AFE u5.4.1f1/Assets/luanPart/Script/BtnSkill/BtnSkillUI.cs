@@ -90,8 +90,14 @@ public class BtnSkillUI : MonoBehaviour
         if (skillHandler != null) return;
         TestYasuo[] _listTestYasuo = FindObjectsOfType<TestYasuo>();
         if (_listTestYasuo.Length <= 0) return;
-
-        var yasuoMine = _listTestYasuo.Single(_ => _.photonView.IsMine);
+        TestYasuo yasuoMine = null;
+        foreach (var item in _listTestYasuo)
+        {
+            if (item.photonView.IsMine)
+            {
+                yasuoMine = item;
+            }
+        }
         if (yasuoMine == null) return;
         if (skillType == SkillType.Skill_1)
         {
