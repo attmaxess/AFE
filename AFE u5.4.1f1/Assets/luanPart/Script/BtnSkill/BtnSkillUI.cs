@@ -92,6 +92,7 @@ public class BtnSkillUI : MonoBehaviour
         if (_listTestYasuo.Length <= 0) return;
 
         var yasuoMine = _listTestYasuo.Single(_ => _.photonView.IsMine);
+        if (yasuoMine == null) return;
         if (skillType == SkillType.Skill_1)
         {
             var _l = yasuoMine.GetComponents<SkillHandler>();
