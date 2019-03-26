@@ -96,5 +96,21 @@ namespace Com.Beetsoft.AFE
 
             return receiveDamageable;
         }
+
+        public static List<IReceiveDamageable> GetAllReceiverDamageNearestByRayCastAll(this GameObject go,
+           Vector3 direction, float distance, LayerMask layerMask = default(LayerMask),
+           QueryTriggerInteraction queryTriggerInteraction = QueryTriggerInteraction.UseGlobal)
+        {
+            List<IReceiveDamageable> receiveDamageable = new List<IReceiveDamageable>();
+            Debug.DrawRay(go.transform.position, direction * distance, Color.blue, 0.5f);
+            var _all = Physics.RaycastAll(go.transform.position, direction, distance, layerMask,
+                queryTriggerInteraction);
+            var _allIreveiceDamaable = _all.Where(_ => _.transform.GetComponent<IReceiveDamageable>() != null).ToList();
+            foreach (var item in _allIreveiceDamaable)
+            {
+                receiveDamageable.Add(item.transform.GetComponent<IReceiveDamageable>());
+            }
+            return receiveDamageable;
+        }
     }
 }

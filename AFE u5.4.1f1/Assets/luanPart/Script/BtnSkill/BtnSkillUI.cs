@@ -7,6 +7,7 @@ using UniRx.Triggers;
 using TMPro;
 using UnityEngine.UI;
 using Com.Beetsoft.AFE;
+using System.Linq;
 
 public struct MessagePlayerData
 {
@@ -38,7 +39,7 @@ public class BtnSkillUI : MonoBehaviour
     }
 
     public SkillType skillType;
-    private SkillReader skillReader;
+    private SkillHandler skillHandler;
 
     [HideInInspector]
     public float countTime;
@@ -78,13 +79,41 @@ public class BtnSkillUI : MonoBehaviour
                touchJoystickSprite.SetSprite(_);
            });   */
 
+
+        FinDSkillReader();
+        skillHandler.SkillMessageOutputCurrent().ObserveEveryValueChanged(_ =>
+        {
+            Debug.Log("Have Change");
+            countTime = _.Cooldown;
+            touchJoystickSprite.SetSprite(_.Icon);
+            return true;
+        });
     }
 
     void FinDSkillReader()
     {
-        if (skillReader != null) return;
+        if (skillHandler != null) return;
         TestYasuo[] _listTestYasuo = FindObjectsOfType<TestYasuo>();
-        //  _listTestYasuo.where()
+
+        var yasuoMine = _listTestYasuo.Where(_ => _.photonView.IsMine).Single();
+
+        if (skillType == SkillType.Skill_1)
+        {
+            skillHandler = yasuoMine.GetComponents<SkillHandler>().Where(_ => _.GetComponent<ISkillSpell_1>() != null).Single();
+        }
+        if (skillType == SkillType.Skill_2)
+        {
+            skillHandler = yasuoMine.GetComponents<SkillHandler>().Where(_ => _.GetComponent<ISkillSpell_2>() != null).Single();
+        }
+        if (skillType == SkillType.Skill_3)
+        {
+            skillHandler = yasuoMine.GetComponents<SkillHandler>().Where(_ => _.GetComponent<ISkillSpell_3>() != null).Single();
+        }
+        if (skillType == SkillType.Skill_4)
+        {
+            skillHandler = yasuoMine.GetComponents<SkillHandler>().Where(_ => _.GetComponent<ISkillSpell_4>() != null).Single();
+        }
+
     }
 
     private void Update()
