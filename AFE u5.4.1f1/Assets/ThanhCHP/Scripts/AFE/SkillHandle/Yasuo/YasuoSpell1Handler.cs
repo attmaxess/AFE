@@ -14,7 +14,7 @@ namespace Com.Beetsoft.AFE
 
         private void Start()
         {
-            SkillReader.SendNext();
+            SkillReader.SendNextFirstIndex();
 
             this.JoystickInputFilterObserver
                 .OnSpell1AsObservable()
@@ -24,7 +24,6 @@ namespace Com.Beetsoft.AFE
                     var skillBehaviour = SkillReader.GetSkillBehaviourCurrent();
                     skillBehaviour.ActiveSkill(message);
                     SkillMessageOutputReactiveProperty.Value = skillBehaviour.GetSkillOutputMessage();
-                    SkillReader.SendNext();
                 });
 
             this.JoystickInputFilterObserver
