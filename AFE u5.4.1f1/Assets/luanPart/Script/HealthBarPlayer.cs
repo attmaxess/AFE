@@ -30,12 +30,12 @@ public class HealthBarPlayer : MonoBehaviour
         if (!isMine)
         {
             rect.localScale = Vector3.one;
-            rect.anchoredPosition = new Vector2(20, 0);
+            rect.anchoredPosition = new Vector2(-20, 0);
         }
         else
         {
             rect.localScale = new Vector3(-1, 1, 1);
-            rect.anchoredPosition = new Vector2(-20, 0);
+            rect.anchoredPosition = new Vector2(20, 0);
         }
     }
   
