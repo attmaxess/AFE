@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class btnRefreshListCloudPoints : MonoBehaviour
+public class btnRefreshListBestLowestPoints : MonoBehaviour
 {
     [Header("Debug")]
     public bool isDebug = true;
@@ -43,14 +43,31 @@ public class btnRefreshListCloudPoints : MonoBehaviour
         currentContent = Instantiate(contentPrefab, Vector3.zero, Quaternion.identity, transViewport).transform;
         currentContent.name = "Content";
         currentContent.gameObject.SetActive(true);
-        scrollView.content = currentContent.GetComponent<RectTransform>();        
-                
-        for (int i = 0; i < map.Length; i++)
+        scrollView.content = currentContent.GetComponent<RectTransform>();
+
+        List<LibPlacenote.PNFeaturePointUnity> sortedMap = new List<LibPlacenote.PNFeaturePointUnity>();
+        List<LibPlacenote.PNFeaturePointUnity> tempMap = new List<LibPlacenote.PNFeaturePointUnity>();
+        for (int i = 0; i < map.Length; i++) { sortedMap.Add(map[i]); tempMap.Add(map[i]); }
+        sortedMap.Sort((a, b) => MagnituteOfSumDirection(tempMap, a).CompareTo(MagnituteOfSumDirection(tempMap, b)));
+
+        for (int i = 0; i < sortedMap.Count; i++)
         {
             btnCloudPointSnapGround cp = Instantiate(btnCloudPointPrefab, Vector3.zero, Quaternion.identity, currentContent).GetComponent<btnCloudPointSnapGround>();
             cp.gameObject.SetActive(true);
-            cp.SetCurrentCordinate(i, new Vector3(map[i].point.x, map[i].point.y, -map[i].point.z));
+            cp.SetCurrentCordinate(i, new Vector3(sortedMap[i].point.x, sortedMap[i].point.y, -sortedMap[i].point.z));
         }
+    }
+
+    float MagnituteOfSumDirection(List<LibPlacenote.PNFeaturePointUnity> sortedMap, LibPlacenote.PNFeaturePointUnity indexedPoint)
+    {
+        Vector3 currentSumDirection = Vector3.zero;
+        for (int i = 0; i < sortedMap.Count; i++)
+        {
+            Vector3 toV3 = new Vector3(sortedMap[i].point.x, sortedMap[i].point.y, -sortedMap[i].point.z);
+            Vector3 fromV3 = new Vector3(indexedPoint.point.x, indexedPoint.point.y, -indexedPoint.point.z);
+            currentSumDirection += toV3 - fromV3;
+        }
+        return (currentSumDirection / sortedMap.Count).magnitude;
     }
 
     [ContextMenu("RandomList")]
@@ -67,7 +84,7 @@ public class btnRefreshListCloudPoints : MonoBehaviour
         currentContent.gameObject.SetActive(true);
         scrollView.content = currentContent.GetComponent<RectTransform>();
 
-        for (int i = 0; i < int.Parse(Random.Range(1,20).ToString()); i++)
+        for (int i = 0; i < int.Parse(Random.Range(1, 20).ToString()); i++)
         {
             btnCloudPointSnapGround cp = Instantiate(btnCloudPointPrefab, Vector3.zero, Quaternion.identity, currentContent).GetComponent<btnCloudPointSnapGround>();
             cp.gameObject.SetActive(true);

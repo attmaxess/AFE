@@ -12,10 +12,10 @@ public class btnCloudPointSnapGround : MonoBehaviour
     public Text text = null;
     public Vector3 currentCordinate = -Vector3.one;
 
-    public void SetCurrentCordinate(Vector3 cor)
+    public void SetCurrentCordinate(int index, Vector3 cor)
     {
         currentCordinate = cor;
-        text.text = "(" + cor.x + ", " + cor.y + ", " + cor.z + ")";
+        text.text = index.ToString() + ". " + "(" + cor.x + ", " + cor.y + ", " + cor.z + ")";
     }
 
     PhotonGroundPlane _currentPhotonGroundPlane = null;
