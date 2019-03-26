@@ -37,11 +37,12 @@ namespace Com.Beetsoft.AFE
                     Animator.SetBool(Constant.AnimationPram.IdleBool, false);
                 });
 
-            foreach (var onActiveSkill in SkillReader.SkillBehaviours
+            foreach (var onActiveSkill in SkillReader.SkillBehaviours.Distinct()
                 .Select(x => x.OnActiveSkillAsObservable()))
             {
                 onActiveSkill.Subscribe(receiveDamageables =>
                 {
+                    Debug.Log(receiveDamageables.IsNullOrEmpty());
                     if (receiveDamageables.IsNullOrEmpty()) return;
                     SkillReader.SendNext();
                     HandleAnimationState();

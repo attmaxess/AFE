@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using ExtraLinq;
 using UnityEngine;
 
 namespace Com.Beetsoft.AFE
@@ -98,19 +99,21 @@ namespace Com.Beetsoft.AFE
         }
 
         public static List<IReceiveDamageable> GetAllReceiverDamageNearestByRayCastAll(this GameObject go,
-           Vector3 direction, float distance, LayerMask layerMask = default(LayerMask),
-           QueryTriggerInteraction queryTriggerInteraction = QueryTriggerInteraction.UseGlobal)
+            Vector3 direction, float distance, LayerMask layerMask = default(LayerMask),
+            QueryTriggerInteraction queryTriggerInteraction = QueryTriggerInteraction.UseGlobal)
         {
-            List<IReceiveDamageable> receiveDamageable = new List<IReceiveDamageable>();
+            RaycastHit[] results = null;
             Debug.DrawRay(go.transform.position, direction * distance, Color.blue, 0.5f);
-            var _all = Physics.RaycastAll(go.transform.position, direction, distance, layerMask,
+            Physics.RaycastNonAlloc(go.transform.position, direction, results, distance, layerMask,
                 queryTriggerInteraction);
-            var _allIreveiceDamaable = _all.Where(_ => _.transform.GetComponent<IReceiveDamageable>() != null).ToList();
-            foreach (var item in _allIreveiceDamaable)
+
+            if (!results.IsNullOrEmpty())
             {
-                receiveDamageable.Add(item.transform.GetComponent<IReceiveDamageable>());
+                return results.Select(x => x.collider.GetComponent<IReceiveDamageable>())
+                    .Where(x => x != null && x.GetTransform.GetInstanceID() != go.GetInstanceID()).ToList();
             }
-            return receiveDamageable;
+
+            return null;
         }
     }
 }
