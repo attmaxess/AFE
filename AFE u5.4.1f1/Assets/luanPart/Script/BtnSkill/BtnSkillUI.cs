@@ -56,18 +56,18 @@ public class BtnSkillUI : MonoBehaviour, IInitialize<ISkillData>
             }
         }
 
-        skillData.CountTime.Where(_count => _count > 0).Subscribe(_ =>
-        {
-            countTime = _;
-        });
-        skillData.Disable.Subscribe(_ =>
-        {
-            canUseSkill = !_;
-        });
-        skillData.SpriteCurrent.Subscribe(_ =>
-        {
-            touchJoystickSprite.SetSprite(_);
-        });
+        /*   skillData.CountTime.Where(_count => _count > 0).Subscribe(_ =>
+           {
+               countTime = _;
+           });
+           skillData.Disable.Subscribe(_ =>
+           {
+               canUseSkill = !_;
+           });
+           skillData.SpriteCurrent.Subscribe(_ =>
+           {
+               touchJoystickSprite.SetSprite(_);
+           });   */
 
     }
 

@@ -2468,36 +2468,6 @@ Prefab:
       propertyPath: m_isInputParsingRequired
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 114047739042535820, guid: 5467f6725d2f11c4e88c0165b45083c4,
-        type: 2}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114047739042535820, guid: 5467f6725d2f11c4e88c0165b45083c4,
-        type: 2}
-      propertyPath: m_isInputParsingRequired
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114498981489415002, guid: 5467f6725d2f11c4e88c0165b45083c4,
-        type: 2}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114498981489415002, guid: 5467f6725d2f11c4e88c0165b45083c4,
-        type: 2}
-      propertyPath: m_isInputParsingRequired
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114168482991537502, guid: 5467f6725d2f11c4e88c0165b45083c4,
-        type: 2}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114168482991537502, guid: 5467f6725d2f11c4e88c0165b45083c4,
-        type: 2}
-      propertyPath: m_isInputParsingRequired
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5467f6725d2f11c4e88c0165b45083c4, type: 2}
   m_IsPrefabAsset: 0
