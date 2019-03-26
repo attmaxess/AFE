@@ -1,15 +1,8 @@
 using System;
 using UniRx;
-using UnityEngine;
 
 namespace Com.Beetsoft.AFE
 {
-    public interface ISkillOutputMessage
-    {
-        Sprite Icon { get; }
-        float Cooldown { get; }
-    }
-    
     public interface ISkillHandler
     {
         ISkillOutputMessage SkillMessageOutputCurrent();
@@ -28,6 +21,11 @@ namespace Com.Beetsoft.AFE
         {
             return Observable.Timer(TimeSpan.FromMilliseconds(milliseconds)).Select(_ => message);
         }
+
+//        public static ISkillOutputMessage CreateSkillOutputMessage(this ISkillHandler skillHandler)
+//        {
+//            
+//        }
 
 //        public static IObservable<ISkillMessage> RequestApplySkill<T>(this ISkillHandler skillHandler,
 //            IObservable<ISkillMessage> applySkillAfterTimer, ISkillMessage message, IObservable<T> requestCancer)

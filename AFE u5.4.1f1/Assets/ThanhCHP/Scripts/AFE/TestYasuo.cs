@@ -9,8 +9,10 @@ namespace Com.Beetsoft.AFE
         [SerializeField] private ChampionModel championModel;
         [SerializeField] private JoystickInputFilter joystickInputFilter;
         [SerializeField] private AnimatorHandler animatorHandler;
+        private IChampionConfig championModelCache = null;
 
-        private ChampionModel ChampionModel => championModel;
+        private IChampionConfig ChampionModel =>
+            championModelCache ?? (championModelCache = Instantiate(championModel));
 
         private JoystickInputFilter JoystickInputFilter => joystickInputFilter;
 
@@ -21,7 +23,7 @@ namespace Com.Beetsoft.AFE
             var monoPuns = GetComponents<MonoBehaviourPun>();
 
             var initChampionConfigList = monoPuns.OfType<IInitialize<IChampionConfig>>().ToList();
-            initChampionConfigList.ForEach(x => x.Initialize(Instantiate(ChampionModel)));
+            initChampionConfigList.ForEach(x => x.Initialize(ChampionModel));
 
             var initJoystick = monoPuns.OfType<IInitialize<IJoystickInputFilterObserver>>().ToList();
             initJoystick.ForEach(x => x.Initialize(JoystickInputFilter));
@@ -36,4 +38,3 @@ namespace Com.Beetsoft.AFE
         }
     }
 }
-

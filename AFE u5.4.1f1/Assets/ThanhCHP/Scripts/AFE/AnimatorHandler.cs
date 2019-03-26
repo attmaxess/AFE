@@ -5,7 +5,7 @@ using ExtraLinq;
 using Photon.Pun;
 using UniRx;
 using UnityEngine;
-using AnimationState = AFE.Enumerables.AnimationState;
+using AnimationState = Com.Beetsoft.AFE.Enumerables.AnimationState;
 using Random = UnityEngine.Random;
 
 namespace Com.Beetsoft.AFE
@@ -73,7 +73,7 @@ namespace Com.Beetsoft.AFE
             HandleSwitchToStateWeaponIn();
             HandleAttackState();
             HandleSpell1State();
-            HandleSpell1Dash();
+            //HandleSpell1Dash();
             HandleSpell2State();
             HandleSpell3State();
             HandleSpell4State();
@@ -187,16 +187,16 @@ namespace Com.Beetsoft.AFE
                     IsInStateSpell1.Value = true;
                 });
 
-            spell1Smb.OnStateExitAsObservable()
-                .Subscribe(_ =>
-                {
-                    FeatureIndexSpell1State++;
-                    if ((int) FeatureIndexSpell1State == Constant.Yasuo.QClipAmount)
-                        FeatureIndexSpell1State = AnimationState.Spell1.Spell1A;
-                    IsInStateSpell1.Value = false;
-                    Animator.SetInteger(Constant.AnimationPram.QInt, (int) FeatureIndexSpell1State);
-                    Animator.SetBool(Constant.AnimationPram.IdleBool, true);
-                });
+//            spell1Smb.OnStateExitAsObservable()
+//                .Subscribe(_ =>
+//                {
+//                    FeatureIndexSpell1State++;
+//                    if ((int) FeatureIndexSpell1State == Constant.Yasuo.QClipAmount)
+//                        FeatureIndexSpell1State = AnimationState.Spell1.Spell1A;
+//                    IsInStateSpell1.Value = false;
+//                    Animator.SetInteger(Constant.AnimationPram.QInt, (int) FeatureIndexSpell1State);
+//                    Animator.SetBool(Constant.AnimationPram.IdleBool, true);
+//                });
         }
 
         private void HandleSpell1Dash()

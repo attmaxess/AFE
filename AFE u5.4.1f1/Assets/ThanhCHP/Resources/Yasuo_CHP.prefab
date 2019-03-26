@@ -4150,6 +4150,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillConfig: {fileID: 11400000, guid: 18234a120e0bf644083efacea99e9255, type: 2}
+  skillReader:
+    skillBehaviours: []
   maxHit: 4
 --- !u!114 &114338453396253636
 MonoBehaviour:

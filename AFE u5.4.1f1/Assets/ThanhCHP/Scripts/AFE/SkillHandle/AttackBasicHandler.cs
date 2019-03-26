@@ -2,7 +2,7 @@ using System;
 using AFE.Extensions;
 using UniRx;
 using UnityEngine;
-using AnimationState = AFE.Enumerables.AnimationState;
+using AnimationState = Com.Beetsoft.AFE.Enumerables.AnimationState;
 
 namespace Com.Beetsoft.AFE
 {
