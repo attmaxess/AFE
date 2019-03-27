@@ -1,0 +1,1078 @@
+fileFormatVersion: 2
+guid: fa2d9ac129c6f0240baf80ccccfb2abc
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: 'animation '
+    100002: animation0
+    100004: animation1
+    100006: Box001
+    100008: Box002
+    100010: Box003
+    100012: Box004
+    100014: Box005
+    100016: Box006
+    100018: Box007
+    100020: Box008
+    100022: Camera001
+    100024: Camera001.target
+    100026: Circle001
+    100028: Cone001
+    100030: Cone010
+    100032: Cone019
+    100034: Cone020
+    100036: Cone021
+    100038: Cone022
+    100040: Cone023
+    100042: Cone024
+    100044: Cone026
+    100046: Cone027
+    100048: Cone028
+    100050: Cone029
+    100052: Cone030
+    100054: Cone031
+    100056: Cone032
+    100058: Cone033
+    100060: Cone034
+    100062: Cone0340
+    100064: Cone035
+    100066: Cone0350
+    100068: Cone036
+    100070: Cone0360
+    100072: Cone037
+    100074: Cone0370
+    100076: Cone038
+    100078: Cone0380
+    100080: Cone039
+    100082: Cone0390
+    100084: Cone040
+    100086: Cone0400
+    100088: Cone041
+    100090: Cone0410
+    100092: Cone042
+    100094: Cone0420
+    100096: Cone043
+    100098: Cone0430
+    100100: Cone044
+    100102: Cone0440
+    100104: Cone045
+    100106: Cone0450
+    100108: Cone046
+    100110: Cone047
+    100112: Cone048
+    100114: Cone049
+    100116: Cone050
+    100118: Cone051
+    100120: Cone052
+    100122: Cone053
+    100124: Cone054
+    100126: Cone055
+    100128: Cone056
+    100130: Cone057
+    100132: Cone058
+    100134: Cone059
+    100136: Cone060
+    100138: Cone061
+    100140: Cone062
+    100142: Cone063
+    100144: Cone064
+    100146: Cone065
+    100148: Cone066
+    100150: Cone067
+    100152: Cone068
+    100154: Cone069
+    100156: Cone070
+    100158: Cone071
+    100160: Cone072
+    100162: Cone073
+    100164: Cone074
+    100166: Cone075
+    100168: Cone076
+    100170: Cone077
+    100172: Cone078
+    100174: Cone079
+    100176: Cone080
+    100178: Cone081
+    100180: Cone082
+    100182: Cone083
+    100184: ground
+    100186: ground hig
+    100188: Group li10
+    100190: Group li11
+    100192: Group li12
+    100194: Group li13
+    100196: Group li14
+    100198: Group li15
+    100200: Group li16
+    100202: Group li17
+    100204: Group li18
+    100206: Group li19
+    100208: Group li20
+    100210: Group li21
+    100212: Group li22
+    100214: Group li23
+    100216: Group li24
+    100218: Group li25
+    100220: Group li26
+    100222: Group li27
+    100224: Group li28
+    100226: Group li29
+    100228: Group li30
+    100230: Group li31
+    100232: Group li32
+    100234: Group li33
+    100236: Group li34
+    100238: Group li35
+    100240: Group li36
+    100242: Group li37
+    100244: Group lis0
+    100246: Group lis1
+    100248: Group lis2
+    100250: Group lis3
+    100252: Group lis4
+    100254: Group lis5
+    100256: Group lis6
+    100258: Group lis7
+    100260: Group lis8
+    100262: Group lis9
+    100264: Group list
+    100266: Group022
+    100268: Group023
+    100270: Group024
+    100272: Group025
+    100274: Group026
+    100276: Group027
+    100278: Group028
+    100280: Group029
+    100282: Group030
+    100284: Group031
+    100286: Group032
+    100288: Group033
+    100290: Group034
+    100292: Group035
+    100294: Group036
+    100296: Group037
+    100298: Group038
+    100300: Group039
+    100302: Group040
+    100304: Group041
+    100306: Group042
+    100308: Group043
+    100310: Group044
+    100312: Group045
+    100314: Group046
+    100316: Group047
+    100318: Group048
+    100320: Group049
+    100322: Group050
+    100324: Group051
+    100326: Group052
+    100328: Group053
+    100330: Group054
+    100332: Omni002
+    100334: palm kust
+    100336: palm kust0
+    100338: palm kust1
+    100340: //RootNode
+    100342: Plane008
+    100344: Plane016
+    100346: Plane017
+    100348: Plane018
+    100350: Plane019
+    100352: Plane020
+    100354: Plane021
+    100356: Plane023
+    100358: Plane024
+    100360: Plane025
+    100362: Plane026
+    100364: Plane027
+    100366: Plane028
+    100368: Plane029
+    100370: Plane030
+    100372: Plane031
+    100374: Plane0310
+    100376: Plane032
+    100378: Plane0320
+    100380: Plane033
+    100382: Plane0330
+    100384: Plane034
+    100386: Plane0340
+    100388: Plane035
+    100390: Plane0350
+    100392: Plane036
+    100394: Plane0360
+    100396: Plane037
+    100398: Plane0370
+    100400: Plane038
+    100402: Plane0380
+    100404: Plane039
+    100406: Plane0390
+    100408: Plane040
+    100410: Plane0400
+    100412: Plane041
+    100414: Plane0410
+    100416: Plane042
+    100418: Plane043
+    100420: Plane044
+    100422: Plane045
+    100424: Plane046
+    100426: Plane047
+    100428: Plane048
+    100430: Plane049
+    100432: Plane050
+    100434: Plane051
+    100436: Plane052
+    100438: Plane053
+    100440: Plane054
+    100442: Plane055
+    100444: Plane056
+    100446: Plane057
+    100448: Plane058
+    100450: Plane059
+    100452: Plane060
+    100454: Plane061
+    100456: Plane062
+    100458: Plane063
+    100460: Plane064
+    100462: Plane065
+    100464: Plane066
+    100466: Plane067
+    100468: Plane068
+    100470: Plane069
+    100472: Plane070
+    100474: Plane071
+    100476: Plane072
+    100478: Plane073
+    100480: Plane074
+    100482: Plane075
+    100484: Plane076
+    100486: sun
+    100488: water
+    100490: water ligh
+    400000: 'animation '
+    400002: animation0
+    400004: animation1
+    400006: Box001
+    400008: Box002
+    400010: Box003
+    400012: Box004
+    400014: Box005
+    400016: Box006
+    400018: Box007
+    400020: Box008
+    400022: Camera001
+    400024: Camera001.target
+    400026: Circle001
+    400028: Cone001
+    400030: Cone010
+    400032: Cone019
+    400034: Cone020
+    400036: Cone021
+    400038: Cone022
+    400040: Cone023
+    400042: Cone024
+    400044: Cone026
+    400046: Cone027
+    400048: Cone028
+    400050: Cone029
+    400052: Cone030
+    400054: Cone031
+    400056: Cone032
+    400058: Cone033
+    400060: Cone034
+    400062: Cone0340
+    400064: Cone035
+    400066: Cone0350
+    400068: Cone036
+    400070: Cone0360
+    400072: Cone037
+    400074: Cone0370
+    400076: Cone038
+    400078: Cone0380
+    400080: Cone039
+    400082: Cone0390
+    400084: Cone040
+    400086: Cone0400
+    400088: Cone041
+    400090: Cone0410
+    400092: Cone042
+    400094: Cone0420
+    400096: Cone043
+    400098: Cone0430
+    400100: Cone044
+    400102: Cone0440
+    400104: Cone045
+    400106: Cone0450
+    400108: Cone046
+    400110: Cone047
+    400112: Cone048
+    400114: Cone049
+    400116: Cone050
+    400118: Cone051
+    400120: Cone052
+    400122: Cone053
+    400124: Cone054
+    400126: Cone055
+    400128: Cone056
+    400130: Cone057
+    400132: Cone058
+    400134: Cone059
+    400136: Cone060
+    400138: Cone061
+    400140: Cone062
+    400142: Cone063
+    400144: Cone064
+    400146: Cone065
+    400148: Cone066
+    400150: Cone067
+    400152: Cone068
+    400154: Cone069
+    400156: Cone070
+    400158: Cone071
+    400160: Cone072
+    400162: Cone073
+    400164: Cone074
+    400166: Cone075
+    400168: Cone076
+    400170: Cone077
+    400172: Cone078
+    400174: Cone079
+    400176: Cone080
+    400178: Cone081
+    400180: Cone082
+    400182: Cone083
+    400184: ground
+    400186: ground hig
+    400188: Group li10
+    400190: Group li11
+    400192: Group li12
+    400194: Group li13
+    400196: Group li14
+    400198: Group li15
+    400200: Group li16
+    400202: Group li17
+    400204: Group li18
+    400206: Group li19
+    400208: Group li20
+    400210: Group li21
+    400212: Group li22
+    400214: Group li23
+    400216: Group li24
+    400218: Group li25
+    400220: Group li26
+    400222: Group li27
+    400224: Group li28
+    400226: Group li29
+    400228: Group li30
+    400230: Group li31
+    400232: Group li32
+    400234: Group li33
+    400236: Group li34
+    400238: Group li35
+    400240: Group li36
+    400242: Group li37
+    400244: Group lis0
+    400246: Group lis1
+    400248: Group lis2
+    400250: Group lis3
+    400252: Group lis4
+    400254: Group lis5
+    400256: Group lis6
+    400258: Group lis7
+    400260: Group lis8
+    400262: Group lis9
+    400264: Group list
+    400266: Group022
+    400268: Group023
+    400270: Group024
+    400272: Group025
+    400274: Group026
+    400276: Group027
+    400278: Group028
+    400280: Group029
+    400282: Group030
+    400284: Group031
+    400286: Group032
+    400288: Group033
+    400290: Group034
+    400292: Group035
+    400294: Group036
+    400296: Group037
+    400298: Group038
+    400300: Group039
+    400302: Group040
+    400304: Group041
+    400306: Group042
+    400308: Group043
+    400310: Group044
+    400312: Group045
+    400314: Group046
+    400316: Group047
+    400318: Group048
+    400320: Group049
+    400322: Group050
+    400324: Group051
+    400326: Group052
+    400328: Group053
+    400330: Group054
+    400332: Omni002
+    400334: palm kust
+    400336: palm kust0
+    400338: palm kust1
+    400340: //RootNode
+    400342: Plane008
+    400344: Plane016
+    400346: Plane017
+    400348: Plane018
+    400350: Plane019
+    400352: Plane020
+    400354: Plane021
+    400356: Plane023
+    400358: Plane024
+    400360: Plane025
+    400362: Plane026
+    400364: Plane027
+    400366: Plane028
+    400368: Plane029
+    400370: Plane030
+    400372: Plane031
+    400374: Plane0310
+    400376: Plane032
+    400378: Plane0320
+    400380: Plane033
+    400382: Plane0330
+    400384: Plane034
+    400386: Plane0340
+    400388: Plane035
+    400390: Plane0350
+    400392: Plane036
+    400394: Plane0360
+    400396: Plane037
+    400398: Plane0370
+    400400: Plane038
+    400402: Plane0380
+    400404: Plane039
+    400406: Plane0390
+    400408: Plane040
+    400410: Plane0400
+    400412: Plane041
+    400414: Plane0410
+    400416: Plane042
+    400418: Plane043
+    400420: Plane044
+    400422: Plane045
+    400424: Plane046
+    400426: Plane047
+    400428: Plane048
+    400430: Plane049
+    400432: Plane050
+    400434: Plane051
+    400436: Plane052
+    400438: Plane053
+    400440: Plane054
+    400442: Plane055
+    400444: Plane056
+    400446: Plane057
+    400448: Plane058
+    400450: Plane059
+    400452: Plane060
+    400454: Plane061
+    400456: Plane062
+    400458: Plane063
+    400460: Plane064
+    400462: Plane065
+    400464: Plane066
+    400466: Plane067
+    400468: Plane068
+    400470: Plane069
+    400472: Plane070
+    400474: Plane071
+    400476: Plane072
+    400478: Plane073
+    400480: Plane074
+    400482: Plane075
+    400484: Plane076
+    400486: sun
+    400488: water
+    400490: water ligh
+    2100000: sand
+    2100002: sand 2
+    2100004: water
+    2100006: 'Material #58'
+    2100008: stone
+    2100010: palma
+    2100012: stebel
+    2100014: list
+    2100016: list 2
+    2100018: stebel 2
+    2100020: 'Material #74'
+    2100022: stebel1
+    2100024: palma1
+    2300000: Box001
+    2300002: Box002
+    2300004: Box003
+    2300006: Box004
+    2300008: Box005
+    2300010: Box006
+    2300012: Box007
+    2300014: Box008
+    2300016: Circle001
+    2300018: Cone001
+    2300020: Cone010
+    2300022: Cone019
+    2300024: Cone020
+    2300026: Cone021
+    2300028: Cone022
+    2300030: Cone023
+    2300032: Cone024
+    2300034: Cone026
+    2300036: Cone027
+    2300038: Cone028
+    2300040: Cone029
+    2300042: Cone030
+    2300044: Cone031
+    2300046: Cone032
+    2300048: Cone033
+    2300050: Cone034
+    2300052: Cone0340
+    2300054: Cone035
+    2300056: Cone0350
+    2300058: Cone036
+    2300060: Cone0360
+    2300062: Cone037
+    2300064: Cone0370
+    2300066: Cone038
+    2300068: Cone0380
+    2300070: Cone039
+    2300072: Cone0390
+    2300074: Cone040
+    2300076: Cone0400
+    2300078: Cone041
+    2300080: Cone0410
+    2300082: Cone042
+    2300084: Cone0420
+    2300086: Cone043
+    2300088: Cone0430
+    2300090: Cone044
+    2300092: Cone0440
+    2300094: Cone045
+    2300096: Cone0450
+    2300098: Cone046
+    2300100: Cone047
+    2300102: Cone048
+    2300104: Cone049
+    2300106: Cone050
+    2300108: Cone051
+    2300110: Cone052
+    2300112: Cone053
+    2300114: Cone054
+    2300116: Cone055
+    2300118: Cone056
+    2300120: Cone057
+    2300122: Cone058
+    2300124: Cone059
+    2300126: Cone060
+    2300128: Cone061
+    2300130: Cone062
+    2300132: Cone063
+    2300134: Cone064
+    2300136: Cone065
+    2300138: Cone066
+    2300140: Cone067
+    2300142: Cone068
+    2300144: Cone069
+    2300146: Cone070
+    2300148: Cone071
+    2300150: Cone072
+    2300152: Cone073
+    2300154: Cone074
+    2300156: Cone075
+    2300158: Cone076
+    2300160: Cone077
+    2300162: Cone078
+    2300164: Cone079
+    2300166: Cone080
+    2300168: Cone081
+    2300170: Cone082
+    2300172: Cone083
+    2300174: ground
+    2300176: ground hig
+    2300178: Plane008
+    2300180: Plane016
+    2300182: Plane017
+    2300184: Plane018
+    2300186: Plane019
+    2300188: Plane020
+    2300190: Plane021
+    2300192: Plane023
+    2300194: Plane024
+    2300196: Plane025
+    2300198: Plane026
+    2300200: Plane027
+    2300202: Plane028
+    2300204: Plane029
+    2300206: Plane030
+    2300208: Plane031
+    2300210: Plane0310
+    2300212: Plane032
+    2300214: Plane0320
+    2300216: Plane033
+    2300218: Plane0330
+    2300220: Plane034
+    2300222: Plane0340
+    2300224: Plane035
+    2300226: Plane0350
+    2300228: Plane036
+    2300230: Plane0360
+    2300232: Plane037
+    2300234: Plane0370
+    2300236: Plane038
+    2300238: Plane0380
+    2300240: Plane039
+    2300242: Plane0390
+    2300244: Plane040
+    2300246: Plane0400
+    2300248: Plane041
+    2300250: Plane0410
+    2300252: Plane042
+    2300254: Plane043
+    2300256: Plane044
+    2300258: Plane045
+    2300260: Plane046
+    2300262: Plane047
+    2300264: Plane048
+    2300266: Plane049
+    2300268: Plane050
+    2300270: Plane051
+    2300272: Plane052
+    2300274: Plane053
+    2300276: Plane054
+    2300278: Plane055
+    2300280: Plane056
+    2300282: Plane057
+    2300284: Plane058
+    2300286: Plane059
+    2300288: Plane060
+    2300290: Plane061
+    2300292: Plane062
+    2300294: Plane063
+    2300296: Plane064
+    2300298: Plane065
+    2300300: Plane066
+    2300302: Plane067
+    2300304: Plane068
+    2300306: Plane069
+    2300308: Plane070
+    2300310: Plane071
+    2300312: Plane072
+    2300314: Plane073
+    2300316: Plane074
+    2300318: Plane075
+    2300320: Plane076
+    2300322: water
+    3300000: Box001
+    3300002: Box002
+    3300004: Box003
+    3300006: Box004
+    3300008: Box005
+    3300010: Box006
+    3300012: Box007
+    3300014: Box008
+    3300016: Circle001
+    3300018: Cone001
+    3300020: Cone010
+    3300022: Cone019
+    3300024: Cone020
+    3300026: Cone021
+    3300028: Cone022
+    3300030: Cone023
+    3300032: Cone024
+    3300034: Cone026
+    3300036: Cone027
+    3300038: Cone028
+    3300040: Cone029
+    3300042: Cone030
+    3300044: Cone031
+    3300046: Cone032
+    3300048: Cone033
+    3300050: Cone034
+    3300052: Cone0340
+    3300054: Cone035
+    3300056: Cone0350
+    3300058: Cone036
+    3300060: Cone0360
+    3300062: Cone037
+    3300064: Cone0370
+    3300066: Cone038
+    3300068: Cone0380
+    3300070: Cone039
+    3300072: Cone0390
+    3300074: Cone040
+    3300076: Cone0400
+    3300078: Cone041
+    3300080: Cone0410
+    3300082: Cone042
+    3300084: Cone0420
+    3300086: Cone043
+    3300088: Cone0430
+    3300090: Cone044
+    3300092: Cone0440
+    3300094: Cone045
+    3300096: Cone0450
+    3300098: Cone046
+    3300100: Cone047
+    3300102: Cone048
+    3300104: Cone049
+    3300106: Cone050
+    3300108: Cone051
+    3300110: Cone052
+    3300112: Cone053
+    3300114: Cone054
+    3300116: Cone055
+    3300118: Cone056
+    3300120: Cone057
+    3300122: Cone058
+    3300124: Cone059
+    3300126: Cone060
+    3300128: Cone061
+    3300130: Cone062
+    3300132: Cone063
+    3300134: Cone064
+    3300136: Cone065
+    3300138: Cone066
+    3300140: Cone067
+    3300142: Cone068
+    3300144: Cone069
+    3300146: Cone070
+    3300148: Cone071
+    3300150: Cone072
+    3300152: Cone073
+    3300154: Cone074
+    3300156: Cone075
+    3300158: Cone076
+    3300160: Cone077
+    3300162: Cone078
+    3300164: Cone079
+    3300166: Cone080
+    3300168: Cone081
+    3300170: Cone082
+    3300172: Cone083
+    3300174: ground
+    3300176: ground hig
+    3300178: Plane008
+    3300180: Plane016
+    3300182: Plane017
+    3300184: Plane018
+    3300186: Plane019
+    3300188: Plane020
+    3300190: Plane021
+    3300192: Plane023
+    3300194: Plane024
+    3300196: Plane025
+    3300198: Plane026
+    3300200: Plane027
+    3300202: Plane028
+    3300204: Plane029
+    3300206: Plane030
+    3300208: Plane031
+    3300210: Plane0310
+    3300212: Plane032
+    3300214: Plane0320
+    3300216: Plane033
+    3300218: Plane0330
+    3300220: Plane034
+    3300222: Plane0340
+    3300224: Plane035
+    3300226: Plane0350
+    3300228: Plane036
+    3300230: Plane0360
+    3300232: Plane037
+    3300234: Plane0370
+    3300236: Plane038
+    3300238: Plane0380
+    3300240: Plane039
+    3300242: Plane0390
+    3300244: Plane040
+    3300246: Plane0400
+    3300248: Plane041
+    3300250: Plane0410
+    3300252: Plane042
+    3300254: Plane043
+    3300256: Plane044
+    3300258: Plane045
+    3300260: Plane046
+    3300262: Plane047
+    3300264: Plane048
+    3300266: Plane049
+    3300268: Plane050
+    3300270: Plane051
+    3300272: Plane052
+    3300274: Plane053
+    3300276: Plane054
+    3300278: Plane055
+    3300280: Plane056
+    3300282: Plane057
+    3300284: Plane058
+    3300286: Plane059
+    3300288: Plane060
+    3300290: Plane061
+    3300292: Plane062
+    3300294: Plane063
+    3300296: Plane064
+    3300298: Plane065
+    3300300: Plane066
+    3300302: Plane067
+    3300304: Plane068
+    3300306: Plane069
+    3300308: Plane070
+    3300310: Plane071
+    3300312: Plane072
+    3300314: Plane073
+    3300316: Plane074
+    3300318: Plane075
+    3300320: Plane076
+    3300322: water
+    4300000: ground
+    4300002: water
+    4300004: Box001
+    4300006: Box002
+    4300008: Box003
+    4300010: Box004
+    4300012: Box005
+    4300014: Box006
+    4300016: Box007
+    4300018: Box008
+    4300020: ground hig
+    4300022: Circle001
+    4300024: Cone001
+    4300026: Cone010
+    4300028: Plane008
+    4300030: Plane016
+    4300032: Cone019
+    4300034: Cone021
+    4300036: Plane018
+    4300038: Plane019
+    4300040: Cone022
+    4300042: Plane020
+    4300044: Cone023
+    4300046: Plane021
+    4300048: Cone024
+    4300050: Plane023
+    4300052: Cone026
+    4300054: Plane024
+    4300056: Cone027
+    4300058: Plane025
+    4300060: Cone028
+    4300062: Plane026
+    4300064: Cone029
+    4300066: Plane027
+    4300068: Cone030
+    4300070: Plane028
+    4300072: Cone031
+    4300074: Plane017
+    4300076: Cone020
+    4300078: Plane029
+    4300080: Cone032
+    4300082: Cone033
+    4300084: Cone034
+    4300086: Plane030
+    4300088: Cone035
+    4300090: Plane031
+    4300092: Plane032
+    4300094: Cone036
+    4300096: Plane033
+    4300098: Cone037
+    4300100: Plane034
+    4300102: Cone038
+    4300104: Plane035
+    4300106: Cone039
+    4300108: Plane036
+    4300110: Cone040
+    4300112: Plane037
+    4300114: Cone041
+    4300116: Plane038
+    4300118: Cone042
+    4300120: Plane039
+    4300122: Cone043
+    4300124: Plane040
+    4300126: Cone044
+    4300128: Plane041
+    4300130: Cone045
+    4300132: Cone046
+    4300134: Plane042
+    4300136: Cone047
+    4300138: Cone048
+    4300140: Plane043
+    4300142: Cone049
+    4300144: Plane044
+    4300146: Plane045
+    4300148: Cone050
+    4300150: Plane046
+    4300152: Cone051
+    4300154: Plane047
+    4300156: Cone052
+    4300158: Plane048
+    4300160: Cone053
+    4300162: Plane049
+    4300164: Cone054
+    4300166: Plane050
+    4300168: Cone055
+    4300170: Plane051
+    4300172: Cone056
+    4300174: Plane052
+    4300176: Cone057
+    4300178: Plane053
+    4300180: Cone058
+    4300182: Plane054
+    4300184: Cone059
+    4300186: Plane0310
+    4300188: Cone0340
+    4300190: Cone0350
+    4300192: Cone0360
+    4300194: Plane0320
+    4300196: Cone0380
+    4300198: Plane0340
+    4300200: Cone0390
+    4300202: Plane0350
+    4300204: Cone0400
+    4300206: Plane0360
+    4300208: Cone0410
+    4300210: Plane0370
+    4300212: Cone0370
+    4300214: Plane0330
+    4300216: Plane0380
+    4300218: Cone0420
+    4300220: Plane0390
+    4300222: Cone0430
+    4300224: Plane0400
+    4300226: Cone0440
+    4300228: Plane0410
+    4300230: Cone0450
+    4300232: Plane055
+    4300234: Cone060
+    4300236: Cone061
+    4300238: Cone062
+    4300240: Plane056
+    4300242: Cone063
+    4300244: Plane057
+    4300246: Cone064
+    4300248: Plane058
+    4300250: Cone065
+    4300252: Plane059
+    4300254: Cone066
+    4300256: Plane060
+    4300258: Cone067
+    4300260: Plane061
+    4300262: Plane062
+    4300264: Cone068
+    4300266: Plane063
+    4300268: Cone069
+    4300270: Plane064
+    4300272: Cone070
+    4300274: Plane065
+    4300276: Cone071
+    4300278: Plane066
+    4300280: Cone072
+    4300282: Cone073
+    4300284: Cone074
+    4300286: Plane067
+    4300288: Cone075
+    4300290: Plane068
+    4300292: Cone076
+    4300294: Plane069
+    4300296: Cone077
+    4300298: Plane070
+    4300300: Cone078
+    4300302: Plane071
+    4300304: Cone079
+    4300306: Plane072
+    4300308: Plane073
+    4300310: Cone080
+    4300312: Plane074
+    4300314: Cone081
+    4300316: Plane075
+    4300318: Cone082
+    4300320: Plane076
+    4300322: Cone083
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

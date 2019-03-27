@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 114653424196456068}
   - component: {fileID: 114890928713071010}
   - component: {fileID: 114211495100786566}
+  - component: {fileID: 114159396315969242}
   m_Layer: 5
   m_Name: btnYasuo
   m_TagString: Untagged
@@ -180,6 +181,7 @@ GameObject:
   - component: {fileID: 114378692240134568}
   - component: {fileID: 114112616814678316}
   - component: {fileID: 114145781717147486}
+  - component: {fileID: 114335182647740592}
   m_Layer: 5
   m_Name: btnAhri
   m_TagString: Untagged
@@ -223,7 +225,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1834872237297836
 GameObject:
   m_ObjectHideFlags: 0
@@ -361,6 +363,17 @@ MonoBehaviour:
           m_StringArgument: AhriPrefab
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 114335182647740592}
+        m_MethodName: SetCanvasOn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114145781717147486
@@ -376,6 +389,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boolCreatePlaneJoystick: 1
   characterPrefab: AhriPrefab
+--- !u!114 &114159396315969242
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1184936569666244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d58b7cfe0fe4d194a93648efb0963ef4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114211495100786566
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -455,6 +479,17 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Viking
+--- !u!114 &114335182647740592
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1733462368447108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d58b7cfe0fe4d194a93648efb0963ef4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114378692240134568
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -984,6 +1019,17 @@ MonoBehaviour:
           m_StringArgument: YasuoPrefab
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 114159396315969242}
+        m_MethodName: SetCanvasOn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114953706891403932
@@ -1241,7 +1287,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 90, y: 127}
-  m_SizeDelta: {x: 50, y: 70}
+  m_SizeDelta: {x: 70, y: 70}
   m_Pivot: {x: 0, y: 0}
 --- !u!224 &224495686885964018
 RectTransform:
@@ -1376,7 +1422,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 2.000061, y: 127}
-  m_SizeDelta: {x: 50, y: 70}
+  m_SizeDelta: {x: 70, y: 70}
   m_Pivot: {x: 0, y: 0}
 --- !u!224 &224843829259957908
 RectTransform:

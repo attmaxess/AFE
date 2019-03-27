@@ -485,6 +485,7 @@ GameObject:
   - component: {fileID: 114303200557662960}
   - component: {fileID: 114460289072225330}
   - component: {fileID: 114306969928528286}
+  - component: {fileID: 143060267932152686}
   m_Layer: 0
   m_Name: Yasuo_CHP
   m_TagString: Untagged
@@ -4189,7 +4190,7 @@ MonoBehaviour:
   - {fileID: 114338453396253636}
   - {fileID: 114773152827730594}
   viewIdField: 0
-  InstantiationId: 6
+  InstantiationId: 3
   isRuntimeInstantiated: 0
 --- !u!114 &114460289072225330
 MonoBehaviour:
@@ -4294,10 +4295,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 100
-  m_Height: 1
+  m_Radius: 81.3
+  m_Height: 230
   m_Direction: 1
-  m_Center: {x: 0, y: 100, z: 0}
+  m_Center: {x: 0, y: 114.85, z: 0}
 --- !u!137 &137490055118385072
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -4418,3 +4419,20 @@ SkinnedMeshRenderer:
     m_Center: {x: 24.039627, y: 1.7561646, z: -29.35054}
     m_Extent: {x: 112.46591, y: 116.67829, z: 109.64731}
   m_DirtyAABB: 0
+--- !u!143 &143060267932152686
+CharacterController:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1174075871233712}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.003
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
