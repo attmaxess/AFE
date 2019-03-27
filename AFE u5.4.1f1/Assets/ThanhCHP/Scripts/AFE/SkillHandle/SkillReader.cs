@@ -39,7 +39,7 @@ namespace Com.Beetsoft.AFE
 
         public void SendNext()
         {
-            SkillIndex = Mathf.Min(SkillBehaviours.Count - 1, SkillIndex + 1);
+            SkillIndex = Mathf.Min(SkillBehaviours.Count - 1, ++SkillIndex);
             SkillBehaviourCurrent.Value = SkillBehaviours[SkillIndex];
         }
 

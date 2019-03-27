@@ -476,15 +476,16 @@ GameObject:
   - component: {fileID: 114366626602675422}
   - component: {fileID: 114338453396253636}
   - component: {fileID: 114773152827730594}
+  - component: {fileID: 65732797011690294}
   - component: {fileID: 114315601636423302}
   - component: {fileID: 114337711945045802}
   - component: {fileID: 114250188246287544}
-  - component: {fileID: 33636560121027768}
-  - component: {fileID: 136731831193200244}
-  - component: {fileID: 114844646119401528}
+  - component: {fileID: 114603826160903828}
   - component: {fileID: 114303200557662960}
-  - component: {fileID: 114460289072225330}
   - component: {fileID: 114306969928528286}
+  - component: {fileID: 114287457019645492}
+  - component: {fileID: 114284003140846610}
+  - component: {fileID: 114337523984434604}
   m_Layer: 0
   m_Name: Yasuo_CHP
   m_TagString: Untagged
@@ -4029,13 +4030,18 @@ Transform:
   m_Father: {fileID: 4757370036572920}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &33636560121027768
-MeshFilter:
+--- !u!65 &65732797011690294
+BoxCollider:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1174075871233712}
-  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 100, y: 400, z: 100}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!95 &95781607689699482
 Animator:
   serializedVersion: 3
@@ -4093,6 +4099,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e94efe5a6af4fa49422b1a56a68ee94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114284003140846610
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1174075871233712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35b2eff3ca794ca892f5c7b0fb9959ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillConfig: {fileID: 0}
+  skillReader:
+    skillBehaviours: []
 --- !u!114 &114285160370677164
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4104,6 +4124,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 282f5b47e246aad4aaa8981acee5f2f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114287457019645492
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1174075871233712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe83a1a8d4484688a42819fc98727a7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillConfig: {fileID: 0}
+  skillReader:
+    skillBehaviours: []
 --- !u!114 &114303200557662960
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4116,6 +4150,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillModel: {fileID: 11400000, guid: 901a2946f74261f4fad4f6b4c9a2b344, type: 2}
+  layerMaskTarget:
+    serializedVersion: 2
+    m_Bits: 1
 --- !u!114 &114306969928528286
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4128,6 +4165,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillModel: {fileID: 11400000, guid: 2d34300a09345634f8b194d879a6945d, type: 2}
+  objectPrefab: {fileID: 114772609666302982, guid: dfae73dec05083f49bbe619610a88ab3,
+    type: 2}
 --- !u!114 &114315601636423302
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4140,6 +4179,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedSmooth: 100
+--- !u!114 &114337523984434604
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1174075871233712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95ff524daa6645c89f11d5112f9f8ee8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillConfig: {fileID: 0}
+  skillReader:
+    skillBehaviours: []
 --- !u!114 &114337711945045802
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4189,9 +4242,9 @@ MonoBehaviour:
   - {fileID: 114338453396253636}
   - {fileID: 114773152827730594}
   viewIdField: 0
-  InstantiationId: 6
+  InstantiationId: 1
   isRuntimeInstantiated: 0
---- !u!114 &114460289072225330
+--- !u!114 &114603826160903828
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4199,10 +4252,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1174075871233712}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4340ddbc5854bf8bb9b4ed294f4a870, type: 3}
+  m_Script: {fileID: 11500000, guid: f0200a3450c0aa54ba728cf2c5b80523, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillModel: {fileID: 11400000, guid: 901a2946f74261f4fad4f6b4c9a2b344, type: 2}
+  skillConfig: {fileID: 0}
+  skillReader:
+    skillBehaviours:
+    - {fileID: 114306969928528286}
+    - {fileID: 114303200557662960}
+    - {fileID: 114306969928528286}
 --- !u!114 &114773152827730594
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4268,36 +4326,6 @@ MonoBehaviour:
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
---- !u!114 &114844646119401528
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1174075871233712}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0200a3450c0aa54ba728cf2c5b80523, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skillConfig: {fileID: 0}
-  skillReader:
-    skillBehaviours:
-    - {fileID: 114303200557662960}
-    - {fileID: 114460289072225330}
-    - {fileID: 114306969928528286}
---- !u!136 &136731831193200244
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1174075871233712}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 100
-  m_Height: 1
-  m_Direction: 1
-  m_Center: {x: 0, y: 100, z: 0}
 --- !u!137 &137490055118385072
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

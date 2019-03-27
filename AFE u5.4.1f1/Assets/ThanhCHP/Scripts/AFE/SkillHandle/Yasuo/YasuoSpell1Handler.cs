@@ -14,7 +14,7 @@ namespace Com.Beetsoft.AFE
 
         private void Start()
         {
-            SkillReader.SendNext();
+            SkillReader.SendNextFirstIndex();
 
             this.JoystickInputFilterObserver
                 .OnSpell1AsObservable()
@@ -24,7 +24,6 @@ namespace Com.Beetsoft.AFE
                     var skillBehaviour = SkillReader.GetSkillBehaviourCurrent();
                     skillBehaviour.ActiveSkill(message);
                     SkillMessageOutputReactiveProperty.Value = skillBehaviour.GetSkillOutputMessage();
-                    SkillReader.SendNext();
                 });
 
             this.JoystickInputFilterObserver
@@ -38,11 +37,12 @@ namespace Com.Beetsoft.AFE
                     Animator.SetBool(Constant.AnimationPram.IdleBool, false);
                 });
 
-            foreach (var onActiveSkill in SkillReader.SkillBehaviours
+            foreach (var onActiveSkill in SkillReader.SkillBehaviours.Distinct()
                 .Select(x => x.OnActiveSkillAsObservable()))
             {
                 onActiveSkill.Subscribe(receiveDamageables =>
                 {
+                    Debug.Log(receiveDamageables.IsNullOrEmpty());
                     if (receiveDamageables.IsNullOrEmpty()) return;
                     SkillReader.SendNext();
                     HandleAnimationState();
