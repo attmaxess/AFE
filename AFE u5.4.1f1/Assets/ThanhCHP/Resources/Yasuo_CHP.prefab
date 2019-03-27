@@ -4165,6 +4165,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillModel: {fileID: 11400000, guid: 2d34300a09345634f8b194d879a6945d, type: 2}
+  objectPrefab: {fileID: 114772609666302982, guid: dfae73dec05083f49bbe619610a88ab3,
+    type: 2}
 --- !u!114 &114315601636423302
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4256,7 +4258,7 @@ MonoBehaviour:
   skillConfig: {fileID: 0}
   skillReader:
     skillBehaviours:
-    - {fileID: 114303200557662960}
+    - {fileID: 114306969928528286}
     - {fileID: 114303200557662960}
     - {fileID: 114306969928528286}
 --- !u!114 &114773152827730594

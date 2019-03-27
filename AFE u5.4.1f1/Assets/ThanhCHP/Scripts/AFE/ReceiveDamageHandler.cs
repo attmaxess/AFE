@@ -14,7 +14,13 @@ namespace Com.Beetsoft.AFE
 
         private IChampionConfig ChampionConfig { get; set; }
 
+        public void Initialize(IChampionConfig init)
+        {
+            ChampionConfig = init;
+        }
+
         Transform IReceiveDamageable.GetTransform => transform;
+        int IReceiveDamageable.ViewID => photonView.ViewID;
 
         void IReceiveDamageable.TakeDamage(IDamageMessage message)
         {
@@ -26,19 +32,14 @@ namespace Com.Beetsoft.AFE
             return DamageMessageSubject;
         }
 
-        public void Initialize(IChampionConfig init)
-        {
-            ChampionConfig = init;
-        }
-
         private void Start()
         {
-            this.OnTakeDamageAsObservable()
+            OnTakeDamageAsObservable()
                 .Subscribe(HandleWhenReceiveDamage);
-            
+
             if (!photonView.IsMine) return;
-            
-            this.ChampionConfig.Health
+
+            ChampionConfig.Health
                 .Subscribe(x => Debug.Log(x));
         }
 
@@ -46,7 +47,7 @@ namespace Com.Beetsoft.AFE
         {
             var physicDamageReceive = this.GetDamageReceive(damageMessage.PhysicDamage, ChampionConfig.Armor.Value);
             var magicDamageReceive = this.GetDamageReceive(damageMessage.MagicDamage, ChampionConfig.MagicResist.Value);
-            
+
             photonView.RPC("HandleHealth", RpcTarget.All, physicDamageReceive, magicDamageReceive);
         }
 

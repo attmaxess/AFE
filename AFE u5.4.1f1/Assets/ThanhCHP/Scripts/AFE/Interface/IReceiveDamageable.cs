@@ -8,6 +8,7 @@ namespace Com.Beetsoft.AFE
     {
         void TakeDamage(IDamageMessage message);
         Transform GetTransform { get; }
+        int ViewID { get; }
     }
 
     public interface IReceiveDamageObserver

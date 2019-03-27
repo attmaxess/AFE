@@ -99,7 +99,7 @@ namespace Com.Beetsoft.AFE
         }
 
         public static List<IReceiveDamageable> GetAllReceiverDamageNearestByRayCastAll(this GameObject go,
-            Vector3 direction, float distance, LayerMask layerMask = default(LayerMask),
+            Vector3 direction, float distance, int layerMask = Physics.DefaultRaycastLayers,
             QueryTriggerInteraction queryTriggerInteraction = QueryTriggerInteraction.UseGlobal)
         {
             RaycastHit[] results = null;
@@ -110,7 +110,7 @@ namespace Com.Beetsoft.AFE
             if (!results.IsNullOrEmpty())
             {
                 return results.Select(x => x.collider.GetComponent<IReceiveDamageable>())
-                    .Where(x => x != null && x.GetTransform.GetInstanceID() != go.GetInstanceID()).ToList();
+                    .Where(x => x != null && x.GetTransform.GetInstanceID() != go.transform.GetInstanceID()).ToList();
             }
 
             return null;
