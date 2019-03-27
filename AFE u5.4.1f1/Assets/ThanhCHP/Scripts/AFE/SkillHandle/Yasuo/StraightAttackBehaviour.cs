@@ -8,7 +8,6 @@ namespace Com.Beetsoft.AFE
         [SerializeField] private LayerMask layerMaskTarget;
 
         private LayerMask LayerMaskTarget => layerMaskTarget;
-
         public override void ActiveSkill(IInputMessage inputMessage)
         {
             var receiver =

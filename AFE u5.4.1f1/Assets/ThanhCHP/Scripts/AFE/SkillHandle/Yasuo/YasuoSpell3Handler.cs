@@ -1,9 +1,12 @@
 using AFE.Extensions;
+using ExtraLinq;
+using System.Linq;
 using UniRx;
+using UnityEngine;
 
 namespace Com.Beetsoft.AFE
 {
-    public class YasuoSpell3Handler : SkillHandler
+    public class YasuoSpell3Handler : SkillHandler, ISkillSpell_3
     {
         private void Start()
         {
@@ -11,6 +14,22 @@ namespace Com.Beetsoft.AFE
                 .OnSpell3AsObservable()
                 .Do(_ => Animator.SetTriggerWithBool(Constant.AnimationPram.E))
                 .Subscribe();
+
+            foreach (var onActiveSkill in SkillReader.SkillBehaviours.Distinct()
+             .Select(x => x.OnActiveSkillAsObservable()))
+            {
+                onActiveSkill.Subscribe(receiveDamageables =>
+                {
+                    Debug.Log(receiveDamageables.IsNullOrEmpty());
+                    if (receiveDamageables.IsNullOrEmpty())
+                    {
+                        return;
+                    }
+
+                    // Move to target + attack
+
+                });
+            }
         }
     }
 }

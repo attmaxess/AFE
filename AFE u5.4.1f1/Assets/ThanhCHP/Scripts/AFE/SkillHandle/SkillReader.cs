@@ -11,13 +11,13 @@ namespace Com.Beetsoft.AFE
         void SendNext();
     }
 
-//    public static class SkillReaderExtension
-//    {
-//        public static ISkillReaderOutput ReadSkill(this ISkillReader skillReader, ISkillConfig skillConfig)
-//        {
-//            return new SkillReaderOutput(skillConfig.IconCurrent, skillConfig.);
-//        }
-//    }
+    //    public static class SkillReaderExtension
+    //    {
+    //        public static ISkillReaderOutput ReadSkill(this ISkillReader skillReader, ISkillConfig skillConfig)
+    //        {
+    //            return new SkillReaderOutput(skillConfig.IconCurrent, skillConfig.);
+    //        }
+    //    }
 
     [Serializable]
     public class SkillReader

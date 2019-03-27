@@ -84,13 +84,12 @@ public class BtnSkillUI : MonoBehaviour
 
 
     }
-
-    void FinDSkillReader()
+    public void FinDSkillReader()
     {
         if (skillHandler != null) return;
         TestYasuo[] _listTestYasuo = FindObjectsOfType<TestYasuo>();
         if (_listTestYasuo.Length <= 0) return;
-        TestYasuo yasuoMine = null;
+        TestYasuo yasuoMine = _listTestYasuo[0];
         foreach (var item in _listTestYasuo)
         {
             if (item.photonView.IsMine)
@@ -104,8 +103,11 @@ public class BtnSkillUI : MonoBehaviour
             var _l = yasuoMine.GetComponents<SkillHandler>();
             foreach (var item in _l)
             {
-                if (item.GetComponent<ISkillSpell_1>() != null)
+                var implement = item as ISkillSpell_1;
+                if (implement != null)
+                {
                     skillHandler = item;
+                }
             }
         }
         if (skillType == SkillType.Skill_2)
@@ -113,8 +115,11 @@ public class BtnSkillUI : MonoBehaviour
             var _l = yasuoMine.GetComponents<SkillHandler>();
             foreach (var item in _l)
             {
-                if (item.GetComponent<ISkillSpell_2>() != null)
+                var implement = item as ISkillSpell_2;
+                if (implement != null)
+                {
                     skillHandler = item;
+                }
             }
         }
         if (skillType == SkillType.Skill_3)
@@ -122,8 +127,11 @@ public class BtnSkillUI : MonoBehaviour
             var _l = yasuoMine.GetComponents<SkillHandler>();
             foreach (var item in _l)
             {
-                if (item.GetComponent<ISkillSpell_3>() != null)
+                var implement = item as ISkillSpell_3;
+                if (implement != null)
+                {
                     skillHandler = item;
+                }
             }
         }
         if (skillType == SkillType.Skill_4)
@@ -131,8 +139,11 @@ public class BtnSkillUI : MonoBehaviour
             var _l = yasuoMine.GetComponents<SkillHandler>();
             foreach (var item in _l)
             {
-                if (item.GetComponent<ISkillSpell_4>() != null)
+                var implement = item as ISkillSpell_4;
+                if (implement != null)
+                {
                     skillHandler = item;
+                }
             }
         }
 
@@ -146,7 +157,6 @@ public class BtnSkillUI : MonoBehaviour
                }
                else
                {
-                   Debug.Log(_skillHandle.Cooldown);
                    isCountTime = true;
                    canUseSkill = false;
                    countTime = _skillHandle.Cooldown;

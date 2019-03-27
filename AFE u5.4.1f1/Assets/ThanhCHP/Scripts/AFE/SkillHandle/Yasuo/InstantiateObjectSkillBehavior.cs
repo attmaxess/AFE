@@ -24,6 +24,7 @@ namespace Com.Beetsoft.AFE
 
         public override void ActiveSkill(IInputMessage inputMessage)
         {
+            ActiveSkillSubject.OnNext(new[] { inputMessage.ObjectReceive});
             if (inputMessage.ObjectReceive != null)
                 photonView.RPC("ActiveSkillRPC", RpcTarget.All, inputMessage.Direction,
                     inputMessage.ObjectReceive.ViewID);

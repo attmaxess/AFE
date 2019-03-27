@@ -45,6 +45,12 @@ namespace Com.Beetsoft.AFE
 
         private void HandleWhenReceiveDamage(IDamageMessage damageMessage)
         {
+            if (ChampionConfig == null)
+            {
+                Debug.LogError("Set ChampionConfig");
+                return;
+            }
+
             var physicDamageReceive = this.GetDamageReceive(damageMessage.PhysicDamage, ChampionConfig.Armor.Value);
             var magicDamageReceive = this.GetDamageReceive(damageMessage.MagicDamage, ChampionConfig.MagicResist.Value);
 

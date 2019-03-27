@@ -59,7 +59,7 @@ namespace Com.Beetsoft.AFE
         }
 
         public static IReceiveDamageable ReceiverDamageNearestByRayCast(this GameObject go,
-            Vector3 direction, float distance , LayerMask layerMask = default(LayerMask) ,
+            Vector3 direction, float distance, LayerMask layerMask = default(LayerMask),
             QueryTriggerInteraction queryTriggerInteraction = QueryTriggerInteraction.UseGlobal)
         {
             IReceiveDamageable receiveDamageable = null;
@@ -104,10 +104,13 @@ namespace Com.Beetsoft.AFE
            Vector3 direction, float distance, LayerMask layerMask = default(LayerMask),
            QueryTriggerInteraction queryTriggerInteraction = QueryTriggerInteraction.Collide)
         {
-            if (layerMask == default(LayerMask)) layerMask = ~0;
+            if (layerMask == default(LayerMask))
+            {
+                layerMask = ~0;
+            }
             List<IReceiveDamageable> receiveDamageable = new List<IReceiveDamageable>();
             Debug.DrawRay(go.transform.position, direction * distance, Color.blue, 0.5f);
-            var _all = Physics.RaycastAll(go.transform.position, direction, distance, layerMask,
+            var _all = Physics.RaycastAll(go.transform.position, direction.normalized, distance, layerMask,
                 queryTriggerInteraction);
             var _allIreveiceDamaable = _all.Where(_ => _.transform.GetComponent<IReceiveDamageable>() != null).ToList();
             foreach (var item in _allIreveiceDamaable)

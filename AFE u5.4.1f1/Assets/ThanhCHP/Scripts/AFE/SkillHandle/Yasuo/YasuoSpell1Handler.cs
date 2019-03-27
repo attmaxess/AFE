@@ -43,7 +43,10 @@ namespace Com.Beetsoft.AFE
                 onActiveSkill.Subscribe(receiveDamageables =>
                 {
                     Debug.Log(receiveDamageables.IsNullOrEmpty());
-                    if (receiveDamageables.IsNullOrEmpty()) return;
+                    if (receiveDamageables.IsNullOrEmpty())
+                    {
+                        return;
+                    }
                     SkillReader.SendNext();
                     HandleAnimationState();
                 });
@@ -54,7 +57,10 @@ namespace Com.Beetsoft.AFE
         {
             FeatureIndexSpell1State++;
             if ((int)FeatureIndexSpell1State == Constant.Yasuo.QClipAmount)
+            {
                 FeatureIndexSpell1State = AnimationState.Spell1.Spell1A;
+                SkillReader.SendNextFirstIndex();
+            }
             Animator.SetInteger(Constant.AnimationPram.QInt, (int)FeatureIndexSpell1State);
             Animator.SetBool(Constant.AnimationPram.IdleBool, true);
         }

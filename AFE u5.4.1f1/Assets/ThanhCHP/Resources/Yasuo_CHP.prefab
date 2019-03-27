@@ -484,7 +484,9 @@ GameObject:
   - component: {fileID: 114303200557662960}
   - component: {fileID: 114306969928528286}
   - component: {fileID: 114287457019645492}
+  - component: {fileID: 114809400590198410}
   - component: {fileID: 114284003140846610}
+  - component: {fileID: 114530284841553940}
   - component: {fileID: 114337523984434604}
   m_Layer: 0
   m_Name: Yasuo_CHP
@@ -4112,7 +4114,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillConfig: {fileID: 0}
   skillReader:
-    skillBehaviours: []
+    skillBehaviours:
+    - {fileID: 114530284841553940}
 --- !u!114 &114285160370677164
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4137,7 +4140,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillConfig: {fileID: 0}
   skillReader:
-    skillBehaviours: []
+    skillBehaviours:
+    - {fileID: 114809400590198410}
 --- !u!114 &114303200557662960
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4152,7 +4156,7 @@ MonoBehaviour:
   skillModel: {fileID: 11400000, guid: 901a2946f74261f4fad4f6b4c9a2b344, type: 2}
   layerMaskTarget:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 4294967295
 --- !u!114 &114306969928528286
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4242,8 +4246,23 @@ MonoBehaviour:
   - {fileID: 114338453396253636}
   - {fileID: 114773152827730594}
   viewIdField: 0
-  InstantiationId: 1
+  InstantiationId: 2
   isRuntimeInstantiated: 0
+--- !u!114 &114530284841553940
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1174075871233712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1eca721827e945848a0d4e81c43e3a7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillModel: {fileID: 11400000, guid: 089328d3d2e04a741923e8afd81c8e33, type: 2}
+  layerMaskTarget:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!114 &114603826160903828
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4258,7 +4277,7 @@ MonoBehaviour:
   skillConfig: {fileID: 0}
   skillReader:
     skillBehaviours:
-    - {fileID: 114306969928528286}
+    - {fileID: 114303200557662960}
     - {fileID: 114303200557662960}
     - {fileID: 114306969928528286}
 --- !u!114 &114773152827730594
@@ -4326,6 +4345,20 @@ MonoBehaviour:
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
+--- !u!114 &114809400590198410
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1174075871233712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32ae5aff4efd89f4fbd1b88b5a42efc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillModel: {fileID: 11400000, guid: 1897c10aeb370b24e91035e8f3cf69f2, type: 2}
+  objectPrefab: {fileID: 114772609666302982, guid: dfae73dec05083f49bbe619610a88ab3,
+    type: 2}
 --- !u!137 &137490055118385072
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
