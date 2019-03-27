@@ -59,12 +59,14 @@ namespace Com.Beetsoft.AFE
         }
 
         public static IReceiveDamageable ReceiverDamageNearestByRayCast(this GameObject go,
-            Vector3 direction, float distance, LayerMask layerMask = default(LayerMask),
+            Vector3 direction, float distance , LayerMask layerMask = default(LayerMask) ,
             QueryTriggerInteraction queryTriggerInteraction = QueryTriggerInteraction.UseGlobal)
         {
             IReceiveDamageable receiveDamageable = null;
             RaycastHit hit;
             Debug.DrawRay(go.transform.position, direction * distance, Color.red, 1);
+            if (layerMask == default(LayerMask)) layerMask = ~0;
+
             if (Physics.Raycast(go.transform.position, direction, out hit, distance, layerMask,
                 queryTriggerInteraction))
             {
@@ -76,8 +78,9 @@ namespace Com.Beetsoft.AFE
 
         public static IReceiveDamageable ReceiverDamageNearestByRayCastAll(this GameObject go,
             Vector3 direction, float distance, LayerMask layerMask = default(LayerMask),
-            QueryTriggerInteraction queryTriggerInteraction = QueryTriggerInteraction.UseGlobal)
+            QueryTriggerInteraction queryTriggerInteraction = QueryTriggerInteraction.Collide)
         {
+            if (layerMask == default(LayerMask)) layerMask = ~0;
             IReceiveDamageable receiveDamageable = null;
             Debug.DrawRay(go.transform.position, direction * distance, Color.blue, 0.5f);
             var _all = Physics.RaycastAll(go.transform.position, direction, distance, layerMask,
@@ -99,8 +102,9 @@ namespace Com.Beetsoft.AFE
 
         public static List<IReceiveDamageable> GetAllReceiverDamageNearestByRayCastAll(this GameObject go,
            Vector3 direction, float distance, LayerMask layerMask = default(LayerMask),
-           QueryTriggerInteraction queryTriggerInteraction = QueryTriggerInteraction.UseGlobal)
+           QueryTriggerInteraction queryTriggerInteraction = QueryTriggerInteraction.Collide)
         {
+            if (layerMask == default(LayerMask)) layerMask = ~0;
             List<IReceiveDamageable> receiveDamageable = new List<IReceiveDamageable>();
             Debug.DrawRay(go.transform.position, direction * distance, Color.blue, 0.5f);
             var _all = Physics.RaycastAll(go.transform.position, direction, distance, layerMask,
