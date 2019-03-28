@@ -4280,7 +4280,7 @@ MonoBehaviour:
     m_Bits: 4294967295
   timeDelayTakeDam: 100
   timeMove: 0.75
-  easeType: 30
+  easeType: 3
 --- !u!114 &114603826160903828
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4321,7 +4321,7 @@ MonoBehaviour:
     SynchronizeType: 2
     Name: Idle Int
   - Type: 3
-    SynchronizeType: 2
+    SynchronizeType: 1
     Name: Idle Out Int
   - Type: 3
     SynchronizeType: 2

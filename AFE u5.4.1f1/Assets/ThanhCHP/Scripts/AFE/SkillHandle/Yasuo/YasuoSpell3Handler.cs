@@ -1,6 +1,7 @@
 using System.Linq;
 using AFE.Extensions;
 using ExtraLinq;
+using Photon.Pun;
 using UniRx;
 using UnityEngine;
 
@@ -25,7 +26,7 @@ namespace Com.Beetsoft.AFE
                 {
                     Debug.Log(receiveDamageables.IsNullOrEmpty());
                     if (receiveDamageables.IsNullOrEmpty()) return;
-
+                    
                     Animator.SetTriggerWithBool(Constant.AnimationPram.E);
                 });
         }

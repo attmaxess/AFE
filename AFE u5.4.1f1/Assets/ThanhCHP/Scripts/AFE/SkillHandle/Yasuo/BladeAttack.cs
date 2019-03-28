@@ -1,4 +1,5 @@
 ﻿using System;
+using Photon.Pun;
 using UniRx;
 using UnityEngine;
 
@@ -63,11 +64,12 @@ namespace Com.Beetsoft.AFE
 
         private void Dash(Vector3 direction)
         {
+            RotateWithDirection(direction);
+            
             if (photonView.IsMine)
                 MessageBroker.Default.Publish(new IMessageBladeAttack(true, photonView.IsMine,
                     transform));
             var posTarget = transform.position + direction * SkillConfig.Range.Value;
-            transform.forward = direction;
             ObservableTween.Tween(transform.position, posTarget, timeMove, EaseType)
                 .DoOnCompleted(() =>
                 {
@@ -76,6 +78,17 @@ namespace Com.Beetsoft.AFE
                             new IMessageBladeAttack(false, photonView.IsMine, transform));
                 })
                 .Subscribe(rate => { transform.position = rate; });
+        }
+            
+        private void RotateWithDirection(Vector3 direction)
+        {
+            photonView.RPC("RotateWithDirectionRPC", RpcTarget.All, direction);
+        }
+
+        [PunRPC]
+        private void RotateWithDirectionRPC(Vector3 direction)
+        {
+            transform.forward = direction;
         }
     }
 }
