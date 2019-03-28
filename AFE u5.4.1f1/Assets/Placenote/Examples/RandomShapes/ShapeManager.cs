@@ -6,7 +6,7 @@ using UnityEngine.XR.iOS;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 
- // Classes to hold shape information
+// Classes to hold shape information
 
 [System.Serializable]
 public class ShapeInfo
@@ -29,19 +29,26 @@ public class ShapeList
     public ShapeInfo[] shapes;
 }
 
- // Main Class for Managing Markers
+[System.Serializable]
+public class DHTObjectData
+{
+    public string stringDHT = "dohoangthan";
+}
 
-public class ShapeManager : MonoBehaviour {
+// Main Class for Managing Markers
 
+public class ShapeManager : MonoBehaviour
+{
     public List<ShapeInfo> shapeInfoList = new List<ShapeInfo>();
     public List<GameObject> shapeObjList = new List<GameObject>();
     public Material mShapeMaterial;
-    private Color[] colorTypeOptions = {Color.cyan, Color.red, Color.yellow};
+    private Color[] colorTypeOptions = { Color.cyan, Color.red, Color.yellow };
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
 
-	}
+    }
 
     // The HitTest to Add a Marker
 
@@ -124,14 +131,14 @@ public class ShapeManager : MonoBehaviour {
         }
     }
 
-	public void OnSimulatorDropShape()
-	{
-		Vector3 dropPosition = Camera.main.transform.position + Camera.main.transform.forward * 0.3f;
-		Quaternion dropRotation = Camera.main.transform.rotation;
+    public void OnSimulatorDropShape()
+    {
+        Vector3 dropPosition = Camera.main.transform.position + Camera.main.transform.forward * 0.3f;
+        Quaternion dropRotation = Camera.main.transform.rotation;
 
-		AddShape(dropPosition, dropRotation);
+        AddShape(dropPosition, dropRotation);
 
-	}
+    }
 
 
     // All shape management functions (add shapes, save shapes to metadata etc.
@@ -211,6 +218,11 @@ public class ShapeManager : MonoBehaviour {
                 shapeInfoList.Add(shapeInfo);
                 GameObject shape = ShapeFromInfo(shapeInfo);
                 shapeObjList.Add(shape);
+            }
+
+            if (mapMetadata["dht"] is JObject)
+            {
+                Debug.Log("LoadShapesJSON " + mapMetadata["dht"].ToObject<DHTObjectData>().stringDHT);
             }
         }
     }

@@ -382,10 +382,17 @@ public class PlacenoteSampleView : MonoBehaviour, PlacenoteListener
                 metadata.userdata = userdata;
 
                 JObject shapeList = GetComponent<ShapeManager>().Shapes2JSON();
-
                 userdata["shapeList"] = shapeList;
                 GetComponent<ShapeManager>().ClearShapes();
 
+                ///Test gởi đi/lấy về gói info với PlaceNote luôn
+                ///=======================================================
+                DHTObjectData dhtObjData = new DHTObjectData();
+                dhtObjData.stringDHT = "dohoangthan";
+                JObject dhtObject = JObject.FromObject(dhtObjData);
+                userdata["dht"] = "dohoangthan";
+                ///=======================================================
+                
                 if (useLocation)
                 {
                     metadata.location = new LibPlacenote.MapLocation();
