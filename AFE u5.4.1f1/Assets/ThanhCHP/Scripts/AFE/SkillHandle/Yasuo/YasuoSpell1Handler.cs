@@ -19,12 +19,7 @@ namespace Com.Beetsoft.AFE
             this.JoystickInputFilterObserver
                 .OnSpell1AsObservable()
                 .Do(_ => Animator.SetTriggerWithBool(Constant.AnimationPram.Q))
-                .Subscribe(message =>
-                {
-                    var skillBehaviour = SkillReader.GetSkillBehaviourCurrent();
-                    skillBehaviour.ActiveSkill(message);
-                    SkillMessageOutputReactiveProperty.Value = skillBehaviour.GetSkillOutputMessage();
-                });
+                .Subscribe(message => { ActiveSkillCurrent(message, 100); });
 
             this.JoystickInputFilterObserver
                 .OnSpell3AsObservable()
@@ -33,7 +28,7 @@ namespace Com.Beetsoft.AFE
                         Observable.Timer(TimeSpan.FromMilliseconds(Constant.Yasuo.OffsetTimeSpell3AndSpell1))))
                 .Subscribe(_ =>
                 {
-                    Animator.SetInteger(Constant.AnimationPram.QInt, (int)AnimationState.Spell1.Spell1_Dash);
+                    Animator.SetInteger(Constant.AnimationPram.QInt, (int) AnimationState.Spell1.Spell1_Dash);
                     Animator.SetBool(Constant.AnimationPram.IdleBool, false);
                 });
 
@@ -47,8 +42,10 @@ namespace Com.Beetsoft.AFE
                     {
                         return;
                     }
+
                     SkillReader.SendNext();
                     HandleAnimationState();
+                    SkillMessageOutputReactiveProperty.Value = SkillReader.GetSkillBehaviourCurrent().GetSkillOutputMessage();
                 });
             }
         }
@@ -56,12 +53,13 @@ namespace Com.Beetsoft.AFE
         private void HandleAnimationState()
         {
             FeatureIndexSpell1State++;
-            if ((int)FeatureIndexSpell1State == Constant.Yasuo.QClipAmount)
+            if ((int) FeatureIndexSpell1State == Constant.Yasuo.QClipAmount)
             {
                 FeatureIndexSpell1State = AnimationState.Spell1.Spell1A;
                 SkillReader.SendNextFirstIndex();
             }
-            Animator.SetInteger(Constant.AnimationPram.QInt, (int)FeatureIndexSpell1State);
+
+            Animator.SetInteger(Constant.AnimationPram.QInt, (int) FeatureIndexSpell1State);
             Animator.SetBool(Constant.AnimationPram.IdleBool, true);
         }
     }
