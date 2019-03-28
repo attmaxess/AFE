@@ -11,9 +11,8 @@ namespace Com.Beetsoft.AFE
         IInitialize<IAnimationStateChecker>,
         IInitialize<IChampionConfig>
     {
-        [SerializeField] private SkillModel skillConfig;
-
         [SerializeField] private SkillBehaviour[] skillBehaviours;
+        [SerializeField] private SkillModel skillConfig;
 
         private SkillBehaviour[] SkillBehaviours => skillBehaviours;
 
@@ -31,6 +30,8 @@ namespace Com.Beetsoft.AFE
             new ReactiveProperty<ISkillOutputMessage>();
 
         protected SkillReader SkillReader { get; private set; }
+
+        protected SyncTransformImmediately SyncTransformImmediately { get; private set; }
 
         void IInitialize<IAnimationStateChecker>.Initialize(IAnimationStateChecker init)
         {
@@ -86,6 +87,7 @@ namespace Com.Beetsoft.AFE
         {
             Animator = GetComponent<Animator>();
             SkillReader = new SkillReader(SkillBehaviours, 0);
+            SyncTransformImmediately = gameObject.GetOrAddComponent<SyncTransformImmediately>();
         }
 
         protected virtual void ActiveSkillCurrent(IInputMessage message, int millisecondDelay)

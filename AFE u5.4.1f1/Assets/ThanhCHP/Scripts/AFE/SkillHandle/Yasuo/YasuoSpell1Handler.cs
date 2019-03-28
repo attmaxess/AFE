@@ -22,9 +22,8 @@ namespace Com.Beetsoft.AFE
                 .Do(_ => Animator.SetTriggerWithBool(Constant.AnimationPram.Q))
                 .Subscribe(message =>
                 {
-                    var skillBehaviour = SkillReader.GetSkillBehaviourCurrent();
-                    skillBehaviour.ActiveSkill(message);
-                    RotateWithDirection(message.Direction);
+                    SyncTransformImmediately.SyncRotationWithDirection(message.Direction);
+                    ActiveSkillCurrent(message, 100);
                 });
 
             JoystickInputFilterObserver
@@ -63,17 +62,6 @@ namespace Com.Beetsoft.AFE
 
             Animator.SetInteger(Constant.AnimationPram.QInt, (int) FeatureIndexSpell1State);
             Animator.SetBool(Constant.AnimationPram.IdleBool, true);
-        }
-        
-        private void RotateWithDirection(Vector3 direction)
-        {
-            photonView.RPC("Spell1RotateWithDirectionRPC", RpcTarget.All, direction);
-        }
-
-        [PunRPC]
-        private void Spell1RotateWithDirectionRPC(Vector3 direction)
-        {
-            transform.forward = direction;
         }
     }
 }

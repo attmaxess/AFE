@@ -64,8 +64,7 @@ namespace Com.Beetsoft.AFE
 
         private void Dash(Vector3 direction)
         {
-            RotateWithDirection(direction);
-            
+            SyncTransformImmediately.SyncRotationWithDirection(direction);
             if (photonView.IsMine)
                 MessageBroker.Default.Publish(new IMessageBladeAttack(true, photonView.IsMine,
                     transform));
@@ -78,17 +77,6 @@ namespace Com.Beetsoft.AFE
                             new IMessageBladeAttack(false, photonView.IsMine, transform));
                 })
                 .Subscribe(rate => { transform.position = rate; });
-        }
-            
-        private void RotateWithDirection(Vector3 direction)
-        {
-            photonView.RPC("RotateWithDirectionRPC", RpcTarget.All, direction);
-        }
-
-        [PunRPC]
-        private void RotateWithDirectionRPC(Vector3 direction)
-        {
-            transform.forward = direction;
         }
     }
 }
