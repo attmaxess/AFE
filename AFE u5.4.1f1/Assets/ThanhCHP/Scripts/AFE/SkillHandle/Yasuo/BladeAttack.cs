@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using AnimeRx;
 
 namespace Com.Beetsoft.AFE
 {
@@ -13,6 +14,8 @@ namespace Com.Beetsoft.AFE
             var receiver = gameObject.GetAllReceiverDamageNearestByRayCastAll(inputMessage.Direction
                 , SkillConfig.Range.Value, LayerMaskTarget);
             ActiveSkillSubject.OnNext(receiver);
+            if (receiver == null) return;
+
         }
     }
 }

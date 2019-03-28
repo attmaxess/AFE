@@ -13,7 +13,12 @@ namespace Com.Beetsoft.AFE
             this.JoystickInputFilterObserver
                 .OnSpell3AsObservable()
                 .Do(_ => Animator.SetTriggerWithBool(Constant.AnimationPram.E))
-                .Subscribe();
+                .Subscribe(message =>
+                {
+                    var skillBehavior = SkillReader.GetSkillBehaviourCurrent();
+                    skillBehavior.ActiveSkill(message);
+                    SkillMessageOutputReactiveProperty.Value = skillBehavior.GetSkillOutputMessage();
+                });
 
             foreach (var onActiveSkill in SkillReader.SkillBehaviours.Distinct()
              .Select(x => x.OnActiveSkillAsObservable()))

@@ -37,7 +37,7 @@ public class PlayerRunHandler : MonoBehaviourPun,
         JoystickInputFilterObserver.OnRunAsObservable()
             .Subscribe(message =>
             {
-                transform.position = message.Direction * ChampionConfig.MoveSpeed.Value;
+                transform.position = message.Direction;//* ChampionConfig.MoveSpeed.Value;
                 rotateTarget = message.Rotation;
             });
 
