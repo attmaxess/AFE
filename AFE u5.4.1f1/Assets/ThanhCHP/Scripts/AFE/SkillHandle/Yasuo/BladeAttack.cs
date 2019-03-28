@@ -24,6 +24,9 @@ namespace Com.Beetsoft.AFE
         [SerializeField] private LayerMask layerMaskTarget;
 
         private LayerMask LayerMaskTarget => layerMaskTarget;
+        public float timeMove = 1;
+        [Tooltip("milliseconds")]
+        public float timeDelayTakeDam = 100;
 
         public override void ActiveSkill(IInputMessage inputMessage)
         {
@@ -36,14 +39,14 @@ namespace Com.Beetsoft.AFE
 
             Vector3 dir = new Vector3(receiver.GetTransform.position.x, transform.position.y, receiver.GetTransform.position.z) - transform.position;
             Vector3 posTarget = new Vector3(dir.x * ChampionConfig.Range.Value, transform.position.y, dir.z * ChampionConfig.Range.Value);
-            ObservableTween.Tween(transform.position, posTarget, 3f, ObservableTween.EaseType.Linear)
+            ObservableTween.Tween(transform.position, posTarget, timeMove, ObservableTween.EaseType.Linear)
                 .DoOnCompleted(() => { if (photonView.IsMine) MessageBroker.Default.Publish<IMessageBladeAttack>(new IMessageBladeAttack(false, photonView.IsMine, transform)); })
          .Subscribe(rate =>
          {
              transform.position = rate;
          });
 
-            Observable.Timer(TimeSpan.FromMilliseconds(100))
+            Observable.Timer(TimeSpan.FromMilliseconds(timeDelayTakeDam))
                 .Subscribe(_ =>
                 {
                     //

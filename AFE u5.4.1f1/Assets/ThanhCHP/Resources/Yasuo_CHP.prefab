@@ -4115,7 +4115,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillConfig: {fileID: 0}
   skillBehaviours:
-  - {fileID: 114306969928528286}
+  - {fileID: 114530284841553940}
 --- !u!114 &114285160370677164
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4277,6 +4277,8 @@ MonoBehaviour:
   layerMaskTarget:
     serializedVersion: 2
     m_Bits: 4294967295
+  timeMove: 1
+  timeDelayTakeDam: 100
 --- !u!114 &114603826160903828
 MonoBehaviour:
   m_ObjectHideFlags: 1
