@@ -133,7 +133,7 @@ public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
             h1 = CF2Input.GetAxis("S_4_Hoz");
             v1 = CF2Input.GetAxis("S_4_Ver");
         }
-        Vector3 dirSkill = (transform.right * previousH1_Skill + transform.forward * previousV1_Skill);
+        Vector3 dirSkill = (transform.right * previousH1_Skill + transform.forward * previousV1_Skill).normalized;
 
 
         if (CF2Input.GetButtonUp("Skill1") && joystickCharacter != null)

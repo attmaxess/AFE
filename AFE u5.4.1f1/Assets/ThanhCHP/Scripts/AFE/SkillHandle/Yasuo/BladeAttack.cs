@@ -37,8 +37,8 @@ namespace Com.Beetsoft.AFE
             if (photonView.IsMine)
                 MessageBroker.Default.Publish<IMessageBladeAttack>(new IMessageBladeAttack(true, photonView.IsMine, transform));
 
-            Vector3 dir = new Vector3(receiver.GetTransform.position.x, transform.position.y, receiver.GetTransform.position.z) - transform.position;
-            Vector3 posTarget = new Vector3(dir.x * ChampionConfig.Range.Value, transform.position.y, dir.z * ChampionConfig.Range.Value);
+            var posTarget = transform.position + inputMessage.Direction * SkillConfig.Range.Value;
+            transform.rotation = Quaternion.LookRotation(inputMessage.Direction);
             ObservableTween.Tween(transform.position, posTarget, timeMove, ObservableTween.EaseType.Linear)
                 .DoOnCompleted(() => { if (photonView.IsMine) MessageBroker.Default.Publish<IMessageBladeAttack>(new IMessageBladeAttack(false, photonView.IsMine, transform)); })
          .Subscribe(rate =>

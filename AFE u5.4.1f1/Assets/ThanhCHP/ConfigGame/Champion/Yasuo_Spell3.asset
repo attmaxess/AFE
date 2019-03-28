@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: Yasuo_Spell3
   m_EditorClassIdentifier: 
   championModel: {fileID: 11400000, guid: c27aa9838b137744c97785c959173d79, type: 2}
-  iconCurrent: {fileID: 21300000, guid: 2f45d3a42a07c5d4c8b8d9b978a04252, type: 3}
+  iconCurrent: {fileID: 21300000, guid: b2b8f148ac872b44da92bbc5ac63b2d9, type: 3}
   cost:
     value: 0
   costPerLevel: 0
