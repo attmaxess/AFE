@@ -2,6 +2,7 @@
 using AnimeRx;
 using UniRx;
 using System.Linq;
+using System;
 
 namespace Com.Beetsoft.AFE
 {
@@ -26,24 +27,14 @@ namespace Com.Beetsoft.AFE
 
         public override void ActiveSkill(IInputMessage inputMessage)
         {
-            var receiver = gameObject.GetAllReceiverDamageNearestByRayCastAll(inputMessage.Direction
+            var receiver = gameObject.ReceiverDamageNearestByRayCast(inputMessage.Direction
                 , SkillConfig.Range.Value, LayerMaskTarget);
-            ActiveSkillSubject.OnNext(receiver);
+            ActiveSkillSubject.OnNext(new IReceiveDamageable[] { receiver });
             if (receiver == null) return;
             if (photonView.IsMine)
                 MessageBroker.Default.Publish<IMessageBladeAttack>(new IMessageBladeAttack(true, photonView.IsMine, transform));
 
-            IReceiveDamageable nearestReceiver = null;
-            float dis = -1;
-            foreach (var item in receiver)
-            {
-                if (Vector3.Distance(item.GetTransform.position, transform.position) > dis)
-                {
-                    dis = Vector3.Distance(item.GetTransform.position, transform.position);
-                    nearestReceiver = item;
-                }
-            }
-            Vector3 dir = new Vector3(nearestReceiver.GetTransform.position.x, transform.position.y, nearestReceiver.GetTransform.position.z) - transform.position;
+            Vector3 dir = new Vector3(receiver.GetTransform.position.x, transform.position.y, receiver.GetTransform.position.z) - transform.position;
             Vector3 posTarget = new Vector3(dir.x * ChampionConfig.Range.Value, transform.position.y, dir.z * ChampionConfig.Range.Value);
             ObservableTween.Tween(transform.position, posTarget, 3f, ObservableTween.EaseType.Linear)
                 .DoOnCompleted(() => { if (photonView.IsMine) MessageBroker.Default.Publish<IMessageBladeAttack>(new IMessageBladeAttack(false, photonView.IsMine, transform)); })
@@ -51,6 +42,13 @@ namespace Com.Beetsoft.AFE
          {
              transform.position = rate;
          });
+
+            Observable.Timer(TimeSpan.FromMilliseconds(100))
+                .Subscribe(_ =>
+                {
+                    //
+                    receiver.TakeDamage(new DamageMessage(SkillConfig.PhysicDamage.Value, SkillConfig.MagicDamage.Value));
+                });
         }
     }
 }
