@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using AnimeRx;
+using UniRx;
+using System.Linq;
 
 namespace Com.Beetsoft.AFE
 {
@@ -16,6 +18,22 @@ namespace Com.Beetsoft.AFE
             ActiveSkillSubject.OnNext(receiver);
             if (receiver == null) return;
 
+            IReceiveDamageable nearestReceiver = null;
+            float dis = -1;
+            foreach (var item in receiver)
+            {
+                if (Vector3.Distance(item.GetTransform.position, transform.position) > dis)
+                {
+                    dis = Vector3.Distance(item.GetTransform.position, transform.position);
+                    nearestReceiver = item;
+                }
+            }
+
+            ObservableTween.Tween(transform.position, nearestReceiver.GetTransform.position, 1f, ObservableTween.EaseType.Linear)
+         .Subscribe(rate =>
+         {
+             transform.position = rate;
+         });
         }
     }
 }
