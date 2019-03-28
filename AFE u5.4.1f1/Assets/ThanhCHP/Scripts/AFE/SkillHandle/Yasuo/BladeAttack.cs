@@ -1,16 +1,15 @@
-﻿using UnityEngine;
-using AnimeRx;
+﻿using System;
 using UniRx;
-using System.Linq;
-using System;
+using UnityEngine;
 
 namespace Com.Beetsoft.AFE
 {
     public class IMessageBladeAttack
     {
-        public bool isUsing;
         public bool isMine;
+        public bool isUsing;
         public Transform player;
+
         public IMessageBladeAttack(bool isUsing, bool isMine, Transform player)
         {
             this.isUsing = isUsing;
@@ -21,37 +20,62 @@ namespace Com.Beetsoft.AFE
 
     public class BladeAttack : SkillBehaviour
     {
+        [SerializeField] private bool isMustDetectTarget;
         [SerializeField] private LayerMask layerMaskTarget;
+        [Tooltip("milliseconds")] public float timeDelayTakeDam = 100;
+        public float timeMove = 1;
+        [SerializeField] private ObservableTween.EaseType easeType;
 
         private LayerMask LayerMaskTarget => layerMaskTarget;
-        public float timeMove = 1;
-        [Tooltip("milliseconds")]
-        public float timeDelayTakeDam = 100;
+
+        private bool IsMustDetectTarget => isMustDetectTarget;
+
+        private ObservableTween.EaseType EaseType => easeType;
 
         public override void ActiveSkill(IInputMessage inputMessage)
         {
-            var receiver = gameObject.ReceiverDamageNearestByRayCast(inputMessage.Direction
-                , SkillConfig.Range.Value, LayerMaskTarget);
-            ActiveSkillSubject.OnNext(new IReceiveDamageable[] { receiver });
-            if (receiver == null) return;
-            if (photonView.IsMine)
-                MessageBroker.Default.Publish<IMessageBladeAttack>(new IMessageBladeAttack(true, photonView.IsMine, transform));
-
-            var posTarget = transform.position + inputMessage.Direction * SkillConfig.Range.Value;
-            transform.rotation = Quaternion.LookRotation(inputMessage.Direction);
-            ObservableTween.Tween(transform.position, posTarget, timeMove, ObservableTween.EaseType.Linear)
-                .DoOnCompleted(() => { if (photonView.IsMine) MessageBroker.Default.Publish<IMessageBladeAttack>(new IMessageBladeAttack(false, photonView.IsMine, transform)); })
-         .Subscribe(rate =>
-         {
-             transform.position = rate;
-         });
-
-            Observable.Timer(TimeSpan.FromMilliseconds(timeDelayTakeDam))
-                .Subscribe(_ =>
+            if (IsMustDetectTarget)
+            {
+                var receiver = gameObject.ReceiverDamageNearestByRayCast(inputMessage.Direction
+                    , SkillConfig.Range.Value, LayerMaskTarget);
+                if (receiver == null)
                 {
-                    //
-                    receiver.TakeDamage(new DamageMessage(SkillConfig.PhysicDamage.Value, SkillConfig.MagicDamage.Value));
-                });
+                    ActiveSkillSubject.OnNext(null);
+                    return;
+                }
+
+                ActiveSkillSubject.OnNext(new[] {receiver});
+
+                Observable.Timer(TimeSpan.FromMilliseconds(timeDelayTakeDam))
+                    .Subscribe(_ =>
+                    {
+                        receiver.TakeDamage(
+                            new DamageMessage(SkillConfig.PhysicDamage.Value, SkillConfig.MagicDamage.Value));
+                    });
+                Dash(inputMessage.Direction);
+            }
+            else
+            {
+                ActiveSkillSubject.OnNext(null);
+                Dash(inputMessage.Direction);
+            }
+        }
+
+        private void Dash(Vector3 direction)
+        {
+            if (photonView.IsMine)
+                MessageBroker.Default.Publish(new IMessageBladeAttack(true, photonView.IsMine,
+                    transform));
+            var posTarget = transform.position + direction * SkillConfig.Range.Value;
+            transform.forward = direction;
+            ObservableTween.Tween(transform.position, posTarget, timeMove, EaseType)
+                .DoOnCompleted(() =>
+                {
+                    if (photonView.IsMine)
+                        MessageBroker.Default.Publish(
+                            new IMessageBladeAttack(false, photonView.IsMine, transform));
+                })
+                .Subscribe(rate => { transform.position = rate; });
         }
     }
 }

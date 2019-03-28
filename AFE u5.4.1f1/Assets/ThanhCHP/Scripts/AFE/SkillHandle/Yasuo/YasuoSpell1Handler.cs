@@ -2,8 +2,8 @@ using System;
 using System.Linq;
 using AFE.Extensions;
 using ExtraLinq;
-using UnityEngine;
 using UniRx;
+using UnityEngine;
 using AnimationState = Com.Beetsoft.AFE.Enumerables.AnimationState;
 
 namespace Com.Beetsoft.AFE
@@ -16,7 +16,7 @@ namespace Com.Beetsoft.AFE
         {
             SkillReader.SendNextFirstIndex();
 
-            this.JoystickInputFilterObserver
+            JoystickInputFilterObserver
                 .OnSpell1AsObservable()
                 .Do(_ => Animator.SetTriggerWithBool(Constant.AnimationPram.Q))
                 .Subscribe(message =>
@@ -25,10 +25,10 @@ namespace Com.Beetsoft.AFE
                     ActiveSkillCurrent(message, 100);
                 });
 
-            this.JoystickInputFilterObserver
+            JoystickInputFilterObserver
                 .OnSpell3AsObservable()
                 .SelectMany(_ =>
-                    this.JoystickInputFilterObserver.OnSpell1AsObservable().TakeUntil(
+                    JoystickInputFilterObserver.OnSpell1AsObservable().TakeUntil(
                         Observable.Timer(TimeSpan.FromMilliseconds(Constant.Yasuo.OffsetTimeSpell3AndSpell1))))
                 .Subscribe(_ =>
                 {
@@ -38,20 +38,16 @@ namespace Com.Beetsoft.AFE
 
             foreach (var onActiveSkill in SkillReader.SkillBehaviours.Distinct()
                 .Select(x => x.OnActiveSkillAsObservable()))
-            {
                 onActiveSkill.Subscribe(receiveDamageables =>
                 {
                     Debug.Log(receiveDamageables.IsNullOrEmpty());
-                    if (receiveDamageables.IsNullOrEmpty())
-                    {
-                        return;
-                    }
+                    if (receiveDamageables.IsNullOrEmpty()) return;
 
                     SkillReader.SendNext();
                     HandleAnimationState();
-                    SkillMessageOutputReactiveProperty.Value = SkillReader.GetSkillBehaviourCurrent().GetSkillOutputMessage();
+                    SkillMessageOutputReactiveProperty.Value =
+                        SkillReader.GetSkillBehaviourCurrent().GetSkillOutputMessage();
                 });
-            }
         }
 
         private void HandleAnimationState()

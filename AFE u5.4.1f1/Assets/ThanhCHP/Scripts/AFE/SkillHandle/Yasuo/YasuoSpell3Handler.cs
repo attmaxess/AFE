@@ -1,6 +1,6 @@
+using System.Linq;
 using AFE.Extensions;
 using ExtraLinq;
-using System.Linq;
 using UniRx;
 using UnityEngine;
 
@@ -10,9 +10,8 @@ namespace Com.Beetsoft.AFE
     {
         private void Start()
         {
-            this.JoystickInputFilterObserver
+            JoystickInputFilterObserver
                 .OnSpell3AsObservable()
-                .Do(_ => Animator.SetTriggerWithBool(Constant.AnimationPram.E))
                 .Subscribe(message =>
                 {
                     var skillBehavior = SkillReader.GetSkillBehaviourCurrent();
@@ -21,21 +20,14 @@ namespace Com.Beetsoft.AFE
                 });
 
             foreach (var onActiveSkill in SkillReader.SkillBehaviours.Distinct()
-             .Select(x => x.OnActiveSkillAsObservable()))
-            {
+                .Select(x => x.OnActiveSkillAsObservable()))
                 onActiveSkill.Subscribe(receiveDamageables =>
                 {
                     Debug.Log(receiveDamageables.IsNullOrEmpty());
-                    if (receiveDamageables.IsNullOrEmpty())
-                    {
-                        return;
-                    }
+                    if (receiveDamageables.IsNullOrEmpty()) return;
 
-                    // Move to target + attack
-                    
-
+                    Animator.SetTriggerWithBool(Constant.AnimationPram.E);
                 });
-            }
         }
     }
 }
