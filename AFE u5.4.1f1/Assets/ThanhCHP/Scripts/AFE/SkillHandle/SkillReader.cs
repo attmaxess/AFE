@@ -22,9 +22,7 @@ namespace Com.Beetsoft.AFE
     [Serializable]
     public class SkillReader
     {
-        [SerializeField] private List<SkillBehaviour> skillBehaviours;
-
-        public List<SkillBehaviour> SkillBehaviours => skillBehaviours;
+        public SkillBehaviour[] SkillBehaviours { get; }
 
         private int SkillIndex { get; set; } = -1;
 
@@ -39,13 +37,13 @@ namespace Com.Beetsoft.AFE
 
         public void SendNext()
         {
-            SkillIndex = Mathf.Min(SkillBehaviours.Count - 1, ++SkillIndex);
+            SkillIndex = Mathf.Min(SkillBehaviours.Length - 1, ++SkillIndex);
             SkillBehaviourCurrent.Value = SkillBehaviours[SkillIndex];
         }
 
         public void SendNextLastIndex()
         {
-            SkillIndex = SkillBehaviours.Count - 1;
+            SkillIndex = SkillBehaviours.Length - 1;
             SkillBehaviourCurrent.Value = SkillBehaviours.Last();
         }
 
@@ -62,6 +60,13 @@ namespace Com.Beetsoft.AFE
 
         public SkillReader()
         {
+        }
+
+        public SkillReader(SkillBehaviour[] skillBehaviours, int skillIndex)
+        {
+            SkillBehaviours = skillBehaviours;
+            SkillIndex = skillIndex;
+            SkillBehaviourCurrent.Value = skillBehaviours[skillIndex];
         }
     }
 }

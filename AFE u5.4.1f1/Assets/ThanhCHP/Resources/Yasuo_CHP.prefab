@@ -4113,9 +4113,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillConfig: {fileID: 0}
-  skillReader:
-    skillBehaviours:
-    - {fileID: 114530284841553940}
+  skillBehaviours:
+  - {fileID: 114306969928528286}
 --- !u!114 &114285160370677164
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4139,9 +4138,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillConfig: {fileID: 0}
-  skillReader:
-    skillBehaviours:
-    - {fileID: 114809400590198410}
+  skillBehaviours:
+  - {fileID: 114809400590198410}
 --- !u!114 &114303200557662960
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4195,8 +4193,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillConfig: {fileID: 0}
-  skillReader:
-    skillBehaviours: []
+  skillBehaviours:
+  - {fileID: 114530284841553940}
 --- !u!114 &114337711945045802
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4209,8 +4207,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillConfig: {fileID: 11400000, guid: 18234a120e0bf644083efacea99e9255, type: 2}
-  skillReader:
-    skillBehaviours: []
+  skillBehaviours:
+  - {fileID: 114306969928528286}
   maxHit: 4
 --- !u!114 &114338453396253636
 MonoBehaviour:
@@ -4275,11 +4273,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillConfig: {fileID: 0}
-  skillReader:
-    skillBehaviours:
-    - {fileID: 114303200557662960}
-    - {fileID: 114303200557662960}
-    - {fileID: 114306969928528286}
+  skillBehaviours:
+  - {fileID: 114303200557662960}
+  - {fileID: 114303200557662960}
+  - {fileID: 114306969928528286}
 --- !u!114 &114773152827730594
 MonoBehaviour:
   m_ObjectHideFlags: 1

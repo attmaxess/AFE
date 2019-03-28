@@ -10,10 +10,18 @@ namespace Com.Beetsoft.AFE
     {
         private void Start()
         {
+            this.SkillReader.SendNextFirstIndex();
+
             this.JoystickInputFilterObserver
                 .OnSpell2AsObservable()
                 .Do(_ => Animator.SetTriggerWithBool(Constant.AnimationPram.W))
-                .Subscribe();
+                .Subscribe(message =>
+                {
+                    var skillBehaviour = SkillReader.GetSkillBehaviourCurrent();
+                    skillBehaviour.ActiveSkill(message);
+                    SkillMessageOutputReactiveProperty.Value = skillBehaviour.GetSkillOutputMessage();
+                });
+
 
             foreach (var onActiveSkill in SkillReader.SkillBehaviours.Distinct()
                .Select(x => x.OnActiveSkillAsObservable()))

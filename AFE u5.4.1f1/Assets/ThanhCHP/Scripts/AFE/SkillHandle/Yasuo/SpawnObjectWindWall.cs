@@ -26,11 +26,21 @@ namespace Com.Beetsoft.AFE
         {
             ActiveSkillSubject.OnNext(new[] { inputMessage.ObjectReceive });
             if (inputMessage.ObjectReceive != null)
+                photonView.RPC("SpawnWindWall", RpcTarget.All, inputMessage.Direction,
+                    inputMessage.ObjectReceive.ViewID);
+            else
                 photonView.RPC("SpawnWindWall", RpcTarget.All, inputMessage.Direction);
         }
-
-        protected virtual void SpawnWindWall(Vector3 direction, int viewIdTarget)
+        [PunRPC]
+        public virtual void SpawnWindWall(Vector3 direction)
         {
+            Debug.Log("SpawnWindWall - " + direction);
+            ObjectPool.RentAsync().Subscribe();
+        }
+        [PunRPC]
+        public virtual void SpawnWindWall(Vector3 direction, int viewIdTarget)
+        {
+            Debug.Log("SpawnWindWall - " + direction);
             ObjectPool.RentAsync().Subscribe();
         }
     }

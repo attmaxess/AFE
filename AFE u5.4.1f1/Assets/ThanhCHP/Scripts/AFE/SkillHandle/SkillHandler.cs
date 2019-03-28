@@ -13,7 +13,11 @@ namespace Com.Beetsoft.AFE
     {
         [SerializeField] private SkillModel skillConfig;
 
-        [SerializeField] private SkillReader skillReader;
+        [SerializeField]
+        private SkillBehaviour[] skillBehaviours;
+
+        private SkillBehaviour[] SkillBehaviours => skillBehaviours;
+
         protected IJoystickInputFilterObserver JoystickInputFilterObserver { get; private set; }
 
         protected IAnimationStateChecker AnimationStateChecker { get; private set; }
@@ -26,7 +30,7 @@ namespace Com.Beetsoft.AFE
 
         protected ReactiveProperty<ISkillOutputMessage> SkillMessageOutputReactiveProperty { get; } = new ReactiveProperty<ISkillOutputMessage>();
 
-        protected SkillReader SkillReader => skillReader;
+        protected SkillReader SkillReader { get; private set; }
 
         void IInitialize<IAnimationStateChecker>.Initialize(IAnimationStateChecker init)
         {
@@ -81,6 +85,7 @@ namespace Com.Beetsoft.AFE
         private void Awake()
         {
             Animator = GetComponent<Animator>();
+            SkillReader = new SkillReader(SkillBehaviours, 0);
         }
     }
 }
