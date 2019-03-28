@@ -19,7 +19,11 @@ namespace Com.Beetsoft.AFE
             this.JoystickInputFilterObserver
                 .OnSpell1AsObservable()
                 .Do(_ => Animator.SetTriggerWithBool(Constant.AnimationPram.Q))
-                .Subscribe(message => { ActiveSkillCurrent(message, 100); });
+                .Subscribe(message =>
+                {
+                    transform.forward = message.Direction;
+                    ActiveSkillCurrent(message, 100);
+                });
 
             this.JoystickInputFilterObserver
                 .OnSpell3AsObservable()
