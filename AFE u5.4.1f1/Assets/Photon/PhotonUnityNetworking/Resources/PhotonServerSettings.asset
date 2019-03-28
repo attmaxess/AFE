@@ -28,8 +28,10 @@ MonoBehaviour:
   EnableSupportLogger: 0
   RunInBackground: 1
   RpcList:
+  - ActiveSkillRPC
   - DestroySpaceship
   - Fire
+  - HandleHealth
   - RespawnSpaceship
   - RpcAttack
   - RpcHit
@@ -41,8 +43,9 @@ MonoBehaviour:
   - RpcSkill_4
   - RpcSpawnObject
   - SendChatMessage
-  - HandleHealth
-  - ActiveSkillRPC
   - SpawnWindWall
+  - SyncLocalScaleRPC
+  - SyncPositionRPC
+  - SyncRotationWithDirectionRPC
   DisableAutoOpenWizard: 1
   ShowSettings: 1

@@ -28,6 +28,11 @@ namespace Com.Beetsoft.AFE
 
         protected IChampionConfig ChampionConfig { get; private set; }
 
+        protected Subject<IEnumerable<IReceiveDamageable>> ActiveSkillSubject { get; } =
+            new Subject<IEnumerable<IReceiveDamageable>>();
+
+        protected SyncTransformImmediately SyncTransformImmediately { get; private set; }
+
         public void Initialize(IAnimationStateChecker init)
         {
             AnimationStateChecker = init;
@@ -37,8 +42,6 @@ namespace Com.Beetsoft.AFE
         {
             ChampionConfig = init;
         }
-        
-        protected Subject<IEnumerable<IReceiveDamageable>> ActiveSkillSubject { get; } = new Subject<IEnumerable<IReceiveDamageable>>();
 
         public virtual void ActiveSkill(IInputMessage inputMessage)
         {
@@ -58,6 +61,11 @@ namespace Com.Beetsoft.AFE
         protected float GetCooldown()
         {
             return SkillConfig.Cooldown.Value - SkillConfig.Cooldown.Value * ChampionConfig.CooldownSkillBonus.Value;
+        }
+
+        private void Awake()
+        {
+            SyncTransformImmediately = gameObject.GetOrAddComponent<SyncTransformImmediately>();
         }
     }
 }

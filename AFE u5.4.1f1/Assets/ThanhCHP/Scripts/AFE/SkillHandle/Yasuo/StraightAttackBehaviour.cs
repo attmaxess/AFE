@@ -1,4 +1,6 @@
+using System;
 using ExtraLinq;
+using UniRx;
 using UnityEngine;
 
 namespace Com.Beetsoft.AFE
@@ -8,10 +10,12 @@ namespace Com.Beetsoft.AFE
         [SerializeField] private LayerMask layerMaskTarget;
 
         private LayerMask LayerMaskTarget => layerMaskTarget;
+
         public override void ActiveSkill(IInputMessage inputMessage)
         {
             var receiver =
-                gameObject.GetAllReceiverDamageNearestByRayCastAll(inputMessage.Direction, SkillConfig.Range.Value, LayerMaskTarget);
+                gameObject.GetAllReceiverDamageNearestByRayCastAll(inputMessage.Direction, SkillConfig.Range.Value,
+                    LayerMaskTarget);
             ActiveSkillSubject.OnNext(receiver);
             if (receiver.IsNullOrEmpty()) return;
             var damageMessage = new DamageMessage(SkillConfig.PhysicDamage.Value, SkillConfig.MagicDamage.Value);
