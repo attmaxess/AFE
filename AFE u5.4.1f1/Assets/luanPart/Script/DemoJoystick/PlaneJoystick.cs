@@ -157,10 +157,10 @@ public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
 
         if (joystickCharacter != null)
         {
-//            if (moveVector == Vector3.zero)
-//                joystickCharacter.Idle(new RunMessage(transform.position, Vector3.zero));
-//            else
-                joystickCharacter.Run(new RunMessage(transform.position, moveVector));
+            //            if (moveVector == Vector3.zero)
+            //                joystickCharacter.Idle(new RunMessage(transform.position, Vector3.zero));
+            //            else
+            joystickCharacter.Run(new RunMessage(transform.position, moveVector));
 
         }
         else
@@ -175,6 +175,7 @@ public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
                     if (mono != null && mono.GetComponent<PhotonView>().IsMine)
                     {
                         joystickCharacter = interfaceScripts[i];
+                        speed = mono.GetComponent<TestYasuo>().ChampionModel.MoveSpeed.Value;
                         break;
                     }
                 }

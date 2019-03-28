@@ -12,7 +12,7 @@ namespace Com.Beetsoft.AFE
         [SerializeField] private HealthBarPlayer barPlayer;
         private IChampionConfig championModelCache = null;
 
-        private IChampionConfig ChampionModel =>
+        public IChampionConfig ChampionModel =>
             championModelCache ?? (championModelCache = Instantiate(championModel));
 
         private JoystickInputFilter JoystickInputFilter => joystickInputFilter;
