@@ -482,6 +482,7 @@ GameObject:
   - component: {fileID: 114250188246287544}
   - component: {fileID: 114603826160903828}
   - component: {fileID: 114303200557662960}
+  - component: {fileID: 114331462240772248}
   - component: {fileID: 114306969928528286}
   - component: {fileID: 114287457019645492}
   - component: {fileID: 114809400590198410}
@@ -4181,6 +4182,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedSmooth: 100
+--- !u!114 &114331462240772248
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1174075871233712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07356d30606c41a1bcd24f7804de8cf6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillModel: {fileID: 11400000, guid: feca287268b3ec748845469583e7cbd0, type: 2}
+  layerMaskTarget:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!114 &114337523984434604
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4275,7 +4291,7 @@ MonoBehaviour:
   skillConfig: {fileID: 0}
   skillBehaviours:
   - {fileID: 114303200557662960}
-  - {fileID: 114303200557662960}
+  - {fileID: 114331462240772248}
   - {fileID: 114306969928528286}
 --- !u!114 &114773152827730594
 MonoBehaviour:

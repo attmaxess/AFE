@@ -13,8 +13,7 @@ namespace Com.Beetsoft.AFE
     {
         [SerializeField] private SkillModel skillConfig;
 
-        [SerializeField]
-        private SkillBehaviour[] skillBehaviours;
+        [SerializeField] private SkillBehaviour[] skillBehaviours;
 
         private SkillBehaviour[] SkillBehaviours => skillBehaviours;
 
@@ -28,7 +27,8 @@ namespace Com.Beetsoft.AFE
 
         protected Animator Animator { get; private set; }
 
-        protected ReactiveProperty<ISkillOutputMessage> SkillMessageOutputReactiveProperty { get; } = new ReactiveProperty<ISkillOutputMessage>();
+        protected ReactiveProperty<ISkillOutputMessage> SkillMessageOutputReactiveProperty { get; } =
+            new ReactiveProperty<ISkillOutputMessage>();
 
         protected SkillReader SkillReader { get; private set; }
 
@@ -86,6 +86,13 @@ namespace Com.Beetsoft.AFE
         {
             Animator = GetComponent<Animator>();
             SkillReader = new SkillReader(SkillBehaviours, 0);
+        }
+
+        protected virtual void ActiveSkillCurrent(IInputMessage message, int millisecondDelay)
+        {
+            var skillBehaviour = SkillReader.GetSkillBehaviourCurrent();
+            Observable.Timer(TimeSpan.FromMilliseconds(millisecondDelay))
+                .Subscribe(_ => skillBehaviour.ActiveSkill(message));
         }
     }
 }
