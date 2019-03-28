@@ -5,6 +5,7 @@ using UnityEngine;
 using ControlFreak2;
 using Com.Beetsoft.AFE;
 using Photon.Pun;
+using UniRx;
 
 public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
 {
@@ -19,6 +20,7 @@ public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
     public Transform directionPlayer;
     public Transform directionSkill;
     public IJoystickInputFilter joystickCharacter;
+    private bool IsUpdateWhenSkill;
 
     public Vector3 directionRotate
     {
@@ -65,6 +67,11 @@ public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
         //GameManagerArVik.Singleton.skill3 += Singleton_skill3;
         //GameManagerArVik.Singleton.skill4 += Singleton_skill4;
 
+        MessageBroker.Default.Receive<IMessageBladeAttack>().Subscribe(mes =>
+        {
+            transform.position = mes.player.position;
+            IsUpdateWhenSkill = mes.isUsing;
+        });
     }
 
     private void Singleton_Attack()
@@ -77,7 +84,7 @@ public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
 
     void Update()
     {
-        if (!useUpdate) return;
+        if (!useUpdate || IsUpdateWhenSkill) return;
 
         if (CF2Input.GetButtonDown("Pause"))
         {

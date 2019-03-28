@@ -5,6 +5,19 @@ using System.Linq;
 
 namespace Com.Beetsoft.AFE
 {
+    public class IMessageBladeAttack
+    {
+        public bool isUsing;
+        public bool isMine;
+        public Transform player;
+        public IMessageBladeAttack(bool isUsing, bool isMine, Transform player)
+        {
+            this.isUsing = isUsing;
+            this.isMine = isMine;
+            this.player = player;
+        }
+    }
+
     public class BladeAttack : SkillBehaviour
     {
         [SerializeField] private LayerMask layerMaskTarget;
@@ -17,6 +30,8 @@ namespace Com.Beetsoft.AFE
                 , SkillConfig.Range.Value, LayerMaskTarget);
             ActiveSkillSubject.OnNext(receiver);
             if (receiver == null) return;
+            if (photonView.IsMine)
+                MessageBroker.Default.Publish<IMessageBladeAttack>(new IMessageBladeAttack(true, photonView.IsMine, transform));
 
             IReceiveDamageable nearestReceiver = null;
             float dis = -1;
@@ -28,8 +43,10 @@ namespace Com.Beetsoft.AFE
                     nearestReceiver = item;
                 }
             }
-
-            ObservableTween.Tween(transform.position, nearestReceiver.GetTransform.position, 1f, ObservableTween.EaseType.Linear)
+            Vector3 dir = new Vector3(nearestReceiver.GetTransform.position.x, transform.position.y, nearestReceiver.GetTransform.position.z) - transform.position;
+            Vector3 posTarget = new Vector3(dir.x * ChampionConfig.Range.Value, transform.position.y, dir.z * ChampionConfig.Range.Value);
+            ObservableTween.Tween(transform.position, posTarget, 3f, ObservableTween.EaseType.Linear)
+                .DoOnCompleted(() => { if (photonView.IsMine) MessageBroker.Default.Publish<IMessageBladeAttack>(new IMessageBladeAttack(false, photonView.IsMine, transform)); })
          .Subscribe(rate =>
          {
              transform.position = rate;
