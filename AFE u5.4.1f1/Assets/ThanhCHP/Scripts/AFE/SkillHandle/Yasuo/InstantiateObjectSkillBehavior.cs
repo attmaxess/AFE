@@ -24,7 +24,7 @@ namespace Com.Beetsoft.AFE
 
         public override void ActiveSkill(IInputMessage inputMessage)
         {
-            ActiveSkillSubject.OnNext(new[] { inputMessage.ObjectReceive});
+            ActiveSkillSubject.OnNext(new[] { inputMessage.ObjectReceive });
             if (inputMessage.ObjectReceive != null)
                 photonView.RPC("ActiveSkillRPC", RpcTarget.All, inputMessage.Direction,
                     inputMessage.ObjectReceive.ViewID);
@@ -35,13 +35,19 @@ namespace Com.Beetsoft.AFE
         [PunRPC]
         protected virtual void ActiveSkillRPC(Vector3 direction, int viewIdTarget)
         {
-            ObjectPool.RentAsync().Subscribe();
+            ObjectPool.RentAsync().Subscribe(_ =>
+            {
+                _.GetComponent<IMovable>().MoveToDir(transform.position + direction, direction);
+            });
         }
 
         [PunRPC]
         protected virtual void ActiveSkillRPC(Vector3 direction)
         {
-            ObjectPool.RentAsync().Subscribe();
+            ObjectPool.RentAsync().Subscribe(_ =>
+            {
+                _.GetComponent<IMovable>().MoveToDir(transform.position + direction, direction);
+            });
         }
     }
 }

@@ -35,13 +35,20 @@ namespace Com.Beetsoft.AFE
         public virtual void SpawnWindWall(Vector3 direction)
         {
             Debug.Log("SpawnWindWall - " + direction);
-            ObjectPool.RentAsync().Subscribe();
+            ObjectPool.RentAsync().Subscribe(_ =>
+            {
+                _.GetComponent<IMovable>().MoveToDir(transform.position + direction, direction);
+            });
         }
         [PunRPC]
         public virtual void SpawnWindWall(Vector3 direction, int viewIdTarget)
         {
             Debug.Log("SpawnWindWall - " + direction);
             ObjectPool.RentAsync().Subscribe();
+            ObjectPool.RentAsync().Subscribe(_ =>
+            {
+                _.GetComponent<IMovable>().MoveToDir(transform.position + direction, direction);
+            });
         }
     }
 
