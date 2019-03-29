@@ -38,6 +38,7 @@ namespace Com.Beetsoft.AFE
             ObjectPool.RentAsync().Subscribe(_ =>
             {
                 _.GetComponent<IMovable>().MoveToDir(transform.position + direction, direction);
+                _.GetComponent<ITriggerObject>().SetIdIgnore(transform.GetInstanceID());
             });
         }
 
@@ -47,6 +48,7 @@ namespace Com.Beetsoft.AFE
             ObjectPool.RentAsync().Subscribe(_ =>
             {
                 _.GetComponent<IMovable>().MoveToDir(transform.position + direction, direction);
+                _.GetComponent<ITriggerObject>().SetIdIgnore(transform.GetInstanceID());
             });
         }
     }

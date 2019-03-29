@@ -11,7 +11,7 @@ public interface IMovable
 
 public interface ITriggerObject
 {
-
+    void SetIdIgnore(int id);
 }
 
 public class ObjectMovement : MonoBehaviour, IMovable
@@ -24,7 +24,7 @@ public class ObjectMovement : MonoBehaviour, IMovable
 
     void OnEnable()
     {
-        transform.localScale = Vector3.one;
+        //transform.localScale = Vector3.one;
     }
 
     public void MoveToDir(Vector3 startPos, Vector3 dir)

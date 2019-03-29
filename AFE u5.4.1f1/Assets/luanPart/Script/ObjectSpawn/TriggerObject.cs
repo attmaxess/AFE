@@ -5,7 +5,16 @@ using Com.Beetsoft.AFE;
 public class TriggerObject : MonoBehaviour, ITriggerObject
 {
 
+    public int idIgnore;
+    public void SetIdIgnore(int id)
+    {
+        idIgnore = id;
+        Debug.Log(idIgnore);
+    }
+
+
     public float dam = 10;
+
     void Awake()
     {
         GetComponent<Rigidbody>().isKinematic = true;

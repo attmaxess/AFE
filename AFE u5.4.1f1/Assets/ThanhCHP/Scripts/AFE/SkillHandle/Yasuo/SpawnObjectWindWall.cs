@@ -38,16 +38,17 @@ namespace Com.Beetsoft.AFE
             ObjectPool.RentAsync().Subscribe(_ =>
             {
                 _.GetComponent<IMovable>().MoveToDir(transform.position + direction, direction);
+                _.GetComponent<ITriggerObject>().SetIdIgnore(transform.GetInstanceID());
             });
         }
         [PunRPC]
         public virtual void SpawnWindWall(Vector3 direction, int viewIdTarget)
         {
             Debug.Log("SpawnWindWall - " + direction);
-            ObjectPool.RentAsync().Subscribe();
             ObjectPool.RentAsync().Subscribe(_ =>
             {
                 _.GetComponent<IMovable>().MoveToDir(transform.position + direction, direction);
+                _.GetComponent<ITriggerObject>().SetIdIgnore(transform.GetInstanceID());
             });
         }
     }
