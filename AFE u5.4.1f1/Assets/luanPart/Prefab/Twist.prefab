@@ -27,6 +27,8 @@ GameObject:
   - component: {fileID: 114621632722465130}
   - component: {fileID: 114225880487402616}
   - component: {fileID: 114457570709901002}
+  - component: {fileID: 114116286545759284}
+  - component: {fileID: 114321444348723988}
   m_Layer: 0
   m_Name: Twist
   m_TagString: Untagged
@@ -104,6 +106,17 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &114116286545759284
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1896720226558926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb7d8ce36295e8d42a3a905181938e21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114225880487402616
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -117,9 +130,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveTime: 0
   moveRange: 0
-  speed: 1
+  speed: 0.2
   timeMove: 2
   range: 3
+--- !u!114 &114321444348723988
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1896720226558926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0eefabda6d14d09428c8fc62d022e4ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dam: 10
 --- !u!114 &114457570709901002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -162,7 +187,7 @@ CapsuleCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1896720226558926}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5
   m_Height: 2

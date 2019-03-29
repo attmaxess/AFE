@@ -25,7 +25,8 @@ GameObject:
   - component: {fileID: 114069474751480578}
   - component: {fileID: 114890901414405326}
   - component: {fileID: 54231276300977682}
-  - component: {fileID: 114203517923918038}
+  - component: {fileID: 114571663364339170}
+  - component: {fileID: 114531379853757548}
   m_Layer: 0
   m_Name: Wall
   m_TagString: Untagged
@@ -110,7 +111,7 @@ BoxCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1236388683914292}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -126,7 +127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67ee146a50c848039130d85038548173, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114203517923918038
+--- !u!114 &114531379853757548
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -134,10 +135,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 1236388683914292}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fc5491694b12444692920dece6d7235, type: 3}
+  m_Script: {fileID: 11500000, guid: 3b0d67d8032b5254aa6819eec34eb974, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   dam: 10
+--- !u!114 &114571663364339170
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1236388683914292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 867c6b05fafec8647af7a53beb9cf881, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeLive: 5
 --- !u!114 &114890901414405326
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -149,7 +162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9b20e36df76a41429ab2c60570d14a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveTime: 0
+  moveTime: 1
   moveRange: 0
   speed: 1
   timeMove: 2
