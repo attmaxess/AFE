@@ -17,7 +17,8 @@ namespace Com.Beetsoft.AFE
 
         protected override IObservable<ObjectElementSkillBehaviour> CreateInstanceAsync()
         {
-            var obj = Object.Instantiate(ObjectPrefab, TransformParent);
+            var obj = Object.Instantiate(ObjectPrefab, TransformParent.position, Quaternion.identity);
+            obj.transform.parent = TransformParent;
             obj.PhotonView = PhotonView;
             obj.ObjectPool = this;
             return Observable.Return(obj);
