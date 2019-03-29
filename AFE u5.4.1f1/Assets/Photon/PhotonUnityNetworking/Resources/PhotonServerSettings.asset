@@ -47,5 +47,8 @@ MonoBehaviour:
   - SyncLocalScaleRPC
   - SyncPositionRPC
   - SyncRotationWithDirectionRPC
+  - SyncPositionTweenRpc
+  - SyncRotationTweenRpc
+  - SyncLocalScaleTweenRpc
   DisableAutoOpenWizard: 1
   ShowSettings: 1

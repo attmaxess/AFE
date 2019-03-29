@@ -8,8 +8,9 @@ namespace Com.Beetsoft.AFE
 {
     public class YasuoSpell2Handler : SkillHandler, ISkillSpell_2
     {
-        private void Start()
+        protected override void Start()
         {
+            base.Start();
             this.SkillReader.SendNextFirstIndex();
 
             this.JoystickInputFilterObserver
@@ -19,7 +20,7 @@ namespace Com.Beetsoft.AFE
                 {
                     var skillBehaviour = SkillReader.GetSkillBehaviourCurrent();
                     skillBehaviour.ActiveSkill(message);
-                    SkillMessageOutputReactiveProperty.Value = skillBehaviour.GetSkillOutputMessage();
+                    SendOutput();
                 });
 
 

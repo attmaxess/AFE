@@ -1,66 +1,86 @@
 ﻿using AFE.Extensions;
-using Com.Beetsoft.AFE;
 using Photon.Pun;
 using UniRx;
 using UnityEngine;
 
-public class PlayerRunHandler : MonoBehaviourPun,
-    IInitialize<IChampionConfig>,
-    IInitialize<IJoystickInputFilterObserver>
+namespace Com.Beetsoft.AFE
 {
-    public float speedSmooth = 100;
-    private IJoystickInputFilterObserver JoystickInputFilterObserver { get; set; }
-
-    private IChampionConfig ChampionConfig { get; set; }
-
-    private Animator Animator { get; set; }
-
-    void IInitialize<IChampionConfig>.Initialize(IChampionConfig init)
+    public interface IChampionTransform
     {
-        ChampionConfig = init;
+        Vector3 Forward { get; set; }
     }
 
-    void IInitialize<IJoystickInputFilterObserver>.Initialize(IJoystickInputFilterObserver init)
+    public class PlayerRunHandler : MonoBehaviourPun,
+        IInitialize<IChampionConfig>,
+        IInitialize<IJoystickInputFilterObserver>,
+        IChampionTransform
     {
-        JoystickInputFilterObserver = init;
-    }
+        [SerializeField] private float speedSmooth = 1;
+        private IJoystickInputFilterObserver JoystickInputFilterObserver { get; set; }
 
-    private void Awake()
-    {
-        Animator = GetComponent<Animator>();
-    }
+        private IChampionConfig ChampionConfig { get; set; }
 
-    // Use this for initialization
-    private void Start()
-    {
-        var rotateTarget = Vector3.zero;
-        JoystickInputFilterObserver.OnRunAsObservable()
-            .Subscribe(message =>
-            {
-                transform.position = message.Direction;//* ChampionConfig.MoveSpeed.Value;
-                rotateTarget = message.Rotation;
-            });
+        private Animator Animator { get; set; }
 
-        Observable.EveryUpdate().Subscribe(x =>
+        public float SpeedSmooth => speedSmooth;
+
+        private Vector3 RotateTarget { get; set; }
+
+        public Vector3 Forward
         {
-            if (rotateTarget != Vector3.zero)
-                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(rotateTarget),
-                    speedSmooth * Time.deltaTime);
-        });
+            get { return transform.forward; }
+            set { RotateTarget = value; }
+        }
 
-        JoystickInputFilterObserver.OnRunAsObservable()
-            .Select(message => IsRun(message.Rotation))
-            .DistinctUntilChanged()
-            .Subscribe(HandleAnimationRun);
-    }
+        void IInitialize<IChampionConfig>.Initialize(IChampionConfig init)
+        {
+            ChampionConfig = init;
+        }
 
-    private void HandleAnimationRun(bool isRun)
-    {
-        Animator.SetTriggerWithBool(isRun ? Constant.AnimationPram.Run : Constant.AnimationPram.Idle);
-    }
+        void IInitialize<IJoystickInputFilterObserver>.Initialize(IJoystickInputFilterObserver init)
+        {
+            JoystickInputFilterObserver = init;
+        }
 
-    private bool IsRun(Vector3 direction)
-    {
-        return direction != Vector3.zero;
+        private void Awake()
+        {
+            Animator = GetComponent<Animator>();
+        }
+
+        // Use this for initialization
+        private void Start()
+        {
+            JoystickInputFilterObserver.OnRunAsObservable()
+                .Select(message => message.Direction)
+                .DistinctUntilChanged()
+                .Subscribe(direction =>
+                {
+                    transform.position = direction; //* ChampionConfig.MoveSpeed.Value;
+                });
+
+            JoystickInputFilterObserver.OnRunAsObservable()
+                .Select(message => message.Rotation)
+                .Where(rotation => rotation != Vector3.zero)
+                .Subscribe(rotation => RotateTarget = rotation);
+
+            Observable.EveryUpdate()
+                .Where(_ => RotateTarget != Vector3.zero)
+                .Subscribe(x => { transform.forward = Vector3.Lerp(transform.forward, RotateTarget, SpeedSmooth); });
+
+            JoystickInputFilterObserver.OnRunAsObservable()
+                .Select(message => IsRun(message.Rotation))
+                .DistinctUntilChanged()
+                .Subscribe(HandleAnimationRun);
+        }
+
+        private void HandleAnimationRun(bool isRun)
+        {
+            Animator.SetTriggerWithBool(isRun ? Constant.AnimationPram.Run : Constant.AnimationPram.Idle);
+        }
+
+        private bool IsRun(Vector3 direction)
+        {
+            return direction != Vector3.zero;
+        }
     }
 }

@@ -2,7 +2,6 @@ using System;
 using System.Linq;
 using AFE.Extensions;
 using ExtraLinq;
-using Photon.Pun;
 using UniRx;
 using UnityEngine;
 using AnimationState = Com.Beetsoft.AFE.Enumerables.AnimationState;
@@ -12,43 +11,41 @@ namespace Com.Beetsoft.AFE
     public class YasuoSpell1Handler : SkillHandler, ISkillSpell_1
     {
         private AnimationState.Spell1 FeatureIndexSpell1State { get; set; } = AnimationState.Spell1.Spell1A;
-
-        private void Start()
+        
+        protected override void Start()
         {
+            base.Start();
             SkillReader.SendNextFirstIndex();
 
             JoystickInputFilterObserver
                 .OnSpell1AsObservable()
-                .Do(_ => Animator.SetTriggerWithBool(Constant.AnimationPram.Q))
+                .Where(_ => !AnimationStateChecker.IsInStateSpell3.Value)
                 .Subscribe(message =>
                 {
+                    Animator.SetTriggerWithBool(Constant.AnimationPram.Q);
                     SyncTransformImmediately.SyncRotationWithDirection(message.Direction);
                     ActiveSkillCurrent(message, 100);
                 });
 
-            JoystickInputFilterObserver
-                .OnSpell3AsObservable()
-                .SelectMany(_ =>
-                    JoystickInputFilterObserver.OnSpell1AsObservable().TakeUntil(
-                        Observable.Timer(TimeSpan.FromMilliseconds(Constant.Yasuo.OffsetTimeSpell3AndSpell1))))
-                .Subscribe(_ =>
-                {
-                    Animator.SetInteger(Constant.AnimationPram.QInt, (int) AnimationState.Spell1.Spell1_Dash);
-                    Animator.SetBool(Constant.AnimationPram.IdleBool, false);
-                });
-
             foreach (var onActiveSkill in SkillReader.SkillBehaviours.Distinct()
                 .Select(x => x.OnActiveSkillAsObservable()))
+            {
                 onActiveSkill.Subscribe(receiveDamageables =>
                 {
-                    Debug.Log(receiveDamageables.IsNullOrEmpty());
-                    if (receiveDamageables.IsNullOrEmpty()) return;
-
-                    SkillReader.SendNext();
-                    HandleAnimationState();
-                    SkillMessageOutputReactiveProperty.Value =
-                        SkillReader.GetSkillBehaviourCurrent().GetSkillOutputMessage();
+                    if (receiveDamageables.IsNullOrEmpty())
+                    {
+                        SendOutput();
+                    }
+                    else
+                    {
+                        SkillReader.SendNext();
+                        HandleAnimationState();
+                        SendOutput();
+                    }
                 });
+            }
+            
+            //HandleSpellDash();
         }
 
         private void HandleAnimationState()
@@ -62,6 +59,20 @@ namespace Com.Beetsoft.AFE
 
             Animator.SetInteger(Constant.AnimationPram.QInt, (int) FeatureIndexSpell1State);
             Animator.SetBool(Constant.AnimationPram.IdleBool, true);
+        }
+
+        private void HandleSpellDash()
+        {
+            JoystickInputFilterObserver
+                .OnSpell3AsObservable()
+                .SelectMany(_ =>
+                    JoystickInputFilterObserver.OnSpell1AsObservable().TakeUntil(
+                        Observable.Timer(TimeSpan.FromSeconds(Constant.Yasuo.OffsetTimeSpell3AndSpell1))))
+                .Subscribe(_ =>
+                {
+                    Animator.SetInteger(Constant.AnimationPram.QInt, (int) AnimationState.Spell1.Spell1_Dash);
+                    Animator.SetBool(Constant.AnimationPram.IdleBool, false);
+                });
         }
     }
 }
