@@ -19,18 +19,24 @@ namespace Com.Beetsoft.AFE
         public event Action OnSyncRotationComplete;
         public event Action OnSyncLocalScaleComplete;
 
+        private PhotonTransformView PhotonTransformView { get; set; }
+
+        private void Awake()
+        {
+            PhotonTransformView = GetComponent<PhotonTransformView>();
+        }
+
         private void Start()
         {
-            OnSyncPositionComplete += () => GetComponent<PhotonTransformView>().enabled = true;
-            OnSyncRotationComplete += () => GetComponent<PhotonTransformView>().enabled = true;
-            OnSyncLocalScaleComplete += () => GetComponent<PhotonTransformView>().enabled = true;
+            OnSyncPositionComplete += () => PhotonTransformView.enabled = true;
+            OnSyncRotationComplete += () => PhotonTransformView.enabled = true;
+            OnSyncLocalScaleComplete += () => PhotonTransformView.enabled = true;
         }
 
         public void SyncVectorTween(SyncMode syncMode, Vector3 start, Vector3 end, float duration,
             ObservableTween.EaseType easeType,
             ObservableTween.LoopType loopType = ObservableTween.LoopType.None)
         {
-            GetComponent<PhotonTransformView>().enabled = false;
             switch (syncMode)
             {
                 case SyncMode.Position:
@@ -51,6 +57,7 @@ namespace Com.Beetsoft.AFE
         private void SyncPositionTweenRpc(Vector3 start, Vector3 end, float duration, ObservableTween.EaseType easeType,
             ObservableTween.LoopType loopType = ObservableTween.LoopType.None)
         {
+            PhotonTransformView.enabled = false;
             ObservableTween.Tween(start, end, duration, easeType, loopType, OnSyncPositionComplete)
                 .Subscribe(rate => transform.position = rate);
         }
@@ -59,6 +66,7 @@ namespace Com.Beetsoft.AFE
         private void SyncRotationTweenRpc(Vector3 start, Vector3 end, float duration, ObservableTween.EaseType easeType,
             ObservableTween.LoopType loopType = ObservableTween.LoopType.None)
         {
+            PhotonTransformView.enabled = false;
             ObservableTween.Tween(start, end, duration, easeType, loopType, OnSyncRotationComplete)
                 .Subscribe(rate => transform.forward = rate);
         }
@@ -68,6 +76,7 @@ namespace Com.Beetsoft.AFE
             ObservableTween.EaseType easeType,
             ObservableTween.LoopType loopType = ObservableTween.LoopType.None)
         {
+            PhotonTransformView.enabled = false;
             ObservableTween.Tween(start, end, duration, easeType, loopType, OnSyncLocalScaleComplete)
                 .Subscribe(rate => transform.localScale = rate);
         }

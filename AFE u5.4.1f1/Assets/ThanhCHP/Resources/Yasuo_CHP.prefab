@@ -4280,7 +4280,7 @@ MonoBehaviour:
     m_Bits: 4294967295
   timeDelayTakeDam: 100
   timeMove: 0.75
-  easeType: 3
+  easeType: 30
 --- !u!114 &114603826160903828
 MonoBehaviour:
   m_ObjectHideFlags: 1
