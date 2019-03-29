@@ -6,7 +6,13 @@ namespace Com.Beetsoft.AFE
     [DisallowMultipleComponent]
     public class SyncTransformImmediately : MonoBehaviourPun
     {
-        
+        private IChampionTransform ChampionTransform { get; set; }
+
+        private void Awake()
+        {
+            ChampionTransform = GetComponent<IChampionTransform>();
+        }
+
         public void SyncPosition(Vector3 position)
         {
             photonView.RPC("SyncPositionRPC", RpcTarget.All, position);
@@ -26,7 +32,7 @@ namespace Com.Beetsoft.AFE
         [PunRPC]
         private void SyncRotationWithDirectionRPC(Vector3 direction)
         {
-            transform.forward = direction;
+            ChampionTransform.Forward = direction;
         }
 
         public void SyncLocalScale(Vector3 localScale)

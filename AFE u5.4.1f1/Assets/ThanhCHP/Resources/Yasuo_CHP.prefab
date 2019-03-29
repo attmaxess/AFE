@@ -489,6 +489,7 @@ GameObject:
   - component: {fileID: 114284003140846610}
   - component: {fileID: 114530284841553940}
   - component: {fileID: 114337523984434604}
+  - component: {fileID: 114698782696386444}
   m_Layer: 0
   m_Name: Yasuo_CHP
   m_TagString: Untagged
@@ -4181,7 +4182,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed495d856f3f94940b72bb31e1eacd45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedSmooth: 100
+  speedSmooth: 1
 --- !u!114 &114331462240772248
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4209,7 +4210,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillBehaviours:
-  - {fileID: 114530284841553940}
+  - {fileID: 114698782696386444}
   skillConfig: {fileID: 0}
 --- !u!114 &114337711945045802
 MonoBehaviour:
@@ -4297,6 +4298,21 @@ MonoBehaviour:
   - {fileID: 114331462240772248}
   - {fileID: 114306969928528286}
   skillConfig: {fileID: 0}
+--- !u!114 &114698782696386444
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1174075871233712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07356d30606c41a1bcd24f7804de8cf6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillModel: {fileID: 11400000, guid: 639778a83d9298547ad42d4160189ffd, type: 2}
+  layerMaskTarget:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!114 &114773152827730594
 MonoBehaviour:
   m_ObjectHideFlags: 1

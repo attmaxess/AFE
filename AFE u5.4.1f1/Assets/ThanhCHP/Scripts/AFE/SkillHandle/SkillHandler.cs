@@ -26,12 +26,14 @@ namespace Com.Beetsoft.AFE
 
         protected Animator Animator { get; private set; }
 
-        protected ReactiveProperty<ISkillOutputMessage> SkillMessageOutputReactiveProperty { get; } =
+        private ReactiveProperty<ISkillOutputMessage> SkillMessageOutputReactiveProperty { get; } =
             new ReactiveProperty<ISkillOutputMessage>();
 
         protected SkillReader SkillReader { get; private set; }
 
         protected SyncTransformImmediately SyncTransformImmediately { get; private set; }
+
+        protected IChampionTransform ChampionTransform { get; private set; }
 
         void IInitialize<IAnimationStateChecker>.Initialize(IAnimationStateChecker init)
         {
@@ -83,11 +85,17 @@ namespace Com.Beetsoft.AFE
             return ChampionConfig.CooldownSkillBonus.Value * SkillConfig.Cooldown.Value;
         }
 
-        private void Awake()
+        protected virtual void Awake()
         {
             Animator = GetComponent<Animator>();
             SkillReader = new SkillReader(SkillBehaviours, 0);
             SyncTransformImmediately = gameObject.GetOrAddComponent<SyncTransformImmediately>();
+            ChampionTransform = GetComponent<IChampionTransform>();
+        }
+
+        protected virtual void Start()
+        {
+            InitValue();
         }
 
         protected virtual void ActiveSkillCurrent(IInputMessage message, int millisecondDelay)
@@ -95,6 +103,17 @@ namespace Com.Beetsoft.AFE
             var skillBehaviour = SkillReader.GetSkillBehaviourCurrent();
             Observable.Timer(TimeSpan.FromMilliseconds(millisecondDelay))
                 .Subscribe(_ => skillBehaviour.ActiveSkill(message));
+        }
+
+        private void InitValue()
+        {
+            SkillMessageOutputReactiveProperty.Value =
+                SkillReader.GetSkillBehaviourCurrent().GetSkillOutputMessageInit();
+        }
+
+        protected void SendOutput()
+        {
+            SkillMessageOutputReactiveProperty.Value = SkillReader.GetSkillBehaviourCurrent().GetSkillOutputMessage();
         }
     }
 }

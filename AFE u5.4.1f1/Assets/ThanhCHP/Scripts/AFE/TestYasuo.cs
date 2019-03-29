@@ -1,5 +1,7 @@
 using System.Linq;
 using Photon.Pun;
+using UniRx;
+using UniRx.Triggers;
 using UnityEngine;
 
 namespace Com.Beetsoft.AFE
@@ -41,6 +43,18 @@ namespace Com.Beetsoft.AFE
         {
             CreateHealthBar(ChampionModel, photonView.IsMine);
             if (!photonView.IsMine) return;
+            
+            this.OnKeyDownAsObservable(KeyCode.Q)
+                .Subscribe(_ => JoystickInputFilter.Spell1(new InputMessage(Vector3.forward)));
+
+            this.OnKeyDownAsObservable(KeyCode.W)
+                .Subscribe(_ => JoystickInputFilter.Spell2(new InputMessage(Vector3.forward)));
+
+            this.OnKeyDownAsObservable(KeyCode.E)
+                .Subscribe(_ => JoystickInputFilter.Spell3(new InputMessage(Vector3.forward)));
+
+            this.OnKeyDownAsObservable(KeyCode.R)
+                .Subscribe(_ => JoystickInputFilter.Spell4(new InputMessage(Vector3.forward)));
         }
 
         void CreateHealthBar(IChampionConfig championConfig, bool isMine)

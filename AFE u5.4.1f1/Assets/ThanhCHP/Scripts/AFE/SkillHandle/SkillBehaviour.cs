@@ -11,6 +11,7 @@ namespace Com.Beetsoft.AFE
         void ActiveSkill(IInputMessage inputMessage);
         IObservable<IEnumerable<IReceiveDamageable>> OnActiveSkillAsObservable();
         ISkillOutputMessage GetSkillOutputMessage();
+        ISkillOutputMessage GetSkillOutputMessageInit();
     }
 
     public abstract class SkillBehaviour : MonoBehaviourPun,
@@ -56,6 +57,11 @@ namespace Com.Beetsoft.AFE
         public ISkillOutputMessage GetSkillOutputMessage()
         {
             return new SkillOutputMessage(SkillConfig.IconCurrent, GetCooldown());
+        }
+
+        public ISkillOutputMessage GetSkillOutputMessageInit()
+        {
+            return new SkillOutputMessage(SkillConfig.IconCurrent, 0.5f);
         }
 
         protected float GetCooldown()
