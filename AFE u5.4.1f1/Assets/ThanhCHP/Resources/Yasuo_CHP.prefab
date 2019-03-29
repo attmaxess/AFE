@@ -4113,9 +4113,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35b2eff3ca794ca892f5c7b0fb9959ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillConfig: {fileID: 0}
   skillBehaviours:
   - {fileID: 114530284841553940}
+  skillConfig: {fileID: 0}
 --- !u!114 &114285160370677164
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4138,9 +4138,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe83a1a8d4484688a42819fc98727a7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillConfig: {fileID: 0}
   skillBehaviours:
   - {fileID: 114809400590198410}
+  skillConfig: {fileID: 0}
 --- !u!114 &114303200557662960
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4208,9 +4208,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95ff524daa6645c89f11d5112f9f8ee8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillConfig: {fileID: 0}
   skillBehaviours:
   - {fileID: 114530284841553940}
+  skillConfig: {fileID: 0}
 --- !u!114 &114337711945045802
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4222,9 +4222,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c71ff27ab1d440ebf5c2074b1d56ba1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillConfig: {fileID: 11400000, guid: 18234a120e0bf644083efacea99e9255, type: 2}
   skillBehaviours:
   - {fileID: 114306969928528286}
+  skillConfig: {fileID: 11400000, guid: 18234a120e0bf644083efacea99e9255, type: 2}
   maxHit: 4
 --- !u!114 &114338453396253636
 MonoBehaviour:
@@ -4292,11 +4292,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0200a3450c0aa54ba728cf2c5b80523, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillConfig: {fileID: 0}
   skillBehaviours:
   - {fileID: 114303200557662960}
   - {fileID: 114331462240772248}
   - {fileID: 114306969928528286}
+  skillConfig: {fileID: 0}
 --- !u!114 &114773152827730594
 MonoBehaviour:
   m_ObjectHideFlags: 1

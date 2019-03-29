@@ -63,9 +63,13 @@ namespace Com.Beetsoft.AFE
             return SkillConfig.Cooldown.Value - SkillConfig.Cooldown.Value * ChampionConfig.CooldownSkillBonus.Value;
         }
 
-        private void Awake()
+        protected virtual void Awake()
         {
             SyncTransformImmediately = gameObject.GetOrAddComponent<SyncTransformImmediately>();
+        }
+
+        protected virtual void Start()
+        {
         }
     }
 }

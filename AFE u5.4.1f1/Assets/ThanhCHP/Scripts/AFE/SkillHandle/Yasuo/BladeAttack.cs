@@ -33,6 +33,20 @@ namespace Com.Beetsoft.AFE
 
         private ObservableTween.EaseType EaseType => easeType;
 
+        private SyncTweenRPC SyncTweenRpc { get; set; }
+
+        protected override void Awake()
+        {
+            base.Awake();
+            SyncTweenRpc = gameObject.GetOrAddComponent<SyncTweenRPC>();
+        }
+
+        protected override void Start()
+        {
+            if (photonView.IsMine)
+                SyncTweenRpc.OnSyncPositionComplete += DoOnDashComplete;
+        }
+
         public override void ActiveSkill(IInputMessage inputMessage)
         {
             if (IsMustDetectTarget)
@@ -68,15 +82,22 @@ namespace Com.Beetsoft.AFE
             if (photonView.IsMine)
                 MessageBroker.Default.Publish(new IMessageBladeAttack(true, photonView.IsMine,
                     transform));
-            var posTarget = transform.position + direction * SkillConfig.Range.Value;
-            ObservableTween.Tween(transform.position, posTarget, timeMove, EaseType)
-                .DoOnCompleted(() =>
-                {
-                    if (photonView.IsMine)
-                        MessageBroker.Default.Publish(
-                            new IMessageBladeAttack(false, photonView.IsMine, transform));
-                })
-                .Subscribe(rate => { transform.position = rate; });
+            var position = transform.position;
+            var posTarget = position + direction * SkillConfig.Range.Value;
+            SyncTweenRpc.SyncVectorTween(SyncTweenRPC.SyncMode.Position, position, posTarget, timeMove, EaseType);
+        }
+
+        private void DoOnDashComplete()
+        {
+            if (photonView.IsMine)
+                MessageBroker.Default.Publish(
+                    new IMessageBladeAttack(false, photonView.IsMine, transform));
+        }
+
+        private void OnDestroy()
+        {
+            if (photonView.IsMine)
+                SyncTweenRpc.OnSyncPositionComplete -= DoOnDashComplete;
         }
     }
 }
