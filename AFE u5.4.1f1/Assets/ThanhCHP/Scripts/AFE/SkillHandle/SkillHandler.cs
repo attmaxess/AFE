@@ -11,10 +11,13 @@ namespace Com.Beetsoft.AFE
         IInitialize<IAnimationStateChecker>,
         IInitialize<IChampionConfig>
     {
-        [SerializeField] private SkillBehaviour[] skillBehaviours;
         [SerializeField] private SkillModel skillConfig;
+        [SerializeField] private SkillBehaviour skillBehaviourPassive;
+        [SerializeField] private SkillBehaviour[] skillBehaviours;
 
-        private SkillBehaviour[] SkillBehaviours => skillBehaviours;
+        private ISkillBehaviour[] SkillBehaviours => skillBehaviours;
+
+        protected ISkillBehaviour SkillBehaviourPassive => skillBehaviourPassive;
 
         protected IJoystickInputFilterObserver JoystickInputFilterObserver { get; private set; }
 

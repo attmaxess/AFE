@@ -934,9 +934,9 @@ GameObject:
   - component: {fileID: 607688743}
   - component: {fileID: 607688742}
   - component: {fileID: 607688741}
-  - component: {fileID: 607688740}
   - component: {fileID: 607688739}
   - component: {fileID: 607688738}
+  - component: {fileID: 607688740}
   m_Layer: 0
   m_Name: Cube (4)
   m_TagString: Untagged
@@ -976,8 +976,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e94efe5a6af4fa49422b1a56a68ee94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!65 &607688740
-BoxCollider:
+--- !u!143 &607688740
+CharacterController:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
@@ -986,7 +986,12 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Height: 1
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &607688741
 MeshRenderer:
@@ -2264,9 +2269,9 @@ GameObject:
   - component: {fileID: 1344981023}
   - component: {fileID: 1344981022}
   - component: {fileID: 1344981021}
-  - component: {fileID: 1344981020}
   - component: {fileID: 1344981025}
   - component: {fileID: 1344981024}
+  - component: {fileID: 1344981020}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -2274,8 +2279,8 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!65 &1344981020
-BoxCollider:
+--- !u!143 &1344981020
+CharacterController:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
@@ -2284,7 +2289,12 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Height: 1
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1344981021
 MeshRenderer:
@@ -2911,9 +2921,9 @@ GameObject:
   - component: {fileID: 1792747091}
   - component: {fileID: 1792747090}
   - component: {fileID: 1792747089}
-  - component: {fileID: 1792747088}
   - component: {fileID: 1792747087}
   - component: {fileID: 1792747086}
+  - component: {fileID: 1792747088}
   m_Layer: 0
   m_Name: Cube (2)
   m_TagString: Untagged
@@ -2953,8 +2963,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e94efe5a6af4fa49422b1a56a68ee94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!65 &1792747088
-BoxCollider:
+--- !u!143 &1792747088
+CharacterController:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
@@ -2963,7 +2973,12 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Height: 1
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1792747089
 MeshRenderer:
@@ -3030,9 +3045,9 @@ GameObject:
   - component: {fileID: 1871141839}
   - component: {fileID: 1871141838}
   - component: {fileID: 1871141837}
-  - component: {fileID: 1871141836}
   - component: {fileID: 1871141835}
   - component: {fileID: 1871141834}
+  - component: {fileID: 1871141836}
   m_Layer: 0
   m_Name: Cube (3)
   m_TagString: Untagged
@@ -3072,8 +3087,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e94efe5a6af4fa49422b1a56a68ee94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!65 &1871141836
-BoxCollider:
+--- !u!143 &1871141836
+CharacterController:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
@@ -3082,7 +3097,12 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Height: 1
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1871141837
 MeshRenderer:
@@ -3149,9 +3169,9 @@ GameObject:
   - component: {fileID: 1880166820}
   - component: {fileID: 1880166819}
   - component: {fileID: 1880166818}
-  - component: {fileID: 1880166817}
   - component: {fileID: 1880166816}
   - component: {fileID: 1880166815}
+  - component: {fileID: 1880166817}
   m_Layer: 0
   m_Name: Cube (1)
   m_TagString: Untagged
@@ -3191,8 +3211,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e94efe5a6af4fa49422b1a56a68ee94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!65 &1880166817
-BoxCollider:
+--- !u!143 &1880166817
+CharacterController:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
@@ -3201,7 +3221,12 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Height: 1
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1880166818
 MeshRenderer:

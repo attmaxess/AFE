@@ -6,40 +6,29 @@ namespace Com.Beetsoft.AFE
 {
     public static class ExtentionMethod
     {
-        public static List<IReceiveDamageable> ListReceiverDamageables(this GameObject go,
-            IChampionConfig championConfig)
+        public static IEnumerable<IReceiveDamageable> GetSphereReceiveDamageable(this GameObject go, float radius,
+            int layerMask = Physics.AllLayers,
+            QueryTriggerInteraction queryTriggerInteraction = QueryTriggerInteraction.UseGlobal)
         {
-            var _objects = Physics.OverlapSphere(go.transform.position, championConfig.Range.Value);
-            var _l = _objects.OfType<IReceiveDamageable>().ToList();
-            return _l;
+            return Physics.OverlapSphere(go.transform.position, radius, layerMask, queryTriggerInteraction)
+                .Select(collider => collider.GetComponent<IReceiveDamageable>())
+                .Where(x => x != null && x.GetTransform.GetInstanceID() != go.transform.GetInstanceID());
         }
 
-        public static IReceiveDamageable ReceiverDamageNearest(this GameObject go, IChampionConfig championConfig)
+        public static IReceiveDamageable ReceiverDamageNearest(this GameObject go, float radius,
+            int layerMask = Physics.AllLayers,
+            QueryTriggerInteraction queryTriggerInteraction = QueryTriggerInteraction.UseGlobal)
         {
-            IReceiveDamageable receiveDamageable = null;
-            var _objects = Physics.OverlapSphere(go.transform.position, championConfig.Range.Value);
-            var _l = _objects.Where(_ =>
-                _.GetComponent<IReceiveDamageable>() != null &&
-                _.transform.GetInstanceID() != go.transform.GetInstanceID()).ToList();
-            float tempDis = -1;
-            foreach (var item in _l)
-            {
-                if (tempDis < Vector3.Distance(item.transform.position, go.transform.position))
-                {
-                    tempDis = Vector3.Distance(item.transform.position, go.transform.position);
-                    receiveDamageable = item.GetComponent<IReceiveDamageable>();
-                }
-            }
-
-            return receiveDamageable;
+            return GetSphereReceiveDamageable(go, radius, layerMask, queryTriggerInteraction)
+                .FirstOrDefault();
         }
 
-        public static IReceiveDamageable ReceiverDamageNearest(this GameObject go, IChampionConfig championConfig,
+        public static IReceiveDamageable ReceiverDamageNearest(this GameObject go, IChampionConfig radius,
             out Transform nearestGameObject)
         {
             IReceiveDamageable receiveDamageable = null;
             Collider collider = null;
-            var _objects = Physics.OverlapSphere(go.transform.position, championConfig.Range.Value);
+            var _objects = Physics.OverlapSphere(go.transform.position, radius.Range.Value);
             var _l = _objects.Where(_ =>
                 _.GetComponent<IReceiveDamageable>() != null &&
                 _.transform.GetInstanceID() != go.transform.GetInstanceID()).ToList();
@@ -101,13 +90,14 @@ namespace Com.Beetsoft.AFE
         }
 
         public static List<IReceiveDamageable> GetAllReceiverDamageNearestByRayCastAll(this GameObject go,
-           Vector3 direction, float distance, LayerMask layerMask = default(LayerMask),
-           QueryTriggerInteraction queryTriggerInteraction = QueryTriggerInteraction.Collide)
+            Vector3 direction, float distance, LayerMask layerMask = default(LayerMask),
+            QueryTriggerInteraction queryTriggerInteraction = QueryTriggerInteraction.Collide)
         {
             if (layerMask == default(LayerMask))
             {
                 layerMask = ~0;
             }
+
             List<IReceiveDamageable> receiveDamageable = new List<IReceiveDamageable>();
             Debug.DrawRay(go.transform.position, direction * distance, Color.blue, 0.5f);
             var _all = Physics.RaycastAll(go.transform.position, direction.normalized, distance, layerMask,
@@ -117,6 +107,7 @@ namespace Com.Beetsoft.AFE
             {
                 receiveDamageable.Add(item.transform.GetComponent<IReceiveDamageable>());
             }
+
             return receiveDamageable;
         }
 

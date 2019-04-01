@@ -22,7 +22,7 @@ namespace Com.Beetsoft.AFE
     [Serializable]
     public class SkillReader
     {
-        public SkillBehaviour[] SkillBehaviours { get; }
+        public ISkillBehaviour[] SkillBehaviours { get; }
 
         private int SkillIndex { get; set; } = -1;
 
@@ -62,7 +62,7 @@ namespace Com.Beetsoft.AFE
         {
         }
 
-        public SkillReader(SkillBehaviour[] skillBehaviours, int skillIndex)
+        public SkillReader(ISkillBehaviour[] skillBehaviours, int skillIndex)
         {
             SkillBehaviours = skillBehaviours;
             SkillIndex = skillIndex;
