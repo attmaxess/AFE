@@ -4292,6 +4292,7 @@ MonoBehaviour:
   - {fileID: 114303200557662960}
   - {fileID: 114331462240772248}
   - {fileID: 114306969928528286}
+  timeKnockUpObject: 0.7
 --- !u!114 &114698782696386444
 MonoBehaviour:
   m_ObjectHideFlags: 1

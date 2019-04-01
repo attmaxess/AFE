@@ -3,6 +3,9 @@ using Com.Beetsoft.AFE;
 
 public class TwistTrigger : TriggerObject
 {
+    [SerializeField] private float timeUp = 0.7f;
+
+    private float TimeUp => timeUp;
 
     protected override void OnTriggerEnter(Collider other)
     {
@@ -16,8 +19,7 @@ public class TwistTrigger : TriggerObject
             {
                 _blowUp = other.gameObject.AddComponent<BlowUpObject>();
             }
-            _blowUp.BlowUp();
-            gameObject.GetComponent<ObjectElementSkillBehaviour>().ReturnPool();
+            _blowUp.BlowUp(TimeUp);
         }
     }
 }

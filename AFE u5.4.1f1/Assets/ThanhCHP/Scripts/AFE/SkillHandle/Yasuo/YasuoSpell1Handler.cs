@@ -1,15 +1,19 @@
 using System;
 using System.Linq;
 using AFE.Extensions;
-using Com.Beetsoft.AFE.Enumerables;
 using ExtraLinq;
 using UniRx;
+using UnityEngine;
+using AnimationState = Com.Beetsoft.AFE.Enumerables.AnimationState;
 
 namespace Com.Beetsoft.AFE
 {
     public class YasuoSpell1Handler : SkillHandler, ISkillSpell_1
     {
+        [SerializeField] private float timeKnockUpObject = 0.7f;
         private AnimationState.Spell1 FeatureIndexSpell1State { get; set; } = AnimationState.Spell1.Spell1A;
+
+        private float TimeKnockUpObject => timeKnockUpObject;
 
         protected override void Start()
         {
@@ -34,7 +38,19 @@ namespace Com.Beetsoft.AFE
                 });
 
             SkillBehaviourPassive.OnActiveSkillAsObservable()
-                .Subscribe(receiveDamageables => HandleNextStateSkill(!receiveDamageables.IsNullOrEmpty()));
+                .Subscribe(receiveDamageables =>
+                {               
+                    if (FeatureIndexSpell1State == AnimationState.Spell1.Spell1C)
+                    {
+                        receiveDamageables.ToList().ForEach(x =>
+                        {
+                            var knockObj = x.GetComponent<IKnockUpable>();
+                            knockObj?.BlowUp(TimeKnockUpObject);
+                        });
+                    }
+                    
+                    HandleNextStateSkill(!receiveDamageables.IsNullOrEmpty());
+                });
 
             HandleSpellDash();
         }

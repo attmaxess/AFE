@@ -129,8 +129,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveTime: 0
   moveRange: 0
-  speed: 1
-  timeMove: 2
+  speed: 4
+  timeMove: 3
   range: 3
 --- !u!114 &114321444348723988
 MonoBehaviour:
@@ -144,6 +144,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dam: 10
+  timeUp: 0.4
 --- !u!114 &114457570709901002
 MonoBehaviour:
   m_ObjectHideFlags: 1

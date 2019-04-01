@@ -937,6 +937,7 @@ GameObject:
   - component: {fileID: 607688739}
   - component: {fileID: 607688738}
   - component: {fileID: 607688740}
+  - component: {fileID: 607688744}
   m_Layer: 0
   m_Name: Cube (4)
   m_TagString: Untagged
@@ -1048,6 +1049,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &607688744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 607688737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c88ada98ac0884946a48bf90eb5065f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  easeType: 5
+  maxYAxis: 4
+  minYAxis: 0
 --- !u!1 &710385048
 GameObject:
   m_ObjectHideFlags: 0
@@ -2272,6 +2287,7 @@ GameObject:
   - component: {fileID: 1344981025}
   - component: {fileID: 1344981024}
   - component: {fileID: 1344981020}
+  - component: {fileID: 1344981026}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -2383,6 +2399,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e94efe5a6af4fa49422b1a56a68ee94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1344981026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1344981019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c88ada98ac0884946a48bf90eb5065f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  easeType: 5
+  maxYAxis: 4
+  minYAxis: 0
 --- !u!1 &1361131288
 GameObject:
   m_ObjectHideFlags: 0
@@ -2924,6 +2954,7 @@ GameObject:
   - component: {fileID: 1792747087}
   - component: {fileID: 1792747086}
   - component: {fileID: 1792747088}
+  - component: {fileID: 1792747092}
   m_Layer: 0
   m_Name: Cube (2)
   m_TagString: Untagged
@@ -3035,6 +3066,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1792747092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1792747085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c88ada98ac0884946a48bf90eb5065f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  easeType: 5
+  maxYAxis: 4
+  minYAxis: 0
 --- !u!1 &1871141833
 GameObject:
   m_ObjectHideFlags: 0
@@ -3048,6 +3093,7 @@ GameObject:
   - component: {fileID: 1871141835}
   - component: {fileID: 1871141834}
   - component: {fileID: 1871141836}
+  - component: {fileID: 1871141840}
   m_Layer: 0
   m_Name: Cube (3)
   m_TagString: Untagged
@@ -3159,6 +3205,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1871141840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1871141833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c88ada98ac0884946a48bf90eb5065f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  easeType: 5
+  maxYAxis: 4
+  minYAxis: 0
 --- !u!1 &1880166814
 GameObject:
   m_ObjectHideFlags: 0
@@ -3172,6 +3232,7 @@ GameObject:
   - component: {fileID: 1880166816}
   - component: {fileID: 1880166815}
   - component: {fileID: 1880166817}
+  - component: {fileID: 1880166821}
   m_Layer: 0
   m_Name: Cube (1)
   m_TagString: Untagged
@@ -3283,6 +3344,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1880166821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1880166814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c88ada98ac0884946a48bf90eb5065f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  easeType: 5
+  maxYAxis: 4
+  minYAxis: 0
 --- !u!114 &2054562842 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114549259525833482, guid: 00ab02b5ea58b514ea94aab856b2e4a3,

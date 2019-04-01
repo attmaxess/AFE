@@ -57,5 +57,7 @@ namespace Com.Beetsoft.AFE
             public static float OffsetTimeSpell3AndSpell1 { get; } = 1.2f;
             public static int TimeDelayApplyDamageAttackBasicMilliseconds { get; } = 50;
         }
+
+        public const float KnockDown = 0.4f;
     }
 }

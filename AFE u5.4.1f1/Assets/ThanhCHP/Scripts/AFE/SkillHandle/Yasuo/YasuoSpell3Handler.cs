@@ -16,6 +16,7 @@ namespace Com.Beetsoft.AFE
                 .OnSpell3AsObservable()
                 .Subscribe(message =>
                 {
+                    ChampionTransform.Forward = message.Direction;
                     var skillBehavior = SkillReader.GetSkillBehaviourCurrent();
                     skillBehavior.ActiveSkill(message);
                 });
