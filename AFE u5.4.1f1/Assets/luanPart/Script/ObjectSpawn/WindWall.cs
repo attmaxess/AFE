@@ -9,7 +9,6 @@ public class WindWall : TriggerObject
 
         if (other.GetComponent<IDamageOnPlayer>() != null)
         {
-            Debug.Log("IDamageOnPlayer");
             other.GetComponent<IReceiveDamageable>().GetDamageReceive(10, 0);
         }
     }

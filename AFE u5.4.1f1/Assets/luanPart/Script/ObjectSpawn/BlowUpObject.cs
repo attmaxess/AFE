@@ -12,14 +12,14 @@ public class BlowUpObject : MonoBehaviour
             .DoOnCompleted(() =>
             {
                 ObservableTween.Tween(transform.position + Vector3.up, transform.position, timeDown, ObservableTween.EaseType.Linear)
-                .Subscribe(_ =>
+                .Subscribe(pos =>
                 {
-                    transform.position = _;
+                    transform.position = pos;
                 });
             })
-            .Subscribe(_ =>
+            .Subscribe(pos =>
             {
-                transform.position = _;
+                transform.position = pos;
             });
 
     }

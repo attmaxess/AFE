@@ -12,5 +12,7 @@ namespace Com.Beetsoft.AFE
         {
             ObjectPool.Return(this);
         }
+
+        //public abstract void OnSpawn(Vector3 direction);
     }
 }

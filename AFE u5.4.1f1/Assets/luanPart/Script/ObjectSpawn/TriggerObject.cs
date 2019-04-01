@@ -2,27 +2,21 @@
 using Com.Beetsoft.AFE;
 
 [RequireComponent(typeof(Rigidbody))]
-public class TriggerObject : MonoBehaviour, ITriggerObject
+public abstract class TriggerObject : MonoBehaviour, ITriggerObject
 {
-
-    public int idIgnore;
+    [System.NonSerialized]
+    public int idObjecctIgnore;
     public void SetIdIgnore(int id)
     {
-        idIgnore = id;
-        Debug.Log(idIgnore);
+        idObjecctIgnore = id;
     }
 
 
     public float dam = 10;
 
-    void Awake()
-    {
-        GetComponent<Rigidbody>().isKinematic = true;
-    }
-
     protected virtual void OnTriggerEnter(Collider other)
     {
-        Debug.Log("OnTriggerEnter " + other.transform.name);
+        Debug.Log(idObjecctIgnore + " - " + transform.GetInstanceID());
 
         if (other.GetComponent<IReceiveDamageable>() != null)
         {

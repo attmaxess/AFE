@@ -3,6 +3,7 @@ using Com.Beetsoft.AFE;
 
 public class Twist : TriggerObject
 {
+
     protected override void OnTriggerEnter(Collider other)
     {
         base.OnTriggerEnter(other);
@@ -10,9 +11,8 @@ public class Twist : TriggerObject
         {
             gameObject.GetComponent<ObjectElementSkillBehaviour>().ReturnPool();
         }
-        Debug.Log(idIgnore);
 
-        if (other.GetComponent<IReceiveDamageable>() != null && other.transform.GetInstanceID() != idIgnore)
+        if (other.GetComponent<IReceiveDamageable>() != null && other.transform.GetInstanceID() != idObjecctIgnore)
         {
             other.GetComponent<IReceiveDamageable>().GetDamageReceive(dam, 0);
             var _blowUp = other.GetComponent<BlowUpObject>();
