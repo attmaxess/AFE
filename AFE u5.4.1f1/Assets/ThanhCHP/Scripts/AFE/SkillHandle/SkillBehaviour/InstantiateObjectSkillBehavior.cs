@@ -45,10 +45,10 @@ namespace Com.Beetsoft.AFE
         [PunRPC]
         protected virtual void ActiveSkillRPC(Vector3 direction)
         {
-            ObjectPool.RentAsync().Subscribe(_ =>
+            ObjectPool.RentAsync().Subscribe(poolObject =>
             {
-                _.GetComponent<IMovable>().MoveToDir(transform.position + direction, direction);
-                _.GetComponent<ITriggerObject>().SetIdIgnore(transform.GetInstanceID());
+                poolObject.GetComponent<IMovable>().MoveToDir(transform.position + direction, direction);
+                poolObject.GetComponent<ITriggerObject>().SetIdIgnore(transform.GetInstanceID());
             });
         }
     }

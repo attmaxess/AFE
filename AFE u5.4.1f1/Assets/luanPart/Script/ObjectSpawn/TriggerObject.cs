@@ -11,6 +11,10 @@ public abstract class TriggerObject : MonoBehaviour, ITriggerObject
         idObjecctIgnore = id;
     }
 
+    void Awake()
+    {
+        GetComponent<Rigidbody>().isKinematic = true;
+    }
 
     public float dam = 10;
 

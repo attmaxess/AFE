@@ -6,21 +6,23 @@ public class BlowUpObject : MonoBehaviour
 
     public float timeUp = 1;
     public float timeDown = 1;
+    bool isBlowUp;
     public void BlowUp()
     {
-        ObservableTween.Tween(transform.position, transform.position + Vector3.up, timeUp, ObservableTween.EaseType.Linear)
+        if (isBlowUp) return;
+        isBlowUp = true;
+
+        var dispose =  ObservableTween.Tween(transform.position, transform.position + Vector3.up, timeUp + timeDown, ObservableTween.EaseType.Linear, ObservableTween.LoopType.PingPong)
             .DoOnCompleted(() =>
             {
-                ObservableTween.Tween(transform.position + Vector3.up, transform.position, timeDown, ObservableTween.EaseType.Linear)
-                .Subscribe(pos =>
-                {
-                    transform.position = pos;
-                });
+                isBlowUp = false;
             })
             .Subscribe(pos =>
             {
                 transform.position = pos;
             });
+
+        dispose?.Dispose();
 
     }
 }

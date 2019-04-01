@@ -50,7 +50,7 @@ namespace Com.Beetsoft.AFE
                 _.GetComponent<IMovable>().MoveToDir(transform.position + direction, direction);
                 _.GetComponent<ITriggerObject>().SetIdIgnore(transform.GetInstanceID());
             });
-        }
+        } 
     }
 
 }
