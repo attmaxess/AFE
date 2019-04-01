@@ -129,7 +129,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveTime: 0
   moveRange: 0
-  speed: 0.2
+  speed: 1
   timeMove: 2
   range: 3
 --- !u!114 &114321444348723988
