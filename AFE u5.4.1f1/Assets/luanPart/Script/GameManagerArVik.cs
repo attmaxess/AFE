@@ -73,14 +73,14 @@ public class GameManagerArVik : MonoBehaviourPunCallbacks
     private void Update()
     {
 
-       /* if (CF2Input.GetAxis("S_1_Hoz") != 0 && CF2Input.GetAxis("S_1_Ver") != 0 && (CF2Input.GetButton("Skill1") || CF2Input.GetButtonUp("Skill1")))
-        {
-            //      h1 = CF2Input.GetAxis("S_1_Hoz");
-            //    v1 = CF2Input.GetAxis("S_1_Ver");
-            //  joystickCharacter.Spell1(new SkillMessage());
-            Debug.Log("-" + CF2Input.GetButton("Skill1") + CF2Input.GetButtonDown("Skill1") + CF2Input.GetButtonUp("Skill1"));
+        /* if (CF2Input.GetAxis("S_1_Hoz") != 0 && CF2Input.GetAxis("S_1_Ver") != 0 && (CF2Input.GetButton("Skill1") || CF2Input.GetButtonUp("Skill1")))
+         {
+             //      h1 = CF2Input.GetAxis("S_1_Hoz");
+             //    v1 = CF2Input.GetAxis("S_1_Ver");
+             //  joystickCharacter.Spell1(new SkillMessage());
+             Debug.Log("-" + CF2Input.GetButton("Skill1") + CF2Input.GetButtonDown("Skill1") + CF2Input.GetButtonUp("Skill1"));
 
-        }   */
+         }   */
 
         /*if (CF2Input.GetButtonUp("Skill1"))
         {
@@ -96,26 +96,26 @@ public class GameManagerArVik : MonoBehaviourPunCallbacks
              Debug.Log(CF2Input.GetAxis("Vertical"));  */
 
 
-       /* if (CF2Input.GetButtonDown("Skill1"))
-        {
-            if (skill1 != null) skill1();
-            Debug.Log("Skill1");
-        }
-        if (CF2Input.GetButtonDown("Skill2"))
-        {
-            if (skill2 != null) skill2();
-            Debug.Log("Skill2");
-        }
-        if (CF2Input.GetButtonDown("Skill3"))
-        {
-            if (skill3 != null) skill3();
-            Debug.Log("Skill3");
-        }
-        if (CF2Input.GetButtonDown("Skill4"))
-        {
-            if (skill4 != null) skill4();
-            Debug.Log("Skill4");
-        }                     */
+        /* if (CF2Input.GetButtonDown("Skill1"))
+         {
+             if (skill1 != null) skill1();
+             Debug.Log("Skill1");
+         }
+         if (CF2Input.GetButtonDown("Skill2"))
+         {
+             if (skill2 != null) skill2();
+             Debug.Log("Skill2");
+         }
+         if (CF2Input.GetButtonDown("Skill3"))
+         {
+             if (skill3 != null) skill3();
+             Debug.Log("Skill3");
+         }
+         if (CF2Input.GetButtonDown("Skill4"))
+         {
+             if (skill4 != null) skill4();
+             Debug.Log("Skill4");
+         }                     */
     }
 
     private void Start()
@@ -160,7 +160,8 @@ public class GameManagerArVik : MonoBehaviourPunCallbacks
         }
 
         var newChar = PhotonNetwork.Instantiate(prefabName, pos, Quaternion.identity, 0);
-        GameObject.Instantiate(Resources.Load("PlaneJoystick"), pos, Quaternion.identity);
+        GameObject _planeJoyStick = Instantiate(Resources.Load("PlaneJoystick", typeof(GameObject)), pos, Quaternion.identity) as GameObject;
+        _planeJoyStick?.GetComponent<PlaneJoystick>().SetMainCharacter(newChar);
         //  photonView.RPC("RpcSpawnObject", PhotonTargets.MasterClient, pos, prefabName);
     }
 
