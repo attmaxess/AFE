@@ -1,16 +1,12 @@
 ﻿using UnityEngine;
 using Com.Beetsoft.AFE;
 
-public class Twist : TriggerObject
+public class TwistTrigger : TriggerObject
 {
 
     protected override void OnTriggerEnter(Collider other)
     {
         base.OnTriggerEnter(other);
-        if (other.GetComponent<WindWall>())
-        {
-            gameObject.GetComponent<ObjectElementSkillBehaviour>().ReturnPool();
-        }
 
         if (other.GetComponent<IReceiveDamageable>() != null && other.transform.GetInstanceID() != idObjecctIgnore)
         {

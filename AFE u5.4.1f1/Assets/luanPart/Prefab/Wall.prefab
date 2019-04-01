@@ -22,11 +22,11 @@ GameObject:
   - component: {fileID: 33345385976097926}
   - component: {fileID: 23938514720810704}
   - component: {fileID: 65466311396899514}
-  - component: {fileID: 114069474751480578}
   - component: {fileID: 114890901414405326}
   - component: {fileID: 54231276300977682}
   - component: {fileID: 114571663364339170}
   - component: {fileID: 114531379853757548}
+  - component: {fileID: 114598542248339824}
   m_Layer: 0
   m_Name: Wall
   m_TagString: Untagged
@@ -116,17 +116,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114069474751480578
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1236388683914292}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67ee146a50c848039130d85038548173, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114531379853757548
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -151,6 +140,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeLive: 5
+--- !u!114 &114598542248339824
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1236388683914292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e97e928e921af2459ba05cb63131492, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114890901414405326
 MonoBehaviour:
   m_ObjectHideFlags: 1

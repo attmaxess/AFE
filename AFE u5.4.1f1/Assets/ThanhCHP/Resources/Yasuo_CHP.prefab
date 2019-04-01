@@ -4160,8 +4160,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillModel: {fileID: 11400000, guid: 2d34300a09345634f8b194d879a6945d, type: 2}
-  objectPrefab: {fileID: 114621632722465130, guid: 31517fb9f1d230749a47d7a4c40104d0,
-    type: 2}
+  objectPrefab: {fileID: 0}
 --- !u!114 &114315601636423302
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4399,8 +4398,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillModel: {fileID: 11400000, guid: 1897c10aeb370b24e91035e8f3cf69f2, type: 2}
-  objectPrefab: {fileID: 114069474751480578, guid: 51bc945752bf93f4e92b2687f959aeee,
-    type: 2}
+  objectPrefab: {fileID: 0}
 --- !u!137 &137490055118385072
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
