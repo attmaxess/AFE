@@ -26,6 +26,7 @@ GameObject:
   - component: {fileID: 114225880487402616}
   - component: {fileID: 114116286545759284}
   - component: {fileID: 114721238444824766}
+  - component: {fileID: 114164813221416832}
   m_Layer: 0
   m_Name: Twist
   m_TagString: Untagged
@@ -114,6 +115,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb7d8ce36295e8d42a3a905181938e21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114164813221416832
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1896720226558926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 867c6b05fafec8647af7a53beb9cf881, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeLive: 5
 --- !u!114 &114225880487402616
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -141,6 +154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89b72e9d9bd1f6b4bb3138e2079d687b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  knockUpTime: 0.7
 --- !u!136 &136398934282493836
 CapsuleCollider:
   m_ObjectHideFlags: 1
