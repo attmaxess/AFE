@@ -145,10 +145,15 @@ public class GameManagerArVik : MonoBehaviourPunCallbacks
         Debug.LogWarning("OnDisconnectedFromPhoton");
     }
 
+    public bool isSpawnMainCharacter;
+
     public void SpawnObject(Vector3 pos, GameObject hitObject)
     {
-        bool isSpawn = false;
-        var aa = GameObject.FindObjectsOfType<ThirdPersonNetworkARVik>();
+        if (isSpawnMainCharacter)
+            return;
+        isSpawnMainCharacter = true;
+        //bool isSpawnMainCharacter = false;
+        /*var aa = GameObject.FindObjectsOfType<Test>();
         for (int i = 0; i < aa.Length; i++)
         {
             Debug.Log("a[i].gameObject " + aa[i].gameObject.GetPhotonView().IsMine);
@@ -157,7 +162,7 @@ public class GameManagerArVik : MonoBehaviourPunCallbacks
                 isSpawn = true;
                 return;
             }
-        }
+        }  */
 
         var newChar = PhotonNetwork.Instantiate(prefabName, pos, Quaternion.identity, 0);
         GameObject _planeJoyStick = Instantiate(Resources.Load("PlaneJoystick", typeof(GameObject)), pos, Quaternion.identity) as GameObject;
