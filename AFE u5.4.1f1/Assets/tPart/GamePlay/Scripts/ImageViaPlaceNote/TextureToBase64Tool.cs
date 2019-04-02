@@ -1,4 +1,5 @@
-﻿#region [Copyright (c) 2015 Cristian Alexandru Geambasu]
+﻿#if UNITY_EDITOR
+#region [Copyright (c) 2015 Cristian Alexandru Geambasu]
 //	Distributed under the terms of an MIT-style license:
 //
 //	The MIT License
@@ -90,3 +91,4 @@ namespace TeamUtilityEditor
         }
     }
 }
+#endif
