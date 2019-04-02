@@ -50,5 +50,6 @@ MonoBehaviour:
   - SyncPositionTweenRpc
   - SyncRotationTweenRpc
   - SyncLocalScaleTweenRpc
+  - BlowUpRpc
   DisableAutoOpenWizard: 1
   ShowSettings: 1

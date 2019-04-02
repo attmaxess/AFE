@@ -98,7 +98,7 @@ namespace Com.Beetsoft.AFE
 
         protected virtual void Start()
         {
-            InitValue();
+            InitValue(0.5f);
         }
 
         protected virtual void ActiveSkillCurrent(IInputMessage message, int millisecondDelay)
@@ -108,10 +108,10 @@ namespace Com.Beetsoft.AFE
                 .Subscribe(_ => skillBehaviour.ActiveSkill(message));
         }
 
-        private void InitValue()
+        protected void InitValue(float timeInit)
         {
             SkillMessageOutputReactiveProperty.Value =
-                SkillReader.GetSkillBehaviourCurrent().GetSkillOutputMessageInit();
+                SkillReader.GetSkillBehaviourCurrent().GetSkillOutputMessageInit(timeInit);
         }
 
         protected void SendOutput()

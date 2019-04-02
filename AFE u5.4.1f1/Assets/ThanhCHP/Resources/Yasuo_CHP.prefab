@@ -491,6 +491,7 @@ GameObject:
   - component: {fileID: 114337523984434604}
   - component: {fileID: 114698782696386444}
   - component: {fileID: 143594627760311702}
+  - component: {fileID: 114113698452653094}
   m_Layer: 0
   m_Name: Yasuo_CHP
   m_TagString: Untagged
@@ -4069,6 +4070,20 @@ MonoBehaviour:
   animatorHandler: {fileID: 114218586144303770}
   barPlayer: {fileID: 114681016319380998, guid: e53a0e6b970edf0499e0e7fa8bbd148f,
     type: 2}
+--- !u!114 &114113698452653094
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1174075871233712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c88ada98ac0884946a48bf90eb5065f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  easeType: 5
+  maxYAxis: 4
+  minYAxis: 0
 --- !u!114 &114218586144303770
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4384,7 +4399,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 504eb41f394b4523b39ec00c866caf20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillModel: {fileID: 11400000, guid: 901a2946f74261f4fad4f6b4c9a2b344, type: 2}
+  skillModel: {fileID: 11400000, guid: 01b916019809a254ca38b7a6328f5a19, type: 2}
   layerMaskTarget:
     serializedVersion: 2
     m_Bits: 4294967295

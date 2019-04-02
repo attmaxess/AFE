@@ -1,4 +1,5 @@
 ﻿using System;
+using Photon.Pun;
 using UniRx;
 using UnityEngine;
 
@@ -14,7 +15,7 @@ namespace Com.Beetsoft.AFE
         ReactiveProperty<bool> IsCrowdControl { get; }
     }
 
-    public class BlowUpObject : MonoBehaviour,
+    public class BlowUpObject : MonoBehaviourPun,
         ICrowdControl,
         IKnockUpable
     {
@@ -39,6 +40,12 @@ namespace Com.Beetsoft.AFE
         }
 
         public void BlowUp(float timeUp)
+        {
+            photonView.RPC("BlowUpRpc", RpcTarget.All, timeUp);
+        }
+
+        [PunRPC]
+        private void BlowUpRpc(float timeUp)
         {
             IsCrowdControl.Value = true;
             DoBlowUp(timeUp, () => DoBlowDown(Constant.KnockDown, () => IsCrowdControl.Value = false));

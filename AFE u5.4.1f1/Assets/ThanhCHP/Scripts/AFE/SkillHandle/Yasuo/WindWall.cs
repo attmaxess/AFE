@@ -9,10 +9,5 @@ namespace Com.Beetsoft.AFE
         {
             movable.MoveToDir(startPos, direction);
         }
-
-        internal override void SetIdIgnore(int value)
-        {
-            trigger.SetIdIgnore(value);
-        }
     }
 }

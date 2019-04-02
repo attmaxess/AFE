@@ -3,7 +3,7 @@ using UniRx;
 
 namespace Com.Beetsoft.AFE
 {
-    public class YasuoSpell4Handler : SkillHandler    ,ISkillSpell_4
+    public class YasuoSpell4Handler : SkillHandler, ISkillSpell_4
     {
         protected override void Start()
         {
