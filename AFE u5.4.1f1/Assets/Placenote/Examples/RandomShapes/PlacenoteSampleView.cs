@@ -289,20 +289,29 @@ public class PlacenoteSampleView : MonoBehaviour, PlacenoteListener
     IEnumerator C_LoadImagePanel()
     {
         capturePanel.SetActive(true);
-                
+
         ScreenCaptureData captureData = mSelectedMapInfo.metadata.userdata["capture"].ToObject<ScreenCaptureData>();
 
         screenCapture.textureMethod.TextTextureFileName = captureData.texName;
-        screenCapture.textureMethod.m_encodedData = captureData.string64;
 
-        screenCapture.textureMethod.GetTexture2D();
-        yield return new WaitUntil(() => screenCapture.textureMethod.m_texture != null);
+        if (File.Exists(Application.persistentDataPath + "/" + screenCapture.textureMethod.TextTextureFileName + ".png"))
+        {
+            if (isDebug) Debug.Log("Existed " + screenCapture.textureMethod.TextTextureFileName + ".png, just reload from persistPath!!");                        
+        }
+        else
+        {
+            screenCapture.textureMethod.m_encodedData = captureData.string64;
 
-        screenCapture.textureMethod.ToString64File();
-        yield return new WaitUntil(() => screenCapture.textureMethod.doneToString64File == true);
+            screenCapture.textureMethod.GetTexture2D();
+            yield return new WaitUntil(() => screenCapture.textureMethod.m_texture != null);
 
-        screenCapture.textureMethod.ToPNGFile();
-        yield return new WaitUntil(() => screenCapture.textureMethod.doneToPNGFile == true);
+            screenCapture.textureMethod.ToString64File();
+            yield return new WaitUntil(() => screenCapture.textureMethod.doneToString64File == true);
+
+            screenCapture.textureMethod.ToPNGFile();
+            yield return new WaitUntil(() => screenCapture.textureMethod.doneToPNGFile == true);
+
+        }
 
         screenCapture.textureMethod.GetTexture2DFromPNG();
 
@@ -456,7 +465,7 @@ public class PlacenoteSampleView : MonoBehaviour, PlacenoteListener
                 JObject captureObject = JObject.FromObject(captureData);
                 userdata["capture"] = captureObject;
                 ///=============================================================
-                
+
                 if (useLocation)
                 {
                     metadata.location = new LibPlacenote.MapLocation();
@@ -497,7 +506,7 @@ public class PlacenoteSampleView : MonoBehaviour, PlacenoteListener
         if (isDebug) Debug.Log("Done C_OnSaveMapClick");
 
         yield break;
-    }    
+    }
 
     public void OnPose(Matrix4x4 outputPose, Matrix4x4 arkitPose) { }
 

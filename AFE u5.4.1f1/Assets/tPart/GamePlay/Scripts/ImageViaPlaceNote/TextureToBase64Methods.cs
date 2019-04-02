@@ -163,10 +163,8 @@ namespace DHT.TextureToString64
         public void GetTexture2DFromPNG()
         {
             this.m_texture = null;
-
-            m_encodedData = File.ReadAllText(Application.persistentDataPath + "/" + TextTextureFileName + ".txt");
-            byte[] imageData = System.IO.File.ReadAllBytes(Application.persistentDataPath + "/" + TextTextureFileName + ".png");
-            Convert.FromBase64String(m_encodedData);
+                        
+            byte[] imageData = System.IO.File.ReadAllBytes(Application.persistentDataPath + "/" + TextTextureFileName + ".png");            
 
             int width, height;
             GetImageSize(imageData, out width, out height);
