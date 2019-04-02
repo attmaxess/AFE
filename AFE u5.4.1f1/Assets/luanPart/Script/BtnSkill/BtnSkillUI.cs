@@ -48,8 +48,7 @@ public class BtnSkillUI : MonoBehaviour
     {
         canUseSkill = true;
         isCountTime = false;
-        //var a = MessageBroker.Default.Receive<MessagePlayerData>().Subscribe(_ => { });
-        //MessageBroker.Default.Publish<MessagePlayerData>(new MessagePlayerData(10, 100));
+
         var btns = GetComponents<BtnSkillBase>();
         foreach (var item in btns)
         {
@@ -66,22 +65,6 @@ public class BtnSkillUI : MonoBehaviour
             }
         }
 
-        /*   skillData.CountTime.Where(_count => _count > 0).Subscribe(_ =>
-           {
-               countTime = _;
-           });
-           skillData.Disable.Subscribe(_ =>
-           {
-               canUseSkill = !_;
-           });
-           skillData.SpriteCurrent.Subscribe(_ =>
-           {
-               touchJoystickSprite.SetSprite(_);
-           });   */
-
-
-
-        //  FinDSkillReader();
 
         MessageBroker.Default.Receive<MassageSpawnNewCharacter>().Subscribe(MessageBroker =>
         {
@@ -97,23 +80,6 @@ public class BtnSkillUI : MonoBehaviour
     }
     public void FinDSkillReader()
     {
-        /* if (skillHandler != null) return;
-         TestYasuo[] _listTestYasuo = FindObjectsOfType<TestYasuo>();
-         if (_listTestYasuo.Length <= 0) return;
-         TestYasuo yasuoMine = _listTestYasuo[0];
-         foreach (var item in _listTestYasuo)
-         {
-             if (item.photonView.IsMine)
-             {
-                 yasuoMine = item;
-                 break;
-             }
-             else
-             {
-                 yasuoMine = null;
-             }
-         }
-         if (yasuoMine == null) return;        */
 
         TestYasuo yasuoMine = mainCharacter.GetComponent<TestYasuo>();
         if (yasuoMine == null) return;
@@ -189,7 +155,6 @@ public class BtnSkillUI : MonoBehaviour
     {
         if (mainCharacter == null) return;
         SwitchState(curState.UpdateState());
-        // FinDSkillReader();
 
     }
 

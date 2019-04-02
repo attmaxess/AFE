@@ -153,31 +153,15 @@ public class GameManagerArVik : MonoBehaviourPunCallbacks
         if (isSpawnMainCharacter)
             return;
         isSpawnMainCharacter = true;
-        //bool isSpawnMainCharacter = false;
-        /*var aa = GameObject.FindObjectsOfType<Test>();
-        for (int i = 0; i < aa.Length; i++)
-        {
-            Debug.Log("a[i].gameObject " + aa[i].gameObject.GetPhotonView().IsMine);
-            if (aa[i].gameObject.GetPhotonView().IsMine)
-            {
-                isSpawn = true;
-                return;
-            }
-        }  */
 
         var newChar = PhotonNetwork.Instantiate(prefabName, pos, Quaternion.identity, 0);
         GameObject _planeJoyStick = Instantiate(Resources.Load("PlaneJoystick", typeof(GameObject)), pos, Quaternion.identity) as GameObject;
         _planeJoyStick?.GetComponent<PlaneJoystick>().SetMainCharacter(newChar);
         MessageBroker.Default.Publish<MassageSpawnNewCharacter>(new MassageSpawnNewCharacter(newChar.transform));
 
-        //  photonView.RPC("RpcSpawnObject", PhotonTargets.MasterClient, pos, prefabName);
     }
 
-    [PunRPC]
-    public void RpcSpawnObject(Vector3 pos, string prefabName)
-    {
 
-    }
 }
 
 public class MassageSpawnNewCharacter
