@@ -42,13 +42,13 @@ public class BtnSkillUI : MonoBehaviour
     public SkillHandler skillHandler;
 
     public float countTime;
+    public Transform mainCharacter;
 
     private void Start()
     {
         canUseSkill = true;
         isCountTime = false;
-        //var a = MessageBroker.Default.Receive<MessagePlayerData>().Subscribe(_ => { });
-        //MessageBroker.Default.Publish<MessagePlayerData>(new MessagePlayerData(10, 100));
+
         var btns = GetComponents<BtnSkillBase>();
         foreach (var item in btns)
         {
@@ -65,38 +65,23 @@ public class BtnSkillUI : MonoBehaviour
             }
         }
 
-        /*   skillData.CountTime.Where(_count => _count > 0).Subscribe(_ =>
-           {
-               countTime = _;
-           });
-           skillData.Disable.Subscribe(_ =>
-           {
-               canUseSkill = !_;
-           });
-           skillData.SpriteCurrent.Subscribe(_ =>
-           {
-               touchJoystickSprite.SetSprite(_);
-           });   */
 
-
-
-        FinDSkillReader();
-
-
+        MessageBroker.Default.Receive<MassageSpawnNewCharacter>().Subscribe(MessageBroker =>
+        {
+            MessageBroker.mainCharacter.Subscribe(character =>
+            {
+                mainCharacter = character;
+                if (mainCharacter != null)
+                {
+                    FinDSkillReader();
+                }
+            });
+        });
     }
     public void FinDSkillReader()
     {
-        if (skillHandler != null) return;
-        TestYasuo[] _listTestYasuo = FindObjectsOfType<TestYasuo>();
-        if (_listTestYasuo.Length <= 0) return;
-        TestYasuo yasuoMine = _listTestYasuo[0];
-        foreach (var item in _listTestYasuo)
-        {
-            if (item.photonView.IsMine)
-            {
-                yasuoMine = item;
-            }
-        }
+
+        TestYasuo yasuoMine = mainCharacter.GetComponent<TestYasuo>();
         if (yasuoMine == null) return;
         if (skillType == SkillType.Skill_1)
         {
@@ -168,8 +153,8 @@ public class BtnSkillUI : MonoBehaviour
 
     private void Update()
     {
+        if (mainCharacter == null) return;
         SwitchState(curState.UpdateState());
-        FinDSkillReader();
 
     }
 

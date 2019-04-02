@@ -6,6 +6,7 @@ using ControlFreak2;
 using Com.Beetsoft.AFE;
 using Photon.Pun;
 using UniRx;
+using System;
 
 public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
 {
@@ -22,6 +23,9 @@ public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
     public IJoystickInputFilter joystickCharacter;
     private bool IsUpdateWhenSkill;
 
+    public GameObject mainCharacter;
+    public ICrowdControl crowdControl;
+    bool isCrowdConttroll;
     public Vector3 directionRotate
     {
         get
@@ -34,30 +38,46 @@ public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
 
     void Start()
     {
-        if (joystickCharacter != null)
+        if (crowdControl == null)
         {
-            var mObjs = GameObject.FindObjectsOfType<MonoBehaviour>();
-            IJoystickInputFilter[] interfaceScripts = (from a in mObjs where a.GetType().GetInterfaces().Any(k => k == typeof(IJoystickInputFilter)) select (IJoystickInputFilter)a).ToArray();
-            if (interfaceScripts.Length > 0)
+            crowdControl = mainCharacter?.GetComponent<ICrowdControl>();
+            if (joystickCharacter == null)
+                Debug.Log("Dont Find Any Gameobject Have ICrowdControl");
+            crowdControl?.IsCrowdControl.Subscribe(isCrowdConttroll =>
             {
-                for (int i = 0; i < interfaceScripts.Length; i++)
+                this.isCrowdConttroll = isCrowdConttroll;
+            });
+        }
+
+
+        if (joystickCharacter == null)
+        {
+            joystickCharacter = mainCharacter?.GetComponent<IJoystickInputFilter>();
+            if (joystickCharacter == null)
+                Debug.Log("Dont Find Any Gameobject Have joystickCharacter");
+
+            /* var mObjs = GameObject.FindObjectsOfType<MonoBehaviour>();
+                IJoystickInputFilter[] interfaceScripts = (from a in mObjs where a.GetType().GetInterfaces().Any(k => k == typeof(IJoystickInputFilter)) select (IJoystickInputFilter)a).ToArray();
+                if (interfaceScripts.Length > 0)
                 {
-                    var mono = interfaceScripts[i] as MonoBehaviour;
-                    if (mono != null && mono.GetComponent<PhotonView>().IsMine)
+                    for (int i = 0; i < interfaceScripts.Length; i++)
                     {
-                        joystickCharacter = interfaceScripts[i];
-                        break;
+                        var mono = interfaceScripts[i] as MonoBehaviour;
+                        if (mono != null && mono.GetComponent<PhotonView>().IsMine)
+                        {
+                            joystickCharacter = interfaceScripts[i];
+                            break;
+                        }
+                    }
+                    if (joystickCharacter == null)
+                    {
+                        Debug.Log("Dont Have Local joystickCharacter");
                     }
                 }
-                if (joystickCharacter == null)
+                else
                 {
-                    Debug.Log("Dont Have Local joystickCharacter");
-                }
-            }
-            else
-            {
-                Debug.Log("Dont Find Any Gameobject Have joystickCharacter");
-            }
+                    Debug.Log("Dont Find Any Gameobject Have joystickCharacter");
+                }     */
 
         }
 
@@ -90,6 +110,9 @@ public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
         {
             Debug.Log("Pause");
         }
+
+        if (isCrowdConttroll) return;
+
         if (CF2Input.GetButtonDown("Attack"))
         {
             Debug.Log("Attack");
@@ -172,34 +195,54 @@ public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
         }
         else
         {
-            var mObjs = GameObject.FindObjectsOfType<MonoBehaviour>();
-            IJoystickInputFilter[] interfaceScripts = (from a in mObjs where a.GetType().GetInterfaces().Any(k => k == typeof(IJoystickInputFilter)) select (IJoystickInputFilter)a).ToArray();
-            if (interfaceScripts.Length > 0)
-            {
-                for (int i = 0; i < interfaceScripts.Length; i++)
-                {
-                    var mono = interfaceScripts[i] as MonoBehaviour;
-                    if (mono != null && mono.GetComponent<PhotonView>().IsMine)
-                    {
-                        joystickCharacter = interfaceScripts[i];
-                        speed = mono.GetComponent<TestYasuo>().ChampionModel.MoveSpeed.Value;
-                        break;
-                    }
-                }
-                if (joystickCharacter == null)
-                {
-                    Debug.Log("Dont Have Local joystickCharacter");
-                }
-            }
-            else
-            {
+            joystickCharacter = mainCharacter?.GetComponent<IJoystickInputFilter>();
+            if (joystickCharacter == null)
                 Debug.Log("Dont Find Any Gameobject Have joystickCharacter");
-            }
 
+            /* var mObjs = GameObject.FindObjectsOfType<MonoBehaviour>();
+             IJoystickInputFilter[] interfaceScripts = (from a in mObjs where a.GetType().GetInterfaces().Any(k => k == typeof(IJoystickInputFilter)) select (IJoystickInputFilter)a).ToArray();
+             if (interfaceScripts.Length > 0)
+             {
+                 for (int i = 0; i < interfaceScripts.Length; i++)
+                 {
+                     var mono = interfaceScripts[i] as MonoBehaviour;
+                     if (mono != null && mono.GetComponent<PhotonView>().IsMine)
+                     {
+                         joystickCharacter = interfaceScripts[i];
+                         speed = mono.GetComponent<TestYasuo>().ChampionModel.MoveSpeed.Value;
+                         break;
+                     }
+                 }
+                 if (joystickCharacter == null)
+                 {
+                     Debug.Log("Dont Have Local joystickCharacter");
+                 }
+             }
+             else
+             {
+                 Debug.Log("Dont Find Any Gameobject Have joystickCharacter");
+             }      */
+
+        }
+
+        if (crowdControl == null)
+        {
+            crowdControl = mainCharacter?.GetComponent<ICrowdControl>();
+            if (joystickCharacter == null)
+                Debug.Log("Dont Find Any Gameobject Have ICrowdControl");
+            crowdControl?.IsCrowdControl.Subscribe(isCrowdConttroll =>
+            {
+                this.isCrowdConttroll = isCrowdConttroll;
+            });
         }
 
         previousV1_Skill = v1;
         previousH1_Skill = h1;
+    }
+
+    internal void SetMainCharacter(GameObject newChar)
+    {
+        mainCharacter = newChar;
     }
 
     public Transform GetTransform()
