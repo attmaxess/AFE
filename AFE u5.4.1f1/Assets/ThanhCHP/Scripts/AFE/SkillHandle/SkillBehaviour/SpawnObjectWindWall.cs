@@ -37,7 +37,7 @@ namespace Com.Beetsoft.AFE
             Debug.Log("SpawnWindWall - " + direction);
             ObjectPool.RentAsync().Subscribe(windWall =>
             {
-                windWall.OnSpawn(transform.position + direction, direction);
+                windWall.OnSpawn(transform.position + direction, direction, CreateDamageMessage());
                 windWall.SetIdIgnore(transform.GetInstanceID());
             });
         }
@@ -47,7 +47,7 @@ namespace Com.Beetsoft.AFE
             Debug.Log("SpawnWindWall - " + direction);
             ObjectPool.RentAsync().Subscribe(windWall =>
             {
-                windWall.OnSpawn(transform.position + direction, direction);
+                windWall.OnSpawn(transform.position + direction, direction, CreateDamageMessage());
                 windWall.SetIdIgnore(transform.GetInstanceID());
             });
         }

@@ -65,7 +65,12 @@ namespace Com.Beetsoft.AFE
 
             Observable.EveryUpdate()
                 .Where(_ => RotateTarget != Vector3.zero)
-                .Subscribe(x => { transform.forward = Vector3.Lerp(transform.forward, RotateTarget, SpeedSmooth); });
+                .Subscribe(x =>
+                {
+                    transform.forward = Vector3.Lerp(transform.forward, RotateTarget, SpeedSmooth);
+                    if(transform.forward == RotateTarget)
+                        RotateTarget = Vector3.zero;
+                });
 
             JoystickInputFilterObserver.OnRunAsObservable()
                 .Select(message => IsRun(message.Rotation))

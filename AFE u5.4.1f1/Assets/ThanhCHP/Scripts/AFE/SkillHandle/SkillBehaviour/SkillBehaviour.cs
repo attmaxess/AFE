@@ -69,6 +69,16 @@ namespace Com.Beetsoft.AFE
             return SkillConfig.Cooldown.Value - SkillConfig.Cooldown.Value * ChampionConfig.CooldownSkillBonus.Value;
         }
 
+        protected float GetPhysicDamage()
+        {
+            return SkillConfig.PhysicDamage.Value + ChampionConfig.AttackDamage.Value * SkillConfig.PhysicDamageBonus;
+        }
+
+        protected float GetMagicDamage()
+        {
+            return SkillConfig.MagicDamage.Value + ChampionConfig.AbilityPower.Value * SkillConfig.MagicDamageBonus;
+        }
+
         protected virtual void Awake()
         {
             SyncTransformImmediately = gameObject.GetOrAddComponent<SyncTransformImmediately>();
@@ -76,6 +86,11 @@ namespace Com.Beetsoft.AFE
 
         protected virtual void Start()
         {
+        }
+
+        protected IDamageMessage CreateDamageMessage()
+        {
+            return new DamageMessage(GetPhysicDamage(), GetMagicDamage());
         }
     }
 }

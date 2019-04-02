@@ -27,6 +27,6 @@ namespace Com.Beetsoft.AFE
             ObjectPool.Return(this);
         }
 
-        internal abstract void OnSpawn(Vector3 startPos, Vector3 direction);
+        internal abstract void OnSpawn(Vector3 startPos, Vector3 direction, IDamageMessage damageMessage);
     }
 }

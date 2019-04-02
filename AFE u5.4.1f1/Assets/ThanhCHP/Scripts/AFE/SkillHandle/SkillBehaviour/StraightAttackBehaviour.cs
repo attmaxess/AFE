@@ -17,8 +17,7 @@ namespace Com.Beetsoft.AFE
             ActiveSkillSubject.OnNext(receivers);
             
             if (receivers.IsNullOrEmpty()) return;
-            var damageMessage = new DamageMessage(SkillConfig.PhysicDamage.Value, SkillConfig.MagicDamage.Value);
-            receivers.ForEach(x => x.TakeDamage(damageMessage));
+            receivers.ForEach(x => x.TakeDamage(CreateDamageMessage()));
         }
     }
 }

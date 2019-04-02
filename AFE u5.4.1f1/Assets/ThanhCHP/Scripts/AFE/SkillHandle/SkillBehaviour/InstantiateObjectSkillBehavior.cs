@@ -42,7 +42,7 @@ namespace Com.Beetsoft.AFE
         {
             ObjectPool.RentAsync().Subscribe(twist =>
             {
-                twist.OnSpawn(transform.position + direction, direction);
+                twist.OnSpawn(transform.position + direction, direction, CreateDamageMessage());
                 twist.SetIdIgnore(transform.GetInstanceID());
             });
         }
@@ -52,7 +52,7 @@ namespace Com.Beetsoft.AFE
         {
             ObjectPool.RentAsync().Subscribe(twist =>
             {
-                twist.OnSpawn(transform.position + direction, direction);
+                twist.OnSpawn(transform.position + direction, direction, CreateDamageMessage());
                 twist.SetIdIgnore(transform.GetInstanceID());
             });
         }
