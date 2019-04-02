@@ -22,18 +22,65 @@ namespace DHT.TextureToString64
             if (isDebug) Debug.Log(m_encodedData);
         }
 
+        [Header("ToString64File")]
+        public bool doneToString64File = true;
+
         [ContextMenu("ToString64File")]
         public void ToString64File()
         {
+            StartCoroutine(C_ToString64File());
+        }
+
+        IEnumerator C_ToString64File()
+        {
+            doneToString64File = false;
+
             if (m_texture.name == string.Empty)
             {
                 Debug.Log("m_texture.name null");
-                return;
+                doneToString64File = true;
+                yield break;
             }
 
             byte[] imageData = m_texture.EncodeToPNG();
             File.WriteAllText(Application.persistentDataPath + "/" + m_texture.name + ".txt", Convert.ToBase64String(imageData));
+            yield return new WaitUntil(() => File.Exists(Application.persistentDataPath + "/" + m_texture.name + ".txt") == true);
+
             DebugAppPerPath();
+
+            doneToString64File = true;
+
+            yield break;
+        }
+
+        [Header("ToPNGFile")]
+        public bool doneToPNGFile = true;
+
+        [ContextMenu("ToPNGFile")]
+        public void ToPNGFile()
+        {
+            StartCoroutine(C_ToPNGFile());
+        }
+
+        IEnumerator C_ToPNGFile()
+        {
+            doneToPNGFile = false;
+
+            if (m_texture.name == string.Empty)
+            {
+                Debug.Log("m_texture.name null");
+                doneToPNGFile = true;
+                yield break;
+            }
+
+            ScreenCapture.CaptureScreenshot(Application.persistentDataPath + "/" + m_texture.name + ".png");
+            yield return new WaitUntil(() => File.Exists(Application.persistentDataPath + "/" + m_texture.name + ".png") == true);
+
+            DebugAppPerPath();
+
+            doneToPNGFile = true;
+
+            yield break;
         }
 
         [Header("From Texture")]
@@ -63,6 +110,7 @@ namespace DHT.TextureToString64
             GetImageSize(imageData, out width, out height);
 
             m_texture = new Texture2D(width, height, TextureFormat.ARGB32, false, true);
+            m_texture.name = TextTextureFileName;
             m_texture.hideFlags = HideFlags.HideAndDontSave;
             m_texture.filterMode = FilterMode.Point;
 
@@ -103,7 +151,28 @@ namespace DHT.TextureToString64
             int width, height;
             GetImageSize(imageData, out width, out height);
 
-            m_texture = new Texture2D(width, height, TextureFormat.ARGB32, false, true);
+            m_texture = new Texture2D(width, height, TextureFormat.ARGB32, false, true);            
+            m_texture.name = TextTextureFileName;
+            m_texture.hideFlags = HideFlags.HideAndDontSave;
+            m_texture.filterMode = FilterMode.Point;
+
+            m_texture.LoadImage(imageData);
+        }
+
+        [ContextMenu("GetTexture2DFromPNG")]
+        public void GetTexture2DFromPNG()
+        {
+            this.m_texture = null;
+
+            m_encodedData = File.ReadAllText(Application.persistentDataPath + "/" + TextTextureFileName + ".txt");
+            byte[] imageData = System.IO.File.ReadAllBytes(Application.persistentDataPath + "/" + TextTextureFileName + ".png");
+            Convert.FromBase64String(m_encodedData);
+
+            int width, height;
+            GetImageSize(imageData, out width, out height);
+
+            m_texture = new Texture2D(width, height, TextureFormat.ARGB32, false, true);            
+            m_texture.name = TextTextureFileName;
             m_texture.hideFlags = HideFlags.HideAndDontSave;
             m_texture.filterMode = FilterMode.Point;
 

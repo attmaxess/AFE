@@ -283,18 +283,34 @@ public class PlacenoteSampleView : MonoBehaviour, PlacenoteListener
 
     void LoadImagePanel()
     {
+        StartCoroutine(C_LoadImagePanel());
+    }
+
+    IEnumerator C_LoadImagePanel()
+    {
         capturePanel.SetActive(true);
-
-        ScreenCaptureData captureData = ((JObject)(mSelectedMapInfo.metadata.userdata["capture"] is JObject)).ToObject<ScreenCaptureData>();
-
-        screenCapture.textureMethod.m_encodedData = captureData.string64;
-        screenCapture.textureMethod.GetTexture2D();
+                
+        ScreenCaptureData captureData = mSelectedMapInfo.metadata.userdata["capture"].ToObject<ScreenCaptureData>();
 
         screenCapture.textureMethod.TextTextureFileName = captureData.texName;
+        screenCapture.textureMethod.m_encodedData = captureData.string64;
+
+        screenCapture.textureMethod.GetTexture2D();
+        yield return new WaitUntil(() => screenCapture.textureMethod.m_texture != null);
+
         screenCapture.textureMethod.ToString64File();
+        yield return new WaitUntil(() => screenCapture.textureMethod.doneToString64File == true);
+
+        screenCapture.textureMethod.ToPNGFile();
+        yield return new WaitUntil(() => screenCapture.textureMethod.doneToPNGFile == true);
+
+        screenCapture.textureMethod.GetTexture2DFromPNG();
 
         Vector2 texSize = new Vector2(screenCapture.textureMethod.m_texture.width, screenCapture.textureMethod.m_texture.height);
         captureImage.sprite = Sprite.Create(screenCapture.textureMethod.m_texture, new Rect(0f, 0f, texSize.x, texSize.y), new Vector2(0.5f, 0.5f), 100f);
+        captureImage.sprite.name = captureData.texName;
+
+        yield break;
     }
 
     public void OnDeleteMapClicked()
