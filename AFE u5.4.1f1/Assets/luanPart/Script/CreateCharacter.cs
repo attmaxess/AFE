@@ -1,6 +1,7 @@
 ﻿using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
+using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,56 +9,26 @@ public class CreateCharacter : MonoBehaviour
 {   
     [Header("Params")] 
     public bool boolCreatePlaneJoystick = false;
-    public string characterPrefab = string.Empty;
-
-    /// <summary>
-    /// Local
-    /// </summary>
-    GameManagerArVik gameManagerArVik = null;
+    public string characterPrefab = string.Empty;    
 
     [ContextMenu("ClickSpawn")]
     public void ClickSpawn()
     {
-        if (gameManagerArVik == null)
-        {
-            gameManagerArVik = GameObject.FindObjectOfType<GameManagerArVik>();
-        }
-
-        if (gameManagerArVik != null)
-        {
-            gameManagerArVik.prefabName = characterPrefab;
-        }
-
-        bool isSpawn = false;
-        var aa = GameObject.FindObjectsOfType<ThirdPersonNetworkARVik>();
-        for (int i = 0; i < aa.Length; i++)
-        {
-            Debug.Log("a[i].gameObject " + aa[i].gameObject.GetPhotonView().IsMine);
-            if (aa[i].gameObject.GetPhotonView().IsMine)
-            {
-                isSpawn = true;
-                return;
-            }
-        }
-
-        gameManagerArVik.prefabName = characterPrefab;
-        gameManagerArVik.SpawnObject(Vector3.zero, null);
+        StartCoroutine(C_ClickSpawn());
     }
 
-    [ContextMenu("SpawnObjectAtZero")]
-    public void SpawnObjectAtZero(float offsetY = 0.5f)
+    IEnumerator C_ClickSpawn()
     {
-        var currentCharacter = GameObject.FindObjectsOfType<ThirdPersonNetworkARVik>();
-        for (int i = 0; i < currentCharacter.Length; i++)
-        {
-            Debug.Log("a[i].gameObject " + currentCharacter[i].gameObject.GetPhotonView().IsMine);
-            if (currentCharacter[i].gameObject.GetPhotonView().IsMine)
-            {
-                return;
-            }
-        }
+        var newChar = PhotonNetwork.Instantiate(characterPrefab, Vector3.zero, Quaternion.identity, 0);
+        yield return new WaitUntil(() => newChar.gameObject != null);                       
 
-        var newChar = PhotonNetwork.Instantiate(characterPrefab, new Vector3(0, offsetY, 0), Quaternion.identity, 0);
-        if (boolCreatePlaneJoystick) GameObject.Instantiate(Resources.Load("PlaneJoystick"), Vector3.zero, Quaternion.identity);
-    }
+        if (boolCreatePlaneJoystick)
+        {
+            GameObject _planeJoyStick = Instantiate(Resources.Load("PlaneJoystick", typeof(GameObject)), Vector3.zero, Quaternion.identity) as GameObject;
+            yield return new WaitUntil(() => _planeJoyStick.gameObject != null);
+
+            _planeJoyStick?.GetComponent<PlaneJoystick>().SetMainCharacter(newChar);
+            MessageBroker.Default.Publish<MassageSpawnNewCharacter>(new MassageSpawnNewCharacter(newChar.transform));
+        }
+    }    
 }

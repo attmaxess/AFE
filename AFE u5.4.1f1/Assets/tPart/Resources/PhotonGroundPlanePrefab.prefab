@@ -254,7 +254,6 @@ MonoBehaviour:
   viewIdField: 0
   InstantiationId: 5
   isRuntimeInstantiated: 0
-  isMine: 0
 --- !u!1002 &11400009
 EditorExtensionImpl:
   serializedVersion: 6
