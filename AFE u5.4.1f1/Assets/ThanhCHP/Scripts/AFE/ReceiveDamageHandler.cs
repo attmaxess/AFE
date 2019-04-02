@@ -22,6 +22,11 @@ namespace Com.Beetsoft.AFE
         Transform IReceiveDamageable.GetTransform => transform;
         int IReceiveDamageable.ViewID => photonView.ViewID;
 
+        float IReceiveDamageable.GetHealth()
+        {
+            return ChampionConfig?.Health.Value ?? 0;
+        }
+
         void IReceiveDamageable.TakeDamage(IDamageMessage message)
         {
             DamageMessageSubject.OnNext(message);

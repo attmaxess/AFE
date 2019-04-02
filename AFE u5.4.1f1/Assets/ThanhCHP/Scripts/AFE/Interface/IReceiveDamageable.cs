@@ -10,6 +10,7 @@ namespace Com.Beetsoft.AFE
         Transform GetTransform { get; }
         int ViewID { get; }
         T GetComponent<T>();
+        float GetHealth();
     }
 
     public interface IReceiveDamageObserver

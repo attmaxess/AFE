@@ -25,6 +25,12 @@ namespace Com.Beetsoft.AFE
             Direction = direction;
         }
 
+        public InputMessage(IReceiveDamageable objectReceive, Vector3 direction)
+        {
+            ObjectReceive = objectReceive;
+            Direction = direction;
+        }
+
         public InputMessage(Vector3 direction)
         {
             Direction = direction;

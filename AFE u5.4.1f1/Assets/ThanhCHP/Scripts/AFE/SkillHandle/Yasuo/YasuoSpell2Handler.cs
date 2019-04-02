@@ -18,6 +18,7 @@ namespace Com.Beetsoft.AFE
                 .Do(_ => Animator.SetTriggerWithBool(Constant.AnimationPram.W))
                 .Subscribe(message =>
                 {
+                    ChampionTransform.Forward = message.Direction;
                     var skillBehaviour = SkillReader.GetSkillBehaviourCurrent();
                     skillBehaviour.ActiveSkill(message);
                     SendOutput();
