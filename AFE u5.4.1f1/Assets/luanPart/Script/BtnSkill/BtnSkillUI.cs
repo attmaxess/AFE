@@ -42,6 +42,7 @@ public class BtnSkillUI : MonoBehaviour
     public SkillHandler skillHandler;
 
     public float countTime;
+    public Transform mainCharacter;
 
     private void Start()
     {
@@ -80,23 +81,41 @@ public class BtnSkillUI : MonoBehaviour
 
 
 
-        FinDSkillReader();
+        //  FinDSkillReader();
 
-
+        MessageBroker.Default.Receive<MassageSpawnNewCharacter>().Subscribe(MessageBroker =>
+        {
+            MessageBroker.mainCharacter.Subscribe(character =>
+            {
+                mainCharacter = character;
+                if (mainCharacter != null)
+                {
+                    FinDSkillReader();
+                }
+            });
+        });
     }
     public void FinDSkillReader()
     {
-        if (skillHandler != null) return;
-        TestYasuo[] _listTestYasuo = FindObjectsOfType<TestYasuo>();
-        if (_listTestYasuo.Length <= 0) return;
-        TestYasuo yasuoMine = _listTestYasuo[0];
-        foreach (var item in _listTestYasuo)
-        {
-            if (item.photonView.IsMine)
-            {
-                yasuoMine = item;
-            }
-        }
+        /* if (skillHandler != null) return;
+         TestYasuo[] _listTestYasuo = FindObjectsOfType<TestYasuo>();
+         if (_listTestYasuo.Length <= 0) return;
+         TestYasuo yasuoMine = _listTestYasuo[0];
+         foreach (var item in _listTestYasuo)
+         {
+             if (item.photonView.IsMine)
+             {
+                 yasuoMine = item;
+                 break;
+             }
+             else
+             {
+                 yasuoMine = null;
+             }
+         }
+         if (yasuoMine == null) return;        */
+
+        TestYasuo yasuoMine = mainCharacter.GetComponent<TestYasuo>();
         if (yasuoMine == null) return;
         if (skillType == SkillType.Skill_1)
         {
@@ -168,8 +187,9 @@ public class BtnSkillUI : MonoBehaviour
 
     private void Update()
     {
+        if (mainCharacter == null) return;
         SwitchState(curState.UpdateState());
-        FinDSkillReader();
+        // FinDSkillReader();
 
     }
 

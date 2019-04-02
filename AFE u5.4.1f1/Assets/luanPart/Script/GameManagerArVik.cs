@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using ControlFreak2;
 using Photon.Pun;
+using UniRx;
 
 public class GameManagerArVik : MonoBehaviourPunCallbacks
 {
@@ -167,6 +168,8 @@ public class GameManagerArVik : MonoBehaviourPunCallbacks
         var newChar = PhotonNetwork.Instantiate(prefabName, pos, Quaternion.identity, 0);
         GameObject _planeJoyStick = Instantiate(Resources.Load("PlaneJoystick", typeof(GameObject)), pos, Quaternion.identity) as GameObject;
         _planeJoyStick?.GetComponent<PlaneJoystick>().SetMainCharacter(newChar);
+        MessageBroker.Default.Publish<MassageSpawnNewCharacter>(new MassageSpawnNewCharacter(newChar.transform));
+
         //  photonView.RPC("RpcSpawnObject", PhotonTargets.MasterClient, pos, prefabName);
     }
 
@@ -174,5 +177,15 @@ public class GameManagerArVik : MonoBehaviourPunCallbacks
     public void RpcSpawnObject(Vector3 pos, string prefabName)
     {
 
+    }
+}
+
+public class MassageSpawnNewCharacter
+{
+    public ReactiveProperty<Transform> mainCharacter = new ReactiveProperty<Transform>();
+
+    public MassageSpawnNewCharacter(Transform mainCharacter)
+    {
+        this.mainCharacter.Value = mainCharacter;
     }
 }
