@@ -13,19 +13,19 @@ public class CreateCharacter : MonoBehaviour
     /// <summary>
     /// Local
     /// </summary>
-    GameManagerArVik GameManagerArVik = null;
+    GameManagerArVik gameManagerArVik = null;
 
     [ContextMenu("ClickSpawn")]
     public void ClickSpawn()
     {
-        if (GameManagerArVik == null)
+        if (gameManagerArVik == null)
         {
-            GameManagerArVik = GameObject.FindObjectOfType<GameManagerArVik>();
+            gameManagerArVik = GameObject.FindObjectOfType<GameManagerArVik>();
         }
 
-        if (GameManagerArVik != null)
+        if (gameManagerArVik != null)
         {
-            GameManagerArVik.prefabName = characterPrefab;
+            gameManagerArVik.prefabName = characterPrefab;
         }
 
         bool isSpawn = false;
@@ -40,8 +40,8 @@ public class CreateCharacter : MonoBehaviour
             }
         }
 
-        var newChar = PhotonNetwork.Instantiate(characterPrefab, Vector3.zero, Quaternion.identity, 0);
-        if (boolCreatePlaneJoystick) GameObject.Instantiate(Resources.Load("PlaneJoystick"), Vector3.zero, Quaternion.identity);
+        gameManagerArVik.prefabName = characterPrefab;
+        gameManagerArVik.SpawnObject(Vector3.zero, null);
     }
 
     [ContextMenu("SpawnObjectAtZero")]
