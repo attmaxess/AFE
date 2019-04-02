@@ -11,6 +11,7 @@ namespace Com.Beetsoft.AFE
         void ActiveSkill(IInputMessage inputMessage);
         IObservable<IEnumerable<IReceiveDamageable>> OnActiveSkillAsObservable();
         ISkillOutputMessage GetSkillOutputMessage();
+        ISkillOutputMessage GetSkillOutputMessageInit(float timeInit);
     }
 
     public abstract class SkillBehaviour : MonoBehaviourPun,
@@ -28,6 +29,11 @@ namespace Com.Beetsoft.AFE
 
         protected IChampionConfig ChampionConfig { get; private set; }
 
+        protected Subject<IEnumerable<IReceiveDamageable>> ActiveSkillSubject { get; } =
+            new Subject<IEnumerable<IReceiveDamageable>>();
+
+        protected SyncTransformImmediately SyncTransformImmediately { get; private set; }
+
         public void Initialize(IAnimationStateChecker init)
         {
             AnimationStateChecker = init;
@@ -37,8 +43,6 @@ namespace Com.Beetsoft.AFE
         {
             ChampionConfig = init;
         }
-        
-        protected Subject<IEnumerable<IReceiveDamageable>> ActiveSkillSubject { get; } = new Subject<IEnumerable<IReceiveDamageable>>();
 
         public virtual void ActiveSkill(IInputMessage inputMessage)
         {
@@ -55,9 +59,38 @@ namespace Com.Beetsoft.AFE
             return new SkillOutputMessage(SkillConfig.IconCurrent, GetCooldown());
         }
 
+        public ISkillOutputMessage GetSkillOutputMessageInit(float timeInit)
+        {
+            return new SkillOutputMessage(SkillConfig.IconCurrent, timeInit);
+        }
+
         protected float GetCooldown()
         {
             return SkillConfig.Cooldown.Value - SkillConfig.Cooldown.Value * ChampionConfig.CooldownSkillBonus.Value;
+        }
+
+        protected float GetPhysicDamage()
+        {
+            return SkillConfig.PhysicDamage.Value + ChampionConfig.AttackDamage.Value * SkillConfig.PhysicDamageBonus;
+        }
+
+        protected float GetMagicDamage()
+        {
+            return SkillConfig.MagicDamage.Value + ChampionConfig.AbilityPower.Value * SkillConfig.MagicDamageBonus;
+        }
+
+        protected virtual void Awake()
+        {
+            SyncTransformImmediately = gameObject.GetOrAddComponent<SyncTransformImmediately>();
+        }
+
+        protected virtual void Start()
+        {
+        }
+
+        protected IDamageMessage CreateDamageMessage()
+        {
+            return new DamageMessage(GetPhysicDamage(), GetMagicDamage());
         }
     }
 }

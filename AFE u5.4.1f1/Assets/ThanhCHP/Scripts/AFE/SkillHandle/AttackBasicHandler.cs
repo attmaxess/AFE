@@ -11,9 +11,9 @@ namespace Com.Beetsoft.AFE
         [SerializeField] private AnimationState.BasicAttack maxHit = AnimationState.BasicAttack.Hit4;
         private AnimationState.BasicAttack BasicAttackIndex { get; set; } = AnimationState.BasicAttack.Hit1;
 
-        private AnimationState.BasicAttack MaxHit => maxHit;
-
-        protected virtual void Start()
+        protected AnimationState.BasicAttack MaxHit => maxHit;
+        
+        protected override void Start()
         {
             if (!photonView.IsMine) return;
 
@@ -39,7 +39,7 @@ namespace Com.Beetsoft.AFE
         protected virtual void WillExitStateAttack()
         {
             BasicAttackIndex++;
-            if (BasicAttackIndex > maxHit)
+            if (BasicAttackIndex > MaxHit)
                 BasicAttackIndex = AnimationState.BasicAttack.Hit1;
         }
     }

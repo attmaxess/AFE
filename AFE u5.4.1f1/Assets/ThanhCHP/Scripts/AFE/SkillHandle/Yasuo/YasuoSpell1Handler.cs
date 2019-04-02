@@ -2,61 +2,126 @@ using System;
 using System.Linq;
 using AFE.Extensions;
 using ExtraLinq;
-using UnityEngine;
 using UniRx;
+using UnityEngine;
 using AnimationState = Com.Beetsoft.AFE.Enumerables.AnimationState;
 
 namespace Com.Beetsoft.AFE
 {
     public class YasuoSpell1Handler : SkillHandler, ISkillSpell_1
     {
-        private AnimationState.Spell1 FeatureIndexSpell1State { get; set; } = AnimationState.Spell1.Spell1A;
+        [SerializeField] private float timeKnockUpObject = 0.7f;
 
-        private void Start()
+        private ReactiveProperty<AnimationState.Spell1> FeatureIndexSpell1State { get; } =
+            new ReactiveProperty<AnimationState.Spell1>(AnimationState.Spell1.Spell1A);
+
+        private float TimeKnockUpObject => timeKnockUpObject;
+
+        private IDisposable ResetSpellAfterTimerDisposable { get; set; }
+
+        protected override void Start()
         {
-            SkillReader.SendNext();
+            if (!photonView.IsMine) return;
+            base.Start();
 
-            this.JoystickInputFilterObserver
+            JoystickInputFilterObserver
                 .OnSpell1AsObservable()
-                .Do(_ => Animator.SetTriggerWithBool(Constant.AnimationPram.Q))
+                .Where(_ => !AnimationStateChecker.IsInStateSpell3.Value)
                 .Subscribe(message =>
                 {
-                    var skillBehaviour = SkillReader.GetSkillBehaviourCurrent();
-                    skillBehaviour.ActiveSkill(message);
-                    SkillMessageOutputReactiveProperty.Value = skillBehaviour.GetSkillOutputMessage();
-                    SkillReader.SendNext();
+                    EnterAnimationSpell1();
+                    SyncTransformImmediately.SyncRotationWithDirection(message.Direction);
+                    ActiveSkillCurrent(message, 100);
                 });
 
-            this.JoystickInputFilterObserver
-                .OnSpell3AsObservable()
-                .SelectMany(_ =>
-                    this.JoystickInputFilterObserver.OnSpell1AsObservable().TakeUntil(
-                        Observable.Timer(TimeSpan.FromMilliseconds(Constant.Yasuo.OffsetTimeSpell3AndSpell1))))
-                .Subscribe(_ =>
-                {
-                    Animator.SetInteger(Constant.AnimationPram.QInt, (int)AnimationState.Spell1.Spell1_Dash);
-                    Animator.SetBool(Constant.AnimationPram.IdleBool, false);
-                });
-
-            foreach (var onActiveSkill in SkillReader.SkillBehaviours
+            foreach (var onActiveSkill in SkillReader.SkillBehaviours.Distinct()
                 .Select(x => x.OnActiveSkillAsObservable()))
-            {
                 onActiveSkill.Subscribe(receiveDamageables =>
                 {
-                    if (receiveDamageables.IsNullOrEmpty()) return;
-                    SkillReader.SendNext();
-                    HandleAnimationState();
+                    if (FeatureIndexSpell1State.Value == AnimationState.Spell1.Spell1C)
+                        FeatureIndexSpell1State.Value = AnimationState.Spell1.Spell1A;
+                    else
+                        HandleNextStateSkill(!receiveDamageables.IsNullOrEmpty());
+
+                    SendOutput();
                 });
-            }
+
+            SkillBehaviourPassive.OnActiveSkillAsObservable()
+                .Subscribe(receiveDamageables =>
+                {
+                    if (FeatureIndexSpell1State.Value == AnimationState.Spell1.Spell1C)
+                        receiveDamageables.ToList().ForEach(x =>
+                        {
+                            var knockObj = x.GetComponent<IKnockUpable>();
+                            knockObj?.BlowUp(TimeKnockUpObject);
+                        });
+
+                    if (FeatureIndexSpell1State.Value == AnimationState.Spell1.Spell1C)
+                        FeatureIndexSpell1State.Value = AnimationState.Spell1.Spell1A;
+                    else
+                        HandleNextStateSkill(!receiveDamageables.IsNullOrEmpty());
+
+                    SendOutput();
+                });
+
+            HandleSpellDash();
+
+            FeatureIndexSpell1State
+                .Where(x => x == AnimationState.Spell1.Spell1A)
+                .Subscribe(_ => { SkillReader.SendNextFirstIndex(); });
+
+            FeatureIndexSpell1State
+                .Where(x => x == AnimationState.Spell1.Spell1B)
+                .Subscribe(_ =>
+                {
+                    SkillReader.SendNext(1);
+                    ResetSpellAfterTimer(6f);
+                });
+
+            FeatureIndexSpell1State
+                .Where(x => x == AnimationState.Spell1.Spell1C)
+                .Subscribe(_ =>
+                {
+                    SkillReader.SendNextLastIndex(); 
+                    ResetSpellAfterTimer(10f);
+                });
         }
 
         private void HandleAnimationState()
         {
-            FeatureIndexSpell1State++;
-            if ((int)FeatureIndexSpell1State == Constant.Yasuo.QClipAmount)
-                FeatureIndexSpell1State = AnimationState.Spell1.Spell1A;
-            Animator.SetInteger(Constant.AnimationPram.QInt, (int)FeatureIndexSpell1State);
-            Animator.SetBool(Constant.AnimationPram.IdleBool, true);
+            FeatureIndexSpell1State.Value++;
+        }
+
+        private void EnterAnimationSpell1()
+        {
+            Animator.SetTriggerWithBool(Constant.AnimationPram.Q);
+            Animator.SetInteger(Constant.AnimationPram.QInt, (int) FeatureIndexSpell1State.Value);
+        }
+
+        private void HandleSpellDash()
+        {
+            var spell1DashSmb = Animator.GetBehaviour<ObservableSpell1DashSmb>();
+            spell1DashSmb.OnStateEnterAsObservable()
+                .Subscribe(_ => SkillBehaviourPassive.ActiveSkill(new InputMessage()));
+        }
+
+        private void HandleNextStateSkill(bool isAnyReceiver)
+        {
+            if (isAnyReceiver)
+                HandleAnimationState();
+        }
+
+        private void ResetSpellAfterTimer(float time)
+        {
+            ResetSpellAfterTimerDisposable?.Dispose();
+            ResetSpellAfterTimerDisposable = Observable.Timer(TimeSpan.FromSeconds(time))
+                .Subscribe(__ => ResetSpell());
+        }
+
+        private void ResetSpell()
+        {
+            FeatureIndexSpell1State.Value = AnimationState.Spell1.Spell1A;
+            InitValue(0);
         }
     }
 }

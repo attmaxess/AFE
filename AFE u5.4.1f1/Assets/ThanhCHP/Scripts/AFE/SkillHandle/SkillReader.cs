@@ -11,20 +11,18 @@ namespace Com.Beetsoft.AFE
         void SendNext();
     }
 
-//    public static class SkillReaderExtension
-//    {
-//        public static ISkillReaderOutput ReadSkill(this ISkillReader skillReader, ISkillConfig skillConfig)
-//        {
-//            return new SkillReaderOutput(skillConfig.IconCurrent, skillConfig.);
-//        }
-//    }
+    //    public static class SkillReaderExtension
+    //    {
+    //        public static ISkillReaderOutput ReadSkill(this ISkillReader skillReader, ISkillConfig skillConfig)
+    //        {
+    //            return new SkillReaderOutput(skillConfig.IconCurrent, skillConfig.);
+    //        }
+    //    }
 
     [Serializable]
     public class SkillReader
     {
-        [SerializeField] private List<SkillBehaviour> skillBehaviours;
-
-        public List<SkillBehaviour> SkillBehaviours => skillBehaviours;
+        public ISkillBehaviour[] SkillBehaviours { get; }
 
         private int SkillIndex { get; set; } = -1;
 
@@ -39,13 +37,19 @@ namespace Com.Beetsoft.AFE
 
         public void SendNext()
         {
-            SkillIndex = Mathf.Min(SkillBehaviours.Count - 1, SkillIndex + 1);
+            SkillIndex = Mathf.Min(SkillBehaviours.Length - 1, ++SkillIndex);
+            SkillBehaviourCurrent.Value = SkillBehaviours[SkillIndex];
+        }
+
+        public void SendNext(int index)
+        {
+            SkillIndex = index;
             SkillBehaviourCurrent.Value = SkillBehaviours[SkillIndex];
         }
 
         public void SendNextLastIndex()
         {
-            SkillIndex = SkillBehaviours.Count - 1;
+            SkillIndex = SkillBehaviours.Length - 1;
             SkillBehaviourCurrent.Value = SkillBehaviours.Last();
         }
 
@@ -62,6 +66,13 @@ namespace Com.Beetsoft.AFE
 
         public SkillReader()
         {
+        }
+
+        public SkillReader(ISkillBehaviour[] skillBehaviours, int skillIndex)
+        {
+            SkillBehaviours = skillBehaviours;
+            SkillIndex = skillIndex;
+            SkillBehaviourCurrent.Value = skillBehaviours[skillIndex];
         }
     }
 }

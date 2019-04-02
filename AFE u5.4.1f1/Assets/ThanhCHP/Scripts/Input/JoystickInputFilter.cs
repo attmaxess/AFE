@@ -40,7 +40,7 @@ namespace Com.Beetsoft.AFE
 
         public void BasicAttack(IInputMessage message)
         {
-            var ireceiver = gameObject.ReceiverDamageNearest(ChampionConfig);
+            var ireceiver = gameObject.ReceiverDamageNearest(ChampionConfig.Range.Value);
 
             var mes = new InputMessage(ireceiver,
                 ChampionConfig.AttackDamage.Value,
@@ -51,42 +51,22 @@ namespace Com.Beetsoft.AFE
 
         public void Spell1(IInputMessage message)
         {
-            var ireceiver = gameObject.ReceiverDamageNearest(ChampionConfig);
-            var mes = new InputMessage(ireceiver,
-                ChampionConfig.AttackDamage.Value,
-                ChampionConfig.AttackDamagePerLevel,
-                message.Direction);
-            Spell1Subject.OnNext(mes);
+            Spell1Subject.OnNext(message);
         }
 
         public void Spell2(IInputMessage message)
         {
-            var ireceiver = gameObject.ReceiverDamageNearest(ChampionConfig);
-            var mes = new InputMessage(ireceiver,
-                ChampionConfig.AttackDamage.Value,
-                ChampionConfig.AttackDamagePerLevel,
-                message.Direction);
-            Spell2Subject.OnNext(mes);
+            Spell2Subject.OnNext(message);
         }
 
         public void Spell3(IInputMessage message)
         {
-            var ireceiver = gameObject.ReceiverDamageNearest(ChampionConfig);
-            var mes = new InputMessage(ireceiver,
-                ChampionConfig.AttackDamage.Value,
-                ChampionConfig.AttackDamagePerLevel,
-                message.Direction);
-            Spell3Subject.OnNext(mes);
+            Spell3Subject.OnNext(message);
         }
 
         public void Spell4(IInputMessage message)
         {
-            var ireceiver = gameObject.ReceiverDamageNearest(ChampionConfig);
-            var mes = new InputMessage(ireceiver,
-                ChampionConfig.AttackDamage.Value,
-                ChampionConfig.AttackDamagePerLevel,
-                message.Direction);
-            Spell4Subject.OnNext(mes);
+            Spell4Subject.OnNext(message);
         }
 
         public void Recall(IInputMessage message)

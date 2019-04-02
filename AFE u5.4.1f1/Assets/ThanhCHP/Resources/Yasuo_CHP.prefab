@@ -479,13 +479,19 @@ GameObject:
   - component: {fileID: 114315601636423302}
   - component: {fileID: 114337711945045802}
   - component: {fileID: 114250188246287544}
-  - component: {fileID: 33636560121027768}
-  - component: {fileID: 136731831193200244}
-  - component: {fileID: 114844646119401528}
+  - component: {fileID: 114603826160903828}
   - component: {fileID: 114303200557662960}
-  - component: {fileID: 114460289072225330}
+  - component: {fileID: 114331462240772248}
   - component: {fileID: 114306969928528286}
-  - component: {fileID: 143060267932152686}
+  - component: {fileID: 114805591704207072}
+  - component: {fileID: 114287457019645492}
+  - component: {fileID: 114809400590198410}
+  - component: {fileID: 114284003140846610}
+  - component: {fileID: 114530284841553940}
+  - component: {fileID: 114337523984434604}
+  - component: {fileID: 114698782696386444}
+  - component: {fileID: 143594627760311702}
+  - component: {fileID: 114113698452653094}
   m_Layer: 0
   m_Name: Yasuo_CHP
   m_TagString: Untagged
@@ -4030,13 +4036,6 @@ Transform:
   m_Father: {fileID: 4757370036572920}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &33636560121027768
-MeshFilter:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1174075871233712}
-  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!95 &95781607689699482
 Animator:
   serializedVersion: 3
@@ -4071,6 +4070,20 @@ MonoBehaviour:
   animatorHandler: {fileID: 114218586144303770}
   barPlayer: {fileID: 114681016319380998, guid: e53a0e6b970edf0499e0e7fa8bbd148f,
     type: 2}
+--- !u!114 &114113698452653094
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1174075871233712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c88ada98ac0884946a48bf90eb5065f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  easeType: 5
+  maxYAxis: 4
+  minYAxis: 0
 --- !u!114 &114218586144303770
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4094,6 +4107,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e94efe5a6af4fa49422b1a56a68ee94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114284003140846610
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1174075871233712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35b2eff3ca794ca892f5c7b0fb9959ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillConfig: {fileID: 0}
+  skillBehaviourPassive: {fileID: 0}
+  skillBehaviours:
+  - {fileID: 114530284841553940}
 --- !u!114 &114285160370677164
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4105,6 +4133,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 282f5b47e246aad4aaa8981acee5f2f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114287457019645492
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1174075871233712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe83a1a8d4484688a42819fc98727a7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillConfig: {fileID: 0}
+  skillBehaviourPassive: {fileID: 0}
+  skillBehaviours:
+  - {fileID: 114809400590198410}
 --- !u!114 &114303200557662960
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4117,6 +4160,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillModel: {fileID: 11400000, guid: 901a2946f74261f4fad4f6b4c9a2b344, type: 2}
+  layerMaskTarget:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!114 &114306969928528286
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4129,6 +4175,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillModel: {fileID: 11400000, guid: 2d34300a09345634f8b194d879a6945d, type: 2}
+  objectPrefab: {fileID: 114721238444824766, guid: 31517fb9f1d230749a47d7a4c40104d0,
+    type: 2}
 --- !u!114 &114315601636423302
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4140,7 +4188,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed495d856f3f94940b72bb31e1eacd45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedSmooth: 100
+  speedSmooth: 1
+--- !u!114 &114331462240772248
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1174075871233712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07356d30606c41a1bcd24f7804de8cf6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillModel: {fileID: 11400000, guid: feca287268b3ec748845469583e7cbd0, type: 2}
+  layerMaskTarget:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!114 &114337523984434604
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1174075871233712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95ff524daa6645c89f11d5112f9f8ee8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillConfig: {fileID: 0}
+  skillBehaviourPassive: {fileID: 0}
+  skillBehaviours:
+  - {fileID: 114698782696386444}
 --- !u!114 &114337711945045802
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4153,8 +4231,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillConfig: {fileID: 11400000, guid: 18234a120e0bf644083efacea99e9255, type: 2}
-  skillReader:
-    skillBehaviours: []
+  skillBehaviourPassive: {fileID: 0}
+  skillBehaviours:
+  - {fileID: 114306969928528286}
   maxHit: 4
 --- !u!114 &114338453396253636
 MonoBehaviour:
@@ -4190,9 +4269,9 @@ MonoBehaviour:
   - {fileID: 114338453396253636}
   - {fileID: 114773152827730594}
   viewIdField: 0
-  InstantiationId: 3
+  InstantiationId: 2
   isRuntimeInstantiated: 0
---- !u!114 &114460289072225330
+--- !u!114 &114530284841553940
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4200,10 +4279,50 @@ MonoBehaviour:
   m_GameObject: {fileID: 1174075871233712}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4340ddbc5854bf8bb9b4ed294f4a870, type: 3}
+  m_Script: {fileID: 11500000, guid: 1eca721827e945848a0d4e81c43e3a7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillModel: {fileID: 11400000, guid: 901a2946f74261f4fad4f6b4c9a2b344, type: 2}
+  skillModel: {fileID: 11400000, guid: 089328d3d2e04a741923e8afd81c8e33, type: 2}
+  isMustDetectTarget: 1
+  layerMaskTarget:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  timeDelayTakeDam: 100
+  timeMove: 0.75
+  easeType: 30
+--- !u!114 &114603826160903828
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1174075871233712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0200a3450c0aa54ba728cf2c5b80523, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillConfig: {fileID: 0}
+  skillBehaviourPassive: {fileID: 114805591704207072}
+  skillBehaviours:
+  - {fileID: 114303200557662960}
+  - {fileID: 114331462240772248}
+  - {fileID: 114306969928528286}
+  timeKnockUpObject: 0.7
+--- !u!114 &114698782696386444
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1174075871233712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07356d30606c41a1bcd24f7804de8cf6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillModel: {fileID: 11400000, guid: 639778a83d9298547ad42d4160189ffd, type: 2}
+  layerMaskTarget:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!114 &114773152827730594
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4228,7 +4347,7 @@ MonoBehaviour:
     SynchronizeType: 2
     Name: Idle Int
   - Type: 3
-    SynchronizeType: 2
+    SynchronizeType: 1
     Name: Idle Out Int
   - Type: 3
     SynchronizeType: 2
@@ -4269,7 +4388,7 @@ MonoBehaviour:
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
---- !u!114 &114844646119401528
+--- !u!114 &114805591704207072
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4277,28 +4396,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 1174075871233712}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0200a3450c0aa54ba728cf2c5b80523, type: 3}
+  m_Script: {fileID: 11500000, guid: 504eb41f394b4523b39ec00c866caf20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillConfig: {fileID: 0}
-  skillReader:
-    skillBehaviours:
-    - {fileID: 114303200557662960}
-    - {fileID: 114460289072225330}
-    - {fileID: 114306969928528286}
---- !u!136 &136731831193200244
-CapsuleCollider:
+  skillModel: {fileID: 11400000, guid: 01b916019809a254ca38b7a6328f5a19, type: 2}
+  layerMaskTarget:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!114 &114809400590198410
+MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1174075871233712}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 81.3
-  m_Height: 230
-  m_Direction: 1
-  m_Center: {x: 0, y: 114.85, z: 0}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32ae5aff4efd89f4fbd1b88b5a42efc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillModel: {fileID: 11400000, guid: 1897c10aeb370b24e91035e8f3cf69f2, type: 2}
+  objectPrefab: {fileID: 114721238444824766, guid: 31517fb9f1d230749a47d7a4c40104d0,
+    type: 2}
 --- !u!137 &137490055118385072
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -4419,7 +4537,7 @@ SkinnedMeshRenderer:
     m_Center: {x: 24.039627, y: 1.7561646, z: -29.35054}
     m_Extent: {x: 112.46591, y: 116.67829, z: 109.64731}
   m_DirtyAABB: 0
---- !u!143 &143060267932152686
+--- !u!143 &143594627760311702
 CharacterController:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4430,9 +4548,9 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 2
   m_Height: 2
-  m_Radius: 0.5
+  m_Radius: 100
   m_SlopeLimit: 45
-  m_StepOffset: 0.003
+  m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 100, z: 0}

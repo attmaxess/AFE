@@ -32,7 +32,8 @@ namespace Com.Beetsoft.AFE
                                              || IsInStateSpell3.Value
                                              || IsInStateSpell4.Value;
 
-        void IInitialize<IJoystickInputFilterObserver>.Initialize(IJoystickInputFilterObserver joystickInputFilterObserver)
+        void IInitialize<IJoystickInputFilterObserver>.Initialize(
+            IJoystickInputFilterObserver joystickInputFilterObserver)
         {
             InputFilterObserver = joystickInputFilterObserver;
         }
@@ -73,7 +74,7 @@ namespace Com.Beetsoft.AFE
             HandleSwitchToStateWeaponIn();
             HandleAttackState();
             HandleSpell1State();
-            //HandleSpell1Dash();
+            HandleSpell1Dash();
             HandleSpell2State();
             HandleSpell3State();
             HandleSpell4State();
@@ -187,16 +188,8 @@ namespace Com.Beetsoft.AFE
                     IsInStateSpell1.Value = true;
                 });
 
-//            spell1Smb.OnStateExitAsObservable()
-//                .Subscribe(_ =>
-//                {
-//                    FeatureIndexSpell1State++;
-//                    if ((int) FeatureIndexSpell1State == Constant.Yasuo.QClipAmount)
-//                        FeatureIndexSpell1State = AnimationState.Spell1.Spell1A;
-//                    IsInStateSpell1.Value = false;
-//                    Animator.SetInteger(Constant.AnimationPram.QInt, (int) FeatureIndexSpell1State);
-//                    Animator.SetBool(Constant.AnimationPram.IdleBool, true);
-//                });
+            spell1Smb.OnStateExitAsObservable()
+                .Subscribe(_ => { Animator.SetBool(Constant.AnimationPram.IdleBool, true); });
         }
 
         private void HandleSpell1Dash()
