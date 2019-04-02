@@ -7,6 +7,10 @@ namespace Com.Beetsoft.AFE
 {
     public class Twist : ObjectElementSkillBehaviour
     {
+        [SerializeField] private float knockUpTime = 0.7f;
+
+        private float KnockUpTime => knockUpTime;
+
         private void Start()
         {
             if (PhotonView.IsMine) return;
@@ -15,7 +19,7 @@ namespace Com.Beetsoft.AFE
                 .Subscribe(other =>
                 {
                     var k = other.GetComponent<IKnockUpable>();
-                    k?.BlowUp(0.7f);
+                    k?.BlowUp(KnockUpTime);
                 });
         }
 
