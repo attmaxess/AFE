@@ -8,9 +8,13 @@ using System.Runtime.InteropServices;
 using System.IO;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
+using DHT.TextureToString64;
 
 public class PlacenoteSampleView : MonoBehaviour, PlacenoteListener
 {
+    [Header("Debug")]
+    public bool isDebug = true;
+
     [SerializeField]
     GameObject mMapSelectedPanel;
     [SerializeField]
@@ -37,6 +41,10 @@ public class PlacenoteSampleView : MonoBehaviour, PlacenoteListener
     float mMaxRadiusSearch;
     [SerializeField]
     Text mRadiusLabel;
+    [SerializeField]
+    GameObject capturePanel;
+    [SerializeField]
+    Image captureImage;
 
     private UnityARSessionNativeInterface mSession;
 
@@ -92,6 +100,10 @@ public class PlacenoteSampleView : MonoBehaviour, PlacenoteListener
         }
     }
 
+    [Header("Debug Map File Info")]
+    public MapToFile mapToFile = null;
+    public bool isDebugMapFileInfo = false;
+
     public void OnListMapClick()
     {
         if (!LibPlacenote.Instance.Initialized())
@@ -105,7 +117,6 @@ public class PlacenoteSampleView : MonoBehaviour, PlacenoteListener
             Destroy(t.gameObject);
         }
 
-
         mMapListPanel.SetActive(true);
         mInitButtonPanel.SetActive(false);
         mRadiusSlider.gameObject.SetActive(true);
@@ -116,7 +127,13 @@ public class PlacenoteSampleView : MonoBehaviour, PlacenoteListener
             {
                 if (mapInfoItem.metadata.userdata != null)
                 {
-                    Debug.Log(mapInfoItem.metadata.userdata.ToString(Formatting.None));
+                    if (isDebug) Debug.Log(mapInfoItem.metadata.userdata.ToString(Formatting.None));
+                    if (isDebugMapFileInfo)
+                    {
+                        mapToFile.TextTextureFileName = mapInfoItem.placeId;
+                        mapToFile.mapInfo = mapInfoItem;
+                        mapToFile.ToString64File();
+                    }
                 }
                 AddMapToList(mapInfoItem);
             }
@@ -201,7 +218,6 @@ public class PlacenoteSampleView : MonoBehaviour, PlacenoteListener
         mRadiusSlider.gameObject.SetActive(false);
     }
 
-
     public void OnLoadMapClicked()
     {
         ConfigureSession();
@@ -250,6 +266,8 @@ public class PlacenoteSampleView : MonoBehaviour, PlacenoteListener
                     }
 
                     mLabelText.text = "Loaded ID: " + mSelectedMapId;
+
+                    LoadImagePanel();
                 }
                 else if (faulted)
                 {
@@ -261,6 +279,22 @@ public class PlacenoteSampleView : MonoBehaviour, PlacenoteListener
                 }
             }
         );
+    }
+
+    void LoadImagePanel()
+    {
+        capturePanel.SetActive(true);
+
+        ScreenCaptureData captureData = ((JObject)(mSelectedMapInfo.metadata.userdata["capture"] is JObject)).ToObject<ScreenCaptureData>();
+
+        screenCapture.textureMethod.m_encodedData = captureData.string64;
+        screenCapture.textureMethod.GetTexture2D();
+
+        screenCapture.textureMethod.TextTextureFileName = captureData.texName;
+        screenCapture.textureMethod.ToString64File();
+
+        Vector2 texSize = new Vector2(screenCapture.textureMethod.m_texture.width, screenCapture.textureMethod.m_texture.height);
+        captureImage.sprite = Sprite.Create(screenCapture.textureMethod.m_texture, new Rect(0f, 0f, texSize.x, texSize.y), new Vector2(0.5f, 0.5f), 100f);
     }
 
     public void OnDeleteMapClicked()
@@ -286,8 +320,6 @@ public class PlacenoteSampleView : MonoBehaviour, PlacenoteListener
             }
         });
     }
-
-
 
     public void OnNewMapClick()
     {
@@ -350,19 +382,34 @@ public class PlacenoteSampleView : MonoBehaviour, PlacenoteListener
 #endif
     }
 
+    [Header("Screen Capture")]
+    public ScreenCaptureManager screenCapture = null;
 
     public void OnSaveMapClick()
     {
+        StartCoroutine(C_OnSaveMapClick());
+    }
+
+    IEnumerator C_OnSaveMapClick()
+    {
+        if (isDebug) Debug.Log("Start C_OnSaveMapClick");
+
         if (!LibPlacenote.Instance.Initialized())
         {
             Debug.Log("SDK not yet initialized");
-            return;
+            yield break;
         }
 
         bool useLocation = Input.location.status == LocationServiceStatus.Running;
         LocationInfo locationInfo = Input.location.lastData;
 
         mLabelText.text = "Saving...";
+
+        string str64MapImage = string.Empty;
+
+        screenCapture.TakeScreenCapture();
+        yield return new WaitUntil(() => screenCapture.doneTakeScreenCapture == true);
+
         LibPlacenote.Instance.SaveMap(
             (mapId) =>
             {
@@ -385,13 +432,14 @@ public class PlacenoteSampleView : MonoBehaviour, PlacenoteListener
                 userdata["shapeList"] = shapeList;
                 GetComponent<ShapeManager>().ClearShapes();
 
-                ///Test gởi đi/lấy về gói info với PlaceNote luôn
-                ///=======================================================
-                DHTObjectData dhtObjData = new DHTObjectData();
-                dhtObjData.stringDHT = "dohoangthan";
-                JObject dhtObject = JObject.FromObject(dhtObjData);
-                userdata["dht"] = "dohoangthan";
-                ///=======================================================
+                ///Test gởi đi/lấy về gói info gồm hình ảnh với PlaceNote luôn
+                ///=============================================================
+                ScreenCaptureData captureData = new ScreenCaptureData();
+                captureData.texName = mSelectedMapId;
+                captureData.string64 = screenCapture.textureMethod.m_encodedData;
+                JObject captureObject = JObject.FromObject(captureData);
+                userdata["capture"] = captureObject;
+                ///=============================================================
                 
                 if (useLocation)
                 {
@@ -429,7 +477,11 @@ public class PlacenoteSampleView : MonoBehaviour, PlacenoteListener
                 }
             }
         );
-    }
+
+        if (isDebug) Debug.Log("Done C_OnSaveMapClick");
+
+        yield break;
+    }    
 
     public void OnPose(Matrix4x4 outputPose, Matrix4x4 arkitPose) { }
 
