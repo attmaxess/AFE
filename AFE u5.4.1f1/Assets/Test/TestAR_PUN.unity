@@ -1559,9 +1559,9 @@ GameObject:
   - component: {fileID: 607688741}
   - component: {fileID: 607688739}
   - component: {fileID: 607688738}
-  - component: {fileID: 607688740}
   - component: {fileID: 607688744}
   - component: {fileID: 607688745}
+  - component: {fileID: 607688740}
   m_Layer: 0
   m_Name: Cube (4)
   m_TagString: Untagged
@@ -1601,22 +1601,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e94efe5a6af4fa49422b1a56a68ee94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!143 &607688740
-CharacterController:
+--- !u!65 &607688740
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 607688737}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 1
-  m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
+  m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &607688741
 MeshRenderer:
@@ -1667,7 +1662,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 607688737}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.57, y: 1.07, z: 3.48}
+  m_LocalPosition: {x: -1.57, y: 0, z: 3.48}
   m_LocalScale: {x: 2, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -3407,9 +3402,9 @@ GameObject:
   - component: {fileID: 1344981021}
   - component: {fileID: 1344981025}
   - component: {fileID: 1344981024}
-  - component: {fileID: 1344981020}
   - component: {fileID: 1344981026}
   - component: {fileID: 1344981027}
+  - component: {fileID: 1344981020}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -3417,22 +3412,17 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!143 &1344981020
-CharacterController:
+--- !u!65 &1344981020
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1344981019}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 1
-  m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
+  m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1344981021
 MeshRenderer:
@@ -3483,7 +3473,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1344981019}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.5418696, y: 1.07, z: 9.75}
+  m_LocalPosition: {x: 1.5418696, y: 0, z: 9.75}
   m_LocalScale: {x: 2, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -4336,9 +4326,9 @@ GameObject:
   - component: {fileID: 1792747089}
   - component: {fileID: 1792747087}
   - component: {fileID: 1792747086}
-  - component: {fileID: 1792747088}
   - component: {fileID: 1792747092}
   - component: {fileID: 1792747093}
+  - component: {fileID: 1792747088}
   m_Layer: 0
   m_Name: Cube (2)
   m_TagString: Untagged
@@ -4378,22 +4368,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e94efe5a6af4fa49422b1a56a68ee94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!143 &1792747088
-CharacterController:
+--- !u!65 &1792747088
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1792747085}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 1
-  m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
+  m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1792747089
 MeshRenderer:
@@ -4444,7 +4429,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1792747085}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.02, y: 1.07, z: 5.96}
+  m_LocalPosition: {x: -1.02, y: 0, z: 5.96}
   m_LocalScale: {x: 2, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -4640,9 +4625,9 @@ GameObject:
   - component: {fileID: 1871141837}
   - component: {fileID: 1871141835}
   - component: {fileID: 1871141834}
-  - component: {fileID: 1871141836}
   - component: {fileID: 1871141840}
   - component: {fileID: 1871141841}
+  - component: {fileID: 1871141836}
   m_Layer: 0
   m_Name: Cube (3)
   m_TagString: Untagged
@@ -4682,22 +4667,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e94efe5a6af4fa49422b1a56a68ee94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!143 &1871141836
-CharacterController:
+--- !u!65 &1871141836
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1871141833}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 1
-  m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
+  m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1871141837
 MeshRenderer:
@@ -4748,7 +4728,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1871141833}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.88, y: 1.07, z: 3.17}
+  m_LocalPosition: {x: 2.88, y: 0, z: 3.17}
   m_LocalScale: {x: 2, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -4792,9 +4772,9 @@ GameObject:
   - component: {fileID: 1880166818}
   - component: {fileID: 1880166816}
   - component: {fileID: 1880166815}
-  - component: {fileID: 1880166817}
   - component: {fileID: 1880166821}
   - component: {fileID: 1880166822}
+  - component: {fileID: 1880166817}
   m_Layer: 0
   m_Name: Cube (1)
   m_TagString: Untagged
@@ -4834,22 +4814,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e94efe5a6af4fa49422b1a56a68ee94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!143 &1880166817
-CharacterController:
+--- !u!65 &1880166817
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1880166814}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 1
-  m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
+  m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1880166818
 MeshRenderer:
@@ -4900,7 +4875,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1880166814}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.5418696, y: 1.07, z: 6.62}
+  m_LocalPosition: {x: 1.5418696, y: 0, z: 6.62}
   m_LocalScale: {x: 2, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
