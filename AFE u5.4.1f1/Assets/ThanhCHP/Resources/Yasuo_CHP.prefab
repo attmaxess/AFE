@@ -4429,7 +4429,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillModel: {fileID: 11400000, guid: 1897c10aeb370b24e91035e8f3cf69f2, type: 2}
-  objectPrefab: {fileID: 114721238444824766, guid: 31517fb9f1d230749a47d7a4c40104d0,
+  objectPrefab: {fileID: 114598542248339824, guid: 51bc945752bf93f4e92b2687f959aeee,
     type: 2}
 --- !u!137 &137490055118385072
 SkinnedMeshRenderer:

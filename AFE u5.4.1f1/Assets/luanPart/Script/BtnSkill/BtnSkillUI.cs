@@ -169,13 +169,6 @@ public class BtnSkillUI : MonoBehaviour
         }
     }
 
-    public void ReceiveMessage(Sprite sprite, float countTime, bool canUseSkill)
-    {
-        this.countTime = countTime > 0 ? countTime : 0;
-        this.canUseSkill = canUseSkill;
-        touchJoystickSprite.SetSprite(sprite);
-    }
-
     public void EnableBtn(bool enable)
     {
 

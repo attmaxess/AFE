@@ -8,7 +8,7 @@ using UniRx;
 public class GameManagerArVik : MonoBehaviourPunCallbacks
 {
     public string prefabName = "VikingPrefab";
-    public ArkitUIManager ArkitUIManager;
+    //public ArkitUIManager ArkitUIManager;
     bool isJoinedRoom = false;
     public List<PhotonView> listCharacter = new List<PhotonView>();
 
@@ -121,14 +121,14 @@ public class GameManagerArVik : MonoBehaviourPunCallbacks
 
     private void Start()
     {
-        ArkitUIManager.gameObject.SetActive(isJoinedRoom);
+        //ArkitUIManager.gameObject.SetActive(isJoinedRoom);
     }
 
     public override void OnJoinedRoom()
     {
         isJoinedRoom = true;
         Debug.Log("OnJoinedRoom");
-        ArkitUIManager.gameObject.SetActive(isJoinedRoom);
+        //ArkitUIManager.gameObject.SetActive(isJoinedRoom);
     }
 
     void OnGUI()
@@ -150,18 +150,26 @@ public class GameManagerArVik : MonoBehaviourPunCallbacks
 
     public void SpawnObject(Vector3 pos, GameObject hitObject)
     {
-        if (isSpawnMainCharacter)
-            return;
+        StartCoroutine(C_SpawnObject(pos, hitObject));        
+    }
+
+    public IEnumerator C_SpawnObject(Vector3 pos, GameObject hitObject)
+    {
+        if (isSpawnMainCharacter) yield break;
+
         isSpawnMainCharacter = true;
 
         var newChar = PhotonNetwork.Instantiate(prefabName, pos, Quaternion.identity, 0);
+        yield return new WaitUntil(() => newChar.gameObject != null);
+
         GameObject _planeJoyStick = Instantiate(Resources.Load("PlaneJoystick", typeof(GameObject)), pos, Quaternion.identity) as GameObject;
+        yield return new WaitUntil(() => _planeJoyStick.gameObject != null);
+
         _planeJoyStick?.GetComponent<PlaneJoystick>().SetMainCharacter(newChar);
         MessageBroker.Default.Publish<MassageSpawnNewCharacter>(new MassageSpawnNewCharacter(newChar.transform));
 
+        yield break;
     }
-
-
 }
 
 public class MassageSpawnNewCharacter

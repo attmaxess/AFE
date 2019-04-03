@@ -1,8 +1,9 @@
 using UnityEngine;
 using System.Collections;
 using Photon.Pun;
+using System;
 
-public class RemoteCamNetwork : MonoBehaviourPunCallbacks
+public class RemoteCamNetwork : MonoBehaviourPunCallbacks, IPunObservable
 {
     private bool appliedInitialUpdate;
 
@@ -33,30 +34,7 @@ public class RemoteCamNetwork : MonoBehaviourPunCallbacks
         gameObject.name += "_" + Application.dataPath;
 #endif
 
-    }
-
-    void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-        if (stream.IsWriting)
-        {
-            //We own this player: send the others our data            
-            stream.SendNext(transform.position);
-            stream.SendNext(transform.rotation);
-        }
-        else
-        {
-            //Network player, receive data            
-            correctCamPos = (Vector3)stream.ReceiveNext();
-            correctCamEuler = (Quaternion)stream.ReceiveNext();
-
-            if (!appliedInitialUpdate)
-            {
-                appliedInitialUpdate = true;
-                transform.position = correctCamPos;
-                transform.rotation = correctCamEuler;
-            }
-        }
-    }
+    }    
 
     private Vector3 correctCamPos = Vector3.zero; //We lerp towards this
     private Quaternion correctCamEuler = Quaternion.identity; //We lerp towards this    
@@ -79,5 +57,28 @@ public class RemoteCamNetwork : MonoBehaviourPunCallbacks
     void OnPhotonInstantiate(PhotonMessageInfo info)
     {
 
+    }
+
+    void IPunObservable.OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            //We own this player: send the others our data            
+            stream.SendNext(transform.position);
+            stream.SendNext(transform.rotation);
+        }
+        else
+        {
+            //Network player, receive data            
+            correctCamPos = (Vector3)stream.ReceiveNext();
+            correctCamEuler = (Quaternion)stream.ReceiveNext();
+
+            if (!appliedInitialUpdate)
+            {
+                appliedInitialUpdate = true;
+                transform.position = correctCamPos;
+                transform.rotation = correctCamEuler;
+            }
+        }
     }
 }

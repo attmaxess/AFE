@@ -36,8 +36,10 @@ public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
         }
     }
 
-    void Start()
+    IEnumerator Start()
     {
+        yield return new WaitUntil(() => mainCharacter != null);
+
         if (crowdControl == null)
         {
             crowdControl = mainCharacter?.GetComponent<ICrowdControl>();
@@ -92,6 +94,8 @@ public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
             transform.position = mes.player.position;
             IsUpdateWhenSkill = mes.isUsing;
         });
+
+        yield break;
     }
 
     private void Singleton_Attack()
@@ -104,6 +108,8 @@ public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
 
     void Update()
     {
+        if (mainCharacter == null) return;
+
         if (!useUpdate || IsUpdateWhenSkill) return;
 
         if (CF2Input.GetButtonDown("Pause"))
