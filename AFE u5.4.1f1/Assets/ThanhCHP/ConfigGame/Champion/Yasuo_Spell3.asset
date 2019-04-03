@@ -20,13 +20,13 @@ MonoBehaviour:
     value: 4.75
   rangePerLevel: 0
   physicDamage:
-    value: 20
-  physicDamagePerLevel: 25
-  physicDamageBonus: 1
-  magicDamage:
     value: 0
-  magicDamagePerLevel: 0
-  magicDamageBonus: 0
+  physicDamagePerLevel: 0
+  physicDamageBonus: 0.2
+  magicDamage:
+    value: 60
+  magicDamagePerLevel: 10
+  magicDamageBonus: 0.6
   cooldown:
-    value: 4
-  cooldownPerLevel: 0
+    value: 1
+  cooldownPerLevel: 0.1

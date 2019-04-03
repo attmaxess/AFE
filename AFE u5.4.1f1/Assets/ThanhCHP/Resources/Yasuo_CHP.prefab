@@ -4254,6 +4254,7 @@ MonoBehaviour:
   skillBehaviours:
   - {fileID: 114306969928528286}
   maxHit: 4
+  millisecondsDelayApplyDamage: 250
 --- !u!114 &114338453396253636
 MonoBehaviour:
   m_ObjectHideFlags: 1

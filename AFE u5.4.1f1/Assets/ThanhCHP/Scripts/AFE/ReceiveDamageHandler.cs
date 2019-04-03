@@ -52,7 +52,7 @@ namespace Com.Beetsoft.AFE
         {
             if (ChampionConfig == null)
             {
-                Debug.LogError("Set ChampionConfig");
+                Debug.LogWarning("Set ChampionConfig");
                 return;
             }
 
