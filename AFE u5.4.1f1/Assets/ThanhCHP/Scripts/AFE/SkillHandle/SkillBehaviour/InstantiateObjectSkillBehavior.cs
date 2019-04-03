@@ -56,7 +56,7 @@ namespace Com.Beetsoft.AFE
             ObjectPool.RentAsync().Subscribe(twist =>
             {
                 Vector3 target = transform.position + direction * SkillConfig.Range.Value;
-                twist.OnSpawn(transform.position + direction, target, CreateDamageMessage());
+                twist.OnSpawn(transform.position, target, CreateDamageMessage());
                 twist.SetIdIgnore(transform.GetInstanceID());
             });
         }
