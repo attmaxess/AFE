@@ -44,16 +44,6 @@ namespace Com.Beetsoft.AFE
             CreateHealthBar(ChampionModel, photonView.IsMine);
             if (!photonView.IsMine) return;
 
-            ChampionModel.Health.Subscribe(health =>
-            {
-                if (health <= 0)
-                {
-                    Debug.Log("Death");
-
-                }
-            });
-
-
             this.OnKeyDownAsObservable(KeyCode.Q)
                 .Subscribe(_ => JoystickInputFilter.Spell1(new InputMessage(Vector3.forward)));
 

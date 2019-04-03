@@ -25,7 +25,8 @@ public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
 
     public GameObject mainCharacter;
     public ICrowdControl crowdControl;
-    bool isCrowdConttroll;
+    public bool isCrowdConttroll;
+    public bool isDeath;
     public Vector3 directionRotate
     {
         get
@@ -89,6 +90,17 @@ public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
         //GameManagerArVik.Singleton.skill3 += Singleton_skill3;
         //GameManagerArVik.Singleton.skill4 += Singleton_skill4;
 
+        mainCharacter?.GetComponent<TestYasuo>().ChampionModel.Health.Subscribe(health =>
+        {
+            if (health <= 0)
+            {
+                isDeath = true;
+            }
+            else
+            {
+                isDeath = false;
+            }
+        });
         MessageBroker.Default.Receive<IMessageBladeAttack>().Subscribe(mes =>
         {
             transform.position = mes.player.position;
@@ -117,7 +129,10 @@ public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
             Debug.Log("Pause");
         }
 
+        if (isDeath) return;
+
         if (isCrowdConttroll) return;
+
 
         if (CF2Input.GetButtonDown("Attack"))
         {
