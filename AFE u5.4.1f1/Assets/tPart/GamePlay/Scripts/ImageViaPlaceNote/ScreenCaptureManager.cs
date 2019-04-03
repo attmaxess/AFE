@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -22,7 +23,7 @@ namespace DHT.TextureToString64
                 if (_textureMethod == null) _textureMethod = gameObject.AddComponent<TextureToBase64Methods>();
                 return _textureMethod;
             }
-        }
+        }        
 
         [ContextMenu("ScreenCapture")]
         public void TakeScreenCapture()

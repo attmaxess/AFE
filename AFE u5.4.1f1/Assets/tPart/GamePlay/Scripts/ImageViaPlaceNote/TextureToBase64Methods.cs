@@ -140,12 +140,56 @@ namespace DHT.TextureToString64
         [Header("Texture From File")]
         public string TextTextureFileName = string.Empty;
 
+        [SerializeField]
+        string _pathFolder = string.Empty;
+        public string pathFolder
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(_pathFolder)) ReConfirmPathType();
+                return _pathFolder;
+            }
+        }
+
+        [Serializable]
+        public enum ePathType
+        {
+            dataPath,
+            persistentDataPath,
+            StreamingAssets
+        }
+
+        [SerializeField]
+        ePathType _currentPathType = ePathType.StreamingAssets;
+        public ePathType currentPathType
+        {
+            get { return _currentPathType; }
+            set { _currentPathType = value; ReConfirmPathType(); }
+        }
+
+        [ContextMenu("ReConfirmPathType")]
+        public void ReConfirmPathType()
+        {
+            switch (_currentPathType)
+            {
+                case ePathType.dataPath:
+                    _pathFolder = Application.dataPath;
+                    break;
+                case ePathType.persistentDataPath:
+                    _pathFolder = Application.persistentDataPath;
+                    break;
+                case ePathType.StreamingAssets:
+                    _pathFolder = Application.streamingAssetsPath;
+                    break;
+            }
+        }
+
         [ContextMenu("GetTexture2DFromFile")]
         public void GetTexture2DFromFile()
         {
             this.m_texture = null;
 
-            m_encodedData = File.ReadAllText(Application.persistentDataPath + "/" + TextTextureFileName + ".txt");
+            m_encodedData = File.ReadAllText(currentPathType + "/" + TextTextureFileName + ".txt");
             byte[] imageData = Convert.FromBase64String(m_encodedData);
 
             int width, height;
@@ -164,7 +208,7 @@ namespace DHT.TextureToString64
         {
             this.m_texture = null;
                         
-            byte[] imageData = System.IO.File.ReadAllBytes(Application.persistentDataPath + "/" + TextTextureFileName + ".png");            
+            byte[] imageData = System.IO.File.ReadAllBytes(currentPathType + "/" + TextTextureFileName + ".png");            
 
             int width, height;
             GetImageSize(imageData, out width, out height);
@@ -180,7 +224,7 @@ namespace DHT.TextureToString64
         [ContextMenu("DebugAppPerPath")]
         public void DebugAppPerPath()
         {
-            Debug.Log(Application.persistentDataPath);
+            Debug.Log(pathFolder);
         }
     }
 }

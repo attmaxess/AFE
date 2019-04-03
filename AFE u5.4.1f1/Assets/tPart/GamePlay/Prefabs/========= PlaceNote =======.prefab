@@ -4211,9 +4211,11 @@ MonoBehaviour:
   m_texture: {fileID: 0}
   doneToString64File: 1
   doneToPNGFile: 1
-  encodeLength: 23412
+  encodeLength: 546176
   resizeTo: {x: 1, y: 1}
   TextTextureFileName: fb0c3db7-534f-4fed-9fcf-570666bfe5ae
+  _pathFolder: E:/AR fight beetsoft/Afe/AFE u5.4.1f1/Assets/StreamingAssets
+  _currentPathType: 2
 --- !u!114 &114188088764272698
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -8413,7 +8415,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDebug: 1
-  TextTextureFileName: 
+  TextTextureFileName: fb0c3db7-534f-4fed-9fcf-570666bfe5ae
   mapInfo:
     placeId: 
     metadata:
