@@ -8,8 +8,9 @@ namespace Com.Beetsoft.AFE
     {
         protected override void Start()
         {
-            if (!photonView.IsMine) return;
             base.Start();
+
+            Debug.Log("yasuo death handler");
 
             ChampionConfig.Health.Subscribe(health =>
             {

@@ -493,6 +493,7 @@ GameObject:
   - component: {fileID: 114302309017024992}
   - component: {fileID: 143594627760311702}
   - component: {fileID: 114113698452653094}
+  - component: {fileID: 114911569951558228}
   m_Layer: 0
   m_Name: Yasuo_CHP
   m_TagString: Untagged
@@ -4431,6 +4432,20 @@ MonoBehaviour:
   skillModel: {fileID: 11400000, guid: 1897c10aeb370b24e91035e8f3cf69f2, type: 2}
   objectPrefab: {fileID: 114598542248339824, guid: 51bc945752bf93f4e92b2687f959aeee,
     type: 2}
+--- !u!114 &114911569951558228
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1174075871233712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 064c33a27646b434eaa9c29d7136314c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillConfig: {fileID: 0}
+  skillBehaviourPassive: {fileID: 0}
+  skillBehaviours: []
 --- !u!137 &137490055118385072
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
