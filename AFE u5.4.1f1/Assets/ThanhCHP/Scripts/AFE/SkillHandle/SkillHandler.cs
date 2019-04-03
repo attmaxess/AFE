@@ -1,8 +1,8 @@
 using System;
+using ExtraLinq;
 using Photon.Pun;
 using UniRx;
 using UnityEngine;
-using ExtraLinq;
 
 namespace Com.Beetsoft.AFE
 {
@@ -12,9 +12,9 @@ namespace Com.Beetsoft.AFE
         IInitialize<IAnimationStateChecker>,
         IInitialize<IChampionConfig>
     {
-        [SerializeField] private SkillModel skillConfig;
         [SerializeField] private SkillBehaviour skillBehaviourPassive;
         [SerializeField] private SkillBehaviour[] skillBehaviours;
+        [SerializeField] private SkillModel skillConfig;
 
         private ISkillBehaviour[] SkillBehaviours => skillBehaviours;
 
@@ -92,7 +92,7 @@ namespace Com.Beetsoft.AFE
         protected virtual void Awake()
         {
             Animator = GetComponent<Animator>();
-            SkillReader = (!SkillBehaviours.IsNullOrEmpty())? new SkillReader(SkillBehaviours, 0) : new SkillReader();
+            SkillReader = !SkillBehaviours.IsNullOrEmpty() ? new SkillReader(SkillBehaviours, 0) : new SkillReader();
             SyncTransformImmediately = gameObject.GetOrAddComponent<SyncTransformImmediately>();
             ChampionTransform = GetComponent<IChampionTransform>();
         }
@@ -119,6 +119,7 @@ namespace Com.Beetsoft.AFE
         {
             SkillMessageOutputReactiveProperty.Value = SkillReader.GetSkillBehaviourCurrent().GetSkillOutputMessage();
         }
+
+        protected abstract bool IsCanUse();
     }
 }
-

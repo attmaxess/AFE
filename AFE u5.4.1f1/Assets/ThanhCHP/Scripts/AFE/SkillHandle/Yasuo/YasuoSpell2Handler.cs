@@ -15,6 +15,7 @@ namespace Com.Beetsoft.AFE
 
             this.JoystickInputFilterObserver
                 .OnSpell2AsObservable()
+                .Where(_ => IsCanUse())
                 .Do(_ => Animator.SetTriggerWithBool(Constant.AnimationPram.W))
                 .Subscribe(message =>
                 {
@@ -32,6 +33,13 @@ namespace Com.Beetsoft.AFE
 //
 //                });
 //            }
+        }
+
+        protected override bool IsCanUse()
+        {
+            return !AnimationStateChecker.IsInStateSpell3.Value
+                   && !AnimationStateChecker.IsInStateSpell4.Value
+                   && !AnimationStateChecker.IsInStateSpell1.Value;
         }
     }
 }

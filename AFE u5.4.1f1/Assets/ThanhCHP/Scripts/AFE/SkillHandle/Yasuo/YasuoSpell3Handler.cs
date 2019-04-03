@@ -14,6 +14,7 @@ namespace Com.Beetsoft.AFE
             base.Start();
             JoystickInputFilterObserver
                 .OnSpell3AsObservable()
+                .Where(_ => IsCanUse())
                 .Subscribe(message =>
                 {
                     var skillBehavior = SkillReader.GetSkillBehaviourCurrent();
@@ -31,6 +32,13 @@ namespace Com.Beetsoft.AFE
                     SendOutput();
                     Animator.SetTriggerWithBool(Constant.AnimationPram.E);
                 });
+        }
+
+        protected override bool IsCanUse()
+        {
+            return !AnimationStateChecker.IsInStateSpell1.Value
+                   && !AnimationStateChecker.IsInStateSpell3.Value
+                   && !AnimationStateChecker.IsInStateSpell4.Value;
         }
     }
 }

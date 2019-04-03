@@ -24,6 +24,7 @@ namespace Com.Beetsoft.AFE
                 Observable.Timer(TimeSpan.FromMilliseconds(MillisecondsDelayApplyDamage));
 
             JoystickInputFilterObserver.OnBasicAttackAsObservable()
+                .Where(_ => IsCanUse())
                 .ThrottleFirst(TimeSpan.FromSeconds(GetTimeInterval()))
                 .Do(_ => WillEnterStateAttack())
                 .SelectMany(message =>

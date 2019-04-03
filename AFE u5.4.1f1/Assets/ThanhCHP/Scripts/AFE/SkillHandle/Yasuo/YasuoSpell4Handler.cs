@@ -88,6 +88,11 @@ namespace Com.Beetsoft.AFE
             }
         }
 
+        protected override bool IsCanUse()
+        {
+            return !AnimationStateChecker.IsInStateSpell4.Value;
+        }
+
         private IReceiveDamageable GetReceiverHealthLowest()
         {
             return FollowObjectBlowUp.GetObjectsBlowUpOrderByHealth()

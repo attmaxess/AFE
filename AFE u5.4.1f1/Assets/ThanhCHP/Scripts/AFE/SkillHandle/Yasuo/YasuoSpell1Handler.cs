@@ -26,7 +26,7 @@ namespace Com.Beetsoft.AFE
 
             JoystickInputFilterObserver
                 .OnSpell1AsObservable()
-                .Where(_ => !AnimationStateChecker.IsInStateSpell3.Value)
+                .Where(_ => IsCanUse())
                 .Subscribe(message =>
                 {
                     EnterAnimationSpell1();
@@ -85,6 +85,12 @@ namespace Com.Beetsoft.AFE
                     SkillReader.SendNextLastIndex(); 
                     ResetSpellAfterTimer(10f);
                 });
+        }
+
+        protected override bool IsCanUse()
+        {
+            return !AnimationStateChecker.IsInStateSpell3.Value
+                   && !AnimationStateChecker.IsInStateSpell4.Value;
         }
 
         private void HandleAnimationState()

@@ -21,6 +21,11 @@ namespace Com.Beetsoft.AFE
 
             });
         }
+
+        protected override bool IsCanUse()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
 
