@@ -160,7 +160,6 @@ public class GameManagerArVik : MonoBehaviourPunCallbacks
         isSpawnMainCharacter = true;
 
         var newChar = PhotonNetwork.Instantiate(prefabName, pos, Quaternion.identity, 0);
-        newChar.transform.localScale = Vector3.one * 0.003f;
         yield return new WaitUntil(() => newChar.gameObject != null);
 
         GameObject _planeJoyStick = Instantiate(Resources.Load("PlaneJoystick", typeof(GameObject)), pos, Quaternion.identity) as GameObject;
