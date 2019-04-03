@@ -29,7 +29,6 @@ namespace Com.Beetsoft.AFE
         private void Start()
         {
             JoystickInputFilterObserver?.OnRunAsObservable()
-                .Where(_ => IsCanUse())
                 .Select(message => message.Direction)
                 .DistinctUntilChanged()
                 .Subscribe(direction =>
@@ -38,7 +37,6 @@ namespace Com.Beetsoft.AFE
                 });
 
             JoystickInputFilterObserver?.OnRunAsObservable()
-                .Where(_ => IsCanUse())
                 .Select(message => message.Rotation)
                 .Where(rotation => rotation != Vector3.zero)
                 .Subscribe(rotation => RotateTarget = rotation);
@@ -53,7 +51,6 @@ namespace Com.Beetsoft.AFE
                 });
 
             JoystickInputFilterObserver?.OnRunAsObservable()
-                .Where(_ => IsCanUse())
                 .Select(message => IsRun(message.Rotation))
                 .DistinctUntilChanged()
                 .Subscribe(HandleAnimationRun);
