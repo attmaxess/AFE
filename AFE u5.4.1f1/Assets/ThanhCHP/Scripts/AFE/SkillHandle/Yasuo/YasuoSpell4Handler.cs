@@ -33,7 +33,7 @@ namespace Com.Beetsoft.AFE
             base.Start();
             JoystickInputFilterObserver
                 .OnSpell4AsObservable()
-                .Where(_ => !AnimationStateChecker.IsInStateSpell4.Value)
+                .Where(_ => IsCanUse())
                 .Subscribe(message =>
                 {
                     var newMessage = new InputMessage(GetReceiverHealthLowest(), message.Direction);
