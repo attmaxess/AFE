@@ -19,20 +19,19 @@ namespace Com.Beetsoft.AFE
                 .Subscribe(message =>
                 {
                     ChampionTransform.Forward = message.Direction;
-                    var skillBehaviour = SkillReader.GetSkillBehaviourCurrent();
-                    skillBehaviour.ActiveSkill(message);
+                    ActiveSkillCurrent(message, 250);
                     SendOutput();
                 });
 
 
-            foreach (var onActiveSkill in SkillReader.SkillBehaviours.Distinct()
-               .Select(x => x.OnActiveSkillAsObservable()))
-            {
-                onActiveSkill.Subscribe(receiveDamageables =>
-                {
-
-                });
-            }
+//            foreach (var onActiveSkill in SkillReader.SkillBehaviours.Distinct()
+//               .Select(x => x.OnActiveSkillAsObservable()))
+//            {
+//                onActiveSkill.Subscribe(receiveDamageables =>
+//                {
+//
+//                });
+//            }
         }
     }
 }

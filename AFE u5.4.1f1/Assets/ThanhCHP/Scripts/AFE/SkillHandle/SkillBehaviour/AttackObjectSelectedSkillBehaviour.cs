@@ -7,7 +7,7 @@ namespace Com.Beetsoft.AFE
 {
     public class AttackObjectSelectedSkillBehaviour : SkillBehaviour
     {
-        private const float RadiusAttack = 4.0f;
+        private const float RadiusAttack = 7.0f;
 
         [SerializeField] private FollowObjectBlowUp followObjectBlowUp;
 

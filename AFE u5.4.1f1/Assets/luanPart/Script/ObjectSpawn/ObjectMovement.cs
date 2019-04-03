@@ -18,6 +18,9 @@ public interface ITriggerObject
 public class ObjectMovement : MonoBehaviour, IMovable
 {
     public float duration = 2;
+    [SerializeField] private ObservableTween.EaseType easeType;
+
+    private ObservableTween.EaseType EaseType => easeType;
 
 
     public virtual void MoveToDir(Vector3 startPos, Vector3 target)
@@ -25,17 +28,14 @@ public class ObjectMovement : MonoBehaviour, IMovable
         transform.position = startPos;
         var _duration = duration;
         ObservableTween.Tween(transform.position, target, _duration
-            , ObservableTween.EaseType.Linear, ObservableTween.LoopType.None
-            , () =>
-         {
-             var twist = GetComponent<Twist>();
-             if (twist != null)
-                 twist.ReturnPool();
-         })
+                , EaseType, ObservableTween.LoopType.None
+                , () =>
+                {
+                    var twist = GetComponent<Twist>();
+                    if (twist != null)
+                        twist.ReturnPool();
+                })
             .TakeWhile(_ => gameObject.activeSelf)
-            .Subscribe(pos =>
-            {
-                transform.position = pos;
-            });
+            .Subscribe(pos => { transform.position = pos; });
     }
 }
