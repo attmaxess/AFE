@@ -12,11 +12,12 @@ namespace Com.Beetsoft.AFE
     {
         [SerializeField] private float blowUpTimer = 0.7f;
         [SerializeField] private Vector3 offsetPositionTeleport = Vector3.forward;
-        private HashSet<IReceiveDamageable> ObjectBlowUps { get; } = new HashSet<IReceiveDamageable>();
 
         private float BlowUpTimer => blowUpTimer;
 
         private SyncTweenRPC SyncTweenRpc { get; set; }
+
+        private FollowObjectBlowUp FollowObjectBlowUp { get; set; }
 
         private Vector3 OffsetPositionTeleport => offsetPositionTeleport;
 
@@ -24,6 +25,7 @@ namespace Com.Beetsoft.AFE
         {
             base.Awake();
             SyncTweenRpc = gameObject.GetOrAddComponent<SyncTweenRPC>();
+            FollowObjectBlowUp = gameObject.GetOrAddComponent<FollowObjectBlowUp>();
         }
 
         protected override void Start()
@@ -35,23 +37,11 @@ namespace Com.Beetsoft.AFE
                 .Subscribe(message =>
                 {
                     var newMessage = new InputMessage(GetReceiverHealthLowest(), message.Direction);
-                    ActiveSkillCurrent(newMessage, 100);
+                    ActiveSkillCurrent(newMessage, 0);
                 });
 
-            AsyncMessageBroker.Default.Subscribe<BlockUpArgs>(message =>
-            {
-                return Observable.Return(message.ObjectHasBeenBlowUp)
-                    .ForEachAsync(obj => { ObjectBlowUps.Add(obj); });
-            });
-
-            AsyncMessageBroker.Default.Subscribe<BlockDownArgs>(args =>
-            {
-                return Observable.Return(args.ObjectHasBeenBlowDown)
-                    .ForEachAsync(obj => { ObjectBlowUps.Remove(obj); });
-            });
-
             var countObjectBlowStream = Observable.EveryUpdate()
-                .Select(_ => ObjectBlowUps.Count)
+                .Select(_ => FollowObjectBlowUp.GetObjectsBlowUp().Count())
                 .DistinctUntilChanged();
 
             countObjectBlowStream
@@ -77,27 +67,54 @@ namespace Com.Beetsoft.AFE
                 {
                     if (receiveDamageables.IsNullOrEmpty()) return;
 
-                    var posReceiver = receiveDamageables.First().GetTransform.position;
-                    var posTarget = new Vector3(posReceiver.x, transform.position.y, posReceiver.z) +
-                                    OffsetPositionTeleport;
-                    Observable.Timer(TimeSpan.FromSeconds(0.1f))
-                        .Subscribe(_ => Animator.SetTriggerWithBool(Constant.AnimationPram.R));
-                    SyncTweenRpc.SyncVectorTween(SyncTweenRPC.SyncMode.Position, transform.position, posTarget,
-                        0.1f, ObservableTween.EaseType.Linear);
-                    receiveDamageables.ToList().ForEach(receiveDamageable =>
-                    {
-                        var k = receiveDamageable.GetComponent<IKnockUpable>();
-                        k?.BlowUp(BlowUpTimer);
-                    });
+                    SyncTweenRpc.OnSyncPositionComplete += EnterAnimationState;
+                    var posReceiver = receiveDamageables.OrderBy(x => x.GetHealth()).First().GetTransform.position;
+                    Teleport(GetPointToTeleport(posReceiver));
+                    ChampionTransform.Forward = GetFowardOnTeleport(posReceiver);
+
+                    var rList = receiveDamageables.ToList();
+                    Observable.EveryUpdate()
+                        .ThrottleFirst(TimeSpan.FromMilliseconds(300))
+                        .Take(3)
+                        .Subscribe(_ =>
+                        {
+                            rList.ForEach(receiveDamageable =>
+                            {
+                                var k = receiveDamageable.GetComponent<IKnockUpable>();
+                                k?.BlowUp(BlowUpTimer);
+                            });
+                        });
                 });
             }
         }
 
         private IReceiveDamageable GetReceiverHealthLowest()
         {
-            return ObjectBlowUps
-                .OrderBy(x => x.GetHealth())
+            return FollowObjectBlowUp.GetObjectsBlowUpOrderByHealth()
                 .FirstOrDefault();
+        }
+
+        private void Teleport(Vector3 target)
+        {
+            SyncTweenRpc.SyncVectorTween(SyncTweenRPC.SyncMode.Position, transform.position, target,
+                0.1f, ObservableTween.EaseType.Linear);
+        }
+
+        private Vector3 GetPointToTeleport(Vector3 target)
+        {
+            return new Vector3(target.x, transform.position.y, target.z) +
+                   OffsetPositionTeleport;
+        }
+
+        private void EnterAnimationState()
+        {
+            Animator.SetTriggerWithBool(Constant.AnimationPram.R);
+            SyncTweenRpc.OnSyncPositionComplete -= EnterAnimationState;
+        }
+
+        private Vector3 GetFowardOnTeleport(Vector3 target)
+        {
+            return (new Vector3(target.x, transform.position.y, target.y) - GetPointToTeleport(target)).normalized;
         }
     }
 }

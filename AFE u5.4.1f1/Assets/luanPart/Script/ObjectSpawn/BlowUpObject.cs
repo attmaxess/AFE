@@ -2,6 +2,7 @@
 using Photon.Pun;
 using UniRx;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Com.Beetsoft.AFE
 {
@@ -57,6 +58,7 @@ namespace Com.Beetsoft.AFE
             TweenDisposable?.Dispose();
             var position = transform.position;
             TweenDisposable = Blow(position.y, MaxYAxis, time, EaseType, onComplete);
+            RandomRotate();
         }
 
         private void DoBlowDown(float time, Action onComplete = null)
@@ -95,6 +97,16 @@ namespace Com.Beetsoft.AFE
         {
             IsCrowdControl.Value = false;
             SendMessageBlowDown();
+        }
+
+        private void RandomRotate()
+        {
+            var championTransform = GetComponent<IChampionTransform>();
+            if (championTransform != null)
+            {
+                var vectorRandom = Quaternion.Euler(0, Random.Range(0, 360), 0);
+                transform.forward = vectorRandom * Vector3.forward;
+            }
         }
     }
 }

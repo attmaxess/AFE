@@ -4161,6 +4161,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillModel: {fileID: 11400000, guid: 763c5cf869313154d87f0c7634bfd910, type: 2}
+  followObjectBlowUp: {fileID: 0}
 --- !u!114 &114303200557662960
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4233,8 +4234,8 @@ MonoBehaviour:
   skillBehaviours:
   - {fileID: 114610403922629190}
   - {fileID: 114302309017024992}
-  blowUpTimer: 1
-  offsetPositionTeleport: {x: 0, y: 0, z: 1}
+  blowUpTimer: 0.3
+  offsetPositionTeleport: {x: 0, y: 0, z: 3}
 --- !u!114 &114337711945045802
 MonoBehaviour:
   m_ObjectHideFlags: 1

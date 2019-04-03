@@ -50,7 +50,7 @@ namespace Com.Beetsoft.AFE
         // Use this for initialization
         private void Start()
         {
-            JoystickInputFilterObserver.OnRunAsObservable()
+            JoystickInputFilterObserver?.OnRunAsObservable()
                 .Select(message => message.Direction)
                 .DistinctUntilChanged()
                 .Subscribe(direction =>
@@ -58,7 +58,7 @@ namespace Com.Beetsoft.AFE
                     transform.position = direction; //* ChampionConfig.MoveSpeed.Value;
                 });
 
-            JoystickInputFilterObserver.OnRunAsObservable()
+            JoystickInputFilterObserver?.OnRunAsObservable()
                 .Select(message => message.Rotation)
                 .Where(rotation => rotation != Vector3.zero)
                 .Subscribe(rotation => RotateTarget = rotation);
@@ -72,7 +72,7 @@ namespace Com.Beetsoft.AFE
                         RotateTarget = Vector3.zero;
                 });
 
-            JoystickInputFilterObserver.OnRunAsObservable()
+            JoystickInputFilterObserver?.OnRunAsObservable()
                 .Select(message => IsRun(message.Rotation))
                 .DistinctUntilChanged()
                 .Subscribe(HandleAnimationRun);
