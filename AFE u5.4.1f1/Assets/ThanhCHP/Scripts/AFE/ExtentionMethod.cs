@@ -53,10 +53,10 @@ namespace Com.Beetsoft.AFE
         {
             IReceiveDamageable receiveDamageable = null;
             RaycastHit hit;
-            Debug.DrawRay(go.transform.position + new Vector3(0, 1, 0), direction * distance, Color.red, 1);
+            Debug.DrawRay(go.transform.position , direction * distance, Color.red, 1);
             if (layerMask == default(LayerMask)) layerMask = ~0;
 
-            if (Physics.Raycast(go.transform.position + new Vector3(0, 1, 0), direction, out hit, distance, layerMask,
+            if (Physics.Raycast(go.transform.position, direction, out hit, distance, layerMask,
                 queryTriggerInteraction))
             {
                 receiveDamageable = hit.transform.GetComponent<IReceiveDamageable>();

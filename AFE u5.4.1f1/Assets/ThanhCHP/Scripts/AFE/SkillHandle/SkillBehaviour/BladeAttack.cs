@@ -45,7 +45,7 @@ namespace Com.Beetsoft.AFE
         {
             if (IsMustDetectTarget)
             {
-                var receiver = gameObject.ReceiverDamageNearestByRayCast(inputMessage.Direction
+                var receiver = GetComponent<TestYasuo>().centerCharacter.gameObject.ReceiverDamageNearestByRayCast(inputMessage.Direction
                     , SkillConfig.Range.Value, LayerMaskTarget);
                 if (receiver == null)
                 {
@@ -53,7 +53,7 @@ namespace Com.Beetsoft.AFE
                     return;
                 }
 
-                ActiveSkillSubject.OnNext(new[] {receiver});
+                ActiveSkillSubject.OnNext(new[] { receiver });
 
                 Observable.Timer(TimeSpan.FromMilliseconds(timeDelayTakeDam))
                     .Subscribe(_ =>
