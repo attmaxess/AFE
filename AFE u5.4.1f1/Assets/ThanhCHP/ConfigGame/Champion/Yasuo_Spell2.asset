@@ -28,5 +28,5 @@ MonoBehaviour:
   magicDamagePerLevel: 0
   magicDamageBonus: 0
   cooldown:
-    value: 4
+    value: 0
   cooldownPerLevel: 0
