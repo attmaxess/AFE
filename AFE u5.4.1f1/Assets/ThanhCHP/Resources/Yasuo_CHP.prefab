@@ -4072,6 +4072,7 @@ MonoBehaviour:
   animatorHandler: {fileID: 114218586144303770}
   barPlayer: {fileID: 114681016319380998, guid: e53a0e6b970edf0499e0e7fa8bbd148f,
     type: 2}
+  centerCharacter: {fileID: 4834491577781052}
 --- !u!114 &114113698452653094
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4287,7 +4288,7 @@ MonoBehaviour:
   - {fileID: 114338453396253636}
   - {fileID: 114773152827730594}
   viewIdField: 0
-  InstantiationId: 2
+  InstantiationId: 1
   isRuntimeInstantiated: 0
 --- !u!114 &114530284841553940
 MonoBehaviour:

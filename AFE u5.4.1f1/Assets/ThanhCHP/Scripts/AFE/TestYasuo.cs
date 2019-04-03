@@ -21,6 +21,8 @@ namespace Com.Beetsoft.AFE
 
         private AnimatorHandler AnimatorHandler => animatorHandler;
 
+        public Transform centerCharacter;
+
 
 
         private void Awake()

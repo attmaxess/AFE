@@ -71,8 +71,8 @@ namespace Com.Beetsoft.AFE
         {
             if (layerMask == default(LayerMask)) layerMask = ~0;
             IReceiveDamageable receiveDamageable = null;
-            Debug.DrawRay(go.transform.position + new Vector3(0, 1, 0), direction * distance, Color.blue, 0.5f);
-            var _all = Physics.RaycastAll(go.transform.position + new Vector3(0, 1, 0), direction, distance, layerMask,
+            Debug.DrawRay(go.transform.position, direction * distance, Color.blue, 0.5f);
+            var _all = Physics.RaycastAll(go.transform.position, direction, distance, layerMask,
                 queryTriggerInteraction);
             float _dis = -1;
             for (int i = 0; i < _all.Length; i++)
@@ -99,8 +99,8 @@ namespace Com.Beetsoft.AFE
             }
 
             List<IReceiveDamageable> receiveDamageable = new List<IReceiveDamageable>();
-            Debug.DrawRay(go.transform.position + new Vector3(0,1,0), direction * distance, Color.blue, 0.5f);
-            var _all = Physics.RaycastAll(go.transform.position + new Vector3(0, 1, 0), direction.normalized, distance, layerMask,
+            Debug.DrawRay(go.transform.position, direction * distance, Color.blue, 0.5f);
+            var _all = Physics.RaycastAll(go.transform.position, direction.normalized, distance, layerMask,
                 queryTriggerInteraction);
             var _allIreveiceDamaable = _all.Where(_ => _.transform.GetComponent<IReceiveDamageable>() != null).ToList();
             foreach (var item in _allIreveiceDamaable)
