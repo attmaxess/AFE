@@ -80,6 +80,8 @@ namespace Com.Beetsoft.AFE
                     var posReceiver = receiveDamageables.First().GetTransform.position;
                     var posTarget = new Vector3(posReceiver.x, transform.position.y, posReceiver.z) +
                                     OffsetPositionTeleport;
+                    Observable.Timer(TimeSpan.FromSeconds(0.1f))
+                        .Subscribe(_ => Animator.SetTriggerWithBool(Constant.AnimationPram.R));
                     SyncTweenRpc.SyncVectorTween(SyncTweenRPC.SyncMode.Position, transform.position, posTarget,
                         0.1f, ObservableTween.EaseType.Linear);
                     receiveDamageables.ToList().ForEach(receiveDamageable =>
@@ -87,9 +89,6 @@ namespace Com.Beetsoft.AFE
                         var k = receiveDamageable.GetComponent<IKnockUpable>();
                         k?.BlowUp(BlowUpTimer);
                     });
-
-                    Observable.Timer(TimeSpan.FromSeconds(0.1f))
-                        .Subscribe(_ => Animator.SetTriggerWithBool(Constant.AnimationPram.R));
                 });
             }
         }

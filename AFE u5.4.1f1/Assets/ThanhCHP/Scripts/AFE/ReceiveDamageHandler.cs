@@ -24,7 +24,7 @@ namespace Com.Beetsoft.AFE
 
         float IReceiveDamageable.GetHealth()
         {
-            return ChampionConfig?.Health.Value ?? 0;
+            return ChampionConfig?.Health.Value ?? 999999;
         }
 
         void IReceiveDamageable.TakeDamage(IDamageMessage message)

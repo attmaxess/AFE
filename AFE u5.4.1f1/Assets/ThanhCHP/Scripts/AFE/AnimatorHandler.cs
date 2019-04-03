@@ -264,7 +264,7 @@ namespace Com.Beetsoft.AFE
         private void HandleSpell4State()
         {
             var spell4Smb = Animator.GetBehaviour<ObservableSpell4Smb>();
-            spell4Smb.OnStateMachineEnterAsObservable()
+            spell4Smb.OnStateEnterAsObservable()
                 .Subscribe(_ =>
                 {
                     IsInStateSpell4.Value = true;

@@ -15,7 +15,7 @@ namespace Com.Beetsoft.AFE
 
         private void Start()
         {
-            if (PhotonView.IsMine) return;
+            if (!PhotonView.IsMine) return;
             this.OnTriggerEnterAsObservable()
                 .Where(other => other.transform.GetInstanceID() != IdIgnore)
                 .Subscribe(other =>

@@ -16,7 +16,6 @@ namespace Com.Beetsoft.AFE
                 .OnSpell3AsObservable()
                 .Subscribe(message =>
                 {
-                    ChampionTransform.Forward = message.Direction;
                     var skillBehavior = SkillReader.GetSkillBehaviourCurrent();
                     skillBehavior.ActiveSkill(message);
                 });
@@ -27,7 +26,8 @@ namespace Com.Beetsoft.AFE
                 {
                     Debug.Log(receiveDamageables.IsNullOrEmpty());
                     if (receiveDamageables.IsNullOrEmpty()) return;
-                    
+                    var direction = (receiveDamageables.First().GetTransform.position - transform.position).normalized;
+                    ChampionTransform.Forward = direction;
                     SendOutput();
                     Animator.SetTriggerWithBool(Constant.AnimationPram.E);
                 });
