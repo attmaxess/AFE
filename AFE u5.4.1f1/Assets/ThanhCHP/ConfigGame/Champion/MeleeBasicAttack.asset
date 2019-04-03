@@ -17,7 +17,7 @@ MonoBehaviour:
     value: 0
   costPerLevel: 0
   range:
-    value: 175
+    value: 0.6
   rangePerLevel: 0
   physicDamage:
     value: 0
