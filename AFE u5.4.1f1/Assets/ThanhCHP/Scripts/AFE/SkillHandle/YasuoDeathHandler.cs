@@ -16,6 +16,7 @@ namespace Com.Beetsoft.AFE
                 {
                     Debug.Log("DEATH");
                     Animator.SetTriggerWithBool(Constant.AnimationPram.Death);
+                    Destroy(GetComponent<ReceiveDamageHandler>());
                 }
 
             });
