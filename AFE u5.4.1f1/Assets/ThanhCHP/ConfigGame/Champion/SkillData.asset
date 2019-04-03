@@ -19,6 +19,6 @@ MonoBehaviour:
     value: {fileID: 21300000, guid: 17b2a1413ffb5254792c7aa5ed0939a9, type: 3}
   championModel: {fileID: 11400000, guid: c27aa9838b137744c97785c959173d79, type: 2}
   range:
-    value: 10
+    value: 3.3
   typeSkillReactiveProperty:
     value: 1
