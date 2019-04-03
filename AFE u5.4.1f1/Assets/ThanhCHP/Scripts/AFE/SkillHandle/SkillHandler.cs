@@ -2,6 +2,7 @@ using System;
 using Photon.Pun;
 using UniRx;
 using UnityEngine;
+using ExtraLinq;
 
 namespace Com.Beetsoft.AFE
 {
@@ -91,7 +92,7 @@ namespace Com.Beetsoft.AFE
         protected virtual void Awake()
         {
             Animator = GetComponent<Animator>();
-            SkillReader = new SkillReader(SkillBehaviours, 0);
+            SkillReader = (!SkillBehaviours.IsNullOrEmpty())? new SkillReader(SkillBehaviours, 0) : new SkillReader();
             SyncTransformImmediately = gameObject.GetOrAddComponent<SyncTransformImmediately>();
             ChampionTransform = GetComponent<IChampionTransform>();
         }
