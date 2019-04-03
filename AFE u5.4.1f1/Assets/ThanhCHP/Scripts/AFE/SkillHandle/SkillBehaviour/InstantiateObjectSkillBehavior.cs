@@ -10,7 +10,7 @@ namespace Com.Beetsoft.AFE
 
         private ObjectElementSkillBehaviour ObjectPrefab => objectPrefab;
 
-        private ObjectPoolSkillBehaviour ObjectPool { get; set; }
+        protected ObjectPoolSkillBehaviour ObjectPool { get; set; }
 
         private void Awake()
         {
@@ -42,7 +42,8 @@ namespace Com.Beetsoft.AFE
         {
             ObjectPool.RentAsync().Subscribe(twist =>
             {
-                twist.OnSpawn(transform.position + direction, direction, CreateDamageMessage());
+                Vector3 target = transform.position + direction * SkillConfig.Range.Value;
+                twist.OnSpawn(transform.position + direction, target, CreateDamageMessage());
                 twist.SetIdIgnore(transform.GetInstanceID());
             });
         }
@@ -52,7 +53,8 @@ namespace Com.Beetsoft.AFE
         {
             ObjectPool.RentAsync().Subscribe(twist =>
             {
-                twist.OnSpawn(transform.position + direction, direction, CreateDamageMessage());
+                Vector3 target = transform.position + direction * SkillConfig.Range.Value;
+                twist.OnSpawn(transform.position + direction, target, CreateDamageMessage());
                 twist.SetIdIgnore(transform.GetInstanceID());
             });
         }
