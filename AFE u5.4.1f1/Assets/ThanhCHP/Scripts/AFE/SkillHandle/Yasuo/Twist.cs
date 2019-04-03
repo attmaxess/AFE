@@ -20,6 +20,7 @@ namespace Com.Beetsoft.AFE
                 .Where(other => other.transform.GetInstanceID() != IdIgnore)
                 .Subscribe(other =>
                 {
+                    Debug.Log("Twist");
                     var k = other.GetComponent<IKnockUpable>();
                     k?.BlowUp(KnockUpTime);
                     var receiver = other.GetComponent<IReceiveDamageable>();

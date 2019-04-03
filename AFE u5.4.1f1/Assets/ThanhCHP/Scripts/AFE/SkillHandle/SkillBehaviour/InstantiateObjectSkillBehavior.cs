@@ -40,6 +40,7 @@ namespace Com.Beetsoft.AFE
         [PunRPC]
         protected virtual void ActiveSkillRPC(Vector3 direction, int viewIdTarget)
         {
+            Debug.Log("ActiveSkillRPC");
             ObjectPool.RentAsync().Subscribe(twist =>
             {
                 Vector3 target = transform.position + direction * SkillConfig.Range.Value;
@@ -51,6 +52,7 @@ namespace Com.Beetsoft.AFE
         [PunRPC]
         protected virtual void ActiveSkillRPC(Vector3 direction)
         {
+            Debug.Log("ActiveSkillRPC");
             ObjectPool.RentAsync().Subscribe(twist =>
             {
                 Vector3 target = transform.position + direction * SkillConfig.Range.Value;

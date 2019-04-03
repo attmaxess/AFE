@@ -19,6 +19,8 @@ namespace Com.Beetsoft.AFE
                 .Where(other => other.transform.GetInstanceID() != IdIgnore)
                 .Subscribe(other =>
                 {
+                    Debug.Log("WindWall");
+
                     var damBullet = other.GetComponent<IDamageBullet>();
                     damBullet?.ReturnPool();
                     if (other.GetComponent<IDamageBullet>() != null)
@@ -27,9 +29,9 @@ namespace Com.Beetsoft.AFE
                     }
                 });
         }
-        internal override void OnSpawn(Vector3 startPos, Vector3 direction, IDamageMessage damageMessage)
+        internal override void OnSpawn(Vector3 startPos, Vector3 target, IDamageMessage damageMessage)
         {
-            throw new System.NotImplementedException();
+            movable.MoveToDir(startPos, target);
         }
     }
 }
