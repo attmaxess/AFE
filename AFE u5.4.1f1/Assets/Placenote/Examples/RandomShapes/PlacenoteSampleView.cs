@@ -281,6 +281,9 @@ public class PlacenoteSampleView : MonoBehaviour, PlacenoteListener
         );
     }
 
+    [Header("LoadImagePanel")]
+    public bool doneLoadImagePanel = true;
+
     void LoadImagePanel()
     {
         StartCoroutine(C_LoadImagePanel());
@@ -288,6 +291,9 @@ public class PlacenoteSampleView : MonoBehaviour, PlacenoteListener
 
     IEnumerator C_LoadImagePanel()
     {
+        if (isDebug) Debug.Log("Start C_LoadImagePanel");
+        doneLoadImagePanel = false;
+
         capturePanel.SetActive(true);
 
         ScreenCaptureData captureData = mSelectedMapInfo.metadata.userdata["capture"].ToObject<ScreenCaptureData>();
@@ -319,6 +325,9 @@ public class PlacenoteSampleView : MonoBehaviour, PlacenoteListener
         Vector2 texSize = new Vector2(screenCapture.textureMethod.m_texture.width, screenCapture.textureMethod.m_texture.height);
         captureImage.sprite = Sprite.Create(screenCapture.textureMethod.m_texture, new Rect(0f, 0f, texSize.x, texSize.y), new Vector2(0.5f, 0.5f), 100f);
         captureImage.sprite.name = captureData.texName;
+
+        if (isDebug) Debug.Log("Start C_LoadImagePanel");
+        doneLoadImagePanel = true;
 
         yield break;
     }

@@ -39,6 +39,10 @@ public class DHTObjectData
 
 public class ShapeManager : MonoBehaviour
 {
+    [Header("Debug")]
+    public bool isDebug = true;
+    public bool useUpdate = false;
+
     public List<ShapeInfo> shapeInfoList = new List<ShapeInfo>();
     public List<GameObject> shapeObjList = new List<GameObject>();
     public Material mShapeMaterial;
@@ -88,7 +92,7 @@ public class ShapeManager : MonoBehaviour
 
     void Update()
     {
-
+        if (!useUpdate) return;
         // Check if the screen is touched
 
         if (Input.touchCount > 0)

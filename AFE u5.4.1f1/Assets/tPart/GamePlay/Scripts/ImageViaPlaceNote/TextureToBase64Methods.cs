@@ -90,6 +90,7 @@ namespace DHT.TextureToString64
         }
 
         [Header("From Texture")]
+        [HideInInspector]
         string _m_encodedData = string.Empty;
         [HideInInspector]
         public string m_encodedData
