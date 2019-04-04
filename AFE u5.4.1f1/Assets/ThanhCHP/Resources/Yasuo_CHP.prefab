@@ -4069,11 +4069,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillModel: {fileID: 11400000, guid: 18234a120e0bf644083efacea99e9255, type: 2}
-  centerCharacter: {fileID: 0}
   rangeDetect: 3
-  timeMove: 1
+  velocity: 1
   easeType: 0
   millisecondsDelayApplyDamage: 250
+  direction: {x: 0, y: 0, z: 0}
+  posTarget: {x: 0, y: 0, z: 0}
 --- !u!114 &114092411545148480
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4309,7 +4310,7 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 114338453396253636}
   - {fileID: 114773152827730594}
-  viewIdField: 1
+  viewIdField: 0
   InstantiationId: 1
   isRuntimeInstantiated: 0
 --- !u!114 &114530284841553940
