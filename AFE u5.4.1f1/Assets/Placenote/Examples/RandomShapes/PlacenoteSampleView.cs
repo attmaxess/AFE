@@ -293,6 +293,7 @@ public class PlacenoteSampleView : MonoBehaviour, PlacenoteListener
         ScreenCaptureData captureData = mSelectedMapInfo.metadata.userdata["capture"].ToObject<ScreenCaptureData>();
 
         screenCapture.textureMethod.TextTextureFileName = captureData.texName;
+        screenCapture.textureMethod.ReConfirmPathType();
 
         if (File.Exists(Application.persistentDataPath + "/" + screenCapture.textureMethod.TextTextureFileName + ".png"))
         {

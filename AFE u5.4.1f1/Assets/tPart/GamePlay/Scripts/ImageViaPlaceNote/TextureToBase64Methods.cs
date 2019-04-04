@@ -33,6 +33,7 @@ namespace DHT.TextureToString64
 
         IEnumerator C_ToString64File()
         {
+            if (isDebug) Debug.Log("Start C_ToString64File");
             doneToString64File = false;
 
             if (m_texture.name == string.Empty)
@@ -42,12 +43,14 @@ namespace DHT.TextureToString64
                 yield break;
             }
 
+            TextTextureFileName = m_texture.name;
             byte[] imageData = m_texture.EncodeToPNG();
-            File.WriteAllText(Application.persistentDataPath + "/" + m_texture.name + ".txt", Convert.ToBase64String(imageData));
-            yield return new WaitUntil(() => File.Exists(Application.persistentDataPath + "/" + m_texture.name + ".txt") == true);
+            File.WriteAllText(pathFolder + "/" + m_texture.name + ".txt", Convert.ToBase64String(imageData));
+            yield return new WaitUntil(() => File.Exists(pathFolder + "/" + m_texture.name + ".txt") == true);
 
             DebugAppPerPath();
 
+            if (isDebug) Debug.Log("Done C_ToString64File");
             doneToString64File = true;
 
             yield break;
@@ -64,6 +67,7 @@ namespace DHT.TextureToString64
 
         IEnumerator C_ToPNGFile()
         {
+            if (isDebug) Debug.Log("Start C_ToPNGFile()");
             doneToPNGFile = false;
 
             if (m_texture.name == string.Empty)
@@ -73,11 +77,13 @@ namespace DHT.TextureToString64
                 yield break;
             }
 
-            ScreenCapture.CaptureScreenshot(Application.persistentDataPath + "/" + m_texture.name + ".png");
-            yield return new WaitUntil(() => File.Exists(Application.persistentDataPath + "/" + m_texture.name + ".png") == true);
+            ScreenCapture.CaptureScreenshot(pathFolder + "/" + m_texture.name + ".png");
+            yield return new WaitUntil(() => File.Exists(pathFolder + "/" + m_texture.name + ".png") == true);
+            TextTextureFileName = m_texture.name;
 
             DebugAppPerPath();
 
+            if (isDebug) Debug.Log("Done C_ToPNGFile()");
             doneToPNGFile = true;
 
             yield break;
@@ -103,18 +109,8 @@ namespace DHT.TextureToString64
         public void GetTexture2D()
         {
             this.m_texture = null;
-
             byte[] imageData = Convert.FromBase64String(m_encodedData);
-
-            int width, height;
-            GetImageSize(imageData, out width, out height);
-
-            m_texture = new Texture2D(width, height, TextureFormat.ARGB32, false, true);
-            m_texture.name = TextTextureFileName;
-            m_texture.hideFlags = HideFlags.HideAndDontSave;
-            m_texture.filterMode = FilterMode.Point;
-
-            m_texture.LoadImage(imageData);
+            LoadTextureFromByteArray(imageData, TextTextureFileName);
         }
 
         private void GetImageSize(byte[] imageData, out int width, out int height)
@@ -188,33 +184,26 @@ namespace DHT.TextureToString64
         public void GetTexture2DFromFile()
         {
             this.m_texture = null;
-
-            m_encodedData = File.ReadAllText(currentPathType + "/" + TextTextureFileName + ".txt");
+            m_encodedData = File.ReadAllText(pathFolder + "/" + TextTextureFileName + ".txt");
             byte[] imageData = Convert.FromBase64String(m_encodedData);
-
-            int width, height;
-            GetImageSize(imageData, out width, out height);
-
-            m_texture = new Texture2D(width, height, TextureFormat.ARGB32, false, true);            
-            m_texture.name = TextTextureFileName;
-            m_texture.hideFlags = HideFlags.HideAndDontSave;
-            m_texture.filterMode = FilterMode.Point;
-
-            m_texture.LoadImage(imageData);
+            LoadTextureFromByteArray(imageData, TextTextureFileName);
         }
 
         [ContextMenu("GetTexture2DFromPNG")]
         public void GetTexture2DFromPNG()
         {
             this.m_texture = null;
-                        
-            byte[] imageData = System.IO.File.ReadAllBytes(currentPathType + "/" + TextTextureFileName + ".png");            
+            byte[] imageData = File.ReadAllBytes(pathFolder + "/" + TextTextureFileName + ".png");
+            LoadTextureFromByteArray(imageData, TextTextureFileName);
+        }
 
+        void LoadTextureFromByteArray(byte[] imageData, string texName)
+        {
             int width, height;
             GetImageSize(imageData, out width, out height);
 
-            m_texture = new Texture2D(width, height, TextureFormat.ARGB32, false, true);            
-            m_texture.name = TextTextureFileName;
+            m_texture = new Texture2D(width, height, TextureFormat.ARGB32, false, true);
+            m_texture.name = texName;
             m_texture.hideFlags = HideFlags.HideAndDontSave;
             m_texture.filterMode = FilterMode.Point;
 
