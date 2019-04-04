@@ -21,6 +21,8 @@ GameObject:
   - component: {fileID: 4834008861523970}
   - component: {fileID: 198706718240729422}
   - component: {fileID: 199435601500721024}
+  - component: {fileID: 114914411591233246}
+  - component: {fileID: 114150148349892832}
   m_Layer: 0
   m_Name: TornadoHit
   m_TagString: Untagged
@@ -41,6 +43,29 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+--- !u!114 &114150148349892832
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1387019224049340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 867c6b05fafec8647af7a53beb9cf881, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeLive: 0.5
+--- !u!114 &114914411591233246
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1387019224049340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67ee146a50c848039130d85038548173, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!198 &198706718240729422
 ParticleSystem:
   m_ObjectHideFlags: 1

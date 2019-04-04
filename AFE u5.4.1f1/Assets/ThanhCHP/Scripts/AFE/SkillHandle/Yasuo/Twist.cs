@@ -1,4 +1,5 @@
 ﻿using System;
+using Photon.Pun;
 using UniRx.Triggers;
 using UnityEngine;
 using UniRx;
@@ -8,10 +9,21 @@ namespace Com.Beetsoft.AFE
     public class Twist : ObjectElementSkillBehaviour
     {
         [SerializeField] private float knockUpTime = 0.7f;
+        [SerializeField] private ObjectElementSkillBehaviour effectPoolPrefabs;
 
         private float KnockUpTime => knockUpTime;
 
         private IDamageMessage DamageMessageCurrent { get; set; }
+
+        private ObjectPoolSkillBehaviour EffectPool { get; set; }
+
+        private ObjectElementSkillBehaviour EffectPoolPrefabs => effectPoolPrefabs;
+
+        protected override void Awake()
+        {
+            base.Awake();
+            EffectPool = new ObjectPoolSkillBehaviour(PhotonView, EffectPoolPrefabs, transform);
+        }
 
         private void Start()
         {
@@ -25,6 +37,7 @@ namespace Com.Beetsoft.AFE
                     k?.BlowUp(KnockUpTime);
                     var receiver = other.GetComponent<IReceiveDamageable>();
                     receiver?.TakeDamage(DamageMessageCurrent);
+                    PhotonView.RPC("SpawnTwistChildRpc", RpcTarget.All, other.transform.position);
                 });
         }
         //
@@ -36,6 +49,12 @@ namespace Com.Beetsoft.AFE
         {
             movable.MoveToDir(startPos, target);
             DamageMessageCurrent = damageMessage;
+        }
+
+        [PunRPC]
+        private void SpawnTwistChildRpc(Vector3 position)
+        {
+            EffectPool.RentAsync().Subscribe(x => { x.transform.position = position; });
         }
     }
 }

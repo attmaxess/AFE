@@ -4110,6 +4110,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e94efe5a6af4fa49422b1a56a68ee94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  effectPrefab: {fileID: 114207803839208368, guid: 0393fe08af292cd4aab7fe5e09f9e893,
+    type: 2}
 --- !u!114 &114284003140846610
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4125,6 +4127,7 @@ MonoBehaviour:
   skillBehaviours:
   - {fileID: 114530284841553940}
   skillConfig: {fileID: 0}
+  effectOnAttack: {fileID: 0}
 --- !u!114 &114285160370677164
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4151,6 +4154,7 @@ MonoBehaviour:
   skillBehaviours:
   - {fileID: 114809400590198410}
   skillConfig: {fileID: 0}
+  effectOnAttack: {fileID: 0}
 --- !u!114 &114302309017024992
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4163,6 +4167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillModel: {fileID: 11400000, guid: 763c5cf869313154d87f0c7634bfd910, type: 2}
+  effectPrefab: {fileID: 0}
   followObjectBlowUp: {fileID: 0}
 --- !u!114 &114303200557662960
 MonoBehaviour:
@@ -4176,6 +4181,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillModel: {fileID: 11400000, guid: 901a2946f74261f4fad4f6b4c9a2b344, type: 2}
+  effectPrefab: {fileID: 0}
   layerMaskTarget:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -4191,6 +4197,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillModel: {fileID: 11400000, guid: 2d34300a09345634f8b194d879a6945d, type: 2}
+  effectPrefab: {fileID: 0}
   objectPrefab: {fileID: 114721238444824766, guid: 31517fb9f1d230749a47d7a4c40104d0,
     type: 2}
 --- !u!114 &114315601636423302
@@ -4207,6 +4214,7 @@ MonoBehaviour:
   skillBehaviourPassive: {fileID: 0}
   skillBehaviours: []
   skillConfig: {fileID: 0}
+  effectOnAttack: {fileID: 0}
   speedSmooth: 1
 --- !u!114 &114331462240772248
 MonoBehaviour:
@@ -4220,6 +4228,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillModel: {fileID: 11400000, guid: feca287268b3ec748845469583e7cbd0, type: 2}
+  effectPrefab: {fileID: 0}
   layerMaskTarget:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -4239,6 +4248,7 @@ MonoBehaviour:
   - {fileID: 114610403922629190}
   - {fileID: 114302309017024992}
   skillConfig: {fileID: 0}
+  effectOnAttack: {fileID: 0}
   blowUpTimer: 0.3
   offsetPositionTeleport: {x: 0, y: 0, z: 1}
 --- !u!114 &114337711945045802
@@ -4256,6 +4266,8 @@ MonoBehaviour:
   skillBehaviours:
   - {fileID: 114306969928528286}
   skillConfig: {fileID: 11400000, guid: 18234a120e0bf644083efacea99e9255, type: 2}
+  effectOnAttack: {fileID: 114207803839208368, guid: 0393fe08af292cd4aab7fe5e09f9e893,
+    type: 2}
   maxHit: 4
   millisecondsDelayApplyDamage: 250
 --- !u!114 &114338453396253636
@@ -4306,6 +4318,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillModel: {fileID: 11400000, guid: 089328d3d2e04a741923e8afd81c8e33, type: 2}
+  effectPrefab: {fileID: 0}
   isMustDetectTarget: 1
   layerMaskTarget:
     serializedVersion: 2
@@ -4330,6 +4343,7 @@ MonoBehaviour:
   - {fileID: 114331462240772248}
   - {fileID: 114306969928528286}
   skillConfig: {fileID: 0}
+  effectOnAttack: {fileID: 0}
   timeKnockUpObject: 0.7
 --- !u!114 &114610403922629190
 MonoBehaviour:
@@ -4343,6 +4357,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillModel: {fileID: 11400000, guid: 639778a83d9298547ad42d4160189ffd, type: 2}
+  effectPrefab: {fileID: 0}
 --- !u!114 &114773152827730594
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4420,6 +4435,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillModel: {fileID: 11400000, guid: 01b916019809a254ca38b7a6328f5a19, type: 2}
+  effectPrefab: {fileID: 114224288040333600, guid: 1c2cf47f34f7f4d4789af577a938f094,
+    type: 2}
   layerMaskTarget:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -4435,6 +4452,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillModel: {fileID: 11400000, guid: 1897c10aeb370b24e91035e8f3cf69f2, type: 2}
+  effectPrefab: {fileID: 0}
   objectPrefab: {fileID: 114598542248339824, guid: 51bc945752bf93f4e92b2687f959aeee,
     type: 2}
 --- !u!114 &114911569951558228
@@ -4451,6 +4469,7 @@ MonoBehaviour:
   skillBehaviourPassive: {fileID: 0}
   skillBehaviours: []
   skillConfig: {fileID: 0}
+  effectOnAttack: {fileID: 0}
 --- !u!137 &137490055118385072
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

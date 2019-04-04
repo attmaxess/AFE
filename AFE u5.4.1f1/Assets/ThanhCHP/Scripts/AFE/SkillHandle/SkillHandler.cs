@@ -15,6 +15,7 @@ namespace Com.Beetsoft.AFE
         [SerializeField] private SkillBehaviour skillBehaviourPassive;
         [SerializeField] private SkillBehaviour[] skillBehaviours;
         [SerializeField] private SkillModel skillConfig;
+        [SerializeField] private ObjectElementSkillBehaviour effectOnAttack;
 
         private ISkillBehaviour[] SkillBehaviours => skillBehaviours;
 
@@ -29,6 +30,10 @@ namespace Com.Beetsoft.AFE
         protected ISkillConfig SkillConfig => skillConfig;
 
         protected Animator Animator { get; private set; }
+        
+        protected ObjectPoolSkillBehaviour ObjectPoolEffectOnAttack { get; private set; }
+
+        protected ObjectElementSkillBehaviour EffectOnAttack => effectOnAttack;
 
         private ReactiveProperty<ISkillOutputMessage> SkillMessageOutputReactiveProperty { get; } =
             new ReactiveProperty<ISkillOutputMessage>();
@@ -95,6 +100,7 @@ namespace Com.Beetsoft.AFE
             SkillReader = !SkillBehaviours.IsNullOrEmpty() ? new SkillReader(SkillBehaviours, 0) : new SkillReader();
             SyncTransformImmediately = gameObject.GetOrAddComponent<SyncTransformImmediately>();
             ChampionTransform = GetComponent<IChampionTransform>();
+            ObjectPoolEffectOnAttack = new ObjectPoolSkillBehaviour(photonView, EffectOnAttack, transform);
         }
 
         protected virtual void Start()

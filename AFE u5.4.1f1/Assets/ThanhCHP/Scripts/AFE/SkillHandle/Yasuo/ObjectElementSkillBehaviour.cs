@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Com.Beetsoft.AFE
 {
-    public abstract class ObjectElementSkillBehaviour : MonoBehaviour, ITriggerObject
+    public class ObjectElementSkillBehaviour : MonoBehaviour, ITriggerObject
     {
         protected IMovable movable;
 
@@ -17,7 +17,7 @@ namespace Com.Beetsoft.AFE
             IdIgnore = id;
         }
 
-        private void Awake()
+        protected virtual void Awake()
         {
             movable = GetComponent<IMovable>();
         }
@@ -27,6 +27,11 @@ namespace Com.Beetsoft.AFE
             ObjectPool.Return(this);
         }
 
-        internal abstract void OnSpawn(Vector3 startPos, Vector3 direction, IDamageMessage damageMessage);
+        internal virtual void OnSpawn(Vector3 startPos, Vector3 direction, IDamageMessage damageMessage)
+        {
+            
+        }
     }
+    
+    
 }

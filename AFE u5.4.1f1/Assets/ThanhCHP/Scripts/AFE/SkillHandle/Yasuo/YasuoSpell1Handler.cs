@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using AFE.Extensions;
 using ExtraLinq;
+using Photon.Pun;
 using UniRx;
 using UnityEngine;
 using AnimationState = Com.Beetsoft.AFE.Enumerables.AnimationState;
@@ -54,6 +55,7 @@ namespace Com.Beetsoft.AFE
                         {
                             var knockObj = x.GetComponent<IKnockUpable>();
                             knockObj?.BlowUp(TimeKnockUpObject);
+                            photonView.RPC("SpawnEffectSpellDashRpc", RpcTarget.All, x.GetTransform.position);
                         });
 
                     if (FeatureIndexSpell1State.Value == AnimationState.Spell1.Spell1C)
@@ -83,7 +85,7 @@ namespace Com.Beetsoft.AFE
                 .Where(x => x == AnimationState.Spell1.Spell1C)
                 .Subscribe(_ =>
                 {
-                    SkillReader.SendNextLastIndex(); 
+                    SkillReader.SendNextLastIndex();
                     ResetSpellAfterTimer(10f);
                 });
         }
@@ -136,6 +138,12 @@ namespace Com.Beetsoft.AFE
             var spell4Smb = Animator.GetBehaviour<ObservableSpell4Smb>();
             spell4Smb.OnStateEnterAsObservable()
                 .Subscribe(_ => ResetSpell());
+        }
+
+        [PunRPC]
+        private void SpawnEffectSpellDashRpc(Vector3 position)
+        {
+            ObjectPoolEffectOnAttack.RentAsync().Subscribe(x => x.transform.position = position);
         }
     }
 }

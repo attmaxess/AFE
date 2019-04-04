@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4801240632671712}
   - component: {fileID: 198358580172876452}
   - component: {fileID: 199473558936237714}
+  - component: {fileID: 114504231896331250}
   m_Layer: 0
   m_Name: Tornado
   m_TagString: Untagged
@@ -72,6 +73,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+--- !u!114 &114504231896331250
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1276883500801688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67ee146a50c848039130d85038548173, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!198 &198358580172876452
 ParticleSystem:
   m_ObjectHideFlags: 1

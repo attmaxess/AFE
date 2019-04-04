@@ -10,6 +10,7 @@ namespace Com.Beetsoft.AFE
         IReceiveDamageObserver,
         IInitialize<IChampionConfig>
     {
+        [SerializeField] private ObjectElementSkillBehaviour effectPrefab;
         private Subject<IDamageMessage> DamageMessageSubject { get; } = new Subject<IDamageMessage>();
 
         private IChampionConfig ChampionConfig { get; set; }
@@ -36,6 +37,15 @@ namespace Com.Beetsoft.AFE
         {
             return DamageMessageSubject;
         }
+        
+        private ObjectPoolSkillBehaviour EffectPool { get; set; }
+
+        private ObjectElementSkillBehaviour EffectPrefab => effectPrefab;
+
+        private void Awake()
+        {
+            EffectPool = new ObjectPoolSkillBehaviour(photonView, EffectPrefab, transform);
+        }
 
         private void Start()
         {
@@ -53,6 +63,7 @@ namespace Com.Beetsoft.AFE
             if (ChampionConfig == null)
             {
                 Debug.LogWarning("Set ChampionConfig");
+                EffectPool.RentAsync().Subscribe(x => x.transform.position = transform.position);
                 return;
             }
 
@@ -67,6 +78,7 @@ namespace Com.Beetsoft.AFE
         {
             ChampionConfig.Health.Value -= physicDamageReceive;
             ChampionConfig.Health.Value -= magicDamageReceive;
+            EffectPool.RentAsync().Subscribe(x => x.transform.position = transform.position);
         }
     }
 }

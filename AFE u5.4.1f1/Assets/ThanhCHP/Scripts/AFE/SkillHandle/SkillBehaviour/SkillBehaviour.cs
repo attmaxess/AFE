@@ -21,6 +21,7 @@ namespace Com.Beetsoft.AFE
     {
         private ISkillConfig skillConfigCache;
         [SerializeField] private SkillModel skillModel;
+        [SerializeField] private ObjectElementSkillBehaviour effectPrefab;
 
         protected ISkillConfig SkillConfig =>
             skillConfigCache ?? (skillConfigCache = Instantiate(skillModel));
@@ -33,6 +34,10 @@ namespace Com.Beetsoft.AFE
             new Subject<IEnumerable<IReceiveDamageable>>();
 
         protected SyncTransformImmediately SyncTransformImmediately { get; private set; }
+
+        private ObjectElementSkillBehaviour EffectPrefab => effectPrefab;
+        
+        protected  ObjectPoolSkillBehaviour EffectPool { get; private set; }
 
         public void Initialize(IAnimationStateChecker init)
         {
@@ -82,6 +87,7 @@ namespace Com.Beetsoft.AFE
         protected virtual void Awake()
         {
             SyncTransformImmediately = gameObject.GetOrAddComponent<SyncTransformImmediately>();
+            EffectPool = new ObjectPoolSkillBehaviour(photonView, EffectPrefab, transform);
         }
 
         protected virtual void Start()
