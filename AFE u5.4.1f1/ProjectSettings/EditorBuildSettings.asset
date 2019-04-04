@@ -5,7 +5,10 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/tPart/Scenes/PlayGroundWithPlaceNote.unity
     guid: e9f5eb29cf41ce04dac4733611cc0670
+  - enabled: 1
+    path: Assets/Test/TestAR_PUN.unity
+    guid: 426b4bc9ac9caf3468d279e4c6ab83df
   m_configObjects: {}
