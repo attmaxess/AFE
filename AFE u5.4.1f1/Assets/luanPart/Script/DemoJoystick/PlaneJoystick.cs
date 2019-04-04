@@ -100,7 +100,7 @@ public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
                 isDeath = false;
             }
         });
-        MessageBroker.Default.Receive<IMessageBladeAttack>().Subscribe(mes =>
+        MessageBroker.Default.Receive<IInvertionPositionPlayerJoystic>().Subscribe(mes =>
         {
             transform.position = mes.player.position;
             IsUpdateWhenSkill = mes.isUsing;

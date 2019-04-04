@@ -5,13 +5,13 @@ using UnityEngine;
 
 namespace Com.Beetsoft.AFE
 {
-    public class IMessageBladeAttack
+    public class IInvertionPositionPlayerJoystic
     {
         public bool isMine;
         public bool isUsing;
         public Transform player;
 
-        public IMessageBladeAttack(bool isUsing, bool isMine, Transform player)
+        public IInvertionPositionPlayerJoystic(bool isUsing, bool isMine, Transform player)
         {
             this.isUsing = isUsing;
             this.isMine = isMine;

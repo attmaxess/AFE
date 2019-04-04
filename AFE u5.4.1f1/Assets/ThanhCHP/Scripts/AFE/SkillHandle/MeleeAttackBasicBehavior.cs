@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ControlFreak2;
+using System;
 using UniRx;
 using UnityEngine;
 
@@ -7,23 +8,12 @@ namespace Com.Beetsoft.AFE
     public class MeleeAttackBasicBehavior : SkillBehaviour
     {
         public float rangeDetect = 3;
-        private SyncTweenRPC SyncTweenRpc { get; set; }
         public float velocity = 1;
         [SerializeField] private ObservableTween.EaseType easeType;
         [SerializeField] private int millisecondsDelayApplyDamage = 250;
         public Vector3 direction;
         public Vector3 posTarget;
-        protected override void Awake()
-        {
-            base.Awake();
-            SyncTweenRpc = gameObject.GetOrAddComponent<SyncTweenRPC>();
-        }
-
-        private void Start()
-        {
-            SyncTweenRpc.OnSyncPositionComplete += Attack;
-            SyncTweenRpc.OnSyncPositionComplete += SetExactPos;
-        }
+        public IDisposable disposable;
 
         public override void ActiveSkill(IInputMessage inputMessage)
         {
@@ -34,8 +24,6 @@ namespace Com.Beetsoft.AFE
                 return;
             }
             float distance = Vector3.Distance(transform.position, receiver.GetTransform.position);
-
-            Debug.Log("distance " + distance + " - " + SkillConfig.Range.Value + " - " + (SkillConfig.Range.Value >= distance));
 
             if (SkillConfig.Range.Value >= distance)
             {
@@ -50,13 +38,31 @@ namespace Com.Beetsoft.AFE
                 float rangeMove = distance - SkillConfig.Range.Value;
                 var position = transform.position;
                 posTarget = position + direction.normalized * rangeMove;
-                SyncTweenRpc.SyncVectorTween(SyncTweenRPC.SyncMode.Position, position, posTarget, velocity / distance, easeType);
+                disposable?.Dispose();
+                MessageBroker.Default.Publish(new IInvertionPositionPlayerJoystic(true, photonView.IsMine, transform));
+                disposable = Observable.EveryUpdate().Subscribe(_ =>
+               {
+                   transform.position = Vector3.MoveTowards(transform.position, posTarget, Time.deltaTime * ChampionConfig.MoveSpeed.Value);
+                   if (Vector3.Distance(transform.position, posTarget) <= 0.1f)
+                   {
+                       disposable?.Dispose();
+                       transform.position = posTarget;
+                       Attack();
+                       MessageBroker.Default.Publish(new IInvertionPositionPlayerJoystic(false, photonView.IsMine, transform));
+                   }
+
+                   if (CF2Input.GetAxis("Horizontal") != 0 || CF2Input.GetAxis("Vertical") != 0)
+                   {
+                       disposable?.Dispose();
+                       MessageBroker.Default.Publish(new IInvertionPositionPlayerJoystic(false, photonView.IsMine, transform));
+                   }
+               });
             }
         }
 
         void Attack()
         {
-            var receiver = GetComponent<TestYasuo>()?.centerCharacter.gameObject.ReceiverDamageNearestByRayCastAll(transform.forward, SkillConfig.Range.Value);
+            var receiver = gameObject.GetReceiveDamageableHealthLowest(SkillConfig.Range.Value);
             if (receiver == null)
             {
                 ActiveSkillSubject.OnNext(null);
@@ -69,11 +75,6 @@ namespace Com.Beetsoft.AFE
                     receiver.TakeDamage(
                         new DamageMessage(SkillConfig.PhysicDamage.Value, SkillConfig.MagicDamage.Value));
                 });
-        }
-
-        void SetExactPos()
-        {
-            transform.position = posTarget;
         }
     }
 }

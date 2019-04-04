@@ -87,7 +87,7 @@ namespace Com.Beetsoft.AFE
         private void DoOnStartSyncPosition()
         {
             if (photonView.IsMine)
-                MessageBroker.Default.Publish(new IMessageBladeAttack(true, photonView.IsMine,
+                MessageBroker.Default.Publish(new IInvertionPositionPlayerJoystic(true, photonView.IsMine,
                     transform));
         }
 
@@ -95,7 +95,7 @@ namespace Com.Beetsoft.AFE
         {
             if (photonView.IsMine)
                 MessageBroker.Default.Publish(
-                    new IMessageBladeAttack(false, photonView.IsMine, transform));
+                    new IInvertionPositionPlayerJoystic(false, photonView.IsMine, transform));
         }
 
         private void OnDestroy()
