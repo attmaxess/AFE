@@ -34,15 +34,17 @@ namespace Com.Beetsoft.AFE
             {
                 ActiveSkillSubject.OnNext(new[] { receiver, receiver, receiver });
                 // move to target and attack
-                Vector3 direction = receiver.GetTransform.position - transform.position;
+                Vector3 direction = (receiver.GetTransform.position - transform.position).normalized;
                 float rangeMove = distance - SkillConfig.Range.Value;
                 var position = transform.position;
-                posTarget = position + direction.normalized * rangeMove;
+                posTarget = position + direction * rangeMove;
                 disposable?.Dispose();
                 MessageBroker.Default.Publish(new IInvertionPositionPlayerJoystic(true, photonView.IsMine, transform));
                 disposable = Observable.EveryUpdate().Subscribe(_ =>
                {
-                   transform.position = Vector3.MoveTowards(transform.position, posTarget, Time.deltaTime * ChampionConfig.MoveSpeed.Value);
+                   // transform.position = Vector3.MoveTowards(transform.position, posTarget, Time.deltaTime * ChampionConfig.MoveSpeed.Value);
+
+                   transform.Translate(direction * ChampionConfig.MoveSpeed.Value * Time.deltaTime, Space.World);
                    if (Vector3.Distance(transform.position, posTarget) <= 0.1f)
                    {
                        disposable?.Dispose();
@@ -68,6 +70,8 @@ namespace Com.Beetsoft.AFE
                 ActiveSkillSubject.OnNext(null);
                 return;
             }
+            Vector3 direction = (receiver.GetTransform.position - transform.position).normalized;
+            ChampionTransform.Forward = direction;
             ActiveSkillSubject.OnNext(new[] { receiver });
             Observable.Timer(TimeSpan.FromMilliseconds(millisecondsDelayApplyDamage))
                 .Subscribe(_ =>

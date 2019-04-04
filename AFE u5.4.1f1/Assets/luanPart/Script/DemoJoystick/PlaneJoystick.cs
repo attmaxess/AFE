@@ -100,6 +100,9 @@ public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
                 isDeath = false;
             }
         });
+
+        speed = mainCharacter.GetComponent<TestYasuo>().ChampionModel.MoveSpeed.Value;
+
         MessageBroker.Default.Receive<IInvertionPositionPlayerJoystic>().Subscribe(mes =>
         {
             transform.position = mes.player.position;
@@ -150,7 +153,7 @@ public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
 
             transform.localRotation = Quaternion.Euler(0, rot.eulerAngles.y, 0);
 
-            transform.Translate(moveVector * speed * Time.deltaTime, Space.World);
+            transform.Translate(moveVector.normalized * speed * Time.deltaTime, Space.World);
 
             directionPlayer.localPosition = new Vector3(h / 2, 0.5f, v / 2);
         }

@@ -34,6 +34,8 @@ namespace Com.Beetsoft.AFE
 
         protected SyncTransformImmediately SyncTransformImmediately { get; private set; }
 
+        protected IChampionTransform ChampionTransform { get; set; }
+
         public void Initialize(IAnimationStateChecker init)
         {
             AnimationStateChecker = init;
@@ -82,6 +84,7 @@ namespace Com.Beetsoft.AFE
         protected virtual void Awake()
         {
             SyncTransformImmediately = gameObject.GetOrAddComponent<SyncTransformImmediately>();
+            ChampionTransform = GetComponent<IChampionTransform>();
         }
 
         protected virtual void Start()
