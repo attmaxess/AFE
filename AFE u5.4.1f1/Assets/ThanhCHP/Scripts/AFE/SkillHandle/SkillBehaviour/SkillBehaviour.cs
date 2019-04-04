@@ -89,11 +89,8 @@ namespace Com.Beetsoft.AFE
         protected virtual void Awake()
         {
             SyncTransformImmediately = gameObject.GetOrAddComponent<SyncTransformImmediately>();
-<<<<<<< HEAD
             EffectPool = new ObjectPoolSkillBehaviour(photonView, EffectPrefab, transform);
-=======
             ChampionTransform = GetComponent<IChampionTransform>();
->>>>>>> 1b81c274c8e908103c29369e72e4576914008a4a
         }
 
         protected virtual void Start()
