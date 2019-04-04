@@ -4069,6 +4069,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillModel: {fileID: 11400000, guid: 18234a120e0bf644083efacea99e9255, type: 2}
+  effectPrefab: {fileID: 0}
   rangeDetect: 3
   velocity: 1
   easeType: 0
@@ -4235,7 +4236,6 @@ MonoBehaviour:
   skillConfig: {fileID: 0}
   effectOnAttack: {fileID: 0}
   speedSmooth: 1
-  speedSmooth: 0.5
 --- !u!114 &114331462240772248
 MonoBehaviour:
   m_ObjectHideFlags: 1
