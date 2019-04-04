@@ -199,15 +199,11 @@ namespace Com.Beetsoft.AFE
         {
             var spell3Smb = Animator.GetBehaviour<ObservableSpell3Smb>();
             spell3Smb.OnStateEnterAsObservable()
+                .Do(_ => Animator.SetInteger(Constant.AnimationPram.QInt, 0))
                 .SelectMany(_ => InputFilterObserver.OnSpell1AsObservable())
                 .TakeUntil(Observable.Timer(TimeSpan.FromMilliseconds(Constant.Yasuo.OffsetTimeSpell3AndSpell1)))
                 .RepeatUntilDestroy(this)
-                .Do(_ => Animator.SetInteger(Constant.AnimationPram.QInt, (int)AnimationState.Spell1.Spell1_Dash))
-                .SelectMany(_ => Observable.Timer(TimeSpan.FromMilliseconds(600)))
-                .Subscribe(_ =>
-                {
-                    Animator.SetTriggerWithBool(Constant.AnimationPram.Q);
-                });
+                .Subscribe(_ => Animator.SetInteger(Constant.AnimationPram.QInt, (int) AnimationState.Spell1.Spell1_Dash));
         }
 
         #endregion

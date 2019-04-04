@@ -20,7 +20,7 @@ namespace Com.Beetsoft.AFE
         private float TimeKnockUpObject => timeKnockUpObject;
 
         private IDisposable ResetSpellAfterTimerDisposable { get; set; }
-        
+
         private ObjectPoolSkillBehaviour WindChildEffectPool { get; set; }
 
         private ObjectElementSkillBehaviour WindChildPrefabs => windChildPrefabs;
@@ -80,6 +80,7 @@ namespace Com.Beetsoft.AFE
                 });
 
             HandleSpellDash();
+            HandleSpell1Animation();
             HandleOnEnterSpell4();
 
             FeatureIndexSpell1State
@@ -120,6 +121,13 @@ namespace Com.Beetsoft.AFE
             Animator.SetInteger(Constant.AnimationPram.QInt, (int) FeatureIndexSpell1State.Value);
         }
 
+        private void HandleSpell1Animation()
+        {
+            var spell1Smb = Animator.GetBehaviour<ObservableSpell1Smb>();
+            spell1Smb.OnStateExitAsObservable()
+                .Subscribe(_ => Animator.SetInteger(Constant.AnimationPram.QInt, (int) FeatureIndexSpell1State.Value));
+        }
+
         private void HandleSpellDash()
         {
             var spell1DashSmb = Animator.GetBehaviour<ObservableSpell1DashSmb>();
@@ -152,7 +160,7 @@ namespace Com.Beetsoft.AFE
             spell4Smb.OnStateEnterAsObservable()
                 .Subscribe(_ => ResetSpell());
         }
-        
+
         [PunRPC]
         private void SpawnTwistChildRpc(Vector3 position)
         {

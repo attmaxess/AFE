@@ -4376,9 +4376,6 @@ MonoBehaviour:
   - Type: 9
     SynchronizeType: 2
     Name: Idle
-  - Type: 4
-    SynchronizeType: 2
-    Name: Idle Bool
   - Type: 3
     SynchronizeType: 2
     Name: Idle Int
