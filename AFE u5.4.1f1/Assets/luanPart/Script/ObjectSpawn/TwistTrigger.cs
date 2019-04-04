@@ -14,12 +14,8 @@ public class TwistTrigger : TriggerObject
         if (other.GetComponent<IReceiveDamageable>() != null && other.transform.GetInstanceID() != idObjecctIgnore)
         {
             other.GetComponent<IReceiveDamageable>().GetDamageReceive(dam, 0);
-            var _blowUp = other.GetComponent<BlowUpObject>();
-            if (_blowUp == null)
-            {
-                _blowUp = other.gameObject.AddComponent<BlowUpObject>();
-            }
-            _blowUp.BlowUp(TimeUp);
+            var blowUp = other.GetComponent<BlowUpObject>();
+            blowUp?.BlowUp(TimeUp);
         }
     }
 }

@@ -43,11 +43,11 @@ public class HealthBarPlayer : MonoBehaviour
     {
         float maxHealth = 0;
         ChampionConfig.Health
-            .Subscribe(_ =>
+            .Subscribe(health =>
             {
-                if (_ > maxHealth)
-                    maxHealth = _;
-                UpdateHealth(_ / maxHealth);
+                if (health > maxHealth)
+                    maxHealth = health;
+                UpdateHealth(health / maxHealth);
             });
     }
 }

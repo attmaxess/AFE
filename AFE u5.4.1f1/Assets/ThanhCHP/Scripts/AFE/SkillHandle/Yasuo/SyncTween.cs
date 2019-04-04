@@ -29,6 +29,8 @@ namespace Com.Beetsoft.AFE
         private void Start()
         {
             OnSyncPositionComplete += () => PhotonTransformView.enabled = true;
+            OnSyncPositionComplete += DoOnSyncPositionComplete;
+            
             OnSyncRotationComplete += () => PhotonTransformView.enabled = true;
             OnSyncLocalScaleComplete += () => PhotonTransformView.enabled = true;
         }
@@ -40,6 +42,7 @@ namespace Com.Beetsoft.AFE
             switch (syncMode)
             {
                 case SyncMode.Position:
+                    DoOnStartSyncPosition();
                     photonView.RPC("SyncPositionTweenRpc", RpcTarget.All, start, end, duration, easeType, loopType);
                     break;
                 case SyncMode.Rotation:
@@ -79,6 +82,27 @@ namespace Com.Beetsoft.AFE
             PhotonTransformView.enabled = false;
             ObservableTween.Tween(start, end, duration, easeType, loopType, OnSyncLocalScaleComplete)
                 .Subscribe(rate => transform.localScale = rate);
+        }
+
+        private void DoOnStartSyncPosition()
+        {
+            if (photonView.IsMine)
+                MessageBroker.Default.Publish(new IMessageBladeAttack(true, photonView.IsMine,
+                    transform));
+        }
+
+        private void DoOnSyncPositionComplete()
+        {
+            if (photonView.IsMine)
+                MessageBroker.Default.Publish(
+                    new IMessageBladeAttack(false, photonView.IsMine, transform));
+        }
+
+        private void OnDestroy()
+        {
+            OnSyncPositionComplete = null;
+            OnSyncRotationComplete = null;
+            OnSyncLocalScaleComplete = null;
         }
     }
 }

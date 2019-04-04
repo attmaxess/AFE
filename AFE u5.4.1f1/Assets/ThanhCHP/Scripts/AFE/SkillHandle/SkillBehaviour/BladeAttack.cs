@@ -41,17 +41,11 @@ namespace Com.Beetsoft.AFE
             SyncTweenRpc = gameObject.GetOrAddComponent<SyncTweenRPC>();
         }
 
-        protected override void Start()
-        {
-            if (photonView.IsMine)
-                SyncTweenRpc.OnSyncPositionComplete += DoOnDashComplete;
-        }
-
         public override void ActiveSkill(IInputMessage inputMessage)
         {
             if (IsMustDetectTarget)
             {
-                var receiver = gameObject.ReceiverDamageNearestByRayCast(inputMessage.Direction
+                var receiver = GetComponent<TestYasuo>().centerCharacter.gameObject.ReceiverDamageNearestByRayCast(inputMessage.Direction
                     , SkillConfig.Range.Value, LayerMaskTarget);
                 if (receiver == null)
                 {
@@ -59,7 +53,7 @@ namespace Com.Beetsoft.AFE
                     return;
                 }
 
-                ActiveSkillSubject.OnNext(new[] {receiver});
+                ActiveSkillSubject.OnNext(new[] { receiver });
 
                 Observable.Timer(TimeSpan.FromMilliseconds(timeDelayTakeDam))
                     .Subscribe(_ =>
@@ -79,25 +73,9 @@ namespace Com.Beetsoft.AFE
         private void Dash(Vector3 direction)
         {
             SyncTransformImmediately.SyncRotationWithDirection(direction);
-            if (photonView.IsMine)
-                MessageBroker.Default.Publish(new IMessageBladeAttack(true, photonView.IsMine,
-                    transform));
             var position = transform.position;
             var posTarget = position + direction * SkillConfig.Range.Value;
             SyncTweenRpc.SyncVectorTween(SyncTweenRPC.SyncMode.Position, position, posTarget, timeMove, EaseType);
-        }
-
-        private void DoOnDashComplete()
-        {
-            if (photonView.IsMine)
-                MessageBroker.Default.Publish(
-                    new IMessageBladeAttack(false, photonView.IsMine, transform));
-        }
-
-        private void OnDestroy()
-        {
-            if (photonView.IsMine)
-                SyncTweenRpc.OnSyncPositionComplete -= DoOnDashComplete;
         }
     }
 }

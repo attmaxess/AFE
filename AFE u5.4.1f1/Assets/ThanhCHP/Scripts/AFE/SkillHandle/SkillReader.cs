@@ -41,6 +41,12 @@ namespace Com.Beetsoft.AFE
             SkillBehaviourCurrent.Value = SkillBehaviours[SkillIndex];
         }
 
+        public void SendNext(int index)
+        {
+            SkillIndex = index;
+            SkillBehaviourCurrent.Value = SkillBehaviours[SkillIndex];
+        }
+
         public void SendNextLastIndex()
         {
             SkillIndex = SkillBehaviours.Length - 1;

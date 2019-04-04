@@ -22,6 +22,11 @@ namespace Com.Beetsoft.AFE
         Transform IReceiveDamageable.GetTransform => transform;
         int IReceiveDamageable.ViewID => photonView.ViewID;
 
+        float IReceiveDamageable.GetHealth()
+        {
+            return ChampionConfig?.Health.Value ?? 999999;
+        }
+
         void IReceiveDamageable.TakeDamage(IDamageMessage message)
         {
             DamageMessageSubject.OnNext(message);
@@ -47,7 +52,7 @@ namespace Com.Beetsoft.AFE
         {
             if (ChampionConfig == null)
             {
-                Debug.LogError("Set ChampionConfig");
+                Debug.LogWarning("Set ChampionConfig");
                 return;
             }
 

@@ -1,6 +1,8 @@
 ﻿using System;
+using Photon.Pun;
 using UniRx;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Com.Beetsoft.AFE
 {
@@ -14,7 +16,7 @@ namespace Com.Beetsoft.AFE
         ReactiveProperty<bool> IsCrowdControl { get; }
     }
 
-    public class BlowUpObject : MonoBehaviour,
+    public class BlowUpObject : MonoBehaviourPun,
         ICrowdControl,
         IKnockUpable
     {
@@ -40,8 +42,15 @@ namespace Com.Beetsoft.AFE
 
         public void BlowUp(float timeUp)
         {
+            photonView.RPC("BlowUpRpc", RpcTarget.All, timeUp);
+        }
+
+        [PunRPC]
+        private void BlowUpRpc(float timeUp)
+        {
             IsCrowdControl.Value = true;
-            DoBlowUp(timeUp, () => DoBlowDown(Constant.KnockDown, () => IsCrowdControl.Value = false));
+            DoBlowUp(timeUp, () => DoBlowDown(Constant.KnockDown, DoOnBlowDownComplete));
+            SendMessageBlowUp();
         }
 
         private void DoBlowUp(float time, Action onComplete = null)
@@ -49,6 +58,7 @@ namespace Com.Beetsoft.AFE
             TweenDisposable?.Dispose();
             var position = transform.position;
             TweenDisposable = Blow(position.y, MaxYAxis, time, EaseType, onComplete);
+            RandomRotate();
         }
 
         private void DoBlowDown(float time, Action onComplete = null)
@@ -69,6 +79,34 @@ namespace Com.Beetsoft.AFE
                     temp.y = posY;
                     transform.position = temp;
                 });
+        }
+
+        private void SendMessageBlowUp()
+        {
+            AsyncMessageBroker.Default.PublishAsync(new BlockUpArgs(GetComponent<IReceiveDamageable>()))
+                .Subscribe(_ => { Debug.Log("Send message blow up success"); });
+        }
+
+        private void SendMessageBlowDown()
+        {
+            AsyncMessageBroker.Default.PublishAsync(new BlockDownArgs(GetComponent<IReceiveDamageable>()))
+                .Subscribe(_ => { Debug.Log("Send message blow down success"); });
+        }
+
+        private void DoOnBlowDownComplete()
+        {
+            IsCrowdControl.Value = false;
+            SendMessageBlowDown();
+        }
+
+        private void RandomRotate()
+        {
+            var championTransform = GetComponent<IChampionTransform>();
+            if (championTransform != null)
+            {
+                var vectorRandom = Quaternion.Euler(0, Random.Range(0, 360), 0);
+                transform.forward = vectorRandom * Vector3.forward;
+            }
         }
     }
 }

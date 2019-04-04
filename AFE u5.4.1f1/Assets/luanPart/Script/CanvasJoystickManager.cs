@@ -13,6 +13,11 @@ public class CanvasJoystickManager : MonoBehaviour
         {
             if (instance == null)
             {
+                instance = FindObjectOfType<CanvasJoystickManager>();
+            }
+
+            if (instance == null)
+            {
                 Debug.LogError("Dont Have Instance of Canvas Joystick Manager");
             }
             return instance;
@@ -24,11 +29,15 @@ public class CanvasJoystickManager : MonoBehaviour
         }
     }
 
+    [Header("Canvas")]
+    public bool ActiveAfterAwake = false;
+    public Transform canvas = null;
+
     private void Awake()
     {
         Singleton = this;
+        if (!ActiveAfterAwake) canvas.gameObject.SetActive(false);
     }
-
 
     private void Destroy()
     {

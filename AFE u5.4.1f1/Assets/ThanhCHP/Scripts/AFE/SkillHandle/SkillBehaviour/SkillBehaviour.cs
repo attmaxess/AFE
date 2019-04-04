@@ -11,7 +11,7 @@ namespace Com.Beetsoft.AFE
         void ActiveSkill(IInputMessage inputMessage);
         IObservable<IEnumerable<IReceiveDamageable>> OnActiveSkillAsObservable();
         ISkillOutputMessage GetSkillOutputMessage();
-        ISkillOutputMessage GetSkillOutputMessageInit();
+        ISkillOutputMessage GetSkillOutputMessageInit(float timeInit);
     }
 
     public abstract class SkillBehaviour : MonoBehaviourPun,
@@ -59,14 +59,24 @@ namespace Com.Beetsoft.AFE
             return new SkillOutputMessage(SkillConfig.IconCurrent, GetCooldown());
         }
 
-        public ISkillOutputMessage GetSkillOutputMessageInit()
+        public ISkillOutputMessage GetSkillOutputMessageInit(float timeInit)
         {
-            return new SkillOutputMessage(SkillConfig.IconCurrent, 0.5f);
+            return new SkillOutputMessage(SkillConfig.IconCurrent, timeInit);
         }
 
         protected float GetCooldown()
         {
             return SkillConfig.Cooldown.Value - SkillConfig.Cooldown.Value * ChampionConfig.CooldownSkillBonus.Value;
+        }
+
+        protected float GetPhysicDamage()
+        {
+            return SkillConfig.PhysicDamage.Value + ChampionConfig.AttackDamage.Value * SkillConfig.PhysicDamageBonus;
+        }
+
+        protected float GetMagicDamage()
+        {
+            return SkillConfig.MagicDamage.Value + ChampionConfig.AbilityPower.Value * SkillConfig.MagicDamageBonus;
         }
 
         protected virtual void Awake()
@@ -76,6 +86,11 @@ namespace Com.Beetsoft.AFE
 
         protected virtual void Start()
         {
+        }
+
+        protected IDamageMessage CreateDamageMessage()
+        {
+            return new DamageMessage(GetPhysicDamage(), GetMagicDamage());
         }
     }
 }

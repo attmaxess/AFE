@@ -7261,6 +7261,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a98b3edd66af7640b6ca41196673752, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ActiveAfterAwake: 0
+  canvas: {fileID: 224722092546683478}
   barPlayer: {fileID: 224270925583815166}
 --- !u!114 &114954368113512734
 MonoBehaviour:

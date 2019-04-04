@@ -10,17 +10,10 @@ namespace Com.Beetsoft.AFE
         Vector3 Forward { get; set; }
     }
 
-    public class PlayerRunHandler : MonoBehaviourPun,
-        IInitialize<IChampionConfig>,
-        IInitialize<IJoystickInputFilterObserver>,
+    public class PlayerRunHandler : SkillHandler,
         IChampionTransform
     {
         [SerializeField] private float speedSmooth = 1;
-        private IJoystickInputFilterObserver JoystickInputFilterObserver { get; set; }
-
-        private IChampionConfig ChampionConfig { get; set; }
-
-        private Animator Animator { get; set; }
 
         public float SpeedSmooth => speedSmooth;
 
@@ -32,25 +25,10 @@ namespace Com.Beetsoft.AFE
             set { RotateTarget = value; }
         }
 
-        void IInitialize<IChampionConfig>.Initialize(IChampionConfig init)
-        {
-            ChampionConfig = init;
-        }
-
-        void IInitialize<IJoystickInputFilterObserver>.Initialize(IJoystickInputFilterObserver init)
-        {
-            JoystickInputFilterObserver = init;
-        }
-
-        private void Awake()
-        {
-            Animator = GetComponent<Animator>();
-        }
-
         // Use this for initialization
         private void Start()
         {
-            JoystickInputFilterObserver.OnRunAsObservable()
+            JoystickInputFilterObserver?.OnRunAsObservable()
                 .Select(message => message.Direction)
                 .DistinctUntilChanged()
                 .Subscribe(direction =>
@@ -58,19 +36,32 @@ namespace Com.Beetsoft.AFE
                     transform.position = direction; //* ChampionConfig.MoveSpeed.Value;
                 });
 
-            JoystickInputFilterObserver.OnRunAsObservable()
+            JoystickInputFilterObserver?.OnRunAsObservable()
                 .Select(message => message.Rotation)
                 .Where(rotation => rotation != Vector3.zero)
                 .Subscribe(rotation => RotateTarget = rotation);
 
             Observable.EveryUpdate()
                 .Where(_ => RotateTarget != Vector3.zero)
-                .Subscribe(x => { transform.forward = Vector3.Lerp(transform.forward, RotateTarget, SpeedSmooth); });
+                .Subscribe(x =>
+                {
+                    transform.forward = Vector3.Lerp(transform.forward, RotateTarget, SpeedSmooth);
+                    if (transform.forward == RotateTarget)
+                        RotateTarget = Vector3.zero;
+                });
 
-            JoystickInputFilterObserver.OnRunAsObservable()
+            JoystickInputFilterObserver?.OnRunAsObservable()
                 .Select(message => IsRun(message.Rotation))
                 .DistinctUntilChanged()
                 .Subscribe(HandleAnimationRun);
+        }
+
+        protected override bool IsCanUse()
+        {
+            return !AnimationStateChecker.IsInStateSpell1.Value
+                   && !AnimationStateChecker.IsInStateSpell2.Value
+                   && !AnimationStateChecker.IsInStateSpell3.Value
+                   && !AnimationStateChecker.IsInStateSpell4.Value;
         }
 
         private void HandleAnimationRun(bool isRun)

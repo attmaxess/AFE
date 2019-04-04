@@ -1,4 +1,5 @@
 using System;
+using ExtraLinq;
 using Photon.Pun;
 using UniRx;
 using UnityEngine;
@@ -11,9 +12,9 @@ namespace Com.Beetsoft.AFE
         IInitialize<IAnimationStateChecker>,
         IInitialize<IChampionConfig>
     {
-        [SerializeField] private SkillModel skillConfig;
         [SerializeField] private SkillBehaviour skillBehaviourPassive;
         [SerializeField] private SkillBehaviour[] skillBehaviours;
+        [SerializeField] private SkillModel skillConfig;
 
         private ISkillBehaviour[] SkillBehaviours => skillBehaviours;
 
@@ -91,14 +92,14 @@ namespace Com.Beetsoft.AFE
         protected virtual void Awake()
         {
             Animator = GetComponent<Animator>();
-            SkillReader = new SkillReader(SkillBehaviours, 0);
+            SkillReader = !SkillBehaviours.IsNullOrEmpty() ? new SkillReader(SkillBehaviours, 0) : new SkillReader();
             SyncTransformImmediately = gameObject.GetOrAddComponent<SyncTransformImmediately>();
             ChampionTransform = GetComponent<IChampionTransform>();
         }
 
         protected virtual void Start()
         {
-            InitValue();
+            InitValue(0.5f);
         }
 
         protected virtual void ActiveSkillCurrent(IInputMessage message, int millisecondDelay)
@@ -108,15 +109,17 @@ namespace Com.Beetsoft.AFE
                 .Subscribe(_ => skillBehaviour.ActiveSkill(message));
         }
 
-        private void InitValue()
+        protected void InitValue(float timeInit)
         {
             SkillMessageOutputReactiveProperty.Value =
-                SkillReader.GetSkillBehaviourCurrent().GetSkillOutputMessageInit();
+                SkillReader.GetSkillBehaviourCurrent().GetSkillOutputMessageInit(timeInit);
         }
 
         protected void SendOutput()
         {
             SkillMessageOutputReactiveProperty.Value = SkillReader.GetSkillBehaviourCurrent().GetSkillOutputMessage();
         }
+
+        protected abstract bool IsCanUse();
     }
 }

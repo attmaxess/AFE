@@ -1,29 +1,32 @@
-using System;
 using Photon.Pun;
 using UnityEngine;
 
 namespace Com.Beetsoft.AFE
 {
-    public abstract class ObjectElementSkillBehaviour : MonoBehaviour
+    public abstract class ObjectElementSkillBehaviour : MonoBehaviour, ITriggerObject
     {
-        protected TriggerObject trigger;
         protected IMovable movable;
+
+        public PhotonView PhotonView { protected get; set; }
+        public ObjectPoolSkillBehaviour ObjectPool { protected get; set; }
+
+        protected int IdIgnore { get; private set; }
+
+        public void SetIdIgnore(int id)
+        {
+            IdIgnore = id;
+        }
 
         private void Awake()
         {
-            trigger = GetComponent<TriggerObject>();
             movable = GetComponent<IMovable>();
         }
-        public PhotonView PhotonView { get; set; }
-        public ObjectPoolSkillBehaviour ObjectPool { get; set; }
 
         public void ReturnPool()
         {
             ObjectPool.Return(this);
         }
 
-        internal abstract void OnSpawn(Vector3 startPos, Vector3 direction);
-
-        internal abstract void SetIdIgnore(int value);
+        internal abstract void OnSpawn(Vector3 startPos, Vector3 direction, IDamageMessage damageMessage);
     }
 }

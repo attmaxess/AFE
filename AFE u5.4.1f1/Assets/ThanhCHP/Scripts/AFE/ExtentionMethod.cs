@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Com.Beetsoft.AFE
 {
-    public static class ExtentionMethod
+    public static class ExtensionMethod
     {
         public static IEnumerable<IReceiveDamageable> GetSphereReceiveDamageable(this GameObject go, float radius,
             int layerMask = Physics.AllLayers,
@@ -53,7 +53,7 @@ namespace Com.Beetsoft.AFE
         {
             IReceiveDamageable receiveDamageable = null;
             RaycastHit hit;
-            Debug.DrawRay(go.transform.position, direction * distance, Color.red, 1);
+            Debug.DrawRay(go.transform.position , direction * distance, Color.red, 1);
             if (layerMask == default(LayerMask)) layerMask = ~0;
 
             if (Physics.Raycast(go.transform.position, direction, out hit, distance, layerMask,
@@ -109,6 +109,15 @@ namespace Com.Beetsoft.AFE
             }
 
             return receiveDamageable;
+        }
+
+        public static IReceiveDamageable GetReceiveDamageableHealthLowest(this GameObject go, float radius,
+            int layerMask = Physics.AllLayers,
+            QueryTriggerInteraction queryTriggerInteraction = QueryTriggerInteraction.UseGlobal)
+        {
+            return GetSphereReceiveDamageable(go, radius, layerMask, queryTriggerInteraction)
+                .OrderBy(x => x.GetHealth())
+                .FirstOrDefault();
         }
 
         public static T GetOrAddComponent<T>(this GameObject gameObject) where T : Component

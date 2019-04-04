@@ -12,13 +12,12 @@ namespace Com.Beetsoft.AFE
         public override void ActiveSkill(IInputMessage inputMessage)
         {
             var receivers =
-                gameObject.GetAllReceiverDamageNearestByRayCastAll(inputMessage.Direction, SkillConfig.Range.Value,
+                GetComponent<TestYasuo>().centerCharacter.gameObject.GetAllReceiverDamageNearestByRayCastAll(inputMessage.Direction, SkillConfig.Range.Value,
                     LayerMaskTarget);
             ActiveSkillSubject.OnNext(receivers);
-            
+
             if (receivers.IsNullOrEmpty()) return;
-            var damageMessage = new DamageMessage(SkillConfig.PhysicDamage.Value, SkillConfig.MagicDamage.Value);
-            receivers.ForEach(x => x.TakeDamage(damageMessage));
+            receivers.ForEach(x => x.TakeDamage(CreateDamageMessage()));
         }
     }
 }

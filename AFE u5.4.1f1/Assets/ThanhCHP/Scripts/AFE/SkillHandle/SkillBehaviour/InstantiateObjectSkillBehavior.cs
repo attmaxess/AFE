@@ -10,7 +10,7 @@ namespace Com.Beetsoft.AFE
 
         private ObjectElementSkillBehaviour ObjectPrefab => objectPrefab;
 
-        private ObjectPoolSkillBehaviour ObjectPool { get; set; }
+        protected ObjectPoolSkillBehaviour ObjectPool { get; set; }
 
         private void Awake()
         {
@@ -24,20 +24,27 @@ namespace Com.Beetsoft.AFE
 
         public override void ActiveSkill(IInputMessage inputMessage)
         {
-            ActiveSkillSubject.OnNext(new[] { inputMessage.ObjectReceive });
             if (inputMessage.ObjectReceive != null)
+            {
+                ActiveSkillSubject.OnNext(new[] { inputMessage.ObjectReceive });
                 photonView.RPC("ActiveSkillRPC", RpcTarget.All, inputMessage.Direction,
                     inputMessage.ObjectReceive.ViewID);
+            }
             else
+            {
+                ActiveSkillSubject.OnNext(null);
                 photonView.RPC("ActiveSkillRPC", RpcTarget.All, inputMessage.Direction);
+            }
         }
 
         [PunRPC]
         protected virtual void ActiveSkillRPC(Vector3 direction, int viewIdTarget)
         {
+            Debug.Log("ActiveSkillRPC");
             ObjectPool.RentAsync().Subscribe(twist =>
             {
-                twist.OnSpawn(transform.position + direction, direction);
+                Vector3 target = transform.position + direction * SkillConfig.Range.Value;
+                twist.OnSpawn(transform.position + direction, target, CreateDamageMessage());
                 twist.SetIdIgnore(transform.GetInstanceID());
             });
         }
@@ -45,9 +52,11 @@ namespace Com.Beetsoft.AFE
         [PunRPC]
         protected virtual void ActiveSkillRPC(Vector3 direction)
         {
+            Debug.Log("ActiveSkillRPC");
             ObjectPool.RentAsync().Subscribe(twist =>
             {
-                twist.OnSpawn(transform.position + direction, direction);
+                Vector3 target = transform.position + direction * SkillConfig.Range.Value;
+                twist.OnSpawn(transform.position, target, CreateDamageMessage());
                 twist.SetIdIgnore(transform.GetInstanceID());
             });
         }

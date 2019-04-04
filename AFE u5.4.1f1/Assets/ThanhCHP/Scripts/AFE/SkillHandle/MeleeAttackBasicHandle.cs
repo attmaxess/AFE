@@ -12,5 +12,13 @@ namespace Com.Beetsoft.AFE
             var newMessage = new InputMessage(message.ObjectReceive, GetPhysicDamageCurrent(), GetMagicDamageCurrent(), message.Direction);
             message.ObjectReceive.TakeDamage(this.CreateDamageMessage(newMessage));
         }
+
+        protected override bool IsCanUse()
+        {
+            return !AnimationStateChecker.IsInStateSpell1.Value
+                   && !AnimationStateChecker.IsInStateSpell2.Value
+                   && !AnimationStateChecker.IsInStateSpell3.Value
+                   && !AnimationStateChecker.IsInStateSpell4.Value;
+        }
     }
 }
