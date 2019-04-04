@@ -36,6 +36,11 @@ namespace Com.Beetsoft.AFE
             Direction = direction;
         }
 
+        public InputMessage(IReceiveDamageable objectReceive)
+        {
+            ObjectReceive = objectReceive;
+        }
+
         public InputMessage()
         {
 

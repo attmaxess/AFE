@@ -111,6 +111,15 @@ namespace Com.Beetsoft.AFE
             return receiveDamageable;
         }
 
+        public static IReceiveDamageable GetReceiveDamageableHealthLowest(this GameObject go, float radius,
+            int layerMask = Physics.AllLayers,
+            QueryTriggerInteraction queryTriggerInteraction = QueryTriggerInteraction.UseGlobal)
+        {
+            return GetSphereReceiveDamageable(go, radius, layerMask, queryTriggerInteraction)
+                .OrderBy(x => x.GetHealth())
+                .FirstOrDefault();
+        }
+
         public static T GetOrAddComponent<T>(this GameObject gameObject) where T : Component
         {
             var component = gameObject.GetComponent<T>();

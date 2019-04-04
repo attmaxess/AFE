@@ -65,6 +65,7 @@ namespace Com.Beetsoft.AFE
                 });
 
             HandleSpellDash();
+            HandleOnEnterSpell4();
 
             FeatureIndexSpell1State
                 .Where(x => x == AnimationState.Spell1.Spell1A)
@@ -75,7 +76,7 @@ namespace Com.Beetsoft.AFE
                 .Subscribe(_ =>
                 {
                     SkillReader.SendNext(1);
-                    ResetSpellAfterTimer(6f);
+                    ResetSpellAfterTimer(8f);
                 });
 
             FeatureIndexSpell1State
@@ -128,6 +129,13 @@ namespace Com.Beetsoft.AFE
         {
             FeatureIndexSpell1State.Value = AnimationState.Spell1.Spell1A;
             InitValue(0);
+        }
+
+        private void HandleOnEnterSpell4()
+        {
+            var spell4Smb = Animator.GetBehaviour<ObservableSpell4Smb>();
+            spell4Smb.OnStateEnterAsObservable()
+                .Subscribe(_ => ResetSpell());
         }
     }
 }
