@@ -12,6 +12,7 @@ namespace Com.Beetsoft.AFE
     public class YasuoSpell1Handler : SkillHandler, ISkillSpell_1
     {
         [SerializeField] private float timeKnockUpObject = 0.7f;
+        [SerializeField] private ObjectElementSkillBehaviour windChildPrefabs;
 
         private ReactiveProperty<AnimationState.Spell1> FeatureIndexSpell1State { get; } =
             new ReactiveProperty<AnimationState.Spell1>(AnimationState.Spell1.Spell1A);
@@ -19,6 +20,16 @@ namespace Com.Beetsoft.AFE
         private float TimeKnockUpObject => timeKnockUpObject;
 
         private IDisposable ResetSpellAfterTimerDisposable { get; set; }
+        
+        private ObjectPoolSkillBehaviour WindChildEffectPool { get; set; }
+
+        private ObjectElementSkillBehaviour WindChildPrefabs => windChildPrefabs;
+
+        protected override void Awake()
+        {
+            base.Awake();
+            WindChildEffectPool = new ObjectPoolSkillBehaviour(photonView, WindChildPrefabs, transform);
+        }
 
         protected override void Start()
         {
@@ -51,12 +62,14 @@ namespace Com.Beetsoft.AFE
                 .Subscribe(receiveDamageables =>
                 {
                     if (FeatureIndexSpell1State.Value == AnimationState.Spell1.Spell1C)
+                    {
                         receiveDamageables.ToList().ForEach(x =>
                         {
                             var knockObj = x.GetComponent<IKnockUpable>();
                             knockObj?.BlowUp(TimeKnockUpObject);
-                            photonView.RPC("SpawnEffectSpellDashRpc", RpcTarget.All, x.GetTransform.position);
+                            photonView.RPC("SpawnTwistChildRpc", RpcTarget.All, x.GetTransform.position);
                         });
+                    }
 
                     if (FeatureIndexSpell1State.Value == AnimationState.Spell1.Spell1C)
                         FeatureIndexSpell1State.Value = AnimationState.Spell1.Spell1A;
@@ -139,11 +152,11 @@ namespace Com.Beetsoft.AFE
             spell4Smb.OnStateEnterAsObservable()
                 .Subscribe(_ => ResetSpell());
         }
-
+        
         [PunRPC]
-        private void SpawnEffectSpellDashRpc(Vector3 position)
+        private void SpawnTwistChildRpc(Vector3 position)
         {
-            ObjectPoolEffectOnAttack.RentAsync().Subscribe(x => x.transform.position = position);
+            WindChildEffectPool.RentAsync().Subscribe(x => { x.transform.position = position; });
         }
     }
 }

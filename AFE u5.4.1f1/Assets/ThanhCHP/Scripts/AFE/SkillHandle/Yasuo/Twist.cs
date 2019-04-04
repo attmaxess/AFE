@@ -15,16 +15,6 @@ namespace Com.Beetsoft.AFE
 
         private IDamageMessage DamageMessageCurrent { get; set; }
 
-        private ObjectPoolSkillBehaviour EffectPool { get; set; }
-
-        private ObjectElementSkillBehaviour EffectPoolPrefabs => effectPoolPrefabs;
-
-        protected override void Awake()
-        {
-            base.Awake();
-            EffectPool = new ObjectPoolSkillBehaviour(PhotonView, EffectPoolPrefabs, transform);
-        }
-
         private void Start()
         {
             if (!PhotonView.IsMine) return;
@@ -37,6 +27,7 @@ namespace Com.Beetsoft.AFE
                     k?.BlowUp(KnockUpTime);
                     var receiver = other.GetComponent<IReceiveDamageable>();
                     receiver?.TakeDamage(DamageMessageCurrent);
+                    //call to YasuoSpell1Handle
                     PhotonView.RPC("SpawnTwistChildRpc", RpcTarget.All, other.transform.position);
                 });
         }
@@ -51,10 +42,5 @@ namespace Com.Beetsoft.AFE
             DamageMessageCurrent = damageMessage;
         }
 
-        [PunRPC]
-        private void SpawnTwistChildRpc(Vector3 position)
-        {
-            EffectPool.RentAsync().Subscribe(x => { x.transform.position = position; });
-        }
     }
 }
