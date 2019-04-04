@@ -192,21 +192,21 @@ namespace Com.Beetsoft.AFE
                 .Subscribe(_ =>
                 {
                     IsInStateSpell1.Value = false;
-                    Animator.SetBool(Constant.AnimationPram.IdleBool, true);
                 });
         }
 
         private void HandleSpell1Dash()
         {
             var spell3Smb = Animator.GetBehaviour<ObservableSpell3Smb>();
-            spell3Smb.OnStateMachineEnterAsObservable()
+            spell3Smb.OnStateEnterAsObservable()
                 .SelectMany(_ => InputFilterObserver.OnSpell1AsObservable())
-                .TakeUntil(Observable.Timer(TimeSpan.FromSeconds(Constant.Yasuo.OffsetTimeSpell3AndSpell1)))
+                .TakeUntil(Observable.Timer(TimeSpan.FromMilliseconds(Constant.Yasuo.OffsetTimeSpell3AndSpell1)))
                 .RepeatUntilDestroy(this)
+                .Do(_ => Animator.SetInteger(Constant.AnimationPram.QInt, (int)AnimationState.Spell1.Spell1_Dash))
+                .SelectMany(_ => Observable.Timer(TimeSpan.FromMilliseconds(600)))
                 .Subscribe(_ =>
                 {
-                    Animator.SetInteger(Constant.AnimationPram.QInt, (int)AnimationState.Spell1.Spell1_Dash);
-                    Animator.SetBool(Constant.AnimationPram.IdleBool, false);
+                    Animator.SetTriggerWithBool(Constant.AnimationPram.Q);
                 });
         }
 
