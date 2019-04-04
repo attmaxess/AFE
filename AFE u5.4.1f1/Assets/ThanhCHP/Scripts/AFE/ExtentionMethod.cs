@@ -53,7 +53,7 @@ namespace Com.Beetsoft.AFE
         {
             IReceiveDamageable receiveDamageable = null;
             RaycastHit hit;
-            Debug.DrawRay(go.transform.position , direction * distance, Color.red, 1);
+            Debug.DrawRay(go.transform.position, direction * distance, Color.red, 1);
             if (layerMask == default(LayerMask)) layerMask = ~0;
 
             if (Physics.Raycast(go.transform.position, direction, out hit, distance, layerMask,

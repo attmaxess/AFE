@@ -478,6 +478,7 @@ GameObject:
   - component: {fileID: 114773152827730594}
   - component: {fileID: 114315601636423302}
   - component: {fileID: 114337711945045802}
+  - component: {fileID: 114005939000452412}
   - component: {fileID: 114250188246287544}
   - component: {fileID: 114603826160903828}
   - component: {fileID: 114303200557662960}
@@ -4056,6 +4057,24 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114005939000452412
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1174075871233712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e15e2e6abb4c50b4a9c37eef494df801, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillModel: {fileID: 11400000, guid: 18234a120e0bf644083efacea99e9255, type: 2}
+  rangeDetect: 3
+  velocity: 1
+  easeType: 0
+  millisecondsDelayApplyDamage: 250
+  direction: {x: 0, y: 0, z: 0}
+  posTarget: {x: 0, y: 0, z: 0}
 --- !u!114 &114092411545148480
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4216,6 +4235,7 @@ MonoBehaviour:
   skillConfig: {fileID: 0}
   effectOnAttack: {fileID: 0}
   speedSmooth: 1
+  speedSmooth: 0.5
 --- !u!114 &114331462240772248
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4264,7 +4284,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillBehaviourPassive: {fileID: 0}
   skillBehaviours:
-  - {fileID: 114306969928528286}
+  - {fileID: 114005939000452412}
   skillConfig: {fileID: 11400000, guid: 18234a120e0bf644083efacea99e9255, type: 2}
   effectOnAttack: {fileID: 0}
   maxHit: 4

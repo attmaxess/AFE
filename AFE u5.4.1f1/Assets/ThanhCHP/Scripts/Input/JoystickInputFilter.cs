@@ -30,7 +30,7 @@ namespace Com.Beetsoft.AFE
 
         public void Run(IRunMessage message)
         {
-            RunSubject.OnNext(message);
+            RunSubject.OnNext(message);                                
         }
 
         public void Idle(IRunMessage message)
@@ -40,13 +40,13 @@ namespace Com.Beetsoft.AFE
 
         public void BasicAttack(IInputMessage message)
         {
-            var ireceiver = gameObject.ReceiverDamageNearest(ChampionConfig.Range.Value);
+            /* var ireceiver = gameObject.ReceiverDamageNearest(ChampionConfig.Range.Value);
 
-            var mes = new InputMessage(ireceiver,
-                ChampionConfig.AttackDamage.Value,
-                ChampionConfig.AttackDamagePerLevel,
-                message.Direction);
-            BasicAttackSubject.OnNext(mes);
+             var mes = new InputMessage(ireceiver,
+                 ChampionConfig.AttackDamage.Value,
+                 ChampionConfig.AttackDamagePerLevel,
+                 message.Direction);   */
+            BasicAttackSubject.OnNext(message);
         }
 
         public void Spell1(IInputMessage message)

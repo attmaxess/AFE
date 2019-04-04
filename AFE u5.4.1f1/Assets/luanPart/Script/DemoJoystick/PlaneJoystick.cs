@@ -100,18 +100,16 @@ public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
                 isDeath = false;
             }
         });
-        MessageBroker.Default.Receive<IMessageBladeAttack>().Subscribe(mes =>
+
+        speed = mainCharacter.GetComponent<TestYasuo>().ChampionModel.MoveSpeed.Value;
+
+        MessageBroker.Default.Receive<IInvertionPositionPlayerJoystic>().Subscribe(mes =>
         {
             transform.position = mes.player.position;
             IsUpdateWhenSkill = mes.isUsing;
         });
 
         yield break;
-    }
-
-    private void Singleton_Attack()
-    {
-        joystickCharacter.BasicAttack(new InputMessage());
     }
 
 
@@ -136,7 +134,7 @@ public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
         if (CF2Input.GetButtonDown("Attack"))
         {
             Debug.Log("Attack");
-            Singleton_Attack();
+            joystickCharacter.BasicAttack(new InputMessage());
         }
 
 
@@ -155,7 +153,7 @@ public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
 
             transform.localRotation = Quaternion.Euler(0, rot.eulerAngles.y, 0);
 
-            transform.Translate(moveVector * speed * Time.deltaTime, Space.World);
+            transform.Translate(moveVector.normalized * speed * Time.deltaTime, Space.World);
 
             directionPlayer.localPosition = new Vector3(h / 2, 0.5f, v / 2);
         }
@@ -214,42 +212,13 @@ public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
 
         if (joystickCharacter != null)
         {
-            //            if (moveVector == Vector3.zero)
-            //                joystickCharacter.Idle(new RunMessage(transform.position, Vector3.zero));
-            //            else
             joystickCharacter.Run(new RunMessage(transform.position, moveVector));
-
         }
         else
         {
             joystickCharacter = mainCharacter?.GetComponent<IJoystickInputFilter>();
             if (joystickCharacter == null)
                 Debug.Log("Dont Find Any Gameobject Have joystickCharacter");
-
-            /* var mObjs = GameObject.FindObjectsOfType<MonoBehaviour>();
-             IJoystickInputFilter[] interfaceScripts = (from a in mObjs where a.GetType().GetInterfaces().Any(k => k == typeof(IJoystickInputFilter)) select (IJoystickInputFilter)a).ToArray();
-             if (interfaceScripts.Length > 0)
-             {
-                 for (int i = 0; i < interfaceScripts.Length; i++)
-                 {
-                     var mono = interfaceScripts[i] as MonoBehaviour;
-                     if (mono != null && mono.GetComponent<PhotonView>().IsMine)
-                     {
-                         joystickCharacter = interfaceScripts[i];
-                         speed = mono.GetComponent<TestYasuo>().ChampionModel.MoveSpeed.Value;
-                         break;
-                     }
-                 }
-                 if (joystickCharacter == null)
-                 {
-                     Debug.Log("Dont Have Local joystickCharacter");
-                 }
-             }
-             else
-             {
-                 Debug.Log("Dont Find Any Gameobject Have joystickCharacter");
-             }      */
-
         }
 
         if (crowdControl == null)

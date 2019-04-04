@@ -1,5 +1,7 @@
 using System;
+using System.Linq;
 using AFE.Extensions;
+using ExtraLinq;
 using UniRx;
 using UnityEngine;
 using AnimationState = Com.Beetsoft.AFE.Enumerables.AnimationState;
@@ -23,14 +25,46 @@ namespace Com.Beetsoft.AFE
             var applySkillTimer =
                 Observable.Timer(TimeSpan.FromMilliseconds(MillisecondsDelayApplyDamage));
 
-            JoystickInputFilterObserver.OnBasicAttackAsObservable()
-                .Where(_ => IsCanUse())
-                .ThrottleFirst(TimeSpan.FromSeconds(GetTimeInterval()))
-                .Do(_ => WillEnterStateAttack())
-                .SelectMany(message =>
-                    applySkillTimer.Select(_ => message))
-                .Do(_ => WillExitStateAttack())
-                .Subscribe(ApplyDamage);
+              /*JoystickInputFilterObserver.OnBasicAttackAsObservable()
+                  .Where(_ => IsCanUse())
+                  .ThrottleFirst(TimeSpan.FromSeconds(GetTimeInterval()))
+                  .Do(_ => WillEnterStateAttack())
+                  .SelectMany(message => applySkillTimer.Select(_ => message))
+                  .Do(_ => WillExitStateAttack())
+                  .Subscribe(ApplyDamage);  */
+
+
+            JoystickInputFilterObserver.OnBasicAttackAsObservable().Where(_ => IsCanUse()).
+            Subscribe(message =>
+            {
+                var skillBehavior = SkillReader.GetSkillBehaviourCurrent();
+                skillBehavior.ActiveSkill(message);
+            });
+
+            foreach (var onActiveSkill in SkillReader.SkillBehaviours.Distinct()
+              .Select(x => x.OnActiveSkillAsObservable()))
+                onActiveSkill.Subscribe(receiveDamageables =>
+                {
+                    Debug.Log(receiveDamageables.IsNullOrEmpty());
+                    if (receiveDamageables.IsNullOrEmpty())
+                    {
+                        WillEnterStateAttack();
+                        return;
+                    }
+
+                    if (receiveDamageables.Count() > 1)
+                    {
+                        HandleAnimationRun(true);
+                        var direction = (receiveDamageables.First().GetTransform.position - transform.position).normalized;
+                        ChampionTransform.Forward = direction;
+                    }
+                    else if (receiveDamageables.Count() == 1)
+                    {
+                        HandleAnimationRun(false);
+                        WillEnterStateAttack();
+                    }
+                });
+
         }
 
         protected abstract void ApplyDamage(IInputMessage message);
@@ -38,7 +72,8 @@ namespace Com.Beetsoft.AFE
         protected virtual void WillEnterStateAttack()
         {
             Animator.SetTriggerWithBool(Constant.AnimationPram.Attack);
-            Animator.SetInteger(Constant.AnimationPram.AttackInt, (int) BasicAttackIndex);
+            Animator.SetInteger(Constant.AnimationPram.AttackInt, (int)BasicAttackIndex);
+            WillExitStateAttack();
         }
 
         protected virtual void WillExitStateAttack()
@@ -51,6 +86,11 @@ namespace Com.Beetsoft.AFE
         private float GetTimeInterval()
         {
             return 1 / ChampionConfig.AttackSpeed.Value;
+        }
+
+        private void HandleAnimationRun(bool isRun)
+        {
+            Animator.SetTriggerWithBool(isRun ? Constant.AnimationPram.Run : Constant.AnimationPram.Idle);
         }
     }
 }
