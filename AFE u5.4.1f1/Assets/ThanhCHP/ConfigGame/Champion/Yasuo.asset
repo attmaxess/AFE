@@ -24,7 +24,7 @@ MonoBehaviour:
     value: 0
   manaRegenPerLevel: 0
   range:
-    value: 1.75
+    value: 0.6
   rangePerLevel: 0
   attackDamage:
     value: 60
@@ -43,6 +43,6 @@ MonoBehaviour:
   critical:
     value: 0
   moveSpeed:
-    value: 3
+    value: 1.25
   cooldownSkillBonus:
     value: 0

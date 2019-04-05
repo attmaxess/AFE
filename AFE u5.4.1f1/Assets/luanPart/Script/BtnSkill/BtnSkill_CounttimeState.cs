@@ -15,13 +15,16 @@ public class BtnSkill_CounttimeState : BtnSkillBase
 
         countmax = btnSkillUI.countTime;
         btnSkillUI.number.gameObject.SetActive(true);
+        if (countmax <= 0) StopState();
     }
 
     public override BtnState UpdateState()
     {
-        btnSkillUI.countTime = btnSkillUI.countTime - 0.1f;
+        if (countmax <= 0) return BtnState.Enable;
+
+        btnSkillUI.countTime = btnSkillUI.countTime - Time.deltaTime;
         btnSkillUI.touchJoystickSprite.GetComponent<Image>().fillAmount = 1 - btnSkillUI.countTime / countmax;
-        btnSkillUI.number.text = Math.Round(btnSkillUI.countTime, 2).ToString();
+        btnSkillUI.number.text = Math.Round(btnSkillUI.countTime, 1).ToString();
         if (btnSkillUI.countTime <= 0)
         {
             btnSkillUI.canUseSkill = true;

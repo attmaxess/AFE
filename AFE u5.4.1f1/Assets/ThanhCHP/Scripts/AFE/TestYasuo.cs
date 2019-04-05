@@ -21,6 +21,14 @@ namespace Com.Beetsoft.AFE
 
         private AnimatorHandler AnimatorHandler => animatorHandler;
 
+        public Transform centerCharacter;
+
+
+        public void SubtractHealth(int n)
+        {
+            ChampionModel.Health.Value -= n;
+            Debug.Log(" ChampionModel.Health.Value  " + ChampionModel.Health.Value);
+        }
 
 
         private void Awake()
@@ -43,7 +51,7 @@ namespace Com.Beetsoft.AFE
         {
             CreateHealthBar(ChampionModel, photonView.IsMine);
             if (!photonView.IsMine) return;
-            
+
             this.OnKeyDownAsObservable(KeyCode.Q)
                 .Subscribe(_ => JoystickInputFilter.Spell1(new InputMessage(Vector3.forward)));
 

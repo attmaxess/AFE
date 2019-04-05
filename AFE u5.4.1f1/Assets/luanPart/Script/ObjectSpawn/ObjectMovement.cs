@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
 using UniRx.Triggers;
+using Com.Beetsoft.AFE;
 
 public interface IMovable
 {
-    void MoveToDir(Vector3 startPos, Vector3 dir);
+    void MoveToDir(Vector3 startPos, Vector3 target);
 }
 
 public interface ITriggerObject
@@ -16,44 +17,25 @@ public interface ITriggerObject
 
 public class ObjectMovement : MonoBehaviour, IMovable
 {
-    public bool moveTime;
-    public bool moveRange;
-    public float speed = 1;
-    public float timeMove = 2;
-    public float range = 3;
+    public float duration = 2;
+    [SerializeField] private ObservableTween.EaseType easeType;
 
-    void OnEnable()
-    {
-        //transform.localScale = Vector3.one;
-    }
+    private ObservableTween.EaseType EaseType => easeType;
 
-    public void MoveToDir(Vector3 startPos, Vector3 dir)
+
+    public virtual void MoveToDir(Vector3 startPos, Vector3 target)
     {
-        transform.localScale = Vector3.one;
-        var _timeMove = timeMove;
         transform.position = startPos;
-        if (moveTime)
-            Observable.EveryUpdate().TakeWhile(_ => _timeMove > 0).Subscribe(_ =>
-              {
-                  _timeMove -= Time.deltaTime;
-                  transform.position += dir * speed * Time.deltaTime;
-              });
-        else if (moveRange)
-        {
-            Vector3 target = transform.position + dir * range;
-            ObservableTween.Tween(transform.position, target, _timeMove, ObservableTween.EaseType.Linear)
-                .TakeWhile(_ => gameObject.activeSelf)
-                .Subscribe(pos =>
-             {
-                 transform.position = pos;
-             });
-        }
-        else
-            Observable.EveryUpdate()
-                .TakeWhile(_ => gameObject.activeSelf)
-                .Subscribe(_ =>
-             {
-                 transform.position += dir * speed * Time.deltaTime;
-             });
+        var _duration = duration;
+        ObservableTween.Tween(transform.position, target, _duration
+                , EaseType, ObservableTween.LoopType.None
+                , () =>
+                {
+                    var twist = GetComponent<Twist>();
+                    if (twist != null)
+                        twist.ReturnPool();
+                })
+            .TakeWhile(_ => gameObject.activeSelf)
+            .Subscribe(pos => { transform.position = pos; });
     }
 }

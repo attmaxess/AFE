@@ -2,6 +2,7 @@
 using Photon.Pun;
 using UniRx;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Com.Beetsoft.AFE
 {
@@ -41,14 +42,16 @@ namespace Com.Beetsoft.AFE
 
         public void BlowUp(float timeUp)
         {
-            photonView.RPC("BlowUpRpc", RpcTarget.All, timeUp);
+            photonView.RPC("BlowUpRpc", RpcTarget.All, timeUp, GetRandomRotate());
         }
 
         [PunRPC]
-        private void BlowUpRpc(float timeUp)
+        private void BlowUpRpc(float timeUp, Vector3 forceRotate)
         {
             IsCrowdControl.Value = true;
-            DoBlowUp(timeUp, () => DoBlowDown(Constant.KnockDown, () => IsCrowdControl.Value = false));
+            DoBlowUp(timeUp, () => DoBlowDown(Constant.KnockDown, DoOnBlowDownComplete));
+            SendMessageBlowUp();
+            Rotate(forceRotate);
         }
 
         private void DoBlowUp(float time, Action onComplete = null)
@@ -77,5 +80,34 @@ namespace Com.Beetsoft.AFE
                     transform.position = temp;
                 });
         }
+
+        private void SendMessageBlowUp()
+        {
+            AsyncMessageBroker.Default.PublishAsync(new BlockUpArgs(GetComponent<IReceiveDamageable>()))
+                .Subscribe(_ => { Debug.Log("Send message blow up success"); });
+        }
+
+        private void SendMessageBlowDown()
+        {
+            AsyncMessageBroker.Default.PublishAsync(new BlockDownArgs(GetComponent<IReceiveDamageable>()))
+                .Subscribe(_ => { Debug.Log("Send message blow down success"); });
+        }
+
+        private void DoOnBlowDownComplete()
+        {
+            IsCrowdControl.Value = false;
+            SendMessageBlowDown();
+        }
+
+        private void Rotate(Vector3 forward)
+        {
+            var championTransform = GetComponent<IChampionTransform>();
+            if (championTransform != null)
+            {
+                championTransform.Forward = forward;
+            }
+        }
+
+        private static Vector3 GetRandomRotate() => Quaternion.Euler(0, Random.Range(0, 360), 0) * Vector3.forward;
     }
 }

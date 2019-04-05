@@ -144,7 +144,32 @@ public class GameManagerArVik : MonoBehaviourPunCallbacks
     void OnDisconnectedFromPhoton()
     {
         Debug.LogWarning("OnDisconnectedFromPhoton");
-    }    
+    }
+
+    public bool isSpawnMainCharacter;
+
+    public void SpawnObject(Vector3 pos, GameObject hitObject)
+    {
+        StartCoroutine(C_SpawnObject(pos, hitObject));
+    }
+
+    public IEnumerator C_SpawnObject(Vector3 pos, GameObject hitObject)
+    {
+        if (isSpawnMainCharacter) yield break;
+
+        isSpawnMainCharacter = true;
+
+        var newChar = PhotonNetwork.Instantiate(prefabName, pos, Quaternion.identity, 0);
+        yield return new WaitUntil(() => newChar.gameObject != null);
+
+        GameObject _planeJoyStick = Instantiate(Resources.Load("PlaneJoystick", typeof(GameObject)), pos, Quaternion.identity) as GameObject;
+        yield return new WaitUntil(() => _planeJoyStick.gameObject != null);
+
+        _planeJoyStick?.GetComponent<PlaneJoystick>().SetMainCharacter(newChar);
+        MessageBroker.Default.Publish<MassageSpawnNewCharacter>(new MassageSpawnNewCharacter(newChar.transform));
+
+        yield break;
+    }
 }
 
 public class MassageSpawnNewCharacter

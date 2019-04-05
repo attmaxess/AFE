@@ -1,4 +1,5 @@
 using System;
+using ExtraLinq;
 using Photon.Pun;
 using UniRx;
 using UnityEngine;
@@ -11,9 +12,10 @@ namespace Com.Beetsoft.AFE
         IInitialize<IAnimationStateChecker>,
         IInitialize<IChampionConfig>
     {
-        [SerializeField] private SkillModel skillConfig;
         [SerializeField] private SkillBehaviour skillBehaviourPassive;
         [SerializeField] private SkillBehaviour[] skillBehaviours;
+        [SerializeField] private SkillModel skillConfig;
+        [SerializeField] private ObjectElementSkillBehaviour effectOnAttack;
 
         private ISkillBehaviour[] SkillBehaviours => skillBehaviours;
 
@@ -28,6 +30,10 @@ namespace Com.Beetsoft.AFE
         protected ISkillConfig SkillConfig => skillConfig;
 
         protected Animator Animator { get; private set; }
+        
+        protected ObjectPoolSkillBehaviour ObjectPoolEffectOnAttack { get; private set; }
+
+        protected ObjectElementSkillBehaviour EffectOnAttack => effectOnAttack;
 
         private ReactiveProperty<ISkillOutputMessage> SkillMessageOutputReactiveProperty { get; } =
             new ReactiveProperty<ISkillOutputMessage>();
@@ -91,9 +97,10 @@ namespace Com.Beetsoft.AFE
         protected virtual void Awake()
         {
             Animator = GetComponent<Animator>();
-            SkillReader = new SkillReader(SkillBehaviours, 0);
+            SkillReader = !SkillBehaviours.IsNullOrEmpty() ? new SkillReader(SkillBehaviours, 0) : new SkillReader();
             SyncTransformImmediately = gameObject.GetOrAddComponent<SyncTransformImmediately>();
             ChampionTransform = GetComponent<IChampionTransform>();
+            ObjectPoolEffectOnAttack = new ObjectPoolSkillBehaviour(photonView, EffectOnAttack, transform);
         }
 
         protected virtual void Start()
@@ -118,5 +125,7 @@ namespace Com.Beetsoft.AFE
         {
             SkillMessageOutputReactiveProperty.Value = SkillReader.GetSkillBehaviourCurrent().GetSkillOutputMessage();
         }
+
+        protected abstract bool IsCanUse();
     }
 }

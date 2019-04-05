@@ -25,7 +25,16 @@ public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
 
     public GameObject mainCharacter;
     public ICrowdControl crowdControl;
-    bool isCrowdConttroll;
+    public bool isCrowdConttroll;
+    public bool isDeath;
+    public IAnimationStateChecker animationStateChecker;
+
+    public bool useSkill_1;
+    public bool useSkill_2;
+    public bool useSkill_3;
+    public bool useSkill_4;
+    public bool useBasicAttack;
+
     public Vector3 directionRotate
     {
         get
@@ -50,57 +59,57 @@ public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
                 this.isCrowdConttroll = isCrowdConttroll;
             });
         }
+        animationStateChecker = mainCharacter.GetComponent<IAnimationStateChecker>();
 
+        animationStateChecker?.IsBasicAttack.Subscribe(use =>
+        {
+            useBasicAttack = use;
+        });
+        animationStateChecker?.IsInStateSpell1.Subscribe(use =>
+        {
+            useSkill_1 = use;
+        });
+        animationStateChecker?.IsInStateSpell2.Subscribe(use =>
+        {
+            useSkill_2 = use;
+        });
+        animationStateChecker?.IsInStateSpell3.Subscribe(use =>
+        {
+            useSkill_3 = use;
+        });
+        animationStateChecker?.IsInStateSpell4.Subscribe(use =>
+        {
+            useSkill_4 = use;
+        });
 
         if (joystickCharacter == null)
         {
             joystickCharacter = mainCharacter?.GetComponent<IJoystickInputFilter>();
             if (joystickCharacter == null)
                 Debug.Log("Dont Find Any Gameobject Have joystickCharacter");
-
-            /* var mObjs = GameObject.FindObjectsOfType<MonoBehaviour>();
-                IJoystickInputFilter[] interfaceScripts = (from a in mObjs where a.GetType().GetInterfaces().Any(k => k == typeof(IJoystickInputFilter)) select (IJoystickInputFilter)a).ToArray();
-                if (interfaceScripts.Length > 0)
-                {
-                    for (int i = 0; i < interfaceScripts.Length; i++)
-                    {
-                        var mono = interfaceScripts[i] as MonoBehaviour;
-                        if (mono != null && mono.GetComponent<PhotonView>().IsMine)
-                        {
-                            joystickCharacter = interfaceScripts[i];
-                            break;
-                        }
-                    }
-                    if (joystickCharacter == null)
-                    {
-                        Debug.Log("Dont Have Local joystickCharacter");
-                    }
-                }
-                else
-                {
-                    Debug.Log("Dont Find Any Gameobject Have joystickCharacter");
-                }     */
-
         }
 
-        //GameManagerArVik.Singleton.attack += Singleton_Attack;
-        //GameManagerArVik.Singleton.skill1 += Singleton_skill1;
-        //GameManagerArVik.Singleton.skill2 += Singleton_skill2;
-        //GameManagerArVik.Singleton.skill3 += Singleton_skill3;
-        //GameManagerArVik.Singleton.skill4 += Singleton_skill4;
+        mainCharacter?.GetComponent<TestYasuo>().ChampionModel.Health.Subscribe(health =>
+        {
+            if (health <= 0)
+            {
+                isDeath = true;
+            }
+            else
+            {
+                isDeath = false;
+            }
+        });
 
-        MessageBroker.Default.Receive<IMessageBladeAttack>().Subscribe(mes =>
+        speed = mainCharacter.GetComponent<TestYasuo>().ChampionModel.MoveSpeed.Value;
+
+        MessageBroker.Default.Receive<IInvertionPositionPlayerJoystic>().Subscribe(mes =>
         {
             transform.position = mes.player.position;
             IsUpdateWhenSkill = mes.isUsing;
         });
 
         yield break;
-    }
-
-    private void Singleton_Attack()
-    {
-        joystickCharacter.BasicAttack(new InputMessage());
     }
 
 
@@ -117,27 +126,37 @@ public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
             Debug.Log("Pause");
         }
 
+        if (isDeath) return;
+
         if (isCrowdConttroll) return;
+
 
         if (CF2Input.GetButtonDown("Attack"))
         {
             Debug.Log("Attack");
-            Singleton_Attack();
+            joystickCharacter.BasicAttack(new InputMessage());
         }
+
 
 
         var h = CF2Input.GetAxis("Horizontal");
         var v = CF2Input.GetAxis("Vertical");
-        Vector3 moveVector = (transform.right * h + transform.forward * v);
+        Vector3 moveVector = Vector3.zero;
+        if (useSkill_1 || useSkill_2 || useSkill_3 || useSkill_4 || useBasicAttack)
+        {
+        }
+        else
+        {
+            moveVector = (transform.right * h + transform.forward * v);
 
-        var rot = Quaternion.LookRotation(Camera.main.transform.forward);
+            var rot = Quaternion.LookRotation(Camera.main.transform.forward);
 
-        transform.localRotation = Quaternion.Euler(0, rot.eulerAngles.y, 0);
+            transform.localRotation = Quaternion.Euler(0, rot.eulerAngles.y, 0);
 
-        transform.Translate(moveVector * speed * Time.deltaTime, Space.World);
+            transform.Translate(moveVector.normalized * speed * Time.deltaTime, Space.World);
 
-        directionPlayer.localPosition = new Vector3(h / 2, 0.5f, v / 2);
-
+            directionPlayer.localPosition = new Vector3(h / 2, 0.5f, v / 2);
+        }
         // direction skill
         float h1 = 0, v1 = 0;
 
@@ -193,42 +212,13 @@ public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
 
         if (joystickCharacter != null)
         {
-            //            if (moveVector == Vector3.zero)
-            //                joystickCharacter.Idle(new RunMessage(transform.position, Vector3.zero));
-            //            else
             joystickCharacter.Run(new RunMessage(transform.position, moveVector));
-
         }
         else
         {
             joystickCharacter = mainCharacter?.GetComponent<IJoystickInputFilter>();
             if (joystickCharacter == null)
                 Debug.Log("Dont Find Any Gameobject Have joystickCharacter");
-
-            /* var mObjs = GameObject.FindObjectsOfType<MonoBehaviour>();
-             IJoystickInputFilter[] interfaceScripts = (from a in mObjs where a.GetType().GetInterfaces().Any(k => k == typeof(IJoystickInputFilter)) select (IJoystickInputFilter)a).ToArray();
-             if (interfaceScripts.Length > 0)
-             {
-                 for (int i = 0; i < interfaceScripts.Length; i++)
-                 {
-                     var mono = interfaceScripts[i] as MonoBehaviour;
-                     if (mono != null && mono.GetComponent<PhotonView>().IsMine)
-                     {
-                         joystickCharacter = interfaceScripts[i];
-                         speed = mono.GetComponent<TestYasuo>().ChampionModel.MoveSpeed.Value;
-                         break;
-                     }
-                 }
-                 if (joystickCharacter == null)
-                 {
-                     Debug.Log("Dont Have Local joystickCharacter");
-                 }
-             }
-             else
-             {
-                 Debug.Log("Dont Find Any Gameobject Have joystickCharacter");
-             }      */
-
         }
 
         if (crowdControl == null)

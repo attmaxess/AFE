@@ -42,33 +42,33 @@ namespace Com.Beetsoft.AFE
         {
             if (!photonView.IsMine) return;
 
-//            InputFilterObserver.OnRunAsObservable()
-//                .Where(_ => !IsAnyStateCanNotExit && !IsRun.Value)
-//                .Subscribe(_ => WillEnterStateRun());
-//
-//            InputFilterObserver.OnIdleAsObservable()
-//                .Where(_ => !IsAnyStateCanNotExit && IsRun.Value)
-//                .Subscribe(_ => WillEnterStateIdle());
-//
-//            InputFilterObserver.OnBasicAttackAsObservable()
-//                .Where(_ => !IsAnyStateCanNotExit)
-//                .Subscribe(_ => WillEnterStateAttack());
-//
-//            InputFilterObserver.OnSpell1AsObservable()
-//                .Where(_ => !(IsInStateSpell3.Value || IsInStateSpell4.Value))
-//                .Subscribe(_ => WillEnterStateSpell1());
-//
-//            InputFilterObserver.OnSpell2AsObservable()
-//                .Where(_ => !IsAnyStateCanNotExit)
-//                .Subscribe(_ => WillEnterStateSpell2());
-//
-//            InputFilterObserver.OnSpell3AsObservable()
-//                .Where(_ => !IsInStateSpell4.Value)
-//                .Subscribe(_ => WillEnterStateSpell3());
-//
-//            InputFilterObserver.OnSpell4AsObservable()
-//                .Where(_ => !(IsInStateSpell3.Value))
-//                .Subscribe(_ => WillEnterStateSpell4());
+            //            InputFilterObserver.OnRunAsObservable()
+            //                .Where(_ => !IsAnyStateCanNotExit && !IsRun.Value)
+            //                .Subscribe(_ => WillEnterStateRun());
+            //
+            //            InputFilterObserver.OnIdleAsObservable()
+            //                .Where(_ => !IsAnyStateCanNotExit && IsRun.Value)
+            //                .Subscribe(_ => WillEnterStateIdle());
+            //
+            //            InputFilterObserver.OnBasicAttackAsObservable()
+            //                .Where(_ => !IsAnyStateCanNotExit)
+            //                .Subscribe(_ => WillEnterStateAttack());
+            //
+            //            InputFilterObserver.OnSpell1AsObservable()
+            //                .Where(_ => !(IsInStateSpell3.Value || IsInStateSpell4.Value))
+            //                .Subscribe(_ => WillEnterStateSpell1());
+            //
+            //            InputFilterObserver.OnSpell2AsObservable()
+            //                .Where(_ => !IsAnyStateCanNotExit)
+            //                .Subscribe(_ => WillEnterStateSpell2());
+            //
+            //            InputFilterObserver.OnSpell3AsObservable()
+            //                .Where(_ => !IsInStateSpell4.Value)
+            //                .Subscribe(_ => WillEnterStateSpell3());
+            //
+            //            InputFilterObserver.OnSpell4AsObservable()
+            //                .Where(_ => !(IsInStateSpell3.Value))
+            //                .Subscribe(_ => WillEnterStateSpell4());
 
             HandleIdleState();
             HandleSwitchToStateWeaponIn();
@@ -82,19 +82,19 @@ namespace Com.Beetsoft.AFE
 
         private void SwitchToStateWeaponOut()
         {
-            Animator.SetInteger(Constant.AnimationPram.IdleInInt, (int) AnimationState.IdleIn.None);
-            Animator.SetInteger(Constant.AnimationPram.RunOutInt, (int) AnimationState.RunOut.RunOut);
-            Animator.SetInteger(Constant.AnimationPram.IdleOutInt, (int) AnimationState.IdleOut.IdleOut);
-            Animator.SetInteger(Constant.AnimationPram.RunOutInt, (int) AnimationState.RunOut.RunOut);
+            Animator.SetInteger(Constant.AnimationPram.IdleInInt, (int)AnimationState.IdleIn.None);
+            Animator.SetInteger(Constant.AnimationPram.RunOutInt, (int)AnimationState.RunOut.RunOut);
+            Animator.SetInteger(Constant.AnimationPram.IdleOutInt, (int)AnimationState.IdleOut.IdleOut);
+            Animator.SetInteger(Constant.AnimationPram.RunOutInt, (int)AnimationState.RunOut.RunOut);
         }
 
         private void SwitchToStateWeaponIn()
         {
             BasicAttackIndex = AnimationState.BasicAttack.Hit1;
-            Animator.SetInteger(Constant.AnimationPram.IdleInInt, (int) AnimationState.IdleIn.IdleIn);
-            Animator.SetInteger(Constant.AnimationPram.RunOutInt, (int) AnimationState.RunOut.None);
-            Animator.SetInteger(Constant.AnimationPram.IdleOutInt, (int) AnimationState.IdleOut.None);
-            Animator.SetInteger(Constant.AnimationPram.RunOutInt, (int) AnimationState.RunOut.None);
+            Animator.SetInteger(Constant.AnimationPram.IdleInInt, (int)AnimationState.IdleIn.IdleIn);
+            Animator.SetInteger(Constant.AnimationPram.RunOutInt, (int)AnimationState.RunOut.None);
+            Animator.SetInteger(Constant.AnimationPram.IdleOutInt, (int)AnimationState.IdleOut.None);
+            Animator.SetInteger(Constant.AnimationPram.RunOutInt, (int)AnimationState.RunOut.None);
         }
 
         #region HandleRunState
@@ -160,7 +160,7 @@ namespace Com.Beetsoft.AFE
         {
             IsRun.Value = false;
             Animator.SetTriggerWithBool(Constant.AnimationPram.Attack);
-            Animator.SetInteger(Constant.AnimationPram.AttackInt, (int) BasicAttackIndex);
+            Animator.SetInteger(Constant.AnimationPram.AttackInt, (int)BasicAttackIndex);
             BasicAttackIndex++;
             if (BasicAttackIndex > AnimationState.BasicAttack.Hit4)
                 BasicAttackIndex = AnimationState.BasicAttack.Hit1;
@@ -181,7 +181,7 @@ namespace Com.Beetsoft.AFE
         private void HandleSpell1State()
         {
             var spell1Smb = Animator.GetBehaviour<ObservableSpell1Smb>();
-            spell1Smb.OnStateMachineEnterAsObservable()
+            spell1Smb.OnStateEnterAsObservable()
                 .Subscribe(_ =>
                 {
                     SwitchToStateWeaponOut();
@@ -189,21 +189,21 @@ namespace Com.Beetsoft.AFE
                 });
 
             spell1Smb.OnStateExitAsObservable()
-                .Subscribe(_ => { Animator.SetBool(Constant.AnimationPram.IdleBool, true); });
+                .Subscribe(_ =>
+                {
+                    IsInStateSpell1.Value = false;
+                });
         }
 
         private void HandleSpell1Dash()
         {
             var spell3Smb = Animator.GetBehaviour<ObservableSpell3Smb>();
-            spell3Smb.OnStateMachineEnterAsObservable()
+            spell3Smb.OnStateEnterAsObservable()
+                .Do(_ => Animator.SetInteger(Constant.AnimationPram.QInt, 0))
                 .SelectMany(_ => InputFilterObserver.OnSpell1AsObservable())
-                .TakeUntil(Observable.Timer(TimeSpan.FromSeconds(Constant.Yasuo.OffsetTimeSpell3AndSpell1)))
+                .TakeUntil(Observable.Timer(TimeSpan.FromMilliseconds(Constant.Yasuo.OffsetTimeSpell3AndSpell1)))
                 .RepeatUntilDestroy(this)
-                .Subscribe(_ =>
-                {
-                    Animator.SetInteger(Constant.AnimationPram.QInt, (int) AnimationState.Spell1.Spell1_Dash);
-                    Animator.SetBool(Constant.AnimationPram.IdleBool, false);
-                });
+                .Subscribe(_ => Animator.SetInteger(Constant.AnimationPram.QInt, (int) AnimationState.Spell1.Spell1_Dash));
         }
 
         #endregion
@@ -264,12 +264,12 @@ namespace Com.Beetsoft.AFE
         private void HandleSpell4State()
         {
             var spell4Smb = Animator.GetBehaviour<ObservableSpell4Smb>();
-            spell4Smb.OnStateMachineEnterAsObservable()
+            spell4Smb.OnStateEnterAsObservable()
                 .Subscribe(_ =>
                 {
                     IsInStateSpell4.Value = true;
                     FeatureIndexSpell1State = AnimationState.Spell1.Spell1A;
-                    Animator.SetInteger(Constant.AnimationPram.QInt, (int) FeatureIndexSpell1State);
+                    Animator.SetInteger(Constant.AnimationPram.QInt, (int)FeatureIndexSpell1State);
                     SwitchToStateWeaponOut();
                 });
             spell4Smb.OnStateExitAsObservable()

@@ -14,9 +14,9 @@ namespace Com.Beetsoft.AFE
             base.Start();
             JoystickInputFilterObserver
                 .OnSpell3AsObservable()
+                .Where(_ => IsCanUse())
                 .Subscribe(message =>
                 {
-                    ChampionTransform.Forward = message.Direction;
                     var skillBehavior = SkillReader.GetSkillBehaviourCurrent();
                     skillBehavior.ActiveSkill(message);
                 });
@@ -27,10 +27,18 @@ namespace Com.Beetsoft.AFE
                 {
                     Debug.Log(receiveDamageables.IsNullOrEmpty());
                     if (receiveDamageables.IsNullOrEmpty()) return;
-                    
+                    var direction = (receiveDamageables.First().GetTransform.position - transform.position).normalized;
+                    ChampionTransform.Forward = direction;
                     SendOutput();
                     Animator.SetTriggerWithBool(Constant.AnimationPram.E);
                 });
+        }
+
+        protected override bool IsCanUse()
+        {
+            return !AnimationStateChecker.IsInStateSpell1.Value
+                   && !AnimationStateChecker.IsInStateSpell3.Value
+                   && !AnimationStateChecker.IsInStateSpell4.Value;
         }
     }
 }
