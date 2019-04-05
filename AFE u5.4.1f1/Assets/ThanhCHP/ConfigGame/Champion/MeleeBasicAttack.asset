@@ -20,8 +20,8 @@ MonoBehaviour:
     value: 0.6
   rangePerLevel: 0
   physicDamage:
-    value: 0
-  physicDamagePerLevel: 0
+    value: 60
+  physicDamagePerLevel: 3.2
   physicDamageBonus: 1
   magicDamage:
     value: 0

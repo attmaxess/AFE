@@ -13,6 +13,7 @@ namespace Com.Beetsoft.AFE
     {
         [SerializeField] private float timeKnockUpObject = 0.7f;
         [SerializeField] private ObjectElementSkillBehaviour windChildPrefabs;
+        [SerializeField] private GameObject windBodyEffect;
 
         private ReactiveProperty<AnimationState.Spell1> FeatureIndexSpell1State { get; } =
             new ReactiveProperty<AnimationState.Spell1>(AnimationState.Spell1.Spell1A);
@@ -24,6 +25,8 @@ namespace Com.Beetsoft.AFE
         private ObjectPoolSkillBehaviour WindChildEffectPool { get; set; }
 
         private ObjectElementSkillBehaviour WindChildPrefabs => windChildPrefabs;
+
+        private GameObject WindBodyEffect => windBodyEffect;
 
         protected override void Awake()
         {
@@ -85,7 +88,11 @@ namespace Com.Beetsoft.AFE
 
             FeatureIndexSpell1State
                 .Where(x => x == AnimationState.Spell1.Spell1A)
-                .Subscribe(_ => { SkillReader.SendNextFirstIndex(); });
+                .Subscribe(_ =>
+                {
+                    SkillReader.SendNextFirstIndex();
+                    photonView.RPC("SetActiveWindBodyEffectRpc", RpcTarget.All, false);
+                });
 
             FeatureIndexSpell1State
                 .Where(x => x == AnimationState.Spell1.Spell1B)
@@ -101,6 +108,7 @@ namespace Com.Beetsoft.AFE
                 {
                     SkillReader.SendNextLastIndex();
                     ResetSpellAfterTimer(10f);
+                    photonView.RPC("SetActiveWindBodyEffectRpc", RpcTarget.All, true);
                 });
         }
 
@@ -165,6 +173,12 @@ namespace Com.Beetsoft.AFE
         private void SpawnTwistChildRpc(Vector3 position)
         {
             WindChildEffectPool.RentAsync().Subscribe(x => { x.transform.position = position; });
+        }
+
+        [PunRPC]
+        private void SetActiveWindBodyEffectRpc(bool value)
+        {
+            WindBodyEffect.SetActive(value);
         }
     }
 }

@@ -23,14 +23,11 @@ namespace Com.Beetsoft.AFE
 
                     var damBullet = other.GetComponent<IDamageBullet>();
                     damBullet?.ReturnPool();
-                    if (other.GetComponent<IDamageBullet>() != null)
-                    {
-                        other.GetComponent<IReceiveDamageable>().GetDamageReceive(10, 0);
-                    }
                 });
         }
         internal override void OnSpawn(Vector3 startPos, Vector3 target, IDamageMessage damageMessage)
         {
+            transform.forward = (target - startPos).normalized;
             movable.MoveToDir(startPos, target);
         }
     }

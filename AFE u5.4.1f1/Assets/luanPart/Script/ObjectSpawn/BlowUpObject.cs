@@ -42,15 +42,16 @@ namespace Com.Beetsoft.AFE
 
         public void BlowUp(float timeUp)
         {
-            photonView.RPC("BlowUpRpc", RpcTarget.All, timeUp);
+            photonView.RPC("BlowUpRpc", RpcTarget.All, timeUp, GetRandomRotate());
         }
 
         [PunRPC]
-        private void BlowUpRpc(float timeUp)
+        private void BlowUpRpc(float timeUp, Vector3 forceRotate)
         {
             IsCrowdControl.Value = true;
             DoBlowUp(timeUp, () => DoBlowDown(Constant.KnockDown, DoOnBlowDownComplete));
             SendMessageBlowUp();
+            Rotate(forceRotate);
         }
 
         private void DoBlowUp(float time, Action onComplete = null)
@@ -58,7 +59,6 @@ namespace Com.Beetsoft.AFE
             TweenDisposable?.Dispose();
             var position = transform.position;
             TweenDisposable = Blow(position.y, MaxYAxis, time, EaseType, onComplete);
-            RandomRotate();
         }
 
         private void DoBlowDown(float time, Action onComplete = null)
@@ -99,14 +99,15 @@ namespace Com.Beetsoft.AFE
             SendMessageBlowDown();
         }
 
-        private void RandomRotate()
+        private void Rotate(Vector3 forward)
         {
             var championTransform = GetComponent<IChampionTransform>();
             if (championTransform != null)
             {
-                var vectorRandom = Quaternion.Euler(0, Random.Range(0, 360), 0);
-                transform.forward = vectorRandom * Vector3.forward;
+                championTransform.Forward = forward;
             }
         }
+
+        private static Vector3 GetRandomRotate() => Quaternion.Euler(0, Random.Range(0, 360), 0) * Vector3.forward;
     }
 }

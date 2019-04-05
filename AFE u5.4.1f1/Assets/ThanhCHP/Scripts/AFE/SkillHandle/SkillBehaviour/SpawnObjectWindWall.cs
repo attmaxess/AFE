@@ -38,7 +38,7 @@ namespace Com.Beetsoft.AFE
             ObjectPool.RentAsync().Subscribe(windWall =>
             {
                 Vector3 target = transform.position + direction * SkillConfig.Range.Value;
-                windWall.OnSpawn(transform.position + direction, target, CreateDamageMessage());
+                windWall.OnSpawn(transform.position, target, CreateDamageMessage());
                 windWall.SetIdIgnore(transform.GetInstanceID());
             });
         }
