@@ -17,7 +17,6 @@ namespace Com.Beetsoft.AFE
             public static readonly int R = Animator.StringToHash("R");
 
             public static readonly int Idle = Animator.StringToHash("Idle");
-            public static readonly int IdleBool = Animator.StringToHash("Idle Bool");
             public static readonly int IdleInt = Animator.StringToHash("Idle Int");
             public static readonly int IdleInInt = Animator.StringToHash("Idle In Int");
             public static readonly int IdleOutInt = Animator.StringToHash("Idle Out Int");
@@ -54,7 +53,7 @@ namespace Com.Beetsoft.AFE
         {
             public static int AttackClipAmount { get; } = 4;
             public static int QClipAmount { get; } = 4;
-            public static float OffsetTimeSpell3AndSpell1 { get; } = 1.2f;
+            public static int OffsetTimeSpell3AndSpell1 { get; } = 1200;
             public static int TimeDelayApplyDamageAttackBasicMilliseconds { get; } = 50;
         }
 

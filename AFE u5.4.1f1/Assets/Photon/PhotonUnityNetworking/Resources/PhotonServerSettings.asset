@@ -51,5 +51,9 @@ MonoBehaviour:
   - SyncRotationTweenRpc
   - SyncLocalScaleTweenRpc
   - BlowUpRpc
+  - SpawnEffectSpellDashRpc
+  - SpawnTwistChildRpc
+  - SpawnEffectSphereAttackRpc
+  - SetActiveWindBodyEffectRpc
   DisableAutoOpenWizard: 1
   ShowSettings: 1
