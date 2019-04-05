@@ -419,6 +419,7 @@ public class PlacenoteSampleView : MonoBehaviour, PlacenoteListener
 
     [Header("Screen Capture")]
     public ScreenCaptureManager screenCapture = null;
+    public ScreenshotHelper screenShot = null;
 
     public void OnSaveMapClick()
     {
