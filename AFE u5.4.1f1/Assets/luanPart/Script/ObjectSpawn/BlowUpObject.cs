@@ -35,9 +35,22 @@ namespace Com.Beetsoft.AFE
 
         public ReactiveProperty<bool> IsCrowdControl { get; } = new ReactiveProperty<bool>(false);
 
+        public bool IsDeathOfMainCharacter;
+
         private void Start()
         {
             minYAxis = transform.position.y;
+            GetComponent<TestYasuo>()?.ChampionModel.Health.Subscribe(health =>
+            {
+                if (health <= 0)
+                {
+                    IsDeathOfMainCharacter = true;
+                }
+                else
+                {
+                    IsDeathOfMainCharacter = false;
+                }
+            });
         }
 
         public void BlowUp(float timeUp)
@@ -48,6 +61,7 @@ namespace Com.Beetsoft.AFE
         [PunRPC]
         private void BlowUpRpc(float timeUp, Vector3 forceRotate)
         {
+            if (IsDeathOfMainCharacter) return;
             IsCrowdControl.Value = true;
             DoBlowUp(timeUp, () => DoBlowDown(Constant.KnockDown, DoOnBlowDownComplete));
             SendMessageBlowUp();
