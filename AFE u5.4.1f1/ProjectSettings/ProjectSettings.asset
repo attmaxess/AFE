@@ -351,7 +351,7 @@ PlayerSettings:
   actionOnDotNetUnhandledException: 1
   enableInternalProfiler: 0
   logObjCUncaughtExceptions: 1
-  enableCrashReportAPI: 0
+  enableCrashReportAPI: 1
   cameraUsageDescription: Need it!!!
   locationUsageDescription: Need it!!!
   microphoneUsageDescription: Need it!!!
@@ -615,7 +615,7 @@ PlayerSettings:
   webGLLinkerTarget: 1
   scriptingDefineSymbols:
     1: CF2_INSTALLED;PHOTON_UNITY_NETWORKING;PUN_2_0_OR_NEWER;PUN_2_OR_NEWER
-    4: CF2_INSTALLED;CF_FORCE_MOBILE_MODE;PHOTON_UNITY_NETWORKING;PUN_2_0_OR_NEWER;PUN_2_OR_NEWER
+    4: CF2_INSTALLED;CF_FORCE_MOBILE_MODE;PHOTON_UNITY_NETWORKING;PUN_2_0_OR_NEWER;PUN_2_OR_NEWER;DEMO_ALPHA1
     5: CF2_INSTALLED
     6: CF2_INSTALLED
     7: CF2_INSTALLED;CF_FORCE_MOBILE_MODE;PHOTON_UNITY_NETWORKING;PUN_2_0_OR_NEWER;PUN_2_OR_NEWER

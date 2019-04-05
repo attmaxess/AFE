@@ -8,7 +8,6 @@ using UniRx;
 public class GameManagerArVik : MonoBehaviourPunCallbacks
 {
     public string prefabName = "VikingPrefab";
-    //public ArkitUIManager ArkitUIManager;
     bool isJoinedRoom = false;
     public List<PhotonView> listCharacter = new List<PhotonView>();
 
@@ -55,6 +54,7 @@ public class GameManagerArVik : MonoBehaviourPunCallbacks
 
     private void OnDestroy()
     {
+
     }
 
     IEnumerator OnLeftRoom()
@@ -74,71 +74,23 @@ public class GameManagerArVik : MonoBehaviourPunCallbacks
     private void Update()
     {
 
-        /* if (CF2Input.GetAxis("S_1_Hoz") != 0 && CF2Input.GetAxis("S_1_Ver") != 0 && (CF2Input.GetButton("Skill1") || CF2Input.GetButtonUp("Skill1")))
-         {
-             //      h1 = CF2Input.GetAxis("S_1_Hoz");
-             //    v1 = CF2Input.GetAxis("S_1_Ver");
-             //  joystickCharacter.Spell1(new SkillMessage());
-             Debug.Log("-" + CF2Input.GetButton("Skill1") + CF2Input.GetButtonDown("Skill1") + CF2Input.GetButtonUp("Skill1"));
-
-         }   */
-
-        /*if (CF2Input.GetButtonUp("Skill1"))
-        {
-            Debug.Log("-" + CF2Input.GetButtonUp("Skill1"));
-        }    */
-
-        /* Debug.Log(CF2Input.GetButtonDown("BtnTest"));
-         Debug.Log(CF2Input.GetButtonUp("BtnTest"));
-         Debug.Log(CF2Input.GetButton("BtnTest"));   
-         Debug.Log(CF2Input.GetAxis("HozTest"));
-         Debug.Log(CF2Input.GetAxis("VerTest"));       */
-        /*     Debug.Log(CF2Input.GetAxis("Horizontal"));
-             Debug.Log(CF2Input.GetAxis("Vertical"));  */
-
-
-        /* if (CF2Input.GetButtonDown("Skill1"))
-         {
-             if (skill1 != null) skill1();
-             Debug.Log("Skill1");
-         }
-         if (CF2Input.GetButtonDown("Skill2"))
-         {
-             if (skill2 != null) skill2();
-             Debug.Log("Skill2");
-         }
-         if (CF2Input.GetButtonDown("Skill3"))
-         {
-             if (skill3 != null) skill3();
-             Debug.Log("Skill3");
-         }
-         if (CF2Input.GetButtonDown("Skill4"))
-         {
-             if (skill4 != null) skill4();
-             Debug.Log("Skill4");
-         }                     */
     }
 
     private void Start()
     {
-        //ArkitUIManager.gameObject.SetActive(isJoinedRoom);
+
     }
 
     public override void OnJoinedRoom()
     {
         isJoinedRoom = true;
         Debug.Log("OnJoinedRoom");
-        //ArkitUIManager.gameObject.SetActive(isJoinedRoom);
     }
 
     void OnGUI()
     {
-        if (PhotonNetwork.CurrentRoom == null) return; //Only display this GUI when inside a room
-
-        if (GUILayout.Button("Leave Room"))
-        {
-            PhotonNetwork.LeaveRoom();
-        }
+        if (PhotonNetwork.CurrentRoom == null) return;
+        //Only display this GUI when inside a room        
     }
 
     void OnDisconnectedFromPhoton()

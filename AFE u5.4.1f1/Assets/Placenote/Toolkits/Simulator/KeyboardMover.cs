@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class KeyboardMover : MonoBehaviour
 {
-
     [SerializeField]
     float translateSpeed = 2.0f;
     [SerializeField]

@@ -5,7 +5,10 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
+    path: Assets/tPart/Scenes/ReadyToPlay.unity
+    guid: d1e03ad168630564d9e62ce5f797c129
+  - enabled: 1
     path: Assets/tPart/Scenes/PlayGroundWithPlaceNote.unity
     guid: e9f5eb29cf41ce04dac4733611cc0670
   - enabled: 1

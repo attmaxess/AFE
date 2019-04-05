@@ -7,7 +7,6 @@ using UnityEngine;
 /// </summary>
 public class SimulatorSetSkybox : MonoBehaviour
 {
-
     public Camera mCamera;
 
     void Start()

@@ -1,0 +1,41 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Video;
+using UnityEngine.XR.iOS;
+
+public class btnAction : MonoBehaviour
+{
+    [Header("Input")]
+    public CanvasGroup canvasVideo = null;
+    public BeetsoftLogoMethod logoMethod = null;
+    public VideoPlayer videoPlayer = null;
+    public UnityARVideo uityARVideo = null;
+    public UnityARCameraNearFar unityARCameraNearFar = null;
+
+    [ContextMenu("OnClick")]
+    public void OnClick()
+    {
+        StartCoroutine(C_OnClick());
+    }
+
+    IEnumerator C_OnClick()
+    {
+        logoMethod.GoTo1WaitBack0();
+        yield return new WaitUntil(() => BeetsoftLogo.Instance.doneC_ToAlPha == true);
+        canvasVideo.alpha = 0;
+        videoPlayer.Stop();
+        videoPlayer.clip = null;
+
+        uityARVideo.UpdateFrameAtStart = true;        
+        uityARVideo.Start();
+
+        unityARCameraNearFar.UpdateFrameAtStart = true;
+        unityARCameraNearFar.useUpdate = true;
+        unityARCameraNearFar.Start();
+
+        yield return new WaitUntil(() => logoMethod.doneGoToWaitBack == true);
+
+        yield break;
+    }
+}
