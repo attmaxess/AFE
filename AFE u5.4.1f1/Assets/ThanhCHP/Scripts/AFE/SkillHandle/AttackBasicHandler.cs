@@ -25,21 +25,22 @@ namespace Com.Beetsoft.AFE
             var applySkillTimer =
                 Observable.Timer(TimeSpan.FromMilliseconds(MillisecondsDelayApplyDamage));
 
-              /*JoystickInputFilterObserver.OnBasicAttackAsObservable()
-                  .Where(_ => IsCanUse())
-                  .ThrottleFirst(TimeSpan.FromSeconds(GetTimeInterval()))
-                  .Do(_ => WillEnterStateAttack())
-                  .SelectMany(message => applySkillTimer.Select(_ => message))
-                  .Do(_ => WillExitStateAttack())
-                  .Subscribe(ApplyDamage);  */
+            /*JoystickInputFilterObserver.OnBasicAttackAsObservable()
+                .Where(_ => IsCanUse())
+                .ThrottleFirst(TimeSpan.FromSeconds(GetTimeInterval()))
+                .Do(_ => WillEnterStateAttack())
+                .SelectMany(message => applySkillTimer.Select(_ => message))
+                .Do(_ => WillExitStateAttack())
+                .Subscribe(ApplyDamage);  */
 
 
-            JoystickInputFilterObserver.OnBasicAttackAsObservable().Where(_ => IsCanUse()).
-            Subscribe(message =>
-            {
-                var skillBehavior = SkillReader.GetSkillBehaviourCurrent();
-                skillBehavior.ActiveSkill(message);
-            });
+            JoystickInputFilterObserver.OnBasicAttackAsObservable().Where(_ => IsCanUse())
+               .ThrottleFirst(TimeSpan.FromSeconds(GetTimeInterval()))
+               .Subscribe(message =>
+               {
+                   var skillBehavior = SkillReader.GetSkillBehaviourCurrent();
+                   skillBehavior.ActiveSkill(message);
+               });
 
             foreach (var onActiveSkill in SkillReader.SkillBehaviours.Distinct()
               .Select(x => x.OnActiveSkillAsObservable()))
