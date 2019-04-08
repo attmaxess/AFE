@@ -80,7 +80,6 @@ public class ShapeManager : MonoBehaviour
                 // add shape
                 AddShape(hitPosition, hitRotation);
 
-
                 return true;
             }
         }
@@ -141,7 +140,6 @@ public class ShapeManager : MonoBehaviour
         Quaternion dropRotation = Camera.main.transform.rotation;
 
         AddShape(dropPosition, dropRotation);
-
     }
 
 
@@ -230,7 +228,4 @@ public class ShapeManager : MonoBehaviour
             }
         }
     }
-
-
-
 }

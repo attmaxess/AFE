@@ -1,7 +1,5 @@
 fileFormatVersion: 2
 guid: 741ff13c6be143e45a61bb3ae8e81805
-timeCreated: 1436287723
-licenseType: Store
 TextureImporter:
   fileIDToRecycleName:
     21300000: CF-Dpad-8-way_UL
@@ -13,52 +11,122 @@ TextureImporter:
     21300012: CF-Dpad-8-way_DL
     21300014: CF-Dpad-8-way_D
     21300016: CF-Dpad-8-way_DR
-  serializedVersion: 2
+  externalObjects: {}
+  serializedVersion: 7
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
+    sRGBTexture: 1
     linearTexture: 0
-    correctGamma: 0
-    fadeOut: 0
+    fadeOut: 1
     borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
     mipMapFadeDistanceStart: 1
     mipMapFadeDistanceEnd: 3
   bumpmap:
     convertToNormalMap: 0
     externalNormalMap: 0
-    heightScale: .25
+    heightScale: 0.25
     normalMapFilter: 0
   isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
   grayScaleToAlpha: 0
-  generateCubemap: 0
+  generateCubemap: 6
   cubemapConvolution: 0
-  cubemapConvolutionSteps: 8
-  cubemapConvolutionExponent: 1.5
   seamlessCubemap: 0
   textureFormat: -1
   maxTextureSize: 2048
   textureSettings:
+    serializedVersion: 2
     filterMode: -1
     aniso: 16
-    mipBias: -1
-    wrapMode: 1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
   nPOTScale: 0
   lightmap: 0
-  rGBM: 0
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
-  spritePivot: {x: .5, y: .5}
-  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
   alphaIsTransparency: 1
+  spriteTessellationDetail: -1
   textureType: 8
-  buildTargetSettings: []
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 2
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
   spriteSheet:
+    serializedVersion: 2
     sprites:
-    - name: CF-Dpad-8-way_UL
+    - serializedVersion: 2
+      name: CF-Dpad-8-way_UL
       rect:
         serializedVersion: 2
         x: 0
@@ -66,9 +134,19 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: CF-Dpad-8-way_U
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c82582fee4ede5045910a559a6ec8d58
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CF-Dpad-8-way_U
       rect:
         serializedVersion: 2
         x: 128
@@ -76,9 +154,19 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: CF-Dpad-8-way_UR
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e9e52809168b1b34ba8970d8dc118bd2
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CF-Dpad-8-way_UR
       rect:
         serializedVersion: 2
         x: 256
@@ -86,9 +174,19 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: CF-Dpad-8-way_L
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: de51a1c8899488a4eaaa40e39a76070c
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CF-Dpad-8-way_L
       rect:
         serializedVersion: 2
         x: 0
@@ -96,9 +194,19 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: CF-Dpad-8-way_N
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bc79365fc40bc2348977eaa038019c07
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CF-Dpad-8-way_N
       rect:
         serializedVersion: 2
         x: 128
@@ -106,9 +214,19 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: CF-Dpad-8-way_R
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9fe81c15fff90cd48a8773ff1ff8c6e1
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CF-Dpad-8-way_R
       rect:
         serializedVersion: 2
         x: 256
@@ -116,9 +234,19 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: CF-Dpad-8-way_DL
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9384f1e7debea014ab8edeca132000d5
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CF-Dpad-8-way_DL
       rect:
         serializedVersion: 2
         x: 0
@@ -126,9 +254,19 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: CF-Dpad-8-way_D
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9b2ade35989ad00468f761f668a18a67
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CF-Dpad-8-way_D
       rect:
         serializedVersion: 2
         x: 128
@@ -136,9 +274,19 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: CF-Dpad-8-way_DR
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 359e58031eb070343804415b14491e60
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CF-Dpad-8-way_DR
       rect:
         serializedVersion: 2
         x: 256
@@ -146,9 +294,28 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5b5b29650fdc8e04ea7cc3237ec3720b
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
   spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

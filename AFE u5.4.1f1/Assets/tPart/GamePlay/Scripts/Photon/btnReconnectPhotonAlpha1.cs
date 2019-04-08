@@ -3,21 +3,35 @@ using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class btnReconnectPhotonAlpha1 : MonoBehaviour
 {
-    [ContextMenu("ReloadPhoton")]
-    public void ReloadPhoton()
-    {
-        RoomOptions roomOptions = new RoomOptions();
-        roomOptions.MaxPlayers = 10;
-        roomOptions.PlayerTtl = 999999999;
-        roomOptions.EmptyRoomTtl = 999999999;
-        roomOptions.CleanupCacheOnLeave = true;
+    [Header("Debug")]
+    public bool isDebug = true;
 
-        TypedLobby typedLobby = new TypedLobby();
-        typedLobby.Name = "lobby_Demo_Alpha1";
+    //[ContextMenu("ReloadPhoton")]
+    //public void ReloadPhoton()
+    //{
+    //    StartCoroutine(C_ReloadPhoton());
+    //}
 
-        Debug.Log("Joining room room_Demo_Alpha1 " + PhotonNetwork.JoinOrCreateRoom("room_Demo_Alpha1", roomOptions, typedLobby));
-    }
+    //IEnumerator C_ReloadPhoton()
+    //{
+    //    if (!PhotonNetwork.IsConnected)
+    //        PhotonNetwork.ConnectUsingSettings();         
+                
+    //    PhotonNetwork.NickName = PlayerPrefs.GetString("playerName", "Guest" + Random.Range(1, 9999));
+
+    //    yield return new WaitUntil(() => PhotonNetwork.IsConnected == true);
+
+    //    PhotonNetwork.JoinRoom("room_Demo_Alpha1");
+
+    //    PhotonNetwork.JoinOrCreateRoom("room_Demo_Alpha1", new RoomOptions() { MaxPlayers = 10 }, TypedLobby.Default);
+    //    yield return new WaitUntil(() => PhotonNetwork.InRoom == true);
+
+    //    Debug.Log("In room " + PhotonNetwork.CurrentRoom.Name);
+
+    //    yield break;
+    //}    
 }

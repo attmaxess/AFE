@@ -172,6 +172,7 @@ namespace AFE.BaseGround
             }
 
             currentPhotonGroundPlane.transform.position = posAtMinDistance;
+            useUpdate = false;
         }        
 
 

@@ -12,6 +12,7 @@ public class btnAction : MonoBehaviour
     public VideoPlayer videoPlayer = null;
     public UnityARVideo uityARVideo = null;
     public UnityARCameraNearFar unityARCameraNearFar = null;
+    public GameObject panelPlaceNote = null;
 
     [ContextMenu("OnClick")]
     public void OnClick()
@@ -35,6 +36,8 @@ public class btnAction : MonoBehaviour
         unityARCameraNearFar.Start();
 
         yield return new WaitUntil(() => logoMethod.doneGoToWaitBack == true);
+
+        panelPlaceNote.gameObject.SetActive(true);
 
         yield break;
     }
