@@ -3565,7 +3565,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1361131289
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3590,7 +3590,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1361131288}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
@@ -3923,6 +3923,36 @@ Prefab:
       propertyPath: m_RootOrder
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 114047739042535820, guid: 5467f6725d2f11c4e88c0165b45083c4,
+        type: 2}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114047739042535820, guid: 5467f6725d2f11c4e88c0165b45083c4,
+        type: 2}
+      propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114498981489415002, guid: 5467f6725d2f11c4e88c0165b45083c4,
+        type: 2}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114498981489415002, guid: 5467f6725d2f11c4e88c0165b45083c4,
+        type: 2}
+      propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114168482991537502, guid: 5467f6725d2f11c4e88c0165b45083c4,
+        type: 2}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114168482991537502, guid: 5467f6725d2f11c4e88c0165b45083c4,
+        type: 2}
+      propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 114888907272546138, guid: 5467f6725d2f11c4e88c0165b45083c4,
         type: 2}
       propertyPath: m_havePropertiesChanged
@@ -3931,33 +3961,6 @@ Prefab:
     - target: {fileID: 114888907272546138, guid: 5467f6725d2f11c4e88c0165b45083c4,
         type: 2}
       propertyPath: m_isInputParsingRequired
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114805466155425652, guid: 5467f6725d2f11c4e88c0165b45083c4,
-        type: 2}
-      propertyPath: btnState
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 114805466155425652, guid: 5467f6725d2f11c4e88c0165b45083c4,
-        type: 2}
-      propertyPath: canUseSkill
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114805466155425652, guid: 5467f6725d2f11c4e88c0165b45083c4,
-        type: 2}
-      propertyPath: skillHandler
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1915352984381172, guid: 5467f6725d2f11c4e88c0165b45083c4, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1241257860997138, guid: 5467f6725d2f11c4e88c0165b45083c4, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1019139921131002, guid: 5467f6725d2f11c4e88c0165b45083c4, type: 2}
-      propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
