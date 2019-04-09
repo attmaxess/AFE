@@ -23,10 +23,11 @@ namespace Com.Beetsoft.AFE
                 .Subscribe(other =>
                 {
                     Debug.Log("Twist");
-                    var k = other.GetComponent<IKnockUpable>();
-                    k?.BlowUp(KnockUpTime);
                     var receiver = other.GetComponent<IReceiveDamageable>();
                     receiver?.TakeDamage(DamageMessageCurrent);
+                    var k = other.GetComponent<IKnockUpable>();
+                    k?.BlowUp(KnockUpTime);
+              
                     //call to YasuoSpell1Handle
                     PhotonView.RPC("SpawnTwistChildRpc", RpcTarget.All, other.transform.position);
                 });
