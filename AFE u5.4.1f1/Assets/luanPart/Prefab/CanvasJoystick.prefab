@@ -186,6 +186,7 @@ GameObject:
   - component: {fileID: 222316342543409342}
   - component: {fileID: 114568052845120786}
   - component: {fileID: 114975583816423218}
+  - component: {fileID: 114614572275344072}
   m_Layer: 0
   m_Name: Joystick-Move-Animator-Hat
   m_TagString: Untagged
@@ -316,6 +317,7 @@ GameObject:
   - component: {fileID: 222446657424747314}
   - component: {fileID: 114724867577271936}
   - component: {fileID: 114321347491654298}
+  - component: {fileID: 114940446044730376}
   m_Layer: 0
   m_Name: Joystick-Move-Animator-Hat
   m_TagString: Untagged
@@ -610,6 +612,7 @@ GameObject:
   - component: {fileID: 222789837767314752}
   - component: {fileID: 114421905483892976}
   - component: {fileID: 114763248535057430}
+  - component: {fileID: 114274424546118176}
   m_Layer: 0
   m_Name: Joystick-Move-Animator-Hat
   m_TagString: Untagged
@@ -628,6 +631,7 @@ GameObject:
   - component: {fileID: 222448968867340866}
   - component: {fileID: 114301089969276622}
   - component: {fileID: 114178941783979494}
+  - component: {fileID: 114248770552127976}
   m_Layer: 0
   m_Name: Joystick-Move-Animator-Hat
   m_TagString: Untagged
@@ -4247,6 +4251,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 3
+--- !u!114 &114248770552127976
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1887701198783774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88f8ff47c75b4a544a0c19dac87c485f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  noParent: 0
+  upParent: 1
 --- !u!114 &114262101094101140
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4321,6 +4338,19 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114274424546118176
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1885295725084280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88f8ff47c75b4a544a0c19dac87c485f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  noParent: 0
+  upParent: 1
 --- !u!114 &114283324747315286
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6346,6 +6376,19 @@ MonoBehaviour:
   touchPressureBinding:
     enabled: 0
     targetList: []
+--- !u!114 &114614572275344072
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1244853152716122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88f8ff47c75b4a544a0c19dac87c485f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  noParent: 0
+  upParent: 1
 --- !u!114 &114615672542980640
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7477,6 +7520,19 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114940446044730376
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1537262853713564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88f8ff47c75b4a544a0c19dac87c485f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  noParent: 0
+  upParent: 1
 --- !u!114 &114949160871607858
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -8403,8 +8459,8 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1887701198783774}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 224162251030720436}
@@ -8412,7 +8468,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.125, y: 0.125}
   m_AnchorMax: {x: 0.875, y: 0.875}
-  m_AnchoredPosition: {x: 0, y: 0.000015258789}
+  m_AnchoredPosition: {x: -0.000022888187, y: 0.00001525879}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224706598887183894
