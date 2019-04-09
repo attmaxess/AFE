@@ -68,7 +68,7 @@ namespace Com.Beetsoft.AFE
         void CreateHealthBar(IChampionConfig championConfig, bool isMine)
         {
             var _barPlayer = Instantiate(barPlayer.transform, CanvasJoystickManager.Singleton.barPlayer, false);
-            _barPlayer.GetComponent<HealthBarPlayer>().SetInit(championConfig, isMine);
+            _barPlayer.GetComponent<HealthBarPlayer>().SetInit(transform, championConfig, isMine);
         }
     }
 }

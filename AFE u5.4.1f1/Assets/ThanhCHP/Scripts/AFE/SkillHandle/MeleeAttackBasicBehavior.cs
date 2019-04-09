@@ -17,6 +17,7 @@ namespace Com.Beetsoft.AFE
 
         public override void ActiveSkill(IInputMessage inputMessage)
         {
+            Debug.Log("ActiveSkill " + inputMessage);
             var receiver = gameObject.GetReceiveDamageableHealthLowest(rangeDetect);
             if (receiver == null)
             {

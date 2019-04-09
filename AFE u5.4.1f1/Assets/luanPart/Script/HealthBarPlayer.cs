@@ -12,13 +12,16 @@ public class HealthBarPlayer : MonoBehaviour
 
     IChampionConfig ChampionConfig;
 
+    public Transform character;
+
     void UpdateHealth(float percent)
     {
         slider.value = Mathf.Lerp(0, 1, percent);
     }
 
-    public void SetInit(IChampionConfig init, bool isMine)
+    public void SetInit(Transform character, IChampionConfig init, bool isMine)
     {
+        this.character = character;
         ChampionConfig = init;
         SetPosition(isMine);
     }
@@ -38,7 +41,7 @@ public class HealthBarPlayer : MonoBehaviour
             rect.anchoredPosition = new Vector2(20, 0);
         }
     }
-  
+
     private void Start()
     {
         float maxHealth = 0;
@@ -49,5 +52,10 @@ public class HealthBarPlayer : MonoBehaviour
                     maxHealth = health;
                 UpdateHealth(health / maxHealth);
             });
+
+        Observable.EveryLateUpdate().RepeatUntilDestroy(gameObject).Where(_ => this.character == null).Subscribe(_ =>
+        {
+            Destroy(gameObject);
+        });
     }
 }

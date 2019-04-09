@@ -84,7 +84,6 @@ public class GameManagerArVik : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         isJoinedRoom = true;
-        Debug.Log("OnJoinedRoom");
     }
 
     void OnGUI()
@@ -95,7 +94,6 @@ public class GameManagerArVik : MonoBehaviourPunCallbacks
 
     void OnDisconnectedFromPhoton()
     {
-        Debug.LogWarning("OnDisconnectedFromPhoton");
     }
 
     public bool isSpawnMainCharacter;

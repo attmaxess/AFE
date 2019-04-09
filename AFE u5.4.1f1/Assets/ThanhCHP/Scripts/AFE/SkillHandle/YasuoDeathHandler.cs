@@ -8,8 +8,6 @@ namespace Com.Beetsoft.AFE
     {
         protected override void Start()
         {
-            if (!photonView.IsMine) return;
-
             ChampionConfig.Health.Subscribe(health =>
             {
                 if (health <= 0)
@@ -17,6 +15,7 @@ namespace Com.Beetsoft.AFE
                     Debug.Log("DEATH");
                     Animator.SetTriggerWithBool(Constant.AnimationPram.Death);
                     Destroy(GetComponent<ReceiveDamageHandler>());
+                    Destroy(GetComponent<BlowUpObject>());
                 }
 
             });

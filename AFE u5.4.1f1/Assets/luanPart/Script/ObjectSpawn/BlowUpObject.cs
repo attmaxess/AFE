@@ -39,7 +39,6 @@ namespace Com.Beetsoft.AFE
         {
             minYAxis = transform.position.y;
         }
-
         public void BlowUp(float timeUp)
         {
             photonView.RPC("BlowUpRpc", RpcTarget.All, timeUp, GetRandomRotate());
