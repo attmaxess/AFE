@@ -6,10 +6,19 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class CreateCharacter : MonoBehaviour
-{   
+{
+    [Header("Debug")]
+    public bool isDebug = false;
+
     [Header("Params")] 
     public bool boolCreatePlaneJoystick = false;
-    public string characterPrefab = string.Empty;    
+    public string characterPrefab = string.Empty;
+
+    [Header("Output")]
+    public GameObject currentCharacter = null;
+
+    [Header("Spawn process")]
+    public bool doneClickSpawn = true;
 
     [ContextMenu("ClickSpawn")]
     public void ClickSpawn()
@@ -19,8 +28,13 @@ public class CreateCharacter : MonoBehaviour
 
     IEnumerator C_ClickSpawn()
     {
+        if (isDebug) Debug.Log("Start C_ClickSpawn");
+        doneClickSpawn = false;
+
         var newChar = PhotonNetwork.Instantiate(characterPrefab, Vector3.zero, Quaternion.identity, 0);
-        yield return new WaitUntil(() => newChar.gameObject != null);                       
+        yield return new WaitUntil(() => newChar.gameObject != null);
+
+        currentCharacter = newChar;
 
         if (boolCreatePlaneJoystick)
         {
@@ -30,5 +44,10 @@ public class CreateCharacter : MonoBehaviour
             _planeJoyStick?.GetComponent<PlaneJoystick>().SetMainCharacter(newChar);
             MessageBroker.Default.Publish<MassageSpawnNewCharacter>(new MassageSpawnNewCharacter(newChar.transform));
         }
+
+        if (isDebug) Debug.Log("Done C_ClickSpawn");
+        doneClickSpawn = true;
+
+        yield break;
     }    
 }

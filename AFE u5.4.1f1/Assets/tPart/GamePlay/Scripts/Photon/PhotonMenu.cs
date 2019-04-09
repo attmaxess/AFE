@@ -4,6 +4,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using System.Collections.Generic;
 using System;
+using UnityEngine.Networking;
 
 public class PhotonMenu : MonoBehaviour, ILobbyCallbacks, IConnectionCallbacks, IPunObservable
 {
@@ -11,12 +12,18 @@ public class PhotonMenu : MonoBehaviour, ILobbyCallbacks, IConnectionCallbacks, 
     public bool isDebug = true;
 
     [Header("Pun Inputs")]
+    public PhotonView photonView = null;    
+
+    [Header("Pun Params")]
+    public string lobbyName = "myLobby";
     public string roomName = "myRoom";
+    public string nickName = string.Empty;
     private Vector2 scrollPos = Vector2.zero;
 
     void Awake()
     {
 #if DEMO_ALPHA1
+        lobbyName = "lobby_Demo_Alpha1";
         roomName = "room_Demo_Alpha1";
 #endif
 
@@ -134,10 +141,32 @@ public class PhotonMenu : MonoBehaviour, ILobbyCallbacks, IConnectionCallbacks, 
 
     #region custom method
 
+    [Header("Disconnect")]
+    public bool doneDisconnect = true;
+
     [ContextMenu("Disconnect")]
     public void Disconnect()
     {
+        StartCoroutine(C_Disconnect());
+    }
+
+    IEnumerator C_Disconnect()
+    {
+        if (isDebug) Debug.Log("Start C_Disconnect");
+        doneDisconnect = false;
+
+        if (PhotonNetwork.InRoom) PhotonNetwork.LeaveRoom();
+        yield return new WaitUntil(() => PhotonNetwork.InRoom == false);
+
+        if (PhotonNetwork.InLobby) PhotonNetwork.LeaveLobby();
+        yield return new WaitUntil(() => PhotonNetwork.InLobby == false);
+
         PhotonNetwork.Disconnect();
+
+        if (isDebug) Debug.Log("Done C_Disconnect");
+        doneDisconnect = true;
+
+        yield break;
     }
 
     [ContextMenu("_ConnectUsingSettings")]
@@ -147,8 +176,12 @@ public class PhotonMenu : MonoBehaviour, ILobbyCallbacks, IConnectionCallbacks, 
             PhotonNetwork.ConnectUsingSettings(); // version of the game/demo. used to separate older clients from newer ones (e.g. if incompatible)
 
         //Load name from PlayerPrefs
-        PhotonNetwork.NickName = PlayerPrefs.GetString("playerName", "Guest" + UnityEngine.Random.Range(1, 9999));
+        nickName = PlayerPrefs.GetString("playerName", "Guest" + UnityEngine.Random.Range(1, 9999));
+        PhotonNetwork.NickName = nickName;
     }
+
+    [Header("ReConnectPhotonAlpha1")]
+    public bool doneReConnectPhotonAlpha1 = true;
 
     [ContextMenu("ReConnectPhotonAlpha1")]
     public void ReConnectPhotonAlpha1()
@@ -158,27 +191,107 @@ public class PhotonMenu : MonoBehaviour, ILobbyCallbacks, IConnectionCallbacks, 
 
     IEnumerator C_ReConnectPhotonAlpha1()
     {
+        if (isDebug) Debug.Log("Start C_ReConnectPhotonAlpha1");
+        doneReConnectPhotonAlpha1 = false;
+
         _ConnectUsingSettings();
-        yield return new WaitUntil(() => PhotonNetwork.IsConnected == true && PhotonNetwork.CurrentLobby != null);        
+        yield return new WaitUntil(() => PhotonNetwork.IsConnected == true);
 
-        bool canCreated = PhotonNetwork.CreateRoom(roomName, new RoomOptions() { MaxPlayers = 10 }, TypedLobby.Default);
-        float momentCreated = Time.time;
-        yield return new WaitUntil(() => (PhotonNetwork.CurrentRoom != null && PhotonNetwork.CurrentRoom.Name == roomName) || Time.time - momentCreated > 2f);
+        TypedLobby typedLobby = new TypedLobby();
+        typedLobby.Name = lobbyName;
+        typedLobby.Type = LobbyType.Default;
 
-        if (Time.time - momentCreated > 2f && canCreated == false)
+        if (!PhotonNetwork.InLobby) PhotonNetwork.JoinLobby(typedLobby);
+        yield return new WaitUntil(() => PhotonNetwork.CurrentLobby != null);
+
+        RoomOptions roomOptions = new RoomOptions();
+        roomOptions.MaxPlayers = 10;
+
+        bool canJoin = PhotonNetwork.JoinRoom(roomName);
+        float momentJoin = Time.time;
+        yield return new WaitUntil(() => (PhotonNetwork.CurrentRoom != null && PhotonNetwork.CurrentRoom.Name == roomName) || Time.time - momentJoin > 2f);
+
+        if (Time.time - momentJoin > 2f && canJoin == false)
         {
-            if (isDebug) Debug.Log("Cant create!! Try Joint!!");
-            bool canJoin = PhotonNetwork.JoinRoom(roomName);
-            float momentJoin = Time.time;
-            yield return new WaitUntil(() => (PhotonNetwork.CurrentRoom != null && PhotonNetwork.CurrentRoom.Name == roomName) || Time.time - momentJoin > 2f);
+            if (isDebug) Debug.Log("Cant join!! Create!!");
 
-            if (Time.time - momentCreated > 2f && canJoin == false)
+            //bool canbeMaster = PhotonNetwork.SetMasterClient(photonView);
+
+            bool canCreated = PhotonNetwork.CreateRoom(roomName, roomOptions, typedLobby);
+            float momentCreated = Time.time;
+            yield return new WaitUntil(() => (PhotonNetwork.CurrentRoom != null && PhotonNetwork.CurrentRoom.Name == roomName) || Time.time - momentCreated > 2f);
+
+            if (Time.time - momentCreated > 2f && canCreated == false)
             {
-                if (isDebug) Debug.Log("Cant join!! Break!!");
+                if (isDebug) Debug.Log("Cant create!! Try Joint!!");
+
             }
         }
 
+        if (isDebug) Debug.Log("Done C_ReConnectPhotonAlpha1");
+        doneReConnectPhotonAlpha1 = true;
+
         yield break;
+    }
+
+    [ContextMenu("LeaveLobby")]
+    public void LeaveLobby()
+    {
+        PhotonNetwork.LeaveLobby();
+    }
+
+    [ContextMenu("JoinCurrentRoom")]
+    public void JoinCurrentRoom()
+    {
+        PhotonNetwork.JoinRoom(roomName);
+    }    
+
+    [ContextMenu("LeaveRoom")]
+    public void LeaveRoom()
+    {
+        PhotonNetwork.LeaveRoom();
+    }
+
+    [ContextMenu("CreateCurrentRoom")]
+    public void CreateCurrentRoom()
+    {
+        TypedLobby typedLobby = new TypedLobby();
+        typedLobby.Name = lobbyName;
+        typedLobby.Type = LobbyType.Default;
+
+        RoomOptions roomOptions = new RoomOptions();
+        roomOptions.MaxPlayers = 10;
+
+        bool canCreated = PhotonNetwork.CreateRoom(roomName, roomOptions, typedLobby);
+    }        
+
+    [ContextMenu("DebugPlayerListInCurrentLobby")]
+    public void DebugPlayerListInCurrentLobby()
+    {
+        //Player[] playerList = PhotonNetwork.play;
+        //for (int i = 0; i < playerList.Length; i++)
+        //{
+        //    Debug.Log(playerList[i].NickName);
+        //}
+    }
+
+    [ContextMenu("DebugCurrentPhoton")]
+    public void DebugCurrentPhoton()
+    {
+        Debug.Log(PhotonNetwork.NickName);
+        Debug.Log(PhotonNetwork.CurrentLobby.Name);
+        Debug.Log(PhotonNetwork.CurrentRoom.Name);
+    }
+
+    [ContextMenu("DebugRoomList")]
+    public void DebugRoomList()
+    {
+        TypedLobby typedLobby = new TypedLobby();
+        typedLobby.Name = lobbyName;
+        typedLobby.Type = LobbyType.Default;
+
+        Debug.Log(PhotonNetwork.CountOfRooms);
+            //(typedLobby, "C0 >= 0 AND C0 < 50");
     }
 
     #endregion custom method
@@ -191,7 +304,12 @@ public class PhotonMenu : MonoBehaviour, ILobbyCallbacks, IConnectionCallbacks, 
         // this demo needs to join the lobby, to show available rooms!
 
         if (isDebug) Debug.Log("OnConnectedToMaster " + PhotonNetwork.MasterClient.NickName);
-        PhotonNetwork.JoinLobby();  // this joins the "default" lobby
+
+        TypedLobby typedLobby = new TypedLobby();
+        typedLobby.Name = lobbyName;
+        typedLobby.Type = LobbyType.Default;
+
+        PhotonNetwork.JoinLobby(typedLobby);  // this joins the "default" lobby
     }
 
     public void OnJoinedLobby()

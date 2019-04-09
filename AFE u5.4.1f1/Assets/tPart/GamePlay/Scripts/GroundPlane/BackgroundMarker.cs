@@ -45,4 +45,7 @@ public class BackgroundMarker : MonoBehaviour
     }
 
     #endregion local method
+
+    [Header("Retrieve Main Char")]
+    public RetrieveMainCharacter retrieveMainChar = null;    
 }

@@ -268,7 +268,8 @@ public class PlacenoteSampleView : MonoBehaviour, PlacenoteListener
 
                     mLabelText.text = "Loaded ID: " + mSelectedMapId;
 
-                    LoadImagePanel();
+                    //LoadImagePanel();
+                    LoadCharacter();
                 }
                 else if (faulted)
                 {
@@ -280,7 +281,7 @@ public class PlacenoteSampleView : MonoBehaviour, PlacenoteListener
                 }
             }
         );
-    }
+    }    
 
     [Header("LoadImagePanel")]
     public bool doneLoadImagePanel = true;
@@ -329,6 +330,48 @@ public class PlacenoteSampleView : MonoBehaviour, PlacenoteListener
 
         if (isDebug) Debug.Log("Start C_LoadImagePanel");
         doneLoadImagePanel = true;
+
+        yield break;
+    }
+
+    [Header("LoadCharacter")]
+    public bool doneLoadCharacter = true;
+    public CreateCharacter createCharacter = null;
+    public CanvasJoystickManagerMethods joystickMethods = null;
+    public BackgroundMarker currentGroundMarker = null;
+
+    void LoadCharacter()
+    {
+        StartCoroutine(C_LoadCharacter());
+    }
+
+    IEnumerator C_LoadCharacter()
+    {
+        if (isDebug) Debug.Log("Start C_LoadCharacter");
+        doneLoadCharacter = false;
+
+        yield return new WaitUntil(() => doneLoadImagePanel == true);
+
+        float momentBackground = Time.time;
+        yield return new WaitUntil(() => FindObjectOfType<BackgroundMarker>() != null || Time.time - momentBackground > 2f);
+
+        currentGroundMarker = FindObjectOfType<BackgroundMarker>();
+        if (currentGroundMarker == null && Time.time - momentBackground > 2f)
+        {
+            doneLoadCharacter = true;
+            yield break;
+        }
+
+        createCharacter.ClickSpawn();
+        joystickMethods.SetCanvasOn();
+        yield return new WaitUntil(() => createCharacter.doneClickSpawn == true);
+                
+        currentGroundMarker.retrieveMainChar.eSnap = RetrieveMainCharacter.eSnapBackgroundMarker.SpawnPosList;
+        currentGroundMarker.retrieveMainChar.TrySnap(currentGroundMarker, createCharacter.currentCharacter);
+        yield return new WaitUntil(() => currentGroundMarker.retrieveMainChar.doneSnapSpawnPos == true);
+
+        if (isDebug) Debug.Log("Done C_LoadCharacter");
+        doneLoadCharacter = true;
 
         yield break;
     }

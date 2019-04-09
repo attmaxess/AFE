@@ -19,10 +19,11 @@ namespace Photon.Realtime
     using System.Collections;
     using ExitGames.Client.Photon;
 
-    #if SUPPORTED_UNITY || NETFX_CORE
+#if SUPPORTED_UNITY || NETFX_CORE
     using Hashtable = ExitGames.Client.Photon.Hashtable;
     using SupportClass = ExitGames.Client.Photon.SupportClass;
-    #endif
+    using System;
+#endif
 
 
     /// <summary>
@@ -33,6 +34,7 @@ namespace Photon.Realtime
     /// This class resembles info about available rooms, as sent by the Master server's lobby.
     /// Consider all values as readonly. None are synced (only updated by events by server).
     /// </remarks>
+    [Serializable]
     public class RoomInfo
     {
         /// <summary>Used in lobby, to mark rooms that are no longer listed (for being full, closed or hidden).</summary>

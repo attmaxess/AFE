@@ -2484,6 +2484,9 @@ GameObject:
   - component: {fileID: 114206673551972426}
   - component: {fileID: 114186543667878610}
   - component: {fileID: 114856583579550672}
+  - component: {fileID: 114502211857671666}
+  - component: {fileID: 114808999715772402}
+  - component: {fileID: 114294397101910066}
   m_Layer: 5
   m_Name: SamplePanel
   m_TagString: Untagged
@@ -6436,6 +6439,27 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 'Snap Character To Center Of Ground '
+--- !u!114 &114294397101910066
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1796903669268766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14daaddda6d99f84bafb98e32b5d381e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ClickHere: 1
+  currentGround: {fileID: 0}
+  currentMainChar: {fileID: 0}
+  spawnposList:
+  - {fileID: 114213471623874830, guid: 60472098544586e45a9ab6ac2fee55b5, type: 2}
+  - {fileID: 114672349486354610, guid: 60472098544586e45a9ab6ac2fee55b5, type: 2}
+  - {fileID: 114034881808434064, guid: 60472098544586e45a9ab6ac2fee55b5, type: 2}
+  - {fileID: 114312840983487434, guid: 60472098544586e45a9ab6ac2fee55b5, type: 2}
+  eSnap: 1
+  doneSnapSpawnPos: 1
 --- !u!114 &114302489051572672
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7561,6 +7585,10 @@ MonoBehaviour:
   mapToFile: {fileID: 114856583579550672}
   isDebugMapFileInfo: 0
   doneLoadImagePanel: 1
+  doneLoadCharacter: 1
+  createCharacter: {fileID: 114502211857671666}
+  joystickMethods: {fileID: 114808999715772402}
+  retrieveMainChar: {fileID: 114294397101910066}
   screenCapture: {fileID: 114206673551972426}
   screenShot: {fileID: 114432862945351614}
   shapeManager: {fileID: 114140185152455318}
@@ -8288,6 +8316,22 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114502211857671666
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1796903669268766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9256a88d6b2482844a4eef2c8c862559, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDebug: 0
+  boolCreatePlaneJoystick: 1
+  characterPrefab: Yasuo_CHP
+  currentCharacter: {fileID: 0}
+  doneClickSpawn: 1
 --- !u!114 &114504690778232424
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -10662,6 +10706,17 @@ MonoBehaviour:
   fv: {fileID: 114547478952363048}
   CurrentBestIndex: -1
   CurrentBestPos: {x: -1, y: -1, z: -1}
+--- !u!114 &114808999715772402
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1796903669268766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d58b7cfe0fe4d194a93648efb0963ef4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114809766002217822
 MonoBehaviour:
   m_ObjectHideFlags: 1

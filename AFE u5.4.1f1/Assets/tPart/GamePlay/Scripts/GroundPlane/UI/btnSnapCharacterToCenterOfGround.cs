@@ -19,7 +19,7 @@ public class btnSnapCharacterToCenterOfGround : MonoBehaviour
             return;
         }
 
-        PhotonGroundPlane ground = FindObjectOfType<PhotonGroundPlane>();
+        BackgroundMarker ground = FindObjectOfType<BackgroundMarker>();
         if (ground == null)
         {
             Debug.Log("Can't find PhotonGroundPlane");

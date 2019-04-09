@@ -263,6 +263,8 @@ GameObject:
   - component: {fileID: 4556427481972274}
   - component: {fileID: 114411047519198854}
   - component: {fileID: 114209050211965800}
+  - component: {fileID: 114132244374964932}
+  - component: {fileID: 114477417632443886}
   m_Layer: 0
   m_Name: Code
   m_TagString: Untagged
@@ -1324,6 +1326,38 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 0
   m_VerticalFit: 2
+--- !u!114 &114132244374964932
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1351301126672050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 56
+    i1: 173
+    i2: 115
+    i3: 54
+    i4: 215
+    i5: 120
+    i6: 196
+    i7: 228
+    i8: 139
+    i9: 164
+    i10: 234
+    i11: 37
+    i12: 231
+    i13: 22
+    i14: 59
+    i15: 164
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!114 &114144455133170552
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1335,8 +1369,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9256a88d6b2482844a4eef2c8c862559, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDebug: 0
   boolCreatePlaneJoystick: 1
   characterPrefab: VikingPrefab
+  currentCharacter: {fileID: 0}
+  doneClickSpawn: 1
 --- !u!114 &114157540534025126
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1348,8 +1385,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9256a88d6b2482844a4eef2c8c862559, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDebug: 0
   boolCreatePlaneJoystick: 0
   characterPrefab: PhotonGroundPlanePrefab
+  currentCharacter: {fileID: 0}
+  doneClickSpawn: 1
 --- !u!114 &114168315627345360
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1729,8 +1769,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9256a88d6b2482844a4eef2c8c862559, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDebug: 0
   boolCreatePlaneJoystick: 1
   characterPrefab: AhriPrefab
+  currentCharacter: {fileID: 0}
+  doneClickSpawn: 1
 --- !u!114 &114336192043609666
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2022,9 +2065,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDebug: 1
+  photonView: {fileID: 0}
+  lobbyName: myLobby
   roomName: myRoom
+  nickName: 
   DrawInfo: 0
   canvasPhoton: {fileID: 223485593261893842}
+  doneDisconnect: 1
+  doneReConnectPhotonAlpha1: 1
 --- !u!114 &114411485690092806
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2157,6 +2205,18 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114477417632443886
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1351301126672050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 246975512, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowLobbyGUI: 1
 --- !u!114 &114494433300249864
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2786,8 +2846,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9256a88d6b2482844a4eef2c8c862559, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDebug: 0
   boolCreatePlaneJoystick: 1
   characterPrefab: Yasuo_CHP
+  currentCharacter: {fileID: 0}
+  doneClickSpawn: 1
 --- !u!114 &114851136359955166
 MonoBehaviour:
   m_ObjectHideFlags: 1
