@@ -116,7 +116,10 @@ public class SaveAndLoadAMap : MonoBehaviour, PlacenoteListener
         LibPlacenote.Instance.LoadMap(savedMapID, 
         (completed, faulted, percentage) =>    
         {
-            if (completed) {
+            if (completed)
+            {
+                BackgroundMarker backgroundMarker = FindObjectOfType<BackgroundMarker>();
+                backgroundMarker.Show();
 
                 LibPlacenote.Instance.StartSession();
                 notifications.text = "Trying to Localize Map: " + savedMapID;
@@ -130,7 +133,7 @@ public class SaveAndLoadAMap : MonoBehaviour, PlacenoteListener
         }
                                       
         );
-    }
+    }    
 
     // Runs when a new pose is received from Placenote.    
     public void OnPose(Matrix4x4 outputPose, Matrix4x4 arkitPose) { }

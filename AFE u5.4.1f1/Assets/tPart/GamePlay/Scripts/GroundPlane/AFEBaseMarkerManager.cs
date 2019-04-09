@@ -7,6 +7,7 @@ using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using ARKitHitTesting;
 using Photon.Pun;
+using UnityEngine.UI;
 
 namespace AFE.BaseGround
 {
@@ -19,55 +20,47 @@ namespace AFE.BaseGround
     {
         [Header("Debug")]
         public bool isDebug = true;
-        public bool useUpdate = true;
+        [SerializeField]
+        bool _useUpdate = false;
+        public bool useUpdate { get { return _useUpdate; } set { _useUpdate = value; OnUseUpdateChanged(); } }
 
-        [Header("Inputs")]        
+        [Header("Background Marker")]
+        public Animator animBtnPlaceBgMarker = null;
 
-        PhotonGroundPlane _currentPhotonGroundPlane = null;
-        PhotonGroundPlane currentPhotonGroundPlane
+        [ContextMenu("OnUseUpdateChanged")]
+        public void OnUseUpdateChanged()
+        {
+            animBtnPlaceBgMarker.SetBool("isPlacing", useUpdate);
+        }
+
+        [Header("Inputs")]
+
+        public GameObject backgroundMarkerPrefab = null;
+
+        BackgroundMarker _currentBackgroundMarker = null;
+        BackgroundMarker currentBackgroundMarker
         {
             get
             {
-                if (_currentPhotonGroundPlane == null)
-                    FindCurrentPhotonGroundPlane();
-                return _currentPhotonGroundPlane;
+                if (_currentBackgroundMarker == null) _currentBackgroundMarker = FindObjectOfType<BackgroundMarker>();
+                if (_currentBackgroundMarker == null) _currentBackgroundMarker = Instantiate(backgroundMarkerPrefab, Vector3.zero, Quaternion.identity).GetComponent<BackgroundMarker>();
+                return _currentBackgroundMarker;
             }
         }
-
-        public void FindCurrentPhotonGroundPlane()
-        {
-            PhotonGroundPlane[] planes = FindObjectsOfType<PhotonGroundPlane>();
-            for (int i = 0; i < planes.Length; i++)
-            {
-                PhotonView pv = planes[i].GetComponent<PhotonView>();
-                if (pv.IsMine)
-                {
-                    _currentPhotonGroundPlane = planes[i];
-                    return;
-                }
-            }
-            if (isDebug) Debug.Log("Can't find PhotonGroundPlane!!");
-        }
-
-        // Functions for adding and deleting models
 
         // Update function checks for hittest
-
         void Update()
         {
-            if (!useUpdate) return;            
+            if (!useUpdate) return;
             // for hit testing on the device
 
             if (Input.touchCount > 0)
             {
-                if (currentPhotonGroundPlane == null) return;
-
                 var touch = Input.GetTouch(0);
                 if (touch.phase == TouchPhase.Ended)
                 {
                     if (EventSystem.current.currentSelectedGameObject == null)
                     {
-
                         Debug.Log("Not touching a UI button. Moving on.");
 
                         // add new shape
@@ -136,10 +129,10 @@ namespace AFE.BaseGround
             }
             return false;
         }
-        
+
         public void PlacePhotonGround(ModelInfo modelInfo)
         {
-            if (currentPhotonGroundPlane == null) return;            
+            if (currentBackgroundMarker == null) return;
 
             if (LibPlacenote.Instance.GetStatus() != LibPlacenote.MappingStatus.RUNNING)
             {
@@ -158,7 +151,7 @@ namespace AFE.BaseGround
             Vector3 modelPos = new Vector3(modelInfo.px, modelInfo.py, modelInfo.pz);
 
             float minDistance = Mathf.Infinity;
-            Vector3 posAtMinDistance = -Vector3.one;            
+            Vector3 posAtMinDistance = -Vector3.one;
 
             for (int i = 0; i < map.Length; i++)
             {
@@ -171,19 +164,19 @@ namespace AFE.BaseGround
                 }
             }
 
-            currentPhotonGroundPlane.transform.position = posAtMinDistance;
+            currentBackgroundMarker.transform.position = posAtMinDistance;
             useUpdate = false;
-        }        
+        }
 
 
         // Helper Functions to convert models to and from JSON
 
-        public JObject PhotonGround2JSON()
+        public JObject BackgroundMarker2JSON()
         {
-            if (currentPhotonGroundPlane == null) return null;
+            if (currentBackgroundMarker == null) return null;
 
             ModelInfo newInfo = new ModelInfo();
-            Vector3 groundPos = currentPhotonGroundPlane.transform.position;
+            Vector3 groundPos = currentBackgroundMarker.transform.position;
             newInfo.px = groundPos.x; newInfo.py = groundPos.y; newInfo.pz = groundPos.z;
 
             ModelList modelList = new ModelList();
@@ -193,13 +186,13 @@ namespace AFE.BaseGround
             return JObject.FromObject(modelList);
         }
 
-        public void LoadPhotonGroundFromJSON(JToken mapMetadata)
+        public void LoadBackgroundMarkerFromJSON(JToken mapMetadata)
         {
-            if (currentPhotonGroundPlane == null) return;
+            if (currentBackgroundMarker == null) return;
 
-            if (mapMetadata is JObject && mapMetadata["modelList"] is JObject)
+            if (mapMetadata is JObject && mapMetadata["backgroundMarker"] is JObject)
             {
-                ModelList modelList = mapMetadata["modelList"].ToObject<ModelList>();
+                ModelList modelList = mapMetadata["backgroundMarker"].ToObject<ModelList>();
                 if (modelList.models == null || modelList.models.Length == 0)
                 {
                     Debug.Log("no models added");
@@ -207,8 +200,30 @@ namespace AFE.BaseGround
                 }
 
                 Vector3 groundPos = new Vector3(modelList.models[0].px, modelList.models[0].py, modelList.models[0].pz);
-                currentPhotonGroundPlane.transform.position = groundPos;
+                currentBackgroundMarker.transform.position = groundPos;
             }
         }
+
+        #region local method
+
+        [ContextMenu("Show")]
+        public void Show()
+        {
+            currentBackgroundMarker.Show();
+        }
+
+        [ContextMenu("Hide")]
+        public void Hide()
+        {
+            currentBackgroundMarker.Hide();
+        }
+
+        [ContextMenu("ToggleShowHide")]
+        public void ToggleShowHide()
+        {
+            currentBackgroundMarker.ToggleShowHide();
+        }
+
+        #endregion local method
     }
 }

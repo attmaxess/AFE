@@ -22,9 +22,12 @@ public class btnAction : MonoBehaviour
 
     IEnumerator C_OnClick()
     {
+        canvasVideo.interactable = false;
+
         logoMethod.GoTo1WaitBack0();
         yield return new WaitUntil(() => BeetsoftLogo.Instance.doneC_ToAlPha == true);
-        canvasVideo.alpha = 0;
+        canvasVideo.alpha = 0;        
+
         videoPlayer.Stop();
         videoPlayer.clip = null;
 

@@ -9,6 +9,7 @@ using System.IO;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using DHT.TextureToString64;
+using AFE.BaseGround;
 
 public class PlacenoteSampleView : MonoBehaviour, PlacenoteListener
 {
@@ -464,9 +465,12 @@ public class PlacenoteSampleView : MonoBehaviour, PlacenoteListener
                 JObject userdata = new JObject();
                 metadata.userdata = userdata;
 
-                JObject shapeList = GetComponent<ShapeManager>().Shapes2JSON();
+                JObject shapeList = shapeManager.Shapes2JSON();
                 userdata["shapeList"] = shapeList;
                 GetComponent<ShapeManager>().ClearShapes();
+
+                JObject backgroundMarker = afeBaseMarkerManager.BackgroundMarker2JSON();
+                userdata["backgroundMarker"] = backgroundMarker;
 
                 ///Test gởi đi/lấy về gói info gồm hình ảnh với PlaceNote luôn
                 ///=============================================================
@@ -521,13 +525,18 @@ public class PlacenoteSampleView : MonoBehaviour, PlacenoteListener
 
     public void OnPose(Matrix4x4 outputPose, Matrix4x4 arkitPose) { }
 
+    [Header("On Status Change")]
+    public ShapeManager shapeManager = null;
+    public AFEBaseMarkerManager afeBaseMarkerManager = null;
+
     public void OnStatusChange(LibPlacenote.MappingStatus prevStatus, LibPlacenote.MappingStatus currStatus)
     {
         Debug.Log("prevStatus: " + prevStatus.ToString() + " currStatus: " + currStatus.ToString());
         if (currStatus == LibPlacenote.MappingStatus.RUNNING && prevStatus == LibPlacenote.MappingStatus.LOST)
         {
             mLabelText.text = "Localized";
-            GetComponent<ShapeManager>().LoadShapesJSON(mSelectedMapInfo.metadata.userdata);
+            shapeManager.LoadShapesJSON(mSelectedMapInfo.metadata.userdata);
+            afeBaseMarkerManager.LoadBackgroundMarkerFromJSON(mSelectedMapInfo.metadata.userdata);
         }
         else if (currStatus == LibPlacenote.MappingStatus.RUNNING && prevStatus == LibPlacenote.MappingStatus.WAITING)
         {

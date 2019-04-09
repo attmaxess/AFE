@@ -142,7 +142,6 @@ public class ShapeManager : MonoBehaviour
         AddShape(dropPosition, dropRotation);
     }
 
-
     // All shape management functions (add shapes, save shapes to metadata etc.
 
     public void AddShape(Vector3 shapePosition, Quaternion shapeRotation)
