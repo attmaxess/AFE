@@ -6,13 +6,10 @@ using System.Collections.Generic;
 using System;
 using UnityEngine.Networking;
 
-public class PhotonMenu : MonoBehaviour, ILobbyCallbacks, IConnectionCallbacks, IPunObservable
+public class PhotonMenu : MonoBehaviourPunCallbacks
 {
     [Header("Debug")]
     public bool isDebug = true;
-
-    [Header("Pun Inputs")]
-    public PhotonView photonView = null;    
 
     [Header("Pun Params")]
     public string lobbyName = "myLobby";
@@ -26,117 +23,33 @@ public class PhotonMenu : MonoBehaviour, ILobbyCallbacks, IConnectionCallbacks, 
         lobbyName = "lobby_Demo_Alpha1";
         roomName = "room_Demo_Alpha1";
 #endif
-
-        _ConnectUsingSettings();
-    }    
-
-    [Header("OnGUI")]
-    public bool DrawInfo = false;
-
-    void OnGUI()
-    {
-        if (!PhotonNetwork.IsConnected)
-        {
-            ShowConnectingGUI();
-            return;   //Wait for a connection
-        }
-
-        if (PhotonNetwork.CurrentRoom != null)
-            return; //Only when we're not in a Room
-
-        if (DrawInfo)
-        {
-            GUILayout.BeginArea(new Rect((Screen.width - 400) / 2, (Screen.height - 300) / 2, 400, 300));
-
-            GUILayout.Label("Main Menu");
-
-            //Player name
-            GUILayout.BeginHorizontal();
-            GUILayout.Label("Player name:", GUILayout.Width(150));
-            PhotonNetwork.NickName = GUILayout.TextField(PhotonNetwork.NickName);
-            if (GUI.changed)//Save name
-                PlayerPrefs.SetString("playerName", PhotonNetwork.NickName);
-            GUILayout.EndHorizontal();
-
-            GUILayout.Space(15);
-
-            //Join room by title
-            GUILayout.BeginHorizontal();
-            GUILayout.Label("JOIN ROOM:", GUILayout.Width(150));
-            roomName = GUILayout.TextField(roomName);
-            if (GUILayout.Button("GO"))
-            {
-                PhotonNetwork.JoinRoom(roomName);
-            }
-            GUILayout.EndHorizontal();
-
-            //Create a room (fails if exist!)
-            GUILayout.BeginHorizontal();
-            GUILayout.Label("CREATE ROOM:", GUILayout.Width(150));
-            roomName = GUILayout.TextField(roomName);
-            if (GUILayout.Button("GO"))
-            {
-                // using null as TypedLobby parameter will also use the default lobby
-                PhotonNetwork.CreateRoom(roomName, new RoomOptions() { MaxPlayers = 10 }, TypedLobby.Default);
-            }
-            GUILayout.EndHorizontal();
-
-            //Join random room
-            GUILayout.BeginHorizontal();
-            GUILayout.Label("JOIN RANDOM ROOM:", GUILayout.Width(150));
-            if (roomList.Count == 0)
-            {
-                GUILayout.Label("..no games available...");
-            }
-            else
-            {
-                if (GUILayout.Button("GO"))
-                {
-                    PhotonNetwork.JoinRandomRoom();
-                }
-            }
-            GUILayout.EndHorizontal();
-
-            GUILayout.Space(30);
-            GUILayout.Label("ROOM LISTING:");
-            if (roomList.Count == 0)
-            {
-                GUILayout.Label("..no games available..");
-            }
-            else
-            {
-                //Room listing: simply call GetRoomList: no need to fetch/poll whatever!
-                scrollPos = GUILayout.BeginScrollView(scrollPos);
-                foreach (RoomInfo game in roomList)
-                {
-                    GUILayout.BeginHorizontal();
-                    GUILayout.Label(game.Name + " " + game.PlayerCount + "/" + game.MaxPlayers);
-                    if (GUILayout.Button("JOIN"))
-                    {
-                        PhotonNetwork.JoinRoom(game.Name);
-                    }
-                    GUILayout.EndHorizontal();
-                }
-                GUILayout.EndScrollView();
-            }
-
-            GUILayout.EndArea();
-        }
     }
+
+    //[Header("OnGUI")]    
+    //public bool DrawOnGUI = false;    
 
     [Header("Show On Lost Connection")]
     public Canvas canvasPhoton = null;
+    public GameStateEqual stateArKitPlaceNote = null;
 
-    void ShowConnectingGUI()
+    void CheckConnecting()
     {
-        if (!canvasPhoton.gameObject.activeSelf) canvasPhoton.gameObject.SetActive(true);
-
-        GUILayout.BeginArea(new Rect((Screen.width - 400) / 2, (Screen.height - 300) / 2, 400, 300));
-
-        GUILayout.Label("Connecting to Photon server.");
-        GUILayout.Label("Hint: This demo uses a settings file and logs the server address to the console.");
-
-        GUILayout.EndArea();
+        stateArKitPlaceNote.OnClick();
+        if (stateArKitPlaceNote.resultEqual == true)
+        {
+            if (!PhotonNetwork.IsConnected
+            || PhotonNetwork.CurrentLobby == null || PhotonNetwork.CurrentLobby.Name != lobbyName
+            || PhotonNetwork.CurrentRoom == null || PhotonNetwork.CurrentRoom.Name != roomName)
+            {
+                if (!canvasPhoton.gameObject.activeSelf)
+                    canvasPhoton.gameObject.SetActive(true);
+            }
+            else
+            {
+                if (canvasPhoton.gameObject.activeSelf)
+                    canvasPhoton.gameObject.SetActive(false);
+            }
+        }
     }
 
     #region custom method
@@ -169,15 +82,30 @@ public class PhotonMenu : MonoBehaviour, ILobbyCallbacks, IConnectionCallbacks, 
         yield break;
     }
 
-    [ContextMenu("_ConnectUsingSettings")]
-    public void _ConnectUsingSettings()
+    [Header("ConnectUsingSettings")]
+    public bool doneConnectUsingSettings = true;
+
+    [ContextMenu("ConnectUsingSettings")]
+    public void ConnectUsingSettings()
     {
+        StartCoroutine(C_ConnectUsingSettings());
+    }
+
+    IEnumerator C_ConnectUsingSettings()
+    {
+        doneConnectUsingSettings = false;
+
         if (!PhotonNetwork.IsConnected)
             PhotonNetwork.ConnectUsingSettings(); // version of the game/demo. used to separate older clients from newer ones (e.g. if incompatible)
 
         //Load name from PlayerPrefs
         nickName = PlayerPrefs.GetString("playerName", "Guest" + UnityEngine.Random.Range(1, 9999));
         PhotonNetwork.NickName = nickName;
+
+        yield return new WaitUntil(() => PhotonNetwork.IsConnected == true);
+        doneConnectUsingSettings = true;
+
+        yield break;
     }
 
     [Header("ReConnectPhotonAlpha1")]
@@ -194,37 +122,65 @@ public class PhotonMenu : MonoBehaviour, ILobbyCallbacks, IConnectionCallbacks, 
         if (isDebug) Debug.Log("Start C_ReConnectPhotonAlpha1");
         doneReConnectPhotonAlpha1 = false;
 
-        _ConnectUsingSettings();
-        yield return new WaitUntil(() => PhotonNetwork.IsConnected == true);
+        ConnectUsingSettings();
+        yield return new WaitUntil(() => doneConnectUsingSettings == true);
 
         TypedLobby typedLobby = new TypedLobby();
-        typedLobby.Name = lobbyName;
-        typedLobby.Type = LobbyType.Default;
 
-        if (!PhotonNetwork.InLobby) PhotonNetwork.JoinLobby(typedLobby);
-        yield return new WaitUntil(() => PhotonNetwork.CurrentLobby != null);
-
-        RoomOptions roomOptions = new RoomOptions();
-        roomOptions.MaxPlayers = 10;
-
-        bool canJoin = PhotonNetwork.JoinRoom(roomName);
-        float momentJoin = Time.time;
-        yield return new WaitUntil(() => (PhotonNetwork.CurrentRoom != null && PhotonNetwork.CurrentRoom.Name == roomName) || Time.time - momentJoin > 2f);
-
-        if (Time.time - momentJoin > 2f && canJoin == false)
+        if (!PhotonNetwork.InLobby || PhotonNetwork.CurrentLobby.Name != lobbyName)
         {
-            if (isDebug) Debug.Log("Cant join!! Create!!");
+            typedLobby = new TypedLobby();
+            typedLobby.Name = lobbyName;
+            typedLobby.Type = LobbyType.Default;
+            PhotonNetwork.JoinLobby(typedLobby);
 
-            //bool canbeMaster = PhotonNetwork.SetMasterClient(photonView);
+            yield return new WaitUntil(() => PhotonNetwork.CurrentLobby != null && PhotonNetwork.CurrentLobby.Name == lobbyName);
+        }
 
-            bool canCreated = PhotonNetwork.CreateRoom(roomName, roomOptions, typedLobby);
+        if (!PhotonNetwork.InRoom || PhotonNetwork.CurrentRoom.Name != roomName)
+        {
+            bool canCreated = false;
             float momentCreated = Time.time;
-            yield return new WaitUntil(() => (PhotonNetwork.CurrentRoom != null && PhotonNetwork.CurrentRoom.Name == roomName) || Time.time - momentCreated > 2f);
 
-            if (Time.time - momentCreated > 2f && canCreated == false)
+            bool canJoin = false;
+            float momentJoin = Time.time;
+
+            if (roomList.FindIndex((x) => x.Name == roomName) == -1)
             {
-                if (isDebug) Debug.Log("Cant create!! Try Joint!!");
+                RoomOptions roomOptions = new RoomOptions();
+                roomOptions.MaxPlayers = 10;
 
+                try
+                {
+                    canCreated = PhotonNetwork.CreateRoom(roomName, roomOptions, typedLobby);
+                    momentCreated = Time.time;
+                }
+                catch
+                {
+                    doneReConnectPhotonAlpha1 = true;
+                    yield break;
+                }
+            }
+            else
+            {
+                try
+                {
+                    canJoin = PhotonNetwork.JoinRoom(roomName);
+                    momentJoin = Time.time;
+                }
+                catch
+                {
+                    doneReConnectPhotonAlpha1 = true;
+                    yield break;
+                }                
+            }
+
+            //yield return new WaitUntil(() => (PhotonNetwork.CurrentRoom != null && PhotonNetwork.CurrentRoom.Name == roomName) || Time.time - momentCreated > 2f);
+            //ield return new WaitUntil(() => (PhotonNetwork.CurrentRoom != null && PhotonNetwork.CurrentRoom.Name == roomName) || Time.time - momentJoin > 2f);
+
+            if (Time.time - momentJoin > 2f && (canJoin == false || canCreated == false))
+            {
+                if (isDebug) Debug.Log("Cant join or Create!!");
             }
         }
 
@@ -244,7 +200,7 @@ public class PhotonMenu : MonoBehaviour, ILobbyCallbacks, IConnectionCallbacks, 
     public void JoinCurrentRoom()
     {
         PhotonNetwork.JoinRoom(roomName);
-    }    
+    }
 
     [ContextMenu("LeaveRoom")]
     public void LeaveRoom()
@@ -263,7 +219,7 @@ public class PhotonMenu : MonoBehaviour, ILobbyCallbacks, IConnectionCallbacks, 
         roomOptions.MaxPlayers = 10;
 
         bool canCreated = PhotonNetwork.CreateRoom(roomName, roomOptions, typedLobby);
-    }        
+    }
 
     [ContextMenu("DebugPlayerListInCurrentLobby")]
     public void DebugPlayerListInCurrentLobby()
@@ -291,19 +247,17 @@ public class PhotonMenu : MonoBehaviour, ILobbyCallbacks, IConnectionCallbacks, 
         typedLobby.Type = LobbyType.Default;
 
         Debug.Log(PhotonNetwork.CountOfRooms);
-            //(typedLobby, "C0 >= 0 AND C0 < 50");
+        //(typedLobby, "C0 >= 0 AND C0 < 50");
     }
 
     #endregion custom method
 
     #region pun callback
 
-    public void OnConnectedToMaster()
+    public override void OnConnectedToMaster()
     {
         // this method gets called by PUN, if "Auto Join Lobby" is off.
         // this demo needs to join the lobby, to show available rooms!
-
-        if (isDebug) Debug.Log("OnConnectedToMaster " + PhotonNetwork.MasterClient.NickName);
 
         TypedLobby typedLobby = new TypedLobby();
         typedLobby.Name = lobbyName;
@@ -312,58 +266,133 @@ public class PhotonMenu : MonoBehaviour, ILobbyCallbacks, IConnectionCallbacks, 
         PhotonNetwork.JoinLobby(typedLobby);  // this joins the "default" lobby
     }
 
-    public void OnJoinedLobby()
+    public override void OnJoinedLobby()
     {
+        base.OnJoinedLobby();
         if (isDebug) Debug.Log("OnJoinedLobby " + PhotonNetwork.CurrentLobby.Name);
+        CheckConnecting();
     }
 
-    public void OnLeftLobby()
+    public override void OnLeftLobby()
     {
+        base.OnLeftLobby();
         if (isDebug) Debug.Log("OnLeftLobby");
     }
 
-    public void OnRoomListUpdate(List<RoomInfo> roomList)
+    public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
+        base.OnRoomListUpdate(roomList);
         if (isDebug) Debug.Log("OnRoomListUpdate : " + roomList.Count);
         this.roomList = roomList;
     }
 
-    public void OnLobbyStatisticsUpdate(List<TypedLobbyInfo> lobbyStatistics)
+    public override void OnLobbyStatisticsUpdate(List<TypedLobbyInfo> lobbyStatistics)
     {
+        base.OnLobbyStatisticsUpdate(lobbyStatistics);
         if (isDebug) Debug.Log("OnLobbyStatisticsUpdate : " + lobbyStatistics.Count);
     }
 
-    public void OnConnected()
+    public override void OnConnected()
     {
+        base.OnConnected();
         if (isDebug) Debug.Log("OnConnected ");
     }
 
-    public void OnDisconnected(DisconnectCause cause)
+    public override void OnDisconnected(DisconnectCause cause)
     {
+        base.OnDisconnected(cause);
         if (isDebug) Debug.Log("OnDisconnected " + cause.ToString());
+        CheckConnecting();
     }
 
-    public void OnRegionListReceived(RegionHandler regionHandler)
+    public override void OnRegionListReceived(RegionHandler regionHandler)
     {
+        base.OnRegionListReceived(regionHandler);
         if (isDebug) Debug.Log("OnRegionListReceived " + regionHandler.BestRegion.ToString());
     }
 
-    public void OnCustomAuthenticationResponse(Dictionary<string, object> data)
+    public override void OnCustomAuthenticationResponse(Dictionary<string, object> data)
     {
-        if (isDebug) Debug.Log("OnCustomAuthenticationResponse " + data.Count);        
+        base.OnCustomAuthenticationResponse(data);
+        if (isDebug) Debug.Log("OnCustomAuthenticationResponse " + data.Count);
     }
 
-    public void OnCustomAuthenticationFailed(string debugMessage)
+    public override void OnCustomAuthenticationFailed(string debugMessage)
     {
-        if (isDebug) Debug.Log("OnCustomAuthenticationFailed " + debugMessage);        
+        base.OnCustomAuthenticationFailed(debugMessage);
+        if (isDebug) Debug.Log("OnCustomAuthenticationFailed " + debugMessage);
     }
 
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    public override void OnFriendListUpdate(List<FriendInfo> friendList)
     {
-        ///Do the Serialize here
+        base.OnFriendListUpdate(friendList);
+        if (isDebug) Debug.Log("OnFriendListUpdate " + friendList.Count);
+    }
+
+    public override void OnCreatedRoom()
+    {
+        base.OnCreatedRoom();
+        if (isDebug) Debug.Log("OnCreatedRoom");
+    }
+
+    public override void OnCreateRoomFailed(short returnCode, string message)
+    {
+        base.OnCreateRoomFailed(returnCode, message);
+        if (isDebug) Debug.Log("OnCreateRoomFailed " + returnCode + ", " + message);
+        CheckConnecting();
+    }
+
+    void AddOnceRoom(string roomName)
+    {
+        if (roomList.FindIndex((x) => x.Name == roomName) == -1)
+        {
+
+        }
+        else
+        {
+
+        }
+    }
+
+    public override void OnJoinedRoom()
+    {
+        base.OnJoinedRoom();
+        if (isDebug) Debug.Log("OnJoinedRoom");
+        CheckConnecting();
+    }
+
+    public override void OnJoinRoomFailed(short returnCode, string message)
+    {
+        base.OnJoinRandomFailed(returnCode, message);
+        if (isDebug) Debug.Log("OnJoinRoomFailed" + returnCode + ", " + message);
+        CheckConnecting();
+    }
+
+    public override void OnJoinRandomFailed(short returnCode, string message)
+    {
+        base.OnJoinRandomFailed(returnCode, message);
+        if (isDebug) Debug.Log("OnJoinRandomFailed" + returnCode + ", " + message);
+        CheckConnecting();
+    }
+
+    public override void OnLeftRoom()
+    {
+        base.OnLeftRoom();
+        if (isDebug) Debug.Log("OnLeftRoom");
+        CheckConnecting();
     }
 
     #endregion pun callback
+
+    public override void OnEnable()
+    {
+        base.OnEnable();
+    }
+
+    public override void OnDisable()
+    {
+        base.OnDisable();
+    }
 
     public List<RoomInfo> roomList = new List<RoomInfo>();
 }

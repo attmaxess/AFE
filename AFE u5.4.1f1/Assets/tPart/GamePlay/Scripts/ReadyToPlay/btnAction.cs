@@ -14,6 +14,15 @@ public class btnAction : MonoBehaviour
     public UnityARCameraNearFar unityARCameraNearFar = null;
     public GameObject panelPlaceNote = null;
     public PhotonMenu photonMenu = null;
+    public GameStateBeThis stateWhenAwake = null;
+
+    private void Awake()
+    {
+        stateWhenAwake.OnClick();
+    }
+
+    [Header("OnClick")]
+    public GameStateBeThis stateAfterClick = null;
 
     [ContextMenu("OnClick")]
     public void OnClick()
@@ -44,6 +53,7 @@ public class btnAction : MonoBehaviour
         yield return new WaitUntil(() => logoMethod.doneGoToWaitBack == true);
 
         panelPlaceNote.gameObject.SetActive(true);
+        stateAfterClick.OnClick();
 
         yield break;
     }

@@ -263,8 +263,9 @@ GameObject:
   - component: {fileID: 4556427481972274}
   - component: {fileID: 114411047519198854}
   - component: {fileID: 114209050211965800}
-  - component: {fileID: 114132244374964932}
-  - component: {fileID: 114477417632443886}
+  - component: {fileID: 114638592403259646}
+  - component: {fileID: 114676211136841116}
+  - component: {fileID: 114174209977137652}
   m_Layer: 0
   m_Name: Code
   m_TagString: Untagged
@@ -1326,38 +1327,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 0
   m_VerticalFit: 2
---- !u!114 &114132244374964932
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1351301126672050}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 56
-    i1: 173
-    i2: 115
-    i3: 54
-    i4: 215
-    i5: 120
-    i6: 196
-    i7: 228
-    i8: 139
-    i9: 164
-    i10: 234
-    i11: 37
-    i12: 231
-    i13: 22
-    i14: 59
-    i15: 164
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0
 --- !u!114 &114144455133170552
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1475,6 +1444,19 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: '>'
+--- !u!114 &114174209977137652
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1351301126672050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec0a6b8cd86d763489ec20c6544a3fd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stateList: 0100000002000000
+  resultEqual: 0
 --- !u!114 &114188236339054282
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2065,14 +2047,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDebug: 1
-  photonView: {fileID: 0}
   lobbyName: myLobby
   roomName: myRoom
   nickName: 
-  DrawInfo: 0
   canvasPhoton: {fileID: 223485593261893842}
+  stateArKitPlaceNote: {fileID: 114174209977137652}
   doneDisconnect: 1
+  doneConnectUsingSettings: 1
   doneReConnectPhotonAlpha1: 1
+  roomList: []
 --- !u!114 &114411485690092806
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2205,18 +2188,6 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &114477417632443886
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1351301126672050}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 246975512, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowLobbyGUI: 1
 --- !u!114 &114494433300249864
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2584,6 +2555,21 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114638592403259646
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1351301126672050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfc570e94a60e254cbf36dc269a09a70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useUpdate: 0
+  photonConnected: 0
+  currentLobby: 
+  currentRoom: 
 --- !u!114 &114647592015452922
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2600,6 +2586,29 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &114676211136841116
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1351301126672050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d06466c03d263624786afa88b52928b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statsWindowOn: 0
+  statsOn: 0
+  healthStatsVisible: 0
+  trafficStatsOn: 0
+  buttonsOn: 0
+  statsRect:
+    serializedVersion: 2
+    x: 0
+    y: 100
+    width: 300
+    height: 50
+  WindowId: 100
 --- !u!114 &114676932854034148
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3322,7 +3331,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 11
   m_TargetDisplay: 0
 --- !u!223 &223502029926865898
 Canvas:

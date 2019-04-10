@@ -23,6 +23,7 @@ namespace Photon.Realtime
     using Hashtable = ExitGames.Client.Photon.Hashtable;
     using SupportClass = ExitGames.Client.Photon.SupportClass;
     using System;
+    using UnityEngine;
 #endif
 
 
@@ -65,6 +66,8 @@ namespace Photon.Realtime
         protected bool autoCleanUp = true;
 
         /// <summary>Backing field for property.</summary>
+        [SerializeField]
+        private string _name = string.Empty;
         protected string name;
 
         /// <summary>Backing field for master client id (actorNumber). defined by server in room props and ev leave.</summary>
@@ -84,7 +87,7 @@ namespace Photon.Realtime
             }
         }
 
-        /// <summary>The name of a room. Unique identifier for a room/match (per AppId + game-Version).</summary>
+        /// <summary>The name of a room. Unique identifier for a room/match (per AppId + game-Version).</summary>        
         public string Name
         {
             get
@@ -97,7 +100,7 @@ namespace Photon.Realtime
         /// Count of players currently in room. This property is overwritten by the Room class (used when you're in a Room).
         /// </summary>
         public int PlayerCount { get; private set; }
-        
+
         /// <summary>
         /// The limit of players for this room. This property is shown in lobby, too.
         /// If the room is full (players count == maxplayers), joining this room will fail.
@@ -161,6 +164,7 @@ namespace Photon.Realtime
             this.InternalCacheProperties(roomProperties);
 
             this.name = roomName;
+            this._name = roomName;
         }
 
         /// <summary>
