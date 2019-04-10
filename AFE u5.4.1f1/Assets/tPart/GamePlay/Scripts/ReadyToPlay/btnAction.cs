@@ -13,6 +13,7 @@ public class btnAction : MonoBehaviour
     public UnityARVideo uityARVideo = null;
     public UnityARCameraNearFar unityARCameraNearFar = null;
     public GameObject panelPlaceNote = null;
+    public PhotonMenu photonMenu = null;
 
     [ContextMenu("OnClick")]
     public void OnClick()
@@ -23,6 +24,7 @@ public class btnAction : MonoBehaviour
     IEnumerator C_OnClick()
     {
         canvasVideo.interactable = false;
+        photonMenu.ReConnectPhotonAlpha1();
 
         logoMethod.GoTo1WaitBack0();
         yield return new WaitUntil(() => BeetsoftLogo.Instance.doneC_ToAlPha == true);

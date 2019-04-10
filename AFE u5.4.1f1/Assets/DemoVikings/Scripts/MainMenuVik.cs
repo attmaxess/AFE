@@ -4,7 +4,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using System.Collections.Generic;
 
-public class MainMenuVik : MonoBehaviour, ILobbyCallbacks
+public class MainMenuVik : MonoBehaviour, ILobbyCallbacks      , IConnectionCallbacks        , IMatchmakingCallbacks        , IInRoomCallbacks
 {
 
     void Awake()
@@ -118,6 +118,15 @@ public class MainMenuVik : MonoBehaviour, ILobbyCallbacks
         GUILayout.EndArea();
     }
 
+    public virtual void OnEnable()
+    {
+        PhotonNetwork.AddCallbackTarget(this);
+    }
+
+    public virtual void OnDisable()
+    {
+        PhotonNetwork.RemoveCallbackTarget(this);
+    }
 
     void ShowConnectingGUI()
     {
@@ -129,29 +138,134 @@ public class MainMenuVik : MonoBehaviour, ILobbyCallbacks
         GUILayout.EndArea();
     }
 
+    [ContextMenu("Disconnect")]
+    public void Disconnect()
+    {
+        Debug.Log("Disconnect");
+        PhotonNetwork.Disconnect();
+    }
+
+    [ContextMenu("Leave Room")]
+    public void LeaveRoom()
+    {
+        Debug.Log("Leave Room");
+        PhotonNetwork.LeaveRoom();
+    }
+
     public void OnConnectedToMaster()
     {
         // this method gets called by PUN, if "Auto Join Lobby" is off.
         // this demo needs to join the lobby, to show available rooms!
 
         PhotonNetwork.JoinLobby();  // this joins the "default" lobby
+        Debug.Log("OnConnectedToMaster");
     }
 
     public void OnJoinedLobby()
     {
+        Debug.Log("OnJoinedLobby");
     }
 
     public void OnLeftLobby()
     {
+        Debug.Log("OnLeftLobby");
     }
 
     public void OnRoomListUpdate(List<RoomInfo> roomList)
     {
         this.roomList = roomList;
+        Debug.Log("OnRoomListUpdate");
     }
 
     public void OnLobbyStatisticsUpdate(List<TypedLobbyInfo> lobbyStatistics)
     {
+        Debug.Log("OnLobbyStatisticsUpdate");
+    }
+
+    public void OnConnected()
+    {
+        Debug.Log("OnConnected");
+    }
+
+    public void OnDisconnected(DisconnectCause cause)
+    {
+        Debug.Log("OnDisconnected");
+        PhotonNetwork.ConnectUsingSettings();
+    }
+
+    public void OnRegionListReceived(RegionHandler regionHandler)
+    {
+        Debug.Log(" OnRegionListReceived");
+    }
+
+    public void OnCustomAuthenticationResponse(Dictionary<string, object> data)
+    {
+        Debug.Log("OnCustomAuthenticationResponse");
+    }
+
+    public void OnCustomAuthenticationFailed(string debugMessage)
+    {
+        Debug.Log("OnCustomAuthenticationFailed");
+    }
+
+    public void OnFriendListUpdate(List<FriendInfo> friendList)
+    {
+        Debug.Log("OnFriendListUpdate");
+    }
+
+    public void OnCreatedRoom()
+    {
+        Debug.Log("OnCreatedRoom");
+    }
+
+    public void OnCreateRoomFailed(short returnCode, string message)
+    {
+        Debug.Log("OnCreateRoomFailed");
+    }
+
+    public void OnJoinedRoom()
+    {
+        Debug.Log("OnJoinedRoom");
+    }
+
+    public void OnJoinRoomFailed(short returnCode, string message)
+    {
+        Debug.Log("OnJoinRoomFailed");
+    }
+
+    public void OnJoinRandomFailed(short returnCode, string message)
+    {
+        Debug.Log("OnJoinRandomFailed");
+    }
+
+    public void OnLeftRoom()
+    {
+        Debug.Log("OnLeftRoom");
+    }
+
+    public void OnPlayerEnteredRoom(Player newPlayer)
+    {
+        Debug.Log("OnPlayerEnteredRoom");
+    }
+
+    public void OnPlayerLeftRoom(Player otherPlayer)
+    {
+        Debug.Log("OnPlayerLeftRoom");
+    }
+
+    public void OnRoomPropertiesUpdate(ExitGames.Client.Photon.Hashtable propertiesThatChanged)
+    {
+        Debug.Log("OnRoomPropertiesUpdate");
+    }
+
+    public void OnPlayerPropertiesUpdate(Player targetPlayer, ExitGames.Client.Photon.Hashtable changedProps)
+    {
+        Debug.Log("OnPlayerPropertiesUpdate");
+    }
+
+    public void OnMasterClientSwitched(Player newMasterClient)
+    {
+        Debug.Log("OnMasterClientSwitched");
     }
 
     public List<RoomInfo> roomList = new List<RoomInfo>();

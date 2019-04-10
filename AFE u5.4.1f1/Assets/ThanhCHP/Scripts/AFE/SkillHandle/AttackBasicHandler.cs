@@ -20,6 +20,7 @@ namespace Com.Beetsoft.AFE
 
         protected override void Start()
         {
+            Debug.Log("photonView.IsMine " + photonView.IsMine);
             if (!photonView.IsMine) return;
 
             var applySkillTimer =
@@ -38,6 +39,7 @@ namespace Com.Beetsoft.AFE
                .ThrottleFirst(TimeSpan.FromSeconds(GetTimeInterval()))
                .Subscribe(message =>
                {
+                   Debug.Log("message " + message);
                    var skillBehavior = SkillReader.GetSkillBehaviourCurrent();
                    skillBehavior.ActiveSkill(message);
                });

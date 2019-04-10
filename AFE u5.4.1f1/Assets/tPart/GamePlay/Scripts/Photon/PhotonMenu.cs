@@ -158,13 +158,16 @@ public class PhotonMenu : MonoBehaviour, ILobbyCallbacks, IConnectionCallbacks, 
 
     IEnumerator C_ReConnectPhotonAlpha1()
     {
+        if (isDebug) Debug.Log("_ConnectUsingSettings();");
+        if (isDebug) Debug.Log("_ConnectUsingSettings(); " + PhotonNetwork.CurrentLobby + " - " + PhotonNetwork.IsConnected);
         _ConnectUsingSettings();
-        yield return new WaitUntil(() => PhotonNetwork.IsConnected == true && PhotonNetwork.CurrentLobby != null);        
+        yield return new WaitUntil(() => PhotonNetwork.IsConnected == true);
 
+        if (isDebug) Debug.Log("PhotonNetwork.CreateRoom");
         bool canCreated = PhotonNetwork.CreateRoom(roomName, new RoomOptions() { MaxPlayers = 10 }, TypedLobby.Default);
         float momentCreated = Time.time;
         yield return new WaitUntil(() => (PhotonNetwork.CurrentRoom != null && PhotonNetwork.CurrentRoom.Name == roomName) || Time.time - momentCreated > 2f);
-
+        if (isDebug) Debug.Log("_ConnectUsingSettings(); " + PhotonNetwork.CurrentLobby + " - " + PhotonNetwork.IsConnected);
         if (Time.time - momentCreated > 2f && canCreated == false)
         {
             if (isDebug) Debug.Log("Cant create!! Try Joint!!");
@@ -247,5 +250,14 @@ public class PhotonMenu : MonoBehaviour, ILobbyCallbacks, IConnectionCallbacks, 
 
     #endregion pun callback
 
+    #region Debug Photon
+
+    [ContextMenu("DebugCurrentRoom")]
+    public void DebugCurrentRoom()
+    {
+        Debug.Log(PhotonNetwork.InRoom);
+        Debug.Log(PhotonNetwork.CurrentRoom.Name);
+    }
+    #endregion
     public List<RoomInfo> roomList = new List<RoomInfo>();
 }

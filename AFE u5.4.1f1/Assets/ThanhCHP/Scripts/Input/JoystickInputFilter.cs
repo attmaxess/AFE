@@ -46,6 +46,7 @@ namespace Com.Beetsoft.AFE
                  ChampionConfig.AttackDamage.Value,
                  ChampionConfig.AttackDamagePerLevel,
                  message.Direction);   */
+            Debug.Log("BasicAttack");
             BasicAttackSubject.OnNext(message);
         }
 
