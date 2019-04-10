@@ -55,5 +55,6 @@ MonoBehaviour:
   - SpawnTwistChildRpc
   - SpawnEffectSphereAttackRpc
   - SetActiveWindBodyEffectRpc
+  - RpcNameMap
   DisableAutoOpenWizard: 1
   ShowSettings: 1

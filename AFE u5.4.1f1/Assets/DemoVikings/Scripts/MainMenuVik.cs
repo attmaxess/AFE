@@ -4,7 +4,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using System.Collections.Generic;
 
-public class MainMenuVik : MonoBehaviour, ILobbyCallbacks      , IConnectionCallbacks        , IMatchmakingCallbacks        , IInRoomCallbacks
+public class MainMenuVik : MonoBehaviour, ILobbyCallbacks, IConnectionCallbacks, IMatchmakingCallbacks, IInRoomCallbacks
 {
 
     void Awake()
@@ -144,6 +144,18 @@ public class MainMenuVik : MonoBehaviour, ILobbyCallbacks      , IConnectionCall
         Debug.Log("Disconnect");
         PhotonNetwork.Disconnect();
     }
+    [ContextMenu("GetListRoom")]
+    public void GetListRoom()
+    {
+        Debug.Log("GetListRoom - " + roomList.Count);
+    }
+
+
+    [ContextMenu("CheckMasterClient")]
+    public void CheckMasterClient()
+    {
+        Debug.Log("CheckMasterClient - " + PhotonNetwork.IsMasterClient);
+    }
 
     [ContextMenu("Leave Room")]
     public void LeaveRoom()
@@ -241,11 +253,13 @@ public class MainMenuVik : MonoBehaviour, ILobbyCallbacks      , IConnectionCall
     public void OnLeftRoom()
     {
         Debug.Log("OnLeftRoom");
+        nameMap = "leftroom";
     }
 
     public void OnPlayerEnteredRoom(Player newPlayer)
     {
         Debug.Log("OnPlayerEnteredRoom");
+        GetComponent<PhotonView>().RPC("RpcNameMap", newPlayer, nameMap);
     }
 
     public void OnPlayerLeftRoom(Player otherPlayer)
@@ -269,4 +283,11 @@ public class MainMenuVik : MonoBehaviour, ILobbyCallbacks      , IConnectionCall
     }
 
     public List<RoomInfo> roomList = new List<RoomInfo>();
+
+    public string nameMap = "";
+    [PunRPC]
+    public void RpcNameMap(string name)
+    {
+        nameMap = name;
+    }
 }
