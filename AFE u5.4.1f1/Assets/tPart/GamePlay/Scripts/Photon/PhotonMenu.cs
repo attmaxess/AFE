@@ -25,6 +25,23 @@ public class PhotonMenu : MonoBehaviourPunCallbacks
 #endif
     }
 
+    [Header("ConstantlyCheckConnection")]
+    public float deltaCheck = 2f;
+
+    public void ConstantlyCheckConnection()
+    {
+        StartCoroutine(C_ConstantlyCheckConnection());
+    }
+
+    IEnumerator C_ConstantlyCheckConnection()
+    {
+        while (true)
+        {
+            CheckConnecting();
+            yield return new WaitForSeconds(deltaCheck);
+        }
+    }
+
     //[Header("OnGUI")]    
     //public bool DrawOnGUI = false;    
 
@@ -34,6 +51,10 @@ public class PhotonMenu : MonoBehaviourPunCallbacks
 
     void CheckConnecting()
     {
+#if UNITY_EDITOR
+        if (isDebug) Debug.Log("CheckConnecting");
+#endif
+
         stateArKitPlaceNote.OnClick();
         if (stateArKitPlaceNote.resultEqual == true)
         {
@@ -124,6 +145,7 @@ public class PhotonMenu : MonoBehaviourPunCallbacks
 
         ConnectUsingSettings();
         yield return new WaitUntil(() => doneConnectUsingSettings == true);
+        yield return new WaitForSeconds(1f);
 
         TypedLobby typedLobby = new TypedLobby();
 
@@ -135,6 +157,7 @@ public class PhotonMenu : MonoBehaviourPunCallbacks
             PhotonNetwork.JoinLobby(typedLobby);
 
             yield return new WaitUntil(() => PhotonNetwork.CurrentLobby != null && PhotonNetwork.CurrentLobby.Name == lobbyName);
+            yield return new WaitForSeconds(1f);
         }
 
         if (!PhotonNetwork.InRoom || PhotonNetwork.CurrentRoom.Name != roomName)
@@ -183,6 +206,8 @@ public class PhotonMenu : MonoBehaviourPunCallbacks
                 if (isDebug) Debug.Log("Cant join or Create!!");
             }
         }
+
+        yield return new WaitForSeconds(1f);
 
         if (isDebug) Debug.Log("Done C_ReConnectPhotonAlpha1");
         doneReConnectPhotonAlpha1 = true;
@@ -387,6 +412,7 @@ public class PhotonMenu : MonoBehaviourPunCallbacks
     public override void OnEnable()
     {
         base.OnEnable();
+        ConstantlyCheckConnection();
     }
 
     public override void OnDisable()
@@ -395,4 +421,18 @@ public class PhotonMenu : MonoBehaviourPunCallbacks
     }
 
     public List<RoomInfo> roomList = new List<RoomInfo>();
+
+    public override void OnPlayerEnteredRoom(Player newPlayer)
+    {
+        Debug.Log("OnPlayerEnteredRoom");
+        GetComponent<PhotonView>().RPC("RpcNameMap", newPlayer, nameMap);
+    }
+
+    public string nameMap = "";
+
+    [PunRPC]
+    public void RpcNameMap(string name)
+    {
+        nameMap = name;
+    }
 }
