@@ -281,6 +281,7 @@ public class PlaceNote : MonoBehaviour, PlacenoteListener
     [Header("AfterLoadARMap")]
     public PlaceNoteLoadMapImage loadImage = null;
     public PlaceNoteLoadCharacter loadCharacter = null;
+    public PhotonMenu photonMenu = null;
 
     void AfterLoadARMap()
     {
@@ -294,6 +295,8 @@ public class PlaceNote : MonoBehaviour, PlacenoteListener
 
         loadCharacter.LoadCharacter();
         yield return new WaitUntil(() => loadCharacter.doneLoadCharacter == true);
+
+        photonMenu.nameMap = mSelectedMapId;
 
         yield break;
     }

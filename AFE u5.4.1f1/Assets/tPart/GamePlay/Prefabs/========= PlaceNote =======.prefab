@@ -7724,6 +7724,7 @@ MonoBehaviour:
   isDebugMapFileInfo: 0
   loadImage: {fileID: 0}
   loadCharacter: {fileID: 114557778410215838}
+  photonMenu: {fileID: 0}
   doneOnSaveMapClick: 1
   screenCapture: {fileID: 114206673551972426}
   screenShot: {fileID: 114432862945351614}
