@@ -10,6 +10,7 @@ public class RetrieveMainCharacter : MonoBehaviour
     [Header("Process")]
     public BackgroundMarker currentGround = null;
     public GameObject currentMainChar = null;
+    public PlaneJoystick currentJoyStick = null;
 
     [Header("Spawn Pos")]
     public List<ColliderList> spawnposList = new List<ColliderList>();
@@ -25,12 +26,12 @@ public class RetrieveMainCharacter : MonoBehaviour
     [Header("TrySnap")]
     public bool doneTrySnap = true;
 
-    public void TrySnap(BackgroundMarker ground = null, GameObject character = null)
+    public void TrySnap(BackgroundMarker ground = null, PlaneJoystick joystick = null, GameObject character = null)
     {
-        StartCoroutine(C_TrySnap(ground, character));
+        StartCoroutine(C_TrySnap(ground, joystick, character));
     }
 
-    IEnumerator C_TrySnap(BackgroundMarker ground = null, GameObject character = null)
+    IEnumerator C_TrySnap(BackgroundMarker ground = null, PlaneJoystick joystick = null, GameObject character = null)
     {
         doneTrySnap = false;
 
@@ -47,6 +48,12 @@ public class RetrieveMainCharacter : MonoBehaviour
             ///Try find here
         }
         currentMainChar = character;
+
+        if (currentJoyStick == null)
+        {
+            ///Try find here
+        }
+        currentJoyStick = joystick;
 
         switch (eSnap)
         {
@@ -91,7 +98,8 @@ public class RetrieveMainCharacter : MonoBehaviour
             yield return new WaitUntil(() => spawnposList[i].doneShake == true);
             if (spawnposList[i].colList.Count == 0)
             {
-                currentMainChar.transform.position = new Vector3(spawnposList[i].transform.position.x, currentGround.transform.position.y, spawnposList[i].transform.position.z);
+                currentJoyStick.transform.position = new Vector3(spawnposList[i].transform.position.x, currentGround.transform.position.y, spawnposList[i].transform.position.z);
+                currentMainChar.transform.position = currentJoyStick.transform.position;
                 doneSnapSpawnPos = true;
                 yield break;
             }

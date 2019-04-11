@@ -19,10 +19,8 @@ public class ThirdPersonControllerEditor : PropertyEditor
     private SerializedProperty requireLockProperty;
     private SerializedProperty controlLockProperty;
 
-
     private const float rotationSpeedHandleScale = 20.0f;
     // Scales the visualization of the rotation speed handles. Reduce if you're dealing with larger rotation speeds.
-
 
     protected override void Initialize()
     {
@@ -40,7 +38,6 @@ public class ThirdPersonControllerEditor : PropertyEditor
         requireLockProperty = serializedObject.FindProperty("requireLock");
         controlLockProperty = serializedObject.FindProperty("controlLock");
     }
-
 
     public override void OnInspectorGUI()
     {
@@ -78,7 +75,6 @@ public class ThirdPersonControllerEditor : PropertyEditor
         EndEdit();
     }
 
-
     public override bool RenderSceneHandles
     {
         get
@@ -88,7 +84,6 @@ public class ThirdPersonControllerEditor : PropertyEditor
         }
     }
 
-
     public override Color SceneHandlesColor
     {
         get
@@ -96,7 +91,6 @@ public class ThirdPersonControllerEditor : PropertyEditor
             return Color.red;
         }
     }
-
 
     protected override void DoSceneGUI()
     {

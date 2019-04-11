@@ -2479,6 +2479,7 @@ GameObject:
   - component: {fileID: 224533475843459406}
   - component: {fileID: 222027770513896286}
   - component: {fileID: 114418650265538418}
+  - component: {fileID: 114557778410215838}
   - component: {fileID: 114140185152455318}
   - component: {fileID: 114242726585006694}
   - component: {fileID: 114206673551972426}
@@ -2488,7 +2489,7 @@ GameObject:
   - component: {fileID: 114808999715772402}
   - component: {fileID: 114294397101910066}
   m_Layer: 5
-  m_Name: SamplePanel
+  m_Name: PlaceNote
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6453,12 +6454,14 @@ MonoBehaviour:
   ClickHere: 1
   currentGround: {fileID: 0}
   currentMainChar: {fileID: 0}
+  currentJoyStick: {fileID: 0}
   spawnposList:
   - {fileID: 114213471623874830, guid: 60472098544586e45a9ab6ac2fee55b5, type: 2}
   - {fileID: 114672349486354610, guid: 60472098544586e45a9ab6ac2fee55b5, type: 2}
   - {fileID: 114034881808434064, guid: 60472098544586e45a9ab6ac2fee55b5, type: 2}
   - {fileID: 114312840983487434, guid: 60472098544586e45a9ab6ac2fee55b5, type: 2}
   eSnap: 1
+  doneTrySnap: 1
   doneSnapSpawnPos: 1
 --- !u!114 &114302489051572672
 MonoBehaviour:
@@ -7580,15 +7583,11 @@ MonoBehaviour:
   mRadiusSlider: {fileID: 114861321496163338}
   mMaxRadiusSearch: 500
   mRadiusLabel: {fileID: 114194126231901204}
-  capturePanel: {fileID: 1790293377533136}
-  captureImage: {fileID: 114701263632110470}
+  mReportDebug: 1
   mapToFile: {fileID: 114856583579550672}
   isDebugMapFileInfo: 0
-  doneLoadImagePanel: 1
-  doneLoadCharacter: 1
-  createCharacter: {fileID: 114502211857671666}
-  joystickMethods: {fileID: 114808999715772402}
-  retrieveMainChar: {fileID: 114294397101910066}
+  loadImage: {fileID: 0}
+  loadCharacter: {fileID: 114557778410215838}
   screenCapture: {fileID: 114206673551972426}
   screenShot: {fileID: 114432862945351614}
   shapeManager: {fileID: 114140185152455318}
@@ -8676,6 +8675,23 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114557778410215838
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1796903669268766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7a99a94b42bc294e959e5665c48ca39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDebug: 1
+  doneLoadCharacter: 1
+  createCharacter: {fileID: 114502211857671666}
+  joystickMethods: {fileID: 114808999715772402}
+  currentGroundMarker: {fileID: 0}
+  currentJoystick: {fileID: 0}
 --- !u!114 &114558371803492546
 MonoBehaviour:
   m_ObjectHideFlags: 1

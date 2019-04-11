@@ -464,7 +464,6 @@ public class LibPlacenote : MonoBehaviour
     // Update function sends a camera frame from Arkit to Placenote
     void Update()
     {
-
         if (mFrameUpdated && libPlacenoteSessionRunning)
         {
             mFrameUpdated = false;
