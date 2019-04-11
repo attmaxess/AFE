@@ -367,7 +367,7 @@ public class PlacenoteSampleView : MonoBehaviour, PlacenoteListener
         yield return new WaitUntil(() => createCharacter.doneClickSpawn == true);
                 
         currentGroundMarker.retrieveMainChar.eSnap = RetrieveMainCharacter.eSnapBackgroundMarker.SpawnPosList;
-        currentGroundMarker.retrieveMainChar.TrySnap(currentGroundMarker, createCharacter.currentCharacter);
+        currentGroundMarker.retrieveMainChar.TrySnap(currentGroundMarker, null, createCharacter.currentCharacter);
         yield return new WaitUntil(() => currentGroundMarker.retrieveMainChar.doneSnapSpawnPos == true);
 
         if (isDebug) Debug.Log("Done C_LoadCharacter");
