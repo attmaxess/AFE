@@ -442,7 +442,7 @@ public class PhotonMenu : MonoBehaviourPunCallbacks
     public string nameMap
     {
         get { return _nameMap; }
-        set { if (_nameMap != value) { _nameMap = value; HandleCurrentMapName(); } }
+        set { _nameMap = value; HandleCurrentMapName(); }
     }
 
     public PlaceNote placeNote = null;

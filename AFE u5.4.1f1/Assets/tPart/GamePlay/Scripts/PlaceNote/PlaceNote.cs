@@ -10,6 +10,7 @@ using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using DHT.TextureToString64;
 using AFE.BaseGround;
+using Photon.Pun;
 
 public class PlaceNote : MonoBehaviour, PlacenoteListener
 {
@@ -342,8 +343,11 @@ public class PlaceNote : MonoBehaviour, PlacenoteListener
         loadCharacter.LoadCharacter();
         yield return new WaitUntil(() => loadCharacter.doneLoadCharacter == true);
 
-        photonMenu.nameMap = mSelectedMapId;
-        photonMenu.MasterRPCMap();
+        if (PhotonNetwork.IsMasterClient)
+        {
+            photonMenu.nameMap = mSelectedMapId;
+            photonMenu.MasterRPCMap();
+        }
 
         yield break;
     }
