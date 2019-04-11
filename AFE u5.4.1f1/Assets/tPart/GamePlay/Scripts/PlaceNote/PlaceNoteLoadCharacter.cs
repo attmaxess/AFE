@@ -34,6 +34,7 @@ public class PlaceNoteLoadCharacter : MonoBehaviour
             doneLoadCharacter = true;
             yield break;
         }
+        currentGroundMarker.Show();
 
         createCharacter.ClickSpawn();
         joystickMethods.SetCanvasOn();

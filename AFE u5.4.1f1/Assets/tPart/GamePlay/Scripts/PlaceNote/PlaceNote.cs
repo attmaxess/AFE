@@ -383,8 +383,10 @@ public class PlaceNote : MonoBehaviour, PlacenoteListener
     }
 
     [Header("Screen Capture")]
+    public bool doneOnSaveMapClick = true;
     public ScreenCaptureManager screenCapture = null;
     public ScreenshotHelper screenShot = null;
+    public BackgroundMarkerMethod backgroundMethod = null;
 
     public void OnSaveMapClick()
     {
@@ -394,6 +396,7 @@ public class PlaceNote : MonoBehaviour, PlacenoteListener
     IEnumerator C_OnSaveMapClick()
     {
         if (isDebug) Debug.Log("Start C_OnSaveMapClick");
+        doneOnSaveMapClick = false;
 
         if (!LibPlacenote.Instance.Initialized())
         {
@@ -482,7 +485,10 @@ public class PlaceNote : MonoBehaviour, PlacenoteListener
             }
         );
 
+        backgroundMethod.Hide();
+
         if (isDebug) Debug.Log("Done C_OnSaveMapClick");
+        doneOnSaveMapClick = true;
 
         yield break;
     }

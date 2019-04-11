@@ -936,6 +936,7 @@ MonoBehaviour:
   ClickHere: 0
   currentGround: {fileID: 0}
   currentMainChar: {fileID: 0}
+  currentJoyStick: {fileID: 0}
   spawnposList:
   - {fileID: 114213471623874830}
   - {fileID: 114672349486354610}
@@ -971,7 +972,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isDebug: 1
   mc: {fileID: 64432080945408726}
-  mr: {fileID: 23240263070907182}
+  mrList:
+  - {fileID: 23240263070907182}
+  - {fileID: 23831997580115988}
+  - {fileID: 23778626132594640}
+  - {fileID: 23085927086419008}
+  - {fileID: 23241027400099580}
+  - {fileID: 23794520319757610}
   retrieveMainChar: {fileID: 114243382584044560}
 --- !u!114 &114672349486354610
 MonoBehaviour:

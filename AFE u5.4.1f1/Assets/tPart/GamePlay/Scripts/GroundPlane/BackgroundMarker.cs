@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class BackgroundMarker : MonoBehaviour
@@ -9,11 +10,17 @@ public class BackgroundMarker : MonoBehaviour
 
     [Header("Setting Transform")]
     public MeshCollider mc = null;
-    public MeshRenderer mr = null;    
+    public List<MeshRenderer> mrList = null;    
+
+    [ContextMenu("FindMRList")]
+    public void FindMRList()
+    {
+        mrList = GetComponentsInChildren<MeshRenderer>().ToList();
+    }
 
     public void SetSize(float size)
     {
-        mr.transform.localScale = new Vector3(size, size, size);
+        transform.localScale = new Vector3(size, size, size);
     }
 
     public void MoveAStep(float step)
@@ -27,21 +34,21 @@ public class BackgroundMarker : MonoBehaviour
     public void Show()
     {
         if (isDebug) Debug.Log("Show Background Marker");
-        mr.enabled = true;
+        foreach (MeshRenderer mr in mrList) mr.enabled = true;
     }
 
     [ContextMenu("Hide")]
     public void Hide()
     {
         if (isDebug) Debug.Log("Hide Background Marker");
-        mr.enabled = false;
+        foreach (MeshRenderer mr in mrList) mr.enabled = false;
     }
 
     [ContextMenu("ToggleShowHide")]
     public void ToggleShowHide()
     {
         if (isDebug) Debug.Log("Toggle Background Marker");
-        mr.enabled = !mr.enabled;
+        foreach (MeshRenderer mr in mrList) mr.enabled = !mr.enabled;
     }
 
     #endregion local method
