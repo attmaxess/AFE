@@ -46,13 +46,14 @@ public class PhotonMenu : MonoBehaviourPunCallbacks
     //public bool DrawOnGUI = false;    
 
     [Header("Show On Lost Connection")]
+    public bool isDebugConnecting = false;
     public Canvas canvasPhoton = null;
     public GameStateEqual stateArKitPlaceNote = null;
 
     void CheckConnecting()
     {
 #if UNITY_EDITOR
-        if (isDebug) Debug.Log("CheckConnecting");
+        if (isDebugConnecting) Debug.Log("CheckConnecting");
 #endif
 
         stateArKitPlaceNote.OnClick();
@@ -441,14 +442,15 @@ public class PhotonMenu : MonoBehaviourPunCallbacks
     public string nameMap
     {
         get { return _nameMap; }
-        set { _nameMap = value; HandleCurrentMapName(); }
+        set { if (_nameMap != value) { _nameMap = value; HandleCurrentMapName(); } }
     }
 
     public PlaceNote placeNote = null;
 
     void HandleCurrentMapName()
     {
-        placeNote.OnLoadMapClicked(_nameMap);
+        if (!PhotonNetwork.IsMasterClient)
+            placeNote.OnLoadMapClicked(_nameMap);
     }
 
     [PunRPC]

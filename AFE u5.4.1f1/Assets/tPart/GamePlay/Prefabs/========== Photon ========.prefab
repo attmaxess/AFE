@@ -2050,12 +2050,15 @@ MonoBehaviour:
   lobbyName: myLobby
   roomName: myRoom
   nickName: 
+  deltaCheck: 2
   canvasPhoton: {fileID: 223485593261893842}
   stateArKitPlaceNote: {fileID: 114174209977137652}
   doneDisconnect: 1
   doneConnectUsingSettings: 1
   doneReConnectPhotonAlpha1: 1
   roomList: []
+  _nameMap: 
+  placeNote: {fileID: 0}
 --- !u!114 &114411485690092806
 MonoBehaviour:
   m_ObjectHideFlags: 1
