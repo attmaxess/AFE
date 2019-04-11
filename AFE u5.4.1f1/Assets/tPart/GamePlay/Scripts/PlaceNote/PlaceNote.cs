@@ -41,7 +41,7 @@ public class PlaceNote : MonoBehaviour, PlacenoteListener
     [SerializeField]
     float mMaxRadiusSearch;
     [SerializeField]
-    Text mRadiusLabel;    
+    Text mRadiusLabel;
 
     private UnityARSessionNativeInterface mSession;
 
@@ -54,13 +54,11 @@ public class PlaceNote : MonoBehaviour, PlacenoteListener
     public bool mReportDebug = false;
 
     private LibPlacenote.MapInfo mSelectedMapInfo;
-    private string mSelectedMapId
+    string mSelectedMapId
     {
-        get
-        {
-            return mSelectedMapInfo != null ? mSelectedMapInfo.placeId : null;
-        }
+        get { return mSelectedMapInfo != null ? mSelectedMapInfo.placeId : null; }
     }
+
     private string mSaveMapId = null;
 
     private BoxCollider mBoxColliderDummy;
@@ -136,6 +134,8 @@ public class PlaceNote : MonoBehaviour, PlacenoteListener
             }
         });
     }
+
+    //public void LoadMapID
 
     public void OnRadiusSelect()
     {
@@ -264,7 +264,7 @@ public class PlaceNote : MonoBehaviour, PlacenoteListener
 
                     mLabelText.text = "Loaded ID: " + mSelectedMapId;
 
-                    AfterLoadARMap();                    
+                    AfterLoadARMap();
                 }
                 else if (faulted)
                 {
@@ -276,6 +276,52 @@ public class PlaceNote : MonoBehaviour, PlacenoteListener
                 }
             }
         );
+    }
+
+    [Header("OnLoadMapClicked + nameMap")]
+    public bool doneOnLoadMapClickedNameMap = true;
+
+    public void OnLoadMapClicked(string nameMap)
+    {
+        StartCoroutine(C_OnLoadMapClicked(nameMap));
+    }
+
+    IEnumerator C_OnLoadMapClicked(string nameMap)
+    {
+        if (isDebug) Debug.Log("Start C_OnLoadMapClicked " + nameMap);
+        doneOnLoadMapClickedNameMap = false;
+
+        ConfigureSession();
+
+        if (!LibPlacenote.Instance.Initialized())
+        {
+            Debug.Log("SDK not yet initialized");
+            yield break;
+        }
+
+        LibPlacenote.Instance.ListMaps((mapList) =>
+        {
+            // render the map list!
+            for (int i = 0; i < mapList.Length; i++)
+            {
+                if (mapList[i].metadata.userdata != null)
+                {
+                    if (mapList[i].placeId == nameMap)
+                    {
+                        mSelectedMapInfo = mapList[i];
+                        OnLoadMapClicked();
+
+                        i = mapList.Length;
+                        doneOnLoadMapClickedNameMap = true;
+                    }                    
+                }                
+            }
+        });
+
+        if (isDebug) Debug.Log("Start C_OnLoadMapClicked " + nameMap);
+        doneOnLoadMapClickedNameMap = true;
+
+        yield break;
     }
 
     [Header("AfterLoadARMap")]
@@ -297,6 +343,7 @@ public class PlaceNote : MonoBehaviour, PlacenoteListener
         yield return new WaitUntil(() => loadCharacter.doneLoadCharacter == true);
 
         photonMenu.nameMap = mSelectedMapId;
+        photonMenu.MasterRPCMap();
 
         yield break;
     }

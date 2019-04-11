@@ -195,7 +195,7 @@ public class PhotonMenu : MonoBehaviourPunCallbacks
                 {
                     doneReConnectPhotonAlpha1 = true;
                     yield break;
-                }                
+                }
             }
 
             //yield return new WaitUntil(() => (PhotonNetwork.CurrentRoom != null && PhotonNetwork.CurrentRoom.Name == roomName) || Time.time - momentCreated > 2f);
@@ -422,13 +422,34 @@ public class PhotonMenu : MonoBehaviourPunCallbacks
 
     public List<RoomInfo> roomList = new List<RoomInfo>();
 
+    [ContextMenu("MasterRPCMap")]
+    public void MasterRPCMap()
+    {
+        if (isDebug) Debug.Log("RPC NameMap All");
+        GetComponent<PhotonView>().RPC("RpcNameMap", RpcTarget.All, nameMap);
+    }
+
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
-        Debug.Log("OnPlayerEnteredRoom");
+        if (isDebug) Debug.Log("OnPlayerEnteredRoom");
         GetComponent<PhotonView>().RPC("RpcNameMap", newPlayer, nameMap);
     }
 
-    public string nameMap = "";
+    [Header("Handle New Map")]
+    [SerializeField]
+    string _nameMap = "";
+    public string nameMap
+    {
+        get { return _nameMap; }
+        set { _nameMap = value; HandleCurrentMapName(); }
+    }
+
+    public PlaceNote placeNote = null;
+
+    void HandleCurrentMapName()
+    {
+        placeNote.OnLoadMapClicked(_nameMap);
+    }
 
     [PunRPC]
     public void RpcNameMap(string name)
