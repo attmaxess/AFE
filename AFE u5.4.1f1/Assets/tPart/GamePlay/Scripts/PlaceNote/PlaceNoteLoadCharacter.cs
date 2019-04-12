@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UniRx;
+using Com.Beetsoft.AFE;
 
 public class PlaceNoteLoadCharacter : MonoBehaviour
 {
@@ -14,6 +16,41 @@ public class PlaceNoteLoadCharacter : MonoBehaviour
     public BackgroundMarker currentGroundMarker = null;
     public PlaneJoystick currentJoystick = null;
 
+    List<TestYasuo> testYasuos = new List<TestYasuo>();
+    private void Start()
+    {
+        MessageBroker.Default.Receive<MessageChangedCharacterYasuo>().Subscribe(mess =>
+        {
+            if (mess.addOrRemove)
+            {
+                testYasuos.Add(mess.yasuo);
+            }
+            else
+            {
+                testYasuos.Remove(mess.yasuo);
+            }
+            Debug.Log("count yasuo in screen" + testYasuos.Count);
+            if (testYasuos.Count == 1)
+            {
+            }
+            if (testYasuos.Count == 2)
+            {
+                int count = 3;
+                Observable.Interval(System.TimeSpan.FromSeconds(1)).TakeWhile(_ => count >= 1 && testYasuos.Count == 2).Subscribe(_ =>
+                {
+                    if (count == 1)
+                    {
+                        LoadCharacter();
+                    }
+                    count--;
+                });
+            }
+            if (testYasuos.Count == 0 || testYasuos.Count >= 3)
+            {
+            }
+        });
+    }
+
     [ContextMenu("LoadCharacter")]
     public void LoadCharacter()
     {
@@ -23,7 +60,7 @@ public class PlaceNoteLoadCharacter : MonoBehaviour
     IEnumerator C_LoadCharacter()
     {
         if (isDebug) Debug.Log("Start C_LoadCharacter");
-        doneLoadCharacter = false;        
+        doneLoadCharacter = false;
 
         float momentBackground = Time.time;
         yield return new WaitUntil(() => FindObjectOfType<BackgroundMarker>() != null || Time.time - momentBackground > 2f);

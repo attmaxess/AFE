@@ -5,6 +5,7 @@ using Photon.Realtime;
 using System.Collections.Generic;
 using System;
 using UnityEngine.Networking;
+using Com.Beetsoft.AFE;
 
 public class PhotonMenu : MonoBehaviourPunCallbacks
 {
@@ -17,6 +18,7 @@ public class PhotonMenu : MonoBehaviourPunCallbacks
     public string nickName = string.Empty;
     private Vector2 scrollPos = Vector2.zero;
 
+             
     void Awake()
     {
 #if DEMO_ALPHA1
@@ -26,7 +28,7 @@ public class PhotonMenu : MonoBehaviourPunCallbacks
     }
 
     //[Header("OnGUI")]    
-    //public bool DrawOnGUI = false;    
+    //public bool DrawOnGUI = false;  \
 
     [Header("Show On Lost Connection")]
     public Canvas canvasPhoton = null;
@@ -172,7 +174,7 @@ public class PhotonMenu : MonoBehaviourPunCallbacks
                 {
                     doneReConnectPhotonAlpha1 = true;
                     yield break;
-                }                
+                }
             }
 
             //yield return new WaitUntil(() => (PhotonNetwork.CurrentRoom != null && PhotonNetwork.CurrentRoom.Name == roomName) || Time.time - momentCreated > 2f);

@@ -13,6 +13,7 @@ namespace Com.Beetsoft.AFE
         [SerializeField] private AnimatorHandler animatorHandler;
         [SerializeField] private HealthBarPlayer barPlayer;
         private IChampionConfig championModelCache = null;
+        MessageChangedCharacterYasuo message;
 
         public IChampionConfig ChampionModel =>
             championModelCache ?? (championModelCache = Instantiate(championModel));
@@ -49,6 +50,9 @@ namespace Com.Beetsoft.AFE
 
         private void Start()
         {
+            message = new MessageChangedCharacterYasuo(this, true);
+            MessageBroker.Default.Publish<MessageChangedCharacterYasuo>(message);
+
             CreateHealthBar(ChampionModel, photonView.IsMine);
             if (!photonView.IsMine) return;
 
@@ -65,10 +69,28 @@ namespace Com.Beetsoft.AFE
                 .Subscribe(_ => JoystickInputFilter.Spell4(new InputMessage(Vector3.forward)));
         }
 
+        private void OnDestroy()
+        {
+            message.addOrRemove = false;
+            MessageBroker.Default.Publish<MessageChangedCharacterYasuo>(message);
+        }
+
         void CreateHealthBar(IChampionConfig championConfig, bool isMine)
         {
             var _barPlayer = Instantiate(barPlayer.transform, CanvasJoystickManager.Singleton.barPlayer, false);
             _barPlayer.GetComponent<HealthBarPlayer>().SetInit(transform, championConfig, isMine);
+        }
+    }
+
+    public class MessageChangedCharacterYasuo
+    {
+        public TestYasuo yasuo;
+        public bool addOrRemove;
+
+        public MessageChangedCharacterYasuo(TestYasuo yasuo, bool addOrRemove)
+        {
+            this.yasuo = yasuo;
+            this.addOrRemove = addOrRemove;
         }
     }
 }
