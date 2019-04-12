@@ -2575,6 +2575,7 @@ MonoBehaviour:
   photonConnected: 0
   currentLobby: 
   currentRoom: 
+  isMasterClient: 0
 --- !u!114 &114647592015452922
 MonoBehaviour:
   m_ObjectHideFlags: 1

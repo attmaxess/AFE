@@ -12,6 +12,7 @@ public class PhotonStatsInspector : MonoBehaviour
     public bool photonConnected = false;
     public string currentLobby = string.Empty;
     public string currentRoom = string.Empty;
+    public bool isMasterClient = false;
 
     private void Update()
     {
@@ -20,5 +21,6 @@ public class PhotonStatsInspector : MonoBehaviour
         photonConnected = PhotonNetwork.IsConnected;
         currentLobby = PhotonNetwork.CurrentLobby == null ? "null" : PhotonNetwork.CurrentLobby.Name;
         currentRoom = PhotonNetwork.CurrentRoom == null ? "null" : PhotonNetwork.CurrentRoom.Name;
+        isMasterClient = PhotonNetwork.IsMasterClient;
     }
 }

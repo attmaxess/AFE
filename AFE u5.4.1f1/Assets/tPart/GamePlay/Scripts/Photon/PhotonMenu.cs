@@ -449,7 +449,13 @@ public class PhotonMenu : MonoBehaviourPunCallbacks
 
     void HandleCurrentMapName()
     {
-        if (!PhotonNetwork.IsMasterClient)
+        if (string.IsNullOrEmpty(_nameMap)) return;
+
+#if UNITY_EDITOR
+        _nameMap = "mapEditor";
+#endif
+
+        if (PhotonNetwork.IsMasterClient == false)
             placeNote.OnLoadMapClicked(_nameMap);
     }
 

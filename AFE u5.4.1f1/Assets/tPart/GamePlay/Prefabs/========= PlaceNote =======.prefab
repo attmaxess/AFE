@@ -884,6 +884,17 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 224390177234834000}
+  - component: {fileID: 114567641709271370}
+  - component: {fileID: 114121368019771882}
+  - component: {fileID: 114220318926308986}
+  - component: {fileID: 114916997275672194}
+  - component: {fileID: 114114687032660490}
+  - component: {fileID: 114310787722065950}
+  - component: {fileID: 114179906772436856}
+  - component: {fileID: 114287358193939406}
+  - component: {fileID: 114863235956301726}
+  - component: {fileID: 114031246963619244}
+  - component: {fileID: 114116905748030930}
   m_Layer: 5
   m_Name: Handle Placenote
   m_TagString: Untagged
@@ -1956,7 +1967,6 @@ GameObject:
   - component: {fileID: 224506190694313488}
   - component: {fileID: 222007356687323228}
   - component: {fileID: 114424743543248772}
-  - component: {fileID: 114214988686671190}
   m_Layer: 5
   m_Name: icon
   m_TagString: Untagged
@@ -2494,17 +2504,6 @@ GameObject:
   m_Component:
   - component: {fileID: 224533475843459406}
   - component: {fileID: 222027770513896286}
-  - component: {fileID: 114418650265538418}
-  - component: {fileID: 114557778410215838}
-  - component: {fileID: 114140185152455318}
-  - component: {fileID: 114242726585006694}
-  - component: {fileID: 114206673551972426}
-  - component: {fileID: 114186543667878610}
-  - component: {fileID: 114856583579550672}
-  - component: {fileID: 114502211857671666}
-  - component: {fileID: 114808999715772402}
-  - component: {fileID: 114294397101910066}
-  - component: {fileID: 114408868105097322}
   m_Layer: 5
   m_Name: PlaceNote
   m_TagString: Untagged
@@ -3917,6 +3916,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 0
+--- !u!114 &114031246963619244
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1299025663081966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14daaddda6d99f84bafb98e32b5d381e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ClickHere: 1
+  currentGround: {fileID: 0}
+  currentMainChar: {fileID: 0}
+  currentJoyStick: {fileID: 0}
+  spawnposList:
+  - {fileID: 114213471623874830, guid: 60472098544586e45a9ab6ac2fee55b5, type: 2}
+  - {fileID: 114672349486354610, guid: 60472098544586e45a9ab6ac2fee55b5, type: 2}
+  - {fileID: 114034881808434064, guid: 60472098544586e45a9ab6ac2fee55b5, type: 2}
+  - {fileID: 114312840983487434, guid: 60472098544586e45a9ab6ac2fee55b5, type: 2}
+  eSnap: 1
+  doneTrySnap: 1
+  doneSnapSpawnPos: 1
 --- !u!114 &114037331950570420
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3983,7 +4005,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114140185152455318}
+      - m_Target: {fileID: 0}
         m_MethodName: OnSimulatorDropShape
         m_Mode: 1
         m_Arguments:
@@ -4143,7 +4165,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114418650265538418}
+      - m_Target: {fileID: 0}
         m_MethodName: OnCancelClick
         m_Mode: 1
         m_Arguments:
@@ -4638,6 +4660,31 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114114687032660490
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1299025663081966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f3665e7c9b13354189e5fb2adf588ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDebug: 1
+  doneTakeScreenCapture: 1
+--- !u!114 &114116905748030930
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1299025663081966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 242111093ea1fac41b59fe6ebae4e920, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doneFindBackground: 1
 --- !u!114 &114119414572360584
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4665,6 +4712,23 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114121368019771882
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1299025663081966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7a99a94b42bc294e959e5665c48ca39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDebug: 1
+  doneLoadCharacter: 1
+  createCharacter: {fileID: 114287358193939406}
+  joystickMethods: {fileID: 114863235956301726}
+  currentGroundMarker: {fileID: 0}
+  currentJoystick: {fileID: 0}
 --- !u!114 &114123709169224692
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4698,22 +4762,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: <
---- !u!114 &114140185152455318
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1796903669268766}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69c9f6fdeeb394a07b35cd0d68a21cba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isDebug: 1
-  useUpdate: 0
-  shapeInfoList: []
-  shapeObjList: []
-  mShapeMaterial: {fileID: 2100000, guid: da132ac2baa253243b87a3c5bd8f96e5, type: 2}
 --- !u!114 &114146182034837038
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4979,7 +5027,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114418650265538418}
+      - m_Target: {fileID: 0}
         m_MethodName: OnDeleteMapClicked
         m_Mode: 1
         m_Arguments:
@@ -5454,6 +5502,28 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114179906772436856
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1299025663081966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 680e40c2765395e49ba6e53c2a71f94c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDebug: 1
+  TextTextureFileName: fb0c3db7-534f-4fed-9fcf-570666bfe5ae
+  mapInfo:
+    placeId: 
+    metadata:
+      name: 
+      location:
+        latitude: 0
+        longitude: 0
+        altitude: 0
+      created: 0
 --- !u!114 &114179958681726552
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5516,26 +5586,6 @@ MonoBehaviour:
   m_Text: '
 
 '
---- !u!114 &114186543667878610
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1796903669268766}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c1808dc71158424a8637bfaacbd70e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isDebug: 1
-  m_texture: {fileID: 0}
-  doneToString64File: 1
-  doneToPNGFile: 1
-  encodeLength: 546176
-  resizeTo: {x: 1, y: 1}
-  TextTextureFileName: fb0c3db7-534f-4fed-9fcf-570666bfe5ae
-  _pathFolder: E:/AR fight beetsoft/Afe/AFE u5.4.1f1/Assets/StreamingAssets
-  _currentPathType: 1
 --- !u!114 &114188088764272698
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5772,7 +5822,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114418650265538418}
+      - m_Target: {fileID: 0}
         m_MethodName: OnNewMapClick
         m_Mode: 1
         m_Arguments:
@@ -5856,19 +5906,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: '>'
---- !u!114 &114206673551972426
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1796903669268766}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f3665e7c9b13354189e5fb2adf588ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isDebug: 1
-  doneTakeScreenCapture: 1
 --- !u!114 &114209215948330456
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5935,58 +5972,22 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Camera
---- !u!114 &114214988686671190
+--- !u!114 &114220318926308986
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1642294805894406}
+  m_GameObject: {fileID: 1299025663081966}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Script: {fileID: 11500000, guid: 69c9f6fdeeb394a07b35cd0d68a21cba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 3
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 114424743543248772}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 114418650265538418}
-        m_MethodName: OnExitClick
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
-      Culture=neutral, PublicKeyToken=null
+  isDebug: 1
+  useUpdate: 0
+  shapeInfoList: []
+  shapeObjList: []
+  mShapeMaterial: {fileID: 2100000, guid: da132ac2baa253243b87a3c5bd8f96e5, type: 2}
 --- !u!114 &114240392665486472
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6094,22 +6095,6 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &114242726585006694
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1796903669268766}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d8d42890b67d934584e8bc43bfed4b5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isDebug: 1
-  _useUpdate: 0
-  animBtnPlaceBgMarker: {fileID: 95760775575665960}
-  backgroundMarkerPrefab: {fileID: 100006, guid: 60472098544586e45a9ab6ac2fee55b5,
-    type: 2}
 --- !u!114 &114243737703978284
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6564,29 +6549,22 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 'Snap Character To Center Of Ground '
---- !u!114 &114294397101910066
+--- !u!114 &114287358193939406
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1796903669268766}
+  m_GameObject: {fileID: 1299025663081966}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14daaddda6d99f84bafb98e32b5d381e, type: 3}
+  m_Script: {fileID: 11500000, guid: 9256a88d6b2482844a4eef2c8c862559, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ClickHere: 1
-  currentGround: {fileID: 0}
-  currentMainChar: {fileID: 0}
-  currentJoyStick: {fileID: 0}
-  spawnposList:
-  - {fileID: 114213471623874830, guid: 60472098544586e45a9ab6ac2fee55b5, type: 2}
-  - {fileID: 114672349486354610, guid: 60472098544586e45a9ab6ac2fee55b5, type: 2}
-  - {fileID: 114034881808434064, guid: 60472098544586e45a9ab6ac2fee55b5, type: 2}
-  - {fileID: 114312840983487434, guid: 60472098544586e45a9ab6ac2fee55b5, type: 2}
-  eSnap: 1
-  doneTrySnap: 1
-  doneSnapSpawnPos: 1
+  isDebug: 0
+  boolCreatePlaneJoystick: 1
+  characterPrefab: Yasuo_CHP
+  currentCharacter: {fileID: 0}
+  doneClickSpawn: 1
 --- !u!114 &114302489051572672
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6724,7 +6702,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114418650265538418}
+      - m_Target: {fileID: 0}
         m_MethodName: OnListMapClick
         m_Mode: 1
         m_Arguments:
@@ -6737,6 +6715,26 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114310787722065950
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1299025663081966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c1808dc71158424a8637bfaacbd70e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDebug: 1
+  m_texture: {fileID: 0}
+  doneToString64File: 1
+  doneToPNGFile: 1
+  encodeLength: 0
+  resizeTo: {x: 1, y: 1}
+  TextTextureFileName: 
+  _pathFolder: 
+  _currentPathType: 2
 --- !u!114 &114314699807931022
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6884,7 +6882,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114418650265538418}
+      - m_Target: {fileID: 0}
         m_MethodName: OnCancelClick
         m_Mode: 1
         m_Arguments:
@@ -7530,7 +7528,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114418650265538418}
+      - m_Target: {fileID: 0}
         m_MethodName: OnExitClick
         m_Mode: 1
         m_Arguments:
@@ -7588,18 +7586,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Show Ray
---- !u!114 &114408868105097322
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1796903669268766}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 242111093ea1fac41b59fe6ebae4e920, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  doneFindBackground: 1
 --- !u!114 &114409676008098110
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7693,44 +7679,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: '>'
---- !u!114 &114418650265538418
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1796903669268766}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0956e3adc39844872bb81e774c3418ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isDebug: 1
-  mMapSelectedPanel: {fileID: 1433976592980620}
-  mInitButtonPanel: {fileID: 1336832716414092}
-  mMappingButtonPanel: {fileID: 1995347770866820}
-  mSimulatorAddShapeButton: {fileID: 1021127876037928}
-  mMapListPanel: {fileID: 1691660532153978}
-  mExitButton: {fileID: 1987906341679228}
-  mListElement: {fileID: 1170995837258984, guid: a3ef81b9c1147467396e3a086b211961,
-    type: 2}
-  mListContentParent: {fileID: 224108059695160948}
-  mToggleGroup: {fileID: 114497039631633330}
-  mLabelText: {fileID: 114786670821103462}
-  mRadiusSlider: {fileID: 114861321496163338}
-  mMaxRadiusSearch: 500
-  mRadiusLabel: {fileID: 114194126231901204}
-  mReportDebug: 1
-  mapToFile: {fileID: 114856583579550672}
-  isDebugMapFileInfo: 0
-  loadImage: {fileID: 0}
-  loadCharacter: {fileID: 114557778410215838}
-  photonMenu: {fileID: 0}
-  doneOnSaveMapClick: 1
-  screenCapture: {fileID: 114206673551972426}
-  screenShot: {fileID: 114432862945351614}
-  backgroundMethod: {fileID: 114408868105097322}
-  shapeManager: {fileID: 114140185152455318}
-  afeBaseMarkerManager: {fileID: 114242726585006694}
 --- !u!114 &114419602376941326
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7770,7 +7718,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114418650265538418}
+      - m_Target: {fileID: 0}
         m_MethodName: OnLoadMapClicked
         m_Mode: 1
         m_Arguments:
@@ -8323,7 +8271,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114418650265538418}
+      - m_Target: {fileID: 0}
         m_MethodName: OnSaveMapClick
         m_Mode: 1
         m_Arguments:
@@ -8402,22 +8350,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114502211857671666
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1796903669268766}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9256a88d6b2482844a4eef2c8c862559, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isDebug: 0
-  boolCreatePlaneJoystick: 1
-  characterPrefab: Yasuo_CHP
-  currentCharacter: {fileID: 0}
-  doneClickSpawn: 1
 --- !u!114 &114504690778232424
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -8761,7 +8693,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDebug: 1
-  textureMethod: {fileID: 114186543667878610}
+  textureMethod: {fileID: 0}
 --- !u!114 &114557502054183870
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -8789,23 +8721,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114557778410215838
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1796903669268766}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7a99a94b42bc294e959e5665c48ca39, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isDebug: 1
-  doneLoadCharacter: 1
-  createCharacter: {fileID: 114502211857671666}
-  joystickMethods: {fileID: 114808999715772402}
-  currentGroundMarker: {fileID: 0}
-  currentJoystick: {fileID: 0}
 --- !u!114 &114558371803492546
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -8885,6 +8800,45 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Scrollbar+ScrollEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114567641709271370
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1299025663081966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0956e3adc39844872bb81e774c3418ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDebug: 1
+  mMapSelectedPanel: {fileID: 1433976592980620}
+  mInitButtonPanel: {fileID: 1336832716414092}
+  mMappingButtonPanel: {fileID: 1995347770866820}
+  mSimulatorAddShapeButton: {fileID: 1021127876037928}
+  mMapListPanel: {fileID: 1691660532153978}
+  mExitButton: {fileID: 1987906341679228}
+  mListElement: {fileID: 1170995837258984, guid: a3ef81b9c1147467396e3a086b211961,
+    type: 2}
+  mListContentParent: {fileID: 224108059695160948}
+  mToggleGroup: {fileID: 114497039631633330}
+  mLabelText: {fileID: 114786670821103462}
+  mRadiusSlider: {fileID: 114861321496163338}
+  mMaxRadiusSearch: 500
+  mRadiusLabel: {fileID: 114194126231901204}
+  mReportDebug: 1
+  mapToFile: {fileID: 114179906772436856}
+  isDebugMapFileInfo: 0
+  doneOnLoadMapClickedNameMap: 1
+  loadImage: {fileID: 0}
+  loadCharacter: {fileID: 114121368019771882}
+  photonMenu: {fileID: 0}
+  doneOnSaveMapClick: 1
+  screenCapture: {fileID: 114114687032660490}
+  screenShot: {fileID: 114432862945351614}
+  backgroundMethod: {fileID: 114116905748030930}
+  shapeManager: {fileID: 114220318926308986}
+  afeBaseMarkerManager: {fileID: 114916997275672194}
 --- !u!114 &114567681233101518
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9403,7 +9357,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDebug: 1
-  textureMethod: {fileID: 114186543667878610}
+  textureMethod: {fileID: 0}
 --- !u!114 &114635153462981650
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9699,7 +9653,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDebug: 1
-  textureMethod: {fileID: 114186543667878610}
+  textureMethod: {fileID: 0}
 --- !u!114 &114669732003242864
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9791,7 +9745,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114418650265538418}
+      - m_Target: {fileID: 0}
         m_MethodName: OnLoadMapClicked
         m_Mode: 1
         m_Arguments:
@@ -9816,7 +9770,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDebug: 1
-  textureMethod: {fileID: 114186543667878610}
+  textureMethod: {fileID: 0}
 --- !u!114 &114681562974594744
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -10194,7 +10148,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114418650265538418}
+      - m_Target: {fileID: 0}
         m_MethodName: OnListMapClick
         m_Mode: 1
         m_Arguments:
@@ -10430,7 +10384,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDebug: 1
-  textureMethod: {fileID: 114186543667878610}
+  textureMethod: {fileID: 0}
 --- !u!114 &114758441225138028
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -10656,7 +10610,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114418650265538418}
+      - m_Target: {fileID: 0}
         m_MethodName: OnDeleteMapClicked
         m_Mode: 1
         m_Arguments:
@@ -10795,17 +10749,6 @@ MonoBehaviour:
   fv: {fileID: 114547478952363048}
   CurrentBestIndex: -1
   CurrentBestPos: {x: -1, y: -1, z: -1}
---- !u!114 &114808999715772402
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1796903669268766}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d58b7cfe0fe4d194a93648efb0963ef4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114809766002217822
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -11264,28 +11207,6 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Scrollbar+ScrollEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &114856583579550672
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1796903669268766}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 680e40c2765395e49ba6e53c2a71f94c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isDebug: 1
-  TextTextureFileName: fb0c3db7-534f-4fed-9fcf-570666bfe5ae
-  mapInfo:
-    placeId: 
-    metadata:
-      name: 
-      location:
-        latitude: 0
-        longitude: 0
-        altitude: 0
-      created: 0
 --- !u!114 &114860770335864216
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -11298,7 +11219,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 95760775575665960}
-  baseMarker: {fileID: 114242726585006694}
+  baseMarker: {fileID: 0}
 --- !u!114 &114861321496163338
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -11347,6 +11268,17 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Slider+SliderEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114863235956301726
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1299025663081966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d58b7cfe0fe4d194a93648efb0963ef4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114865855512297572
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -11651,7 +11583,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 114418650265538418}
+        - m_Target: {fileID: 0}
           m_MethodName: OnRadiusSelect
           m_Mode: 1
           m_Arguments:
@@ -11866,6 +11798,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 1
   m_VerticalFit: 1
+--- !u!114 &114916997275672194
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1299025663081966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d8d42890b67d934584e8bc43bfed4b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDebug: 1
+  _useUpdate: 0
+  animBtnPlaceBgMarker: {fileID: 95760775575665960}
+  backgroundMarkerPrefab: {fileID: 100006, guid: 60472098544586e45a9ab6ac2fee55b5,
+    type: 2}
 --- !u!114 &114919855806417006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -12032,7 +11980,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDebug: 1
-  textureMethod: {fileID: 114186543667878610}
+  textureMethod: {fileID: 0}
 --- !u!114 &114931334273163598
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -12464,7 +12412,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114418650265538418}
+      - m_Target: {fileID: 0}
         m_MethodName: OnSaveMapClick
         m_Mode: 1
         m_Arguments:
@@ -12549,7 +12497,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114418650265538418}
+      - m_Target: {fileID: 0}
         m_MethodName: OnNewMapClick
         m_Mode: 1
         m_Arguments:
@@ -14878,11 +14826,11 @@ RectTransform:
   m_Father: {fileID: 224533475843459406}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 128, y: 50}
-  m_SizeDelta: {x: 128, y: 128}
-  m_Pivot: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0, y: 1}
 --- !u!224 &224301862088856698
 RectTransform:
   m_ObjectHideFlags: 1
@@ -15601,9 +15549,9 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 128, y: 128}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
 --- !u!224 &224512711144637272
 RectTransform:

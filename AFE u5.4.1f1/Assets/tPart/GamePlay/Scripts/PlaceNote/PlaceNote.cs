@@ -303,11 +303,19 @@ public class PlaceNote : MonoBehaviour, PlacenoteListener
         LibPlacenote.Instance.ListMaps((mapList) =>
         {
             // render the map list!
+
             for (int i = 0; i < mapList.Length; i++)
             {
                 if (mapList[i].metadata.userdata != null)
                 {
-                    if (mapList[i].placeId == nameMap)
+                    bool isMapEqual = false;
+#if UNITY_EDITOR
+                    isMapEqual = nameMap == "mapEditor";
+#else
+                    isMapEqual = mapList[i].placeId == nameMap;
+#endif                    
+
+                    if (isMapEqual)
                     {
                         mSelectedMapInfo = mapList[i];
                         OnLoadMapClicked();
