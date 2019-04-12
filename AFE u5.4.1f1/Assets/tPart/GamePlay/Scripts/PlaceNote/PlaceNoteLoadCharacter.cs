@@ -16,6 +16,7 @@ public class PlaceNoteLoadCharacter : MonoBehaviour
     public CanvasJoystickManagerMethods joystickMethods = null;
     public BackgroundMarker currentGroundMarker = null;
     public PlaneJoystick currentJoystick = null;
+    public Snap2Character snap2Character = null;
 
     List<TestYasuo> testYasuos = new List<TestYasuo>();
     private void Start()
@@ -38,14 +39,15 @@ public class PlaceNoteLoadCharacter : MonoBehaviour
             {
                 int index = 0;
                 index = PhotonNetwork.IsMasterClient ? 0 : 1;
-                currentJoystick.transform.position = currentGroundMarker.retrieveMainChar.spawnposList[index].transform.position;
-                createCharacter.transform.position = currentGroundMarker.retrieveMainChar.spawnposList[index].transform.position;
+                snap2Character.Snap(createCharacter.currentCharacter, currentGroundMarker.retrieveMainChar.spawnposList[index].gameObject);                
             }
             if (testYasuos.Count == 0 || testYasuos.Count >= 3)
             {
             }
         });
-    }
+    }    
+
+
 
     [ContextMenu("LoadCharacter")]
     public void LoadCharacter()

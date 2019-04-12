@@ -886,6 +886,7 @@ GameObject:
   - component: {fileID: 224390177234834000}
   - component: {fileID: 114567641709271370}
   - component: {fileID: 114121368019771882}
+  - component: {fileID: 114405752558986212}
   - component: {fileID: 114220318926308986}
   - component: {fileID: 114916997275672194}
   - component: {fileID: 114114687032660490}
@@ -4222,6 +4223,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8244b0a8db9044970b67cdf6b966240b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDebug: 0
   apiKey: 0i2ogb1e0r2s36ivzkp65oapc3rddg7s0nxj70jxrlj96blj9lxhxbf5jdqgitta712f9piwk0k08rr790tze4nltfx58au6u5dw
 --- !u!114 &114077254887346328
 MonoBehaviour:
@@ -4729,6 +4731,7 @@ MonoBehaviour:
   joystickMethods: {fileID: 114863235956301726}
   currentGroundMarker: {fileID: 0}
   currentJoystick: {fileID: 0}
+  snap2Character: {fileID: 114405752558986212}
 --- !u!114 &114123709169224692
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7586,6 +7589,17 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Show Ray
+--- !u!114 &114405752558986212
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1299025663081966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1aaeef0354a89d54fbdc279ad8a21724, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114409676008098110
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -12606,6 +12620,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1876410d8b514981a4b6492316ae3e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDebug: 0
 --- !u!124 &124401195591892836
 Behaviour:
   m_ObjectHideFlags: 1
