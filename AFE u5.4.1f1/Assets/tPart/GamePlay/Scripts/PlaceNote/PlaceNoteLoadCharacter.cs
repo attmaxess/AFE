@@ -38,11 +38,8 @@ public class PlaceNoteLoadCharacter : MonoBehaviour
                 int count = 3;
                 Observable.Interval(System.TimeSpan.FromSeconds(1)).TakeWhile(_ => count >= 1 && testYasuos.Count == 2).Subscribe(_ =>
                 {
-                    if (count == 1)
-                    {
-                        currentGroundMarker.retrieveMainChar.eSnap = RetrieveMainCharacter.eSnapBackgroundMarker.SpawnPosList;
-                        currentGroundMarker.retrieveMainChar.TrySnap(currentGroundMarker, currentJoystick, createCharacter.currentCharacter);
-                    }
+                    currentGroundMarker.retrieveMainChar.eSnap = RetrieveMainCharacter.eSnapBackgroundMarker.SpawnPosList;
+                    currentGroundMarker.retrieveMainChar.TrySnap(currentGroundMarker, currentJoystick, createCharacter.currentCharacter);
                     count--;
                 });
             }
