@@ -40,7 +40,8 @@ public class PlaceNoteLoadCharacter : MonoBehaviour
                 {
                     if (count == 1)
                     {
-                        LoadCharacter();
+                        currentGroundMarker.retrieveMainChar.eSnap = RetrieveMainCharacter.eSnapBackgroundMarker.SpawnPosList;
+                        currentGroundMarker.retrieveMainChar.TrySnap(currentGroundMarker, currentJoystick, createCharacter.currentCharacter);
                     }
                     count--;
                 });
