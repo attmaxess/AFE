@@ -142,6 +142,11 @@ public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
             }
         });
 
+        Observable.EveryLateUpdate().TakeUntilDestroy(gameObject).Subscribe(_ =>
+        {
+            if (mainCharacter == null) Destroy(gameObject);
+        });
+
         yield break;
     }
 
