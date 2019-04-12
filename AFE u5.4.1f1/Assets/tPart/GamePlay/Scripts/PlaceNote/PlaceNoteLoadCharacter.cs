@@ -36,15 +36,10 @@ public class PlaceNoteLoadCharacter : MonoBehaviour
             }
             if (testYasuos.Count == 2)
             {
-                int count = 3;
-                Observable.Interval(System.TimeSpan.FromSeconds(1)).TakeWhile(_ => count >= 0 && testYasuos.Count == 2).Subscribe(_ =>
-                {
-                    int index = 0;
-                    index = PhotonNetwork.IsMasterClient ? 0 : 1;
-                    currentJoystick.transform.position = currentGroundMarker.retrieveMainChar.spawnposList[index].transform.position;
-                    createCharacter.transform.position = currentGroundMarker.retrieveMainChar.spawnposList[index].transform.position;
-                    count--;
-                });
+                int index = 0;
+                index = PhotonNetwork.IsMasterClient ? 0 : 1;
+                currentJoystick.transform.position = currentGroundMarker.retrieveMainChar.spawnposList[index].transform.position;
+                createCharacter.transform.position = currentGroundMarker.retrieveMainChar.spawnposList[index].transform.position;
             }
             if (testYasuos.Count == 0 || testYasuos.Count >= 3)
             {

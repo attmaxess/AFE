@@ -42,7 +42,7 @@ namespace Com.Beetsoft.AFE
                 .Subscribe(rotation => RotateTarget = rotation);
 
             Observable.EveryUpdate()
-                .Where(_ => RotateTarget != Vector3.zero)
+                .Where(_ => RotateTarget != Vector3.zero).TakeUntilDestroy(gameObject)
                 .Subscribe(x =>
                 {
                     transform.forward = Vector3.Lerp(transform.forward, RotateTarget, SpeedSmooth);
