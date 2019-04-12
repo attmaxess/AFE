@@ -121,7 +121,6 @@ public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
             {
                 testYasuos.Remove(mess.yasuo);
             }
-            Debug.Log("count yasuo in screen" + testYasuos.Count);
             if (testYasuos.Count == 1)
             {
             }

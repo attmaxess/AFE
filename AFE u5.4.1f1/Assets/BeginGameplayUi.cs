@@ -25,7 +25,6 @@ public class BeginGameplayUi : MonoBehaviour
             {
                 testYasuos.Remove(mess.yasuo);
             }
-            Debug.Log("count yasuo in screen" + testYasuos.Count);
             if (testYasuos.Count == 1)
             {
                 panelCountTime.gameObject.SetActive(false);

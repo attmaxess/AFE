@@ -56,7 +56,6 @@ namespace Com.Beetsoft.AFE
 
         void IInitialize<IJoystickInputFilterObserver>.Initialize(IJoystickInputFilterObserver init)
         {
-            Debug.Log("IInitialize Skill Hander");
             JoystickInputFilterObserver = init;
         }
 

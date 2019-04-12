@@ -22,8 +22,8 @@ public class PhotonMenu : MonoBehaviourPunCallbacks
     void Awake()
     {
 #if DEMO_ALPHA1
-        lobbyName = "lobby_Demo_Alpha1";
-        roomName = "room_Demo_Alpha1";
+        lobbyName = "lobby_Demo_Alpha12";
+        roomName = "room_Demo_Alpha12";
 #endif
     }
 
