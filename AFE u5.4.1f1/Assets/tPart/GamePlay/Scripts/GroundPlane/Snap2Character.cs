@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class Snap2Character : MonoBehaviour
 {
-    public void Snap(GameObject character, GameObject snapPos)
+    public void Snap(CreateCharacter loadChar, GameObject snapPos)
     {
-        StartCoroutine(C_Snap(character, snapPos));
+        StartCoroutine(C_Snap(loadChar, snapPos));
     }
 
-    IEnumerator C_Snap(GameObject character, GameObject snapPos)
+    IEnumerator C_Snap(CreateCharacter loadChar, GameObject snapPos)
     {
+        yield return new WaitUntil(() => loadChar.currentCharacter != null);
+
         float momentPlaneJoystick = Time.time;
         yield return new WaitUntil(() => FindObjectOfType<PlaneJoystick>() != null || Time.time - momentPlaneJoystick > 2f);
 
@@ -21,7 +23,7 @@ public class Snap2Character : MonoBehaviour
         }
 
         joystick.transform.position = snapPos.transform.position;
-        character.transform.position = snapPos.transform.position;
+        loadChar.transform.position = snapPos.transform.position;
 
         yield break;
     }

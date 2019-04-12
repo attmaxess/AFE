@@ -39,7 +39,7 @@ public class PlaceNoteLoadCharacter : MonoBehaviour
             {
                 int index = 0;
                 index = PhotonNetwork.IsMasterClient ? 0 : 1;
-                snap2Character.Snap(createCharacter.currentCharacter, currentGroundMarker.retrieveMainChar.spawnposList[index].gameObject);                
+                snap2Character.Snap(createCharacter, currentGroundMarker.retrieveMainChar.spawnposList[index].gameObject);                
             }
             if (testYasuos.Count == 0 || testYasuos.Count >= 3)
             {
