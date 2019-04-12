@@ -5,6 +5,7 @@ using Photon.Realtime;
 using System.Collections.Generic;
 using System;
 using UnityEngine.Networking;
+using Com.Beetsoft.AFE;
 
 public class PhotonMenu : MonoBehaviourPunCallbacks
 {
@@ -17,11 +18,12 @@ public class PhotonMenu : MonoBehaviourPunCallbacks
     public string nickName = string.Empty;
     private Vector2 scrollPos = Vector2.zero;
 
+             
     void Awake()
     {
 #if DEMO_ALPHA1
-        lobbyName = "lobby_Demo_Alpha1";
-        roomName = "room_Demo_Alpha1";
+        lobbyName = "lobby_Demo_Alpha12";
+        roomName = "room_Demo_Alpha12";
 #endif
     }
 
@@ -43,7 +45,7 @@ public class PhotonMenu : MonoBehaviourPunCallbacks
     }
 
     //[Header("OnGUI")]    
-    //public bool DrawOnGUI = false;    
+    //public bool DrawOnGUI = false;  \
 
     [Header("Show On Lost Connection")]
     public bool isDebugConnecting = false;

@@ -1,7 +1,9 @@
-﻿using Photon.Pun;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UniRx;
+using Com.Beetsoft.AFE;
+using Photon.Pun;
 
 public class PlaceNoteLoadCharacter : MonoBehaviour
 {
@@ -15,6 +17,36 @@ public class PlaceNoteLoadCharacter : MonoBehaviour
     public BackgroundMarker currentGroundMarker = null;
     public PlaneJoystick currentJoystick = null;
 
+    List<TestYasuo> testYasuos = new List<TestYasuo>();
+    private void Start()
+    {
+        MessageBroker.Default.Receive<MessageChangedCharacterYasuo>().Subscribe(mess =>
+        {
+            if (mess.addOrRemove)
+            {
+                testYasuos.Add(mess.yasuo);
+            }
+            else
+            {
+                testYasuos.Remove(mess.yasuo);
+            }
+            Debug.Log("count yasuo in screen" + testYasuos.Count);
+            if (testYasuos.Count == 1)
+            {
+            }
+            if (testYasuos.Count == 2)
+            {
+                int index = 0;
+                index = PhotonNetwork.IsMasterClient ? 0 : 1;
+                currentJoystick.transform.position = currentGroundMarker.retrieveMainChar.spawnposList[index].transform.position;
+                createCharacter.transform.position = currentGroundMarker.retrieveMainChar.spawnposList[index].transform.position;
+            }
+            if (testYasuos.Count == 0 || testYasuos.Count >= 3)
+            {
+            }
+        });
+    }
+
     [ContextMenu("LoadCharacter")]
     public void LoadCharacter()
     {
@@ -25,13 +57,6 @@ public class PlaceNoteLoadCharacter : MonoBehaviour
     {
         if (isDebug) Debug.Log("Start C_LoadCharacter");
         doneLoadCharacter = false;
-
-        if (PhotonCharacterExisted.Instance.CharacterExisted())
-        {
-            if (isDebug) Debug.Log("Character Exited!");
-            doneLoadCharacter = true;
-            yield break;
-        }
 
         float momentBackground = Time.time;
         yield return new WaitUntil(() => FindObjectOfType<BackgroundMarker>() != null || Time.time - momentBackground > 2f);

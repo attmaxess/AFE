@@ -34,6 +34,8 @@ public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
     public bool useSkill_3;
     public bool useSkill_4;
     public bool useBasicAttack;
+    public bool waitCountTime;
+    List<TestYasuo> testYasuos = new List<TestYasuo>();
 
     public Vector3 directionRotate
     {
@@ -109,6 +111,42 @@ public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
             IsUpdateWhenSkill = mes.isUsing;
         });
 
+        MessageBroker.Default.Receive<MessageChangedCharacterYasuo>().Subscribe(mess =>
+        {
+            if (mess.addOrRemove)
+            {
+                testYasuos.Add(mess.yasuo);
+            }
+            else
+            {
+                testYasuos.Remove(mess.yasuo);
+            }
+            if (testYasuos.Count == 1)
+            {
+            }
+            if (testYasuos.Count == 2)
+            {
+                waitCountTime = true;
+                int count = 3;
+                Observable.Interval(System.TimeSpan.FromSeconds(1)).TakeWhile(_ => count >= 0 && testYasuos.Count == 2).Subscribe(_ =>
+                {
+                    if (count <= 0)
+                    {
+                        waitCountTime = false;
+                    }
+                    count--;
+                });
+            }
+            if (testYasuos.Count == 0 || testYasuos.Count >= 3)
+            {
+            }
+        });
+
+        Observable.EveryLateUpdate().TakeUntilDestroy(gameObject).Subscribe(_ =>
+        {
+            if (mainCharacter == null) Destroy(gameObject);
+        });
+
         yield break;
     }
 
@@ -125,6 +163,8 @@ public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
         {
             Debug.Log("Pause");
         }
+
+        if (waitCountTime) return;
 
         if (isDeath) return;
 
