@@ -128,9 +128,9 @@ public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
             {
                 waitCountTime = true;
                 int count = 3;
-                Observable.Interval(System.TimeSpan.FromSeconds(1)).TakeWhile(_ => count >= 1 && testYasuos.Count == 2).Subscribe(_ =>
+                Observable.Interval(System.TimeSpan.FromSeconds(1)).TakeWhile(_ => count >= 0 && testYasuos.Count == 2).Subscribe(_ =>
                 {
-                    if (count == 1)
+                    if (count <= 1)
                     {
                         waitCountTime = false;
                     }

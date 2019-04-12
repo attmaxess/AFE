@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
 using Com.Beetsoft.AFE;
+using Photon.Pun;
 
 public class PlaceNoteLoadCharacter : MonoBehaviour
 {
@@ -36,10 +37,12 @@ public class PlaceNoteLoadCharacter : MonoBehaviour
             if (testYasuos.Count == 2)
             {
                 int count = 3;
-                Observable.Interval(System.TimeSpan.FromSeconds(1)).TakeWhile(_ => count >= 1 && testYasuos.Count == 2).Subscribe(_ =>
+                Observable.Interval(System.TimeSpan.FromSeconds(1)).TakeWhile(_ => count >= 0 && testYasuos.Count == 2).Subscribe(_ =>
                 {
-                    currentGroundMarker.retrieveMainChar.eSnap = RetrieveMainCharacter.eSnapBackgroundMarker.SpawnPosList;
-                    currentGroundMarker.retrieveMainChar.TrySnap(currentGroundMarker, currentJoystick, createCharacter.currentCharacter);
+                    int index = 0;
+                    index = PhotonNetwork.IsMasterClient ? 0 : 1;
+                    currentJoystick.transform.position = currentGroundMarker.retrieveMainChar.spawnposList[index].transform.position;
+                    createCharacter.transform.position = currentGroundMarker.retrieveMainChar.spawnposList[index].transform.position;
                     count--;
                 });
             }
