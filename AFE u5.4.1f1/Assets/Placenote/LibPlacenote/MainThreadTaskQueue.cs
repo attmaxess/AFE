@@ -5,6 +5,9 @@ using System.Collections.Generic;
 
 public class MainThreadTaskQueue: MonoBehaviour
 {
+    [Header("Debug")]
+    public bool isDebug = false;
+
 	public delegate void Delegate ();
 
 	private static MainThreadTaskQueue sInstance;

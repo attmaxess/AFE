@@ -37,6 +37,9 @@ public class UnityARImageFrameData
 
 public class LibPlacenote : MonoBehaviour
 {
+    [Header("Debug")]
+    public bool isDebug = false;
+
     /// <summary>
     /// Delegate template for a callback to return results of REST API calls such as PNInitialize
     /// </summary>
@@ -497,7 +500,7 @@ public class LibPlacenote : MonoBehaviour
         mImage.y.stride = (ulong)(mARCamera.videoParams.yWidth == 1440 ? 1472 : mARCamera.videoParams.yWidth);
         ulong yBufSize = mImage.y.stride * mImage.y.height;
         mImage.y.data = Marshal.AllocHGlobal((int)yBufSize);
-        Debug.Log(String.Format("yWidth {0} yHeight {1} yStride {2} totalSize {3}",
+        if (isDebug) Debug.Log(String.Format("yWidth {0} yHeight {1} yStride {2} totalSize {3}",
             mImage.y.width, mImage.y.height, mImage.y.stride, yBufSize));
 
         // This does assume the YUV_NV21 format
@@ -507,7 +510,7 @@ public class LibPlacenote : MonoBehaviour
         mImage.vu.stride = (ulong)(mARCamera.videoParams.yWidth == 1440 ? 1472 : mARCamera.videoParams.yWidth);
         ulong vuBufSize = mImage.vu.stride * mImage.vu.height;
         mImage.vu.data = Marshal.AllocHGlobal((int)vuBufSize);
-        Debug.Log(String.Format("vuWidth {0} vuHeight {1} yStride {2} totalSize {3}",
+        if (isDebug) Debug.Log(String.Format("vuWidth {0} vuHeight {1} yStride {2} totalSize {3}",
             mImage.vu.width, mImage.vu.height, mImage.vu.stride, vuBufSize));
 
         mSession.SetCapturePixelData(true, mImage.y.data, mImage.vu.data);
@@ -548,13 +551,13 @@ public class LibPlacenote : MonoBehaviour
 
         if (success)
         {
-            Debug.Log("Initialized SDK!");
+            //Debug.Log("Initialized SDK!");
             Instance.mInitialized = true;
         }
         else
         {
-            Debug.Log("Failed to initialize SDK!");
-            Debug.Log("error message: " + result.msg);
+            //Debug.Log("Failed to initialize SDK!");
+            //Debug.Log("error message: " + result.msg);
         }
     }
 
@@ -641,7 +644,7 @@ public class LibPlacenote : MonoBehaviour
                 orientRemovalMat.m11 = -1;
                 break;
             default:
-                Debug.LogError("Unrecognized screen orientation");
+                if (isDebug) Debug.LogError("Unrecognized screen orientation");
                 return;
         }
 
@@ -940,19 +943,19 @@ public class LibPlacenote : MonoBehaviour
         {
             if (statusClone.completed)
             {
-                Debug.Log("Dataset uploaded!");
+                //Debug.Log("Dataset uploaded!");
                 uploadProgressCb(true, false, 1);
                 handle.Free();
             }
             else if (statusClone.faulted)
             {
-                Debug.Log("Failed to upload dataset!");
+                //Debug.Log("Failed to upload dataset!");
                 uploadProgressCb(false, true, 0);
                 handle.Free();
             }
             else
             {
-                Debug.Log("Uploading dataset!");
+                //Debug.Log("Uploading dataset!");
                 uploadProgressCb(false, false, (float)(statusClone.bytesTransferred) / statusClone.bytesTotal);
             }
         });
@@ -997,7 +1000,7 @@ public class LibPlacenote : MonoBehaviour
             }
             else
             {
-                Debug.LogError("Failed to fetch map list, error: " + resultClone.msg);
+                //Debug.LogError("Failed to fetch map list, error: " + resultClone.msg);
                 metadataCb(null);
             }
 
@@ -1020,7 +1023,7 @@ public class LibPlacenote : MonoBehaviour
         /// If the file does not exist
         if (!File.Exists(Application.dataPath + simMapFileName))
         {
-            Debug.Log("There are no maps. Please create a new map to setMetadata.");
+            //Debug.Log("There are no maps. Please create a new map to setMetadata.");
         }
         else
         {
@@ -1066,7 +1069,7 @@ public class LibPlacenote : MonoBehaviour
             }
             else
             {
-                Debug.LogError("Failed to fetch map list, error: " + resultClone.msg);
+                //Debug.LogError("Failed to fetch map list, error: " + resultClone.msg);
                 metadataSavedCb(false);
             }
 
@@ -1091,7 +1094,7 @@ public class LibPlacenote : MonoBehaviour
         /// If the file does not exist
         if (!File.Exists(Application.dataPath + simMapFileName))
         {
-            Debug.Log("There are no maps. Please create a new map to setMetadata.");
+            //Debug.Log("There are no maps. Please create a new map to setMetadata.");
         }
         else
         {
@@ -1145,7 +1148,7 @@ public class LibPlacenote : MonoBehaviour
             }
             else
             {
-                Debug.LogError("Failed to fetch map list, error: " + resultClone.msg);
+                //Debug.LogError("Failed to fetch map list, error: " + resultClone.msg);
                 listCb(null);
             }
 
@@ -1169,7 +1172,7 @@ public class LibPlacenote : MonoBehaviour
         /// If the file does not exist
         if (!File.Exists(Application.dataPath + simMapFileName))
         {
-            Debug.Log("There are no maps. Please create a new map.");
+            //Debug.Log("There are no maps. Please create a new map.");
         }
         else
         {
@@ -1253,7 +1256,7 @@ public class LibPlacenote : MonoBehaviour
         /// If the file does not exist
         if (!File.Exists(Application.dataPath + simMapFileName))
         {
-            Debug.Log("There are no maps. Please create a new map.");
+            //Debug.Log("There are no maps. Please create a new map.");
         }
         else
         {
@@ -1289,28 +1292,28 @@ public class LibPlacenote : MonoBehaviour
         GCHandle handle = GCHandle.FromIntPtr(contextPtr);
         SaveLoadContext context = handle.Target as SaveLoadContext;
         Action<bool, bool, float> progressCb = context.progressCb;
-
+        
         PNTransferStatusUnity statusClone = status;
-        Debug.Log(String.Format("mapId {0} completed {1} faulted {2} bytesTransferred {3} bytesTotal {4}",
-            status.mapId, status.completed, status.faulted, status.bytesTransferred, status.bytesTotal)
-        );
+        //Debug.Log(String.Format("mapId {0} completed {1} faulted {2} bytesTransferred {3} bytesTotal {4}",
+        //    status.mapId, status.completed, status.faulted, status.bytesTransferred, status.bytesTotal)
+        //);
         MainThreadTaskQueue.InvokeOnMainThread(() =>
         {
             if (statusClone.completed)
             {
-                Debug.Log("Uploaded map!");
+                //Debug.Log("Uploaded map!");
                 progressCb(true, false, 1);
                 handle.Free();
             }
             else if (statusClone.faulted)
             {
-                Debug.Log("Failed to upload map!");
+                //Debug.Log("Failed to upload map!");
                 progressCb(false, true, 0);
                 handle.Free();
             }
             else
             {
-                Debug.Log("Uploading map!");
+                //Debug.Log("Uploading map!");
                 progressCb(false, false, (float)(statusClone.bytesTransferred) / statusClone.bytesTotal);
             }
         });
@@ -1338,13 +1341,13 @@ public class LibPlacenote : MonoBehaviour
             if (resultClone.success)
             {
                 String mapId = resultClone.msg;
-                Debug.Log("Added a record to map db with id " + mapId);
+                //Debug.Log("Added a record to map db with id " + mapId);
                 PNSaveMap(mapId, OnMapUploaded, contextPtr);
                 savedCb(mapId);
             }
             else
             {
-                Debug.Log(String.Format("Failed to add the map! Error msg: %s", resultClone.msg));
+                //Debug.Log(String.Format("Failed to add the map! Error msg: %s", resultClone.msg));
                 savedCb(null);
                 handle.Free();
             }
@@ -1418,19 +1421,19 @@ public class LibPlacenote : MonoBehaviour
         {
             if (statusClone.completed)
             {
-                Debug.Log("Loaded map!");
+                //Debug.Log("Loaded map!");
                 loadProgressCb(true, false, 1);
                 handle.Free();
             }
             else if (statusClone.faulted)
             {
-                Debug.Log("Failed to downloading map!");
+                //Debug.Log("Failed to downloading map!");
                 loadProgressCb(false, true, 0);
                 handle.Free();
             }
             else
             {
-                Debug.Log("Downloading map!");
+                //Debug.Log("Downloading map!");
                 loadProgressCb(false, false, (float)(statusClone.bytesTransferred) / statusClone.bytesTotal);
             }
         });
@@ -1570,7 +1573,7 @@ public class LibPlacenote : MonoBehaviour
 		lmSize = PNGetAllLandmarks (map, 0);
 
 		if (lmSize == 0) {
-			Debug.Log ("Empty landmarks, probably tried to fail");
+			//Debug.Log ("Empty landmarks, probably tried to fail");
 			return null;
 		}
 
@@ -1605,7 +1608,7 @@ public class LibPlacenote : MonoBehaviour
 
         if (lmSize == 0)
         {
-            Debug.Log("Empty landmarks, probably tried to fail");
+            //Debug.Log("Empty landmarks, probably tried to fail");
             return null;
         }
 
