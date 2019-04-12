@@ -31,6 +31,13 @@ public class CreateCharacter : MonoBehaviour
         if (isDebug) Debug.Log("Start C_ClickSpawn");
         doneClickSpawn = false;
 
+        if (PhotonCharacterExisted.Instance.CharacterExisted())
+        {
+            if (isDebug) Debug.Log("Character Exited!");
+            doneClickSpawn = true;
+            yield break;
+        }
+
         var newChar = PhotonNetwork.Instantiate(characterPrefab, Vector3.zero, Quaternion.identity, 0);
         yield return new WaitUntil(() => newChar.gameObject != null);
 

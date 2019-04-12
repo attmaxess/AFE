@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Com.Beetsoft.AFE
 {
-    public class TestYasuo : MonoBehaviourPun
+    public class TestYasuo : MonoBehaviourPun, IPlayer
     {
         [SerializeField] private ChampionModel championModel;
         [SerializeField] private JoystickInputFilter joystickInputFilter;
@@ -23,13 +23,11 @@ namespace Com.Beetsoft.AFE
 
         public Transform centerCharacter;
 
-
         public void SubtractHealth(int n)
         {
             ChampionModel.Health.Value -= n;
             Debug.Log(" ChampionModel.Health.Value  " + ChampionModel.Health.Value);
         }
-
 
         private void Awake()
         {
@@ -70,5 +68,14 @@ namespace Com.Beetsoft.AFE
             var _barPlayer = Instantiate(barPlayer.transform, CanvasJoystickManager.Singleton.barPlayer, false);
             _barPlayer.GetComponent<HealthBarPlayer>().SetInit(transform, championConfig, isMine);
         }
+
+        #region IPlayer
+
+        public GameObject GameObject()
+        {
+            return this.gameObject;
+        }
+
+        #endregion
     }
 }

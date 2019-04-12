@@ -266,6 +266,7 @@ GameObject:
   - component: {fileID: 114638592403259646}
   - component: {fileID: 114676211136841116}
   - component: {fileID: 114174209977137652}
+  - component: {fileID: 114656892289199856}
   m_Layer: 0
   m_Name: Code
   m_TagString: Untagged
@@ -2051,6 +2052,7 @@ MonoBehaviour:
   roomName: myRoom
   nickName: 
   deltaCheck: 2
+  isDebugConnecting: 0
   canvasPhoton: {fileID: 223485593261893842}
   stateArKitPlaceNote: {fileID: 114174209977137652}
   doneDisconnect: 1
@@ -2589,6 +2591,17 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &114656892289199856
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1351301126672050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc81df10a31a53f4a8bea24442ad7bd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114676211136841116
 MonoBehaviour:
   m_ObjectHideFlags: 1

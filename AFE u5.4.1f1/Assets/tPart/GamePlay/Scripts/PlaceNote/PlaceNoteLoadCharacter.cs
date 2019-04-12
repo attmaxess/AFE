@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Photon.Pun;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -23,7 +24,14 @@ public class PlaceNoteLoadCharacter : MonoBehaviour
     IEnumerator C_LoadCharacter()
     {
         if (isDebug) Debug.Log("Start C_LoadCharacter");
-        doneLoadCharacter = false;        
+        doneLoadCharacter = false;
+
+        if (PhotonCharacterExisted.Instance.CharacterExisted())
+        {
+            if (isDebug) Debug.Log("Character Exited!");
+            doneLoadCharacter = true;
+            yield break;
+        }
 
         float momentBackground = Time.time;
         yield return new WaitUntil(() => FindObjectOfType<BackgroundMarker>() != null || Time.time - momentBackground > 2f);
