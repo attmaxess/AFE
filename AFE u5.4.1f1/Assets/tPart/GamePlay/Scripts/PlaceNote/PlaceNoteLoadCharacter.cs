@@ -8,15 +8,7 @@ using Photon.Pun;
 public class PlaceNoteLoadCharacter : MonoBehaviour
 {
     [Header("Debug")]
-    public bool isDebug = true;
-
-    [Header("LoadCharacter")]
-    public bool doneLoadCharacter = true;
-    public CreateCharacter createCharacter = null;
-    public CanvasJoystickManagerMethods joystickMethods = null;
-    public BackgroundMarker currentGroundMarker = null;
-    public PlaneJoystick currentJoystick = null;
-    public Snap2Character snap2Character = null;
+    public bool isDebug = true;    
 
     List<TestYasuo> testYasuos = new List<TestYasuo>();
     private void Start()
@@ -37,17 +29,37 @@ public class PlaceNoteLoadCharacter : MonoBehaviour
             }
             if (testYasuos.Count == 2)
             {
-                int index = 0;
-                index = PhotonNetwork.IsMasterClient ? 0 : 1;
-                snap2Character.Snap(createCharacter, currentGroundMarker.retrieveMainChar.spawnposList[index].gameObject);                
+                WaitAndSnap2();
             }
             if (testYasuos.Count == 0 || testYasuos.Count >= 3)
             {
             }
         });
-    }    
+    }
 
+    [ContextMenu("WaitAndSnap2")]
+    public void WaitAndSnap2()
+    {
+        StartCoroutine(C_WaitAndSnap2());
+    }
 
+    IEnumerator C_WaitAndSnap2()
+    {
+        yield return new WaitUntil(() => doneLoadCharacter == true);
+
+        int index = PhotonNetwork.IsMasterClient ? 0 : 1;
+        snap2Character.Snap(createCharacter, currentGroundMarker.retrieveMainChar.spawnposList[index].gameObject);
+
+        yield break;
+    }
+
+    [Header("LoadCharacter")]
+    public bool doneLoadCharacter = true;
+    public CreateCharacter createCharacter = null;
+    public CanvasJoystickManagerMethods joystickMethods = null;
+    public BackgroundMarker currentGroundMarker = null;
+    public PlaneJoystick currentJoystick = null;
+    public Snap2Character snap2Character = null;
 
     [ContextMenu("LoadCharacter")]
     public void LoadCharacter()
