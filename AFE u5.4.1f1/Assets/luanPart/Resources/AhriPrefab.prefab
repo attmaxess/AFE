@@ -2507,7 +2507,6 @@ MonoBehaviour:
   viewIdField: 0
   InstantiationId: -1
   isRuntimeInstantiated: 0
-  isMine: 0
 --- !u!114 &114466363310965532
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2519,7 +2518,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2c7b9e828b49874882b1eb7db09a008, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isDebug: 0
   target: {fileID: 54739016302440534}
   speed: 0.4
   walkSpeedDownscale: 2
