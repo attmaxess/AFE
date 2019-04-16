@@ -329,8 +329,7 @@ public class PhotonMenu : MonoBehaviourPunCallbacks
     public override void OnDisconnected(DisconnectCause cause)
     {
         base.OnDisconnected(cause);
-        if (isDebug) Debug.Log("OnDisconnected " + cause.ToString());
-        CheckConnecting();
+        if (isDebug) Debug.Log("OnDisconnected " + cause.ToString());        
     }
 
     public override void OnRegionListReceived(RegionHandler regionHandler)
@@ -406,8 +405,7 @@ public class PhotonMenu : MonoBehaviourPunCallbacks
     public override void OnLeftRoom()
     {
         base.OnLeftRoom();
-        if (isDebug) Debug.Log("OnLeftRoom");
-        CheckConnecting();
+        if (isDebug) Debug.Log("OnLeftRoom");        
     }
 
     #endregion pun callback
