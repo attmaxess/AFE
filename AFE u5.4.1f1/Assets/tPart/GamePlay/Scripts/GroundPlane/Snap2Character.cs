@@ -23,7 +23,7 @@ public class Snap2Character : MonoBehaviour
         }
 
         joystick.transform.position = snapPos.transform.position;
-        loadChar.transform.position = snapPos.transform.position;
+        loadChar.currentCharacter.transform.position = snapPos.transform.position;
 
         yield break;
     }
