@@ -1747,6 +1747,19 @@ Prefab:
       propertyPath: photonMenu
       value: 
       objectReference: {fileID: 1069588921}
+    - target: {fileID: 328906469868173028, guid: 00785ef11e189fa438252f492fb12f2a,
+        type: 2}
+      propertyPath: m_AspectRatio
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1299025663081966, guid: 00785ef11e189fa438252f492fb12f2a, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1880511262933202, guid: 00785ef11e189fa438252f492fb12f2a, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 00785ef11e189fa438252f492fb12f2a, type: 2}
   m_IsPrefabAsset: 0

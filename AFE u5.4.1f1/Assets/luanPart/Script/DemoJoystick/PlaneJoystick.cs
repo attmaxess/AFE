@@ -37,6 +37,9 @@ public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
     public bool waitCountTime;
     List<TestYasuo> testYasuos = new List<TestYasuo>();
 
+    IDisposable messInvertionPosition;
+    IDisposable MessageChangedCharacter;
+
     public Vector3 directionRotate
     {
         get
@@ -105,13 +108,13 @@ public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
 
         speed = mainCharacter.GetComponent<TestYasuo>().ChampionModel.MoveSpeed.Value;
 
-        MessageBroker.Default.Receive<IInvertionPositionPlayerJoystic>().Subscribe(mes =>
+        messInvertionPosition = MessageBroker.Default.Receive<IInvertionPositionPlayerJoystic>().Subscribe(mes =>
         {
             transform.position = mes.player.position;
             IsUpdateWhenSkill = mes.isUsing;
         });
 
-        MessageBroker.Default.Receive<MessageChangedCharacterYasuo>().Subscribe(mess =>
+        MessageChangedCharacter = MessageBroker.Default.Receive<MessageChangedCharacterYasuo>().Subscribe(mess =>
         {
             if (mess.addOrRemove)
             {
@@ -148,6 +151,12 @@ public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
         });
 
         yield break;
+    }
+
+    private void OnDestroy()
+    {
+        messInvertionPosition?.Dispose();
+        MessageChangedCharacter?.Dispose();
     }
 
 
