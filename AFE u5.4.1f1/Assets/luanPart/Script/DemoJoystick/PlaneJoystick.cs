@@ -108,13 +108,13 @@ public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
 
         speed = mainCharacter.GetComponent<TestYasuo>().ChampionModel.MoveSpeed.Value;
 
-        messInvertionPosition = MessageBroker.Default.Receive<IInvertionPositionPlayerJoystic>().Subscribe(mes =>
+        messInvertionPosition = MessageBroker.Default.Receive<IInvertionPositionPlayerJoystic>().TakeUntilDestroy(gameObject).Subscribe(mes =>
         {
             transform.position = mes.player.position;
             IsUpdateWhenSkill = mes.isUsing;
         });
 
-        MessageChangedCharacter = MessageBroker.Default.Receive<MessageChangedCharacterYasuo>().Subscribe(mess =>
+        MessageChangedCharacter = MessageBroker.Default.Receive<MessageChangedCharacterYasuo>().TakeUntilDestroy(gameObject).Subscribe(mess =>
         {
             if (mess.addOrRemove)
             {

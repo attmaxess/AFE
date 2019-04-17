@@ -34,7 +34,6 @@ namespace Com.Beetsoft.AFE
         [PunRPC]
         public virtual void SpawnWindWall(Vector3 direction)
         {
-            Debug.Log("SpawnWindWall");
             ObjectPool.RentAsync().Subscribe(windWall =>
             {
                 Vector3 target = transform.position + direction * SkillConfig.Range.Value;
@@ -45,7 +44,6 @@ namespace Com.Beetsoft.AFE
         [PunRPC]
         public virtual void SpawnWindWall(Vector3 direction, int viewIdTarget)
         {
-            Debug.Log("SpawnWindWall");
             ObjectPool.RentAsync().Subscribe(windWall =>
             {
                 Vector3 target = transform.position + direction * SkillConfig.Range.Value;

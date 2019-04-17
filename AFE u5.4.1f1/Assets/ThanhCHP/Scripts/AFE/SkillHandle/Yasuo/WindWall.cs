@@ -18,8 +18,6 @@ namespace Com.Beetsoft.AFE
                 .Where(other => other.transform.GetInstanceID() != IdIgnore)
                 .Subscribe(other =>
                 {
-                    Debug.Log("WindWall");
-
                     var damBullet = other.GetComponent<IDamageBullet>();
                     damBullet?.ReturnPool();
                 });

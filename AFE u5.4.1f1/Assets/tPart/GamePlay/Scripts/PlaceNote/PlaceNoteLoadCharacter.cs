@@ -13,7 +13,7 @@ public class PlaceNoteLoadCharacter : MonoBehaviour
     List<TestYasuo> testYasuos = new List<TestYasuo>();
     private void Start()
     {
-        MessageBroker.Default.Receive<MessageChangedCharacterYasuo>().Subscribe(mess =>
+        MessageBroker.Default.Receive<MessageChangedCharacterYasuo>().TakeUntilDestroy(gameObject).Subscribe(mess =>
         {
             if (mess.addOrRemove)
             {
@@ -23,7 +23,6 @@ public class PlaceNoteLoadCharacter : MonoBehaviour
             {
                 testYasuos.Remove(mess.yasuo);
             }
-            Debug.Log("count yasuo in screen" + testYasuos.Count);
             if (testYasuos.Count == 1)
             {
             }

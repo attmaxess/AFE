@@ -133,7 +133,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1078165
 Transform:
   m_ObjectHideFlags: 0
@@ -348,6 +348,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 65099343}
+  - component: {fileID: 65099344}
   m_Layer: 0
   m_Name: ====== Scene's Properties =====
   m_TagString: Untagged
@@ -376,6 +377,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &65099344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 65099342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c10297b68d5a11c4daaa1e5f2f75fb13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  listCube:
+  - {fileID: 1078164}
+  - {fileID: 2145638202}
+  - {fileID: 202838720}
+  - {fileID: 1243190193}
+  - {fileID: 1198989157}
 --- !u!114 &79788435 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114259877741110000, guid: 00785ef11e189fa438252f492fb12f2a,
@@ -661,7 +679,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &202838721
 Transform:
   m_ObjectHideFlags: 0
@@ -1377,7 +1395,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1198989158
 Transform:
   m_ObjectHideFlags: 0
@@ -1583,7 +1601,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1243190194
 Transform:
   m_ObjectHideFlags: 0
@@ -2433,7 +2451,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2145638203
 Transform:
   m_ObjectHideFlags: 0

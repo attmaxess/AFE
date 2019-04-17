@@ -37,7 +37,7 @@ namespace Com.Beetsoft.AFE
         {
             return DamageMessageSubject;
         }
-        
+
         private ObjectPoolSkillBehaviour EffectPool { get; set; }
 
         private ObjectElementSkillBehaviour EffectPrefab => effectPrefab;
@@ -54,7 +54,7 @@ namespace Com.Beetsoft.AFE
 
             if (!photonView.IsMine) return;
 
-            ChampionConfig.Health
+            ChampionConfig?.Health
                 .Subscribe(x => Debug.Log(x));
         }
 

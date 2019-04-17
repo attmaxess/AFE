@@ -15,7 +15,7 @@ public class BeginGameplayUi : MonoBehaviour
 
     private void Awake()
     {
-        MessageBroker.Default.Receive<MessageChangedCharacterYasuo>().Subscribe(mess =>
+        MessageBroker.Default.Receive<MessageChangedCharacterYasuo>().TakeUntilDestroy(gameObject).Subscribe(mess =>
         {
             if (mess.addOrRemove)
             {
