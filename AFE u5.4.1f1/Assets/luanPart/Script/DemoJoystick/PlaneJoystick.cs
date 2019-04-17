@@ -20,6 +20,7 @@ public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
     public float speed = 1;
     public Transform directionPlayer;
     public Transform directionSkill;
+    public Transform directionSkill2;
     public IJoystickInputFilter joystickCharacter;
     private bool IsUpdateWhenSkill;
 
@@ -256,7 +257,16 @@ public class PlaneJoystick : MonoBehaviour, IPlaneJoystickTranform
 
 
         directionSkill.localPosition = new Vector3(previousH1_Skill / 2, 0.5f, previousV1_Skill / 2);
-
+        var rot1 = Quaternion.LookRotation(directionSkill.localPosition);
+        directionSkill2.localRotation = Quaternion.Euler(0, rot1.eulerAngles.y, 0);
+        if(previousH1_Skill==0 && previousV1_Skill == 0)
+        {
+            directionSkill2.gameObject.SetActive(false);
+        }
+        else
+        {
+            directionSkill2.gameObject.SetActive(true);
+        }
         //----------
 
         if (joystickCharacter != null)
