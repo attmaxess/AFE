@@ -1732,7 +1732,7 @@ MonoBehaviour:
   OwnershipTransfer: 0
   ObservedComponents:
   - {fileID: 0}
-  viewIdField: 2
+  viewIdField: 0
   InstantiationId: 2
   isRuntimeInstantiated: 0
 --- !u!114 &114209780124212972
@@ -2272,6 +2272,7 @@ MonoBehaviour:
   doneDisconnect: 1
   doneConnectUsingSettings: 1
   doneReConnectPhotonAlpha1: 1
+  doneLeaveRoom: 1
   roomList: []
   _nameMap: 
   placeNote: {fileID: 0}
@@ -2904,10 +2905,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useUpdate: 0
+  continueUpdateAtStart: 1
   photonConnected: 0
   currentLobby: 
   currentRoom: 
   isMasterClient: 0
+  waitToContinue: 1
 --- !u!114 &114647592015452922
 MonoBehaviour:
   m_ObjectHideFlags: 1

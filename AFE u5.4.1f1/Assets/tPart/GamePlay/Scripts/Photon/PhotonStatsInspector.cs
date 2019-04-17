@@ -7,6 +7,7 @@ public class PhotonStatsInspector : MonoBehaviour
 {
     [Header("Debug")]
     public bool useUpdate = false;
+    public bool continueUpdateAtStart = false;
 
     [Header("Stats")]
     public bool photonConnected = false;
@@ -16,11 +17,43 @@ public class PhotonStatsInspector : MonoBehaviour
 
     private void Update()
     {
-        if (!useUpdate) return;
+        if (!useUpdate) return;        
+    }
 
+    private void Start()
+    {
+        if (continueUpdateAtStart) ContinueDoUpdate();
+    }
+
+    public float waitToContinue = 1f;
+
+    [ContextMenu("ContinueDoUpdate")]
+    public void ContinueDoUpdate()
+    {
+        StartCoroutine(C_ContinueDoUpdate());
+    }
+
+    IEnumerator C_ContinueDoUpdate()
+    {
+        while (true)
+        {
+            DoUpdate();
+            yield return new WaitForSeconds(waitToContinue);
+        }
+    }
+
+    [ContextMenu("DoUpdate")]
+    public void DoUpdate()
+    {
         photonConnected = PhotonNetwork.IsConnected;
         currentLobby = PhotonNetwork.CurrentLobby == null ? "null" : PhotonNetwork.CurrentLobby.Name;
         currentRoom = PhotonNetwork.CurrentRoom == null ? "null" : PhotonNetwork.CurrentRoom.Name;
         isMasterClient = PhotonNetwork.IsMasterClient;
     }
+    
+    [ContextMenu("StopAllC")]
+    public void StopAllC()
+    {
+        StopAllCoroutines();
+    }    
 }

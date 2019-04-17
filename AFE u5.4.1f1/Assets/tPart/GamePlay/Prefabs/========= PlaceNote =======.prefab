@@ -902,7 +902,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1307796898241988
 GameObject:
   m_ObjectHideFlags: 1
@@ -1001,7 +1001,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1341983073647988
 GameObject:
   m_ObjectHideFlags: 1
@@ -1172,6 +1172,7 @@ GameObject:
   - component: {fileID: 223815480029205062}
   - component: {fileID: 114922054623385410}
   - component: {fileID: 114741454183500244}
+  - component: {fileID: 225250018252821042}
   m_Layer: 5
   m_Name: ArkitUI
   m_TagString: Untagged
@@ -3329,13 +3330,17 @@ GameObject:
   - component: {fileID: 222369477176283806}
   - component: {fileID: 114045327123452164}
   - component: {fileID: 114385063888257274}
+  - component: {fileID: 114702718853906310}
+  - component: {fileID: 114381067578902838}
+  - component: {fileID: 114860309965486628}
+  - component: {fileID: 114069194022563120}
   m_Layer: 5
   m_Name: ExitButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1988026839697378
 GameObject:
   m_ObjectHideFlags: 1
@@ -4179,6 +4184,20 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114069194022563120
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1987906341679228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 242111093ea1fac41b59fe6ebae4e920, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doneFindBackground: 1
+  doneShow: 1
+  doneHide: 1
 --- !u!114 &114069582017411058
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4687,6 +4706,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doneFindBackground: 1
+  doneShow: 1
+  doneHide: 1
 --- !u!114 &114119414572360584
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7402,6 +7423,18 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114381067578902838
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1987906341679228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a55ddf7a8c2b144586ab37b6ce545f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stateList: 00000000
 --- !u!114 &114382659577822800
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7531,8 +7564,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114567641709271370}
-        m_MethodName: OnExitClick
+      - m_Target: {fileID: 114702718853906310}
+        m_MethodName: OnClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10021,6 +10054,28 @@ MonoBehaviour:
     m_VerticalOverflow: 1
     m_LineSpacing: 0.6
   m_Text: Tap on floor to show model!
+--- !u!114 &114702718853906310
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1987906341679228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca8e1b561b93287489d5c8a0310d3d18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvasVideo: {fileID: 0}
+  canvasPlaceNote: {fileID: 225250018252821042}
+  logoMethod: {fileID: 114860309965486628}
+  videoPlayer: {fileID: 328906469868173028}
+  uityARVideo: {fileID: 114814068861634836}
+  unityARCameraNearFar: {fileID: 114599428675966292}
+  photonMenu: {fileID: 0}
+  stateWhenAwake: {fileID: 114381067578902838}
+  shapeManager: {fileID: 114220318926308986}
+  backgroundMethod: {fileID: 114069194022563120}
+  stateAfterClick: {fileID: 114381067578902838}
 --- !u!114 &114713948890257146
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -11221,6 +11276,20 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Scrollbar+ScrollEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114860309965486628
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1987906341679228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8894aa2d72d1ed845b7549a1f04d4cc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waitTime: 1
+  waitSpeed: 9
+  doneGoToWaitBack: 1
 --- !u!114 &114860770335864216
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -17185,6 +17254,17 @@ RectTransform:
   m_AnchoredPosition: {x: 140, y: -165}
   m_SizeDelta: {x: 280, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &225250018252821042
+CanvasGroup:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1377725390385950}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!328 &328906469868173028
 VideoPlayer:
   m_ObjectHideFlags: 1
@@ -17201,7 +17281,7 @@ VideoPlayer:
   m_TargetMaterialRenderer: {fileID: 0}
   m_TargetMaterialProperty: _MainTex
   m_RenderMode: 0
-  m_AspectRatio: 2
+  m_AspectRatio: 4
   m_DataSource: 0
   m_PlaybackSpeed: 1
   m_AudioOutputMode: 2

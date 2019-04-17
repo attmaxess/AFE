@@ -10,6 +10,7 @@ public class ShowCube : MonoBehaviour
     private List<TestYasuo> testYasuos = new List<TestYasuo>();
 
     public List<GameObject> listCube;
+
     void Start()
     {
         MessageBroker.Default.Receive<MessageChangedCharacterYasuo>().TakeUntilDestroy(gameObject).Subscribe(mess =>
@@ -22,6 +23,7 @@ public class ShowCube : MonoBehaviour
             {
                 testYasuos.Remove(mess.yasuo);
             }
+
             if (testYasuos.Count >= 1)
             {
                 listCube.ForEach(cube => cube.SetActive(true));
@@ -30,8 +32,6 @@ public class ShowCube : MonoBehaviour
             {
                 listCube.ForEach(cube => cube.SetActive(false));
             }
-
         });
     }
-
 }

@@ -8,11 +8,12 @@ public class btnAction : MonoBehaviour
 {
     [Header("Input")]
     public CanvasGroup canvasVideo = null;
+    public CanvasGroup canvasPlaceNote = null;
+    public GameObject placeNoteHolder = null;
     public BeetsoftLogoMethod logoMethod = null;
     public VideoPlayer videoPlayer = null;
     public UnityARVideo uityARVideo = null;
-    public UnityARCameraNearFar unityARCameraNearFar = null;
-    public GameObject panelPlaceNote = null;
+    public UnityARCameraNearFar unityARCameraNearFar = null;    
     public PhotonMenu photonMenu = null;
     public GameStateBeThis stateWhenAwake = null;
 
@@ -38,10 +39,12 @@ public class btnAction : MonoBehaviour
 
         logoMethod.GoTo1WaitBack0();
         yield return new WaitUntil(() => BeetsoftLogo.Instance.doneC_ToAlPha == true);
-        canvasVideo.alpha = 0;        
 
-        videoPlayer.Stop();
-        videoPlayer.clip = null;
+        canvasVideo.alpha = 0;
+        canvasVideo.interactable = false;
+        canvasVideo.blocksRaycasts = false;
+
+        videoPlayer.Stop();        
 
         uityARVideo.UpdateFrameAtStart = true;        
         uityARVideo.Start();
@@ -52,8 +55,14 @@ public class btnAction : MonoBehaviour
 
         yield return new WaitUntil(() => logoMethod.doneGoToWaitBack == true);
 
-        panelPlaceNote.gameObject.SetActive(true);
+        placeNoteHolder.gameObject.SetActive(true);
+
+        canvasPlaceNote.alpha = 1;
+        canvasPlaceNote.interactable = true;
+        canvasPlaceNote.blocksRaycasts = true;
+
         stateAfterClick.OnClick();
+        photonMenu.HandleCurrentMapName();
 
         yield break;
     }
