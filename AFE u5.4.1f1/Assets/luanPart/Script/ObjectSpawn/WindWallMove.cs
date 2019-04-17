@@ -7,9 +7,10 @@ public class WindWallMove : ObjectMovement
 {
     public float timeLive = 5;
 
+
     private void OnEnable()
     {
-        Observable.Timer(TimeSpan.FromMilliseconds(timeLive * 1000)).TakeWhile(_ => gameObject.activeSelf).Subscribe(_ =>
+        Observable.Timer(TimeSpan.FromMilliseconds(timeLive * 1000)).TakeUntilDestroy(gameObject).TakeWhile(_ => gameObject.activeSelf).Subscribe(_ =>
         {
             GetComponent<ObjectElementSkillBehaviour>().ReturnPool();
         });
@@ -20,7 +21,7 @@ public class WindWallMove : ObjectMovement
         transform.position = startPos;
         var _duration = duration;
         ObservableTween.Tween(transform.position, target, _duration
-            , ObservableTween.EaseType.Linear)
+            , ObservableTween.EaseType.Linear).TakeUntilDestroy(gameObject)
             .TakeWhile(_ => gameObject.activeSelf)
             .Subscribe(pos =>
             {

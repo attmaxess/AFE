@@ -35,7 +35,7 @@ public class BeginGameplayUi : MonoBehaviour
                 panelCountTime.gameObject.SetActive(true);
                 waitOtherPlayer.gameObject.SetActive(false);
                 int count = 3;
-                Observable.Interval(System.TimeSpan.FromSeconds(2)).TakeWhile(_ => count >= 0 && testYasuos.Count == 2).Subscribe(_ =>
+                Observable.Interval(System.TimeSpan.FromSeconds(2)).TakeUntilDestroy(gameObject).TakeWhile(_ => count >= 0 && testYasuos.Count == 2).Subscribe(_ =>
                      {
                          if (count == 0)
                          {
