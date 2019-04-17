@@ -65,12 +65,22 @@ namespace Com.Beetsoft.AFE
 
             this.OnKeyDownAsObservable(KeyCode.R)
                 .Subscribe(_ => JoystickInputFilter.Spell4(new InputMessage(Vector3.forward)));
+
+            if (photonView.IsMine)
+                CanvasJoystickManager.Singleton.canvas.gameObject.SetActive(true);
+        }
+
+        void OnDisable()
+        {
+            if (photonView.IsMine)
+                CanvasJoystickManager.Singleton.canvas.gameObject.SetActive(false);
         }
 
         private void OnDestroy()
         {
             message.addOrRemove = false;
             MessageBroker.Default.Publish<MessageChangedCharacterYasuo>(message);
+
         }
 
         void CreateHealthBar(IChampionConfig championConfig, bool isMine)

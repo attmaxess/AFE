@@ -49,7 +49,8 @@ public class PhotonMenu : MonoBehaviourPunCallbacks
 
     [Header("Show On Lost Connection")]
     public bool isDebugConnecting = false;
-    public Canvas canvasPhoton = null;
+    public GameObject btnReload = null;
+    public GameObject btnLeaveRoom = null;
     public GameStateEqual stateArKitPlaceNote = null;
 
     void CheckConnecting()
@@ -65,13 +66,17 @@ public class PhotonMenu : MonoBehaviourPunCallbacks
             || PhotonNetwork.CurrentLobby == null || PhotonNetwork.CurrentLobby.Name != lobbyName
             || PhotonNetwork.CurrentRoom == null || PhotonNetwork.CurrentRoom.Name != roomName)
             {
-                if (!canvasPhoton.gameObject.activeSelf)
-                    canvasPhoton.gameObject.SetActive(true);
+                if (!btnReload.gameObject.activeSelf)
+                    btnReload.gameObject.SetActive(true);
+              /*  if (!btnLeaveRoom.gameObject.activeSelf)
+                    btnLeaveRoom.gameObject.SetActive(false);    */
             }
             else
             {
-                if (canvasPhoton.gameObject.activeSelf)
-                    canvasPhoton.gameObject.SetActive(false);
+                if (btnReload.gameObject.activeSelf)
+                    btnReload.gameObject.SetActive(false);
+              /*  if (!btnLeaveRoom.gameObject.activeSelf)
+                    btnLeaveRoom.gameObject.SetActive(true);        */
             }
         }
     }

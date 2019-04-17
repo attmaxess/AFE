@@ -83,7 +83,7 @@ public class PlaceNoteLoadCharacter : MonoBehaviour
         currentGroundMarker.Show();
 
         createCharacter.ClickSpawn();
-        joystickMethods.SetCanvasOn();
+        //joystickMethods.SetCanvasOn();
         yield return new WaitUntil(() => createCharacter.doneClickSpawn == true);
 
         float momentPlaneJoystick = Time.time;
