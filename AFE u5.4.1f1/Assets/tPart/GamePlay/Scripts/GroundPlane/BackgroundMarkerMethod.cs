@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BackgroundMarkerMethod : MonoBehaviour
-{    
+{
     BackgroundMarker currentBackgroundMarker = null;
 
     [Header("FindBackground")]
@@ -19,13 +19,17 @@ public class BackgroundMarkerMethod : MonoBehaviour
     {
         doneFindBackground = false;
 
-        yield return new WaitUntil(() => FindObjectOfType<BackgroundMarker>() != null);
-        currentBackgroundMarker = FindObjectOfType<BackgroundMarker>();
+        float momentFound = Time.time;
+        yield return new WaitUntil(() => FindObjectOfType<BackgroundMarker>() != null || Time.time - momentFound > 1f);
+        currentBackgroundMarker = FindObjectOfType<BackgroundMarker>();        
 
         doneFindBackground = true;
 
         yield break;
     }
+
+    [Header("Show")]
+    public bool doneShow = true;
 
     [ContextMenu("Show")]
     public void Show()
@@ -35,15 +39,22 @@ public class BackgroundMarkerMethod : MonoBehaviour
 
     IEnumerator C_Show()
     {
+        doneShow = false;
+
         if (currentBackgroundMarker == null)
         {
             FindBackground();
-            yield return new WaitUntil(() => currentBackgroundMarker != null);
+            yield return new WaitUntil(() => doneFindBackground == true);
         }
 
-        currentBackgroundMarker.Show();
+        if (currentBackgroundMarker != null) currentBackgroundMarker.Show();
+        doneShow = true;
+
         yield break;
     }
+
+    [Header("Hide")]
+    public bool doneHide = true;
 
     [ContextMenu("Hide")]
     public void Hide()
@@ -53,13 +64,17 @@ public class BackgroundMarkerMethod : MonoBehaviour
 
     IEnumerator C_Hide()
     {
+        doneHide = false;
+
         if (currentBackgroundMarker == null)
         {
             FindBackground();
-            yield return new WaitUntil(() => currentBackgroundMarker != null);
+            yield return new WaitUntil(() => doneFindBackground == true);
         }
 
-        currentBackgroundMarker.Hide();
+        if (currentBackgroundMarker != null) currentBackgroundMarker.Hide();
+        doneHide = true;
+
         yield break;
     }
 
@@ -74,10 +89,10 @@ public class BackgroundMarkerMethod : MonoBehaviour
         if (currentBackgroundMarker == null)
         {
             FindBackground();
-            yield return new WaitUntil(() => currentBackgroundMarker != null);
+            yield return new WaitUntil(() => doneFindBackground == true);
         }
 
-        currentBackgroundMarker.ToggleShowHide();
+        if (currentBackgroundMarker != null) currentBackgroundMarker.ToggleShowHide();
         yield break;
-    }    
+    }
 }

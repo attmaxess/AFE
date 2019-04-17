@@ -17,14 +17,13 @@ public class PhotonMenu : MonoBehaviourPunCallbacks
     public string roomName = "myRoom";
     public string nickName = string.Empty;
     private Vector2 scrollPos = Vector2.zero;
-
-             
+    
     void Awake()
     {
 #if DEMO_ALPHA1
         lobbyName = "lobby_Demo_Alpha1";
         roomName = "room_Demo_Alpha1";
-#endif
+#endif        
     }
 
     [Header("ConstantlyCheckConnection")]
@@ -42,10 +41,7 @@ public class PhotonMenu : MonoBehaviourPunCallbacks
             CheckConnecting();
             yield return new WaitForSeconds(deltaCheck);
         }
-    }
-
-    //[Header("OnGUI")]    
-    //public bool DrawOnGUI = false;  \
+    }    
 
     [Header("Show On Lost Connection")]
     public bool isDebugConnecting = false;
@@ -68,15 +64,11 @@ public class PhotonMenu : MonoBehaviourPunCallbacks
             {
                 if (!btnReload.gameObject.activeSelf)
                     btnReload.gameObject.SetActive(true);
-              /*  if (!btnLeaveRoom.gameObject.activeSelf)
-                    btnLeaveRoom.gameObject.SetActive(false);    */
             }
             else
             {
                 if (btnReload.gameObject.activeSelf)
                     btnReload.gameObject.SetActive(false);
-              /*  if (!btnLeaveRoom.gameObject.activeSelf)
-                    btnLeaveRoom.gameObject.SetActive(true);        */
             }
         }
     }
@@ -125,13 +117,15 @@ public class PhotonMenu : MonoBehaviourPunCallbacks
         doneConnectUsingSettings = false;
 
         if (!PhotonNetwork.IsConnected)
+        {
             PhotonNetwork.ConnectUsingSettings(); // version of the game/demo. used to separate older clients from newer ones (e.g. if incompatible)
 
-        //Load name from PlayerPrefs
-        nickName = PlayerPrefs.GetString("playerName", "Guest" + UnityEngine.Random.Range(1, 9999));
-        PhotonNetwork.NickName = nickName;
+            //Load name from PlayerPrefs
+            nickName = PlayerPrefs.GetString("playerName", "Guest" + UnityEngine.Random.Range(1, 9999));
+            PhotonNetwork.NickName = nickName;
 
-        yield return new WaitUntil(() => PhotonNetwork.IsConnected == true);
+            yield return new WaitUntil(() => PhotonNetwork.IsConnected == true);
+        }
         doneConnectUsingSettings = true;
 
         yield break;
@@ -157,7 +151,12 @@ public class PhotonMenu : MonoBehaviourPunCallbacks
 
         TypedLobby typedLobby = new TypedLobby();
 
-        if (!PhotonNetwork.InLobby || PhotonNetwork.CurrentLobby.Name != lobbyName)
+        if (PhotonNetwork.InLobby && PhotonNetwork.CurrentLobby.Name != lobbyName)
+        {
+            PhotonNetwork.LeaveLobby();
+            yield return new WaitUntil(() => PhotonNetwork.InLobby == false);
+        }
+        else if (!PhotonNetwork.InLobby)
         {
             typedLobby = new TypedLobby();
             typedLobby.Name = lobbyName;
@@ -168,7 +167,12 @@ public class PhotonMenu : MonoBehaviourPunCallbacks
             yield return new WaitForSeconds(1f);
         }
 
-        if (!PhotonNetwork.InRoom || PhotonNetwork.CurrentRoom.Name != roomName)
+        if (PhotonNetwork.InRoom && PhotonNetwork.CurrentRoom.Name != roomName)
+        {
+            PhotonNetwork.LeaveRoom();
+            yield return new WaitUntil(() => PhotonNetwork.InRoom == false);
+        }
+        else if (!PhotonNetwork.InRoom)
         {
             bool canCreated = false;
             float momentCreated = Time.time;
@@ -176,7 +180,8 @@ public class PhotonMenu : MonoBehaviourPunCallbacks
             bool canJoin = false;
             float momentJoin = Time.time;
 
-            if (roomList.FindIndex((x) => x.Name == roomName) == -1)
+            int roomAlphaIndex = roomList.FindIndex((x) => x.Name == roomName);
+            if (roomAlphaIndex == -1 || roomList[roomAlphaIndex].RemovedFromList == true)
             {
                 RoomOptions roomOptions = new RoomOptions();
                 roomOptions.MaxPlayers = 10;
@@ -204,10 +209,7 @@ public class PhotonMenu : MonoBehaviourPunCallbacks
                     doneReConnectPhotonAlpha1 = true;
                     yield break;
                 }
-            }
-
-            //yield return new WaitUntil(() => (PhotonNetwork.CurrentRoom != null && PhotonNetwork.CurrentRoom.Name == roomName) || Time.time - momentCreated > 2f);
-            //ield return new WaitUntil(() => (PhotonNetwork.CurrentRoom != null && PhotonNetwork.CurrentRoom.Name == roomName) || Time.time - momentJoin > 2f);
+            }            
 
             if (Time.time - momentJoin > 2f && (canJoin == false || canCreated == false))
             {
@@ -235,10 +237,22 @@ public class PhotonMenu : MonoBehaviourPunCallbacks
         PhotonNetwork.JoinRoom(roomName);
     }
 
+    [Header("LeaveRoom")]
+    public bool doneLeaveRoom = true;
+
     [ContextMenu("LeaveRoom")]
     public void LeaveRoom()
     {
+        StartCoroutine(C_LeaveRoom());
+    }
+
+    IEnumerator C_LeaveRoom()
+    {
+        doneLeaveRoom = false;
         PhotonNetwork.LeaveRoom();
+        yield return new WaitUntil(() => PhotonNetwork.InRoom == false);
+        doneLeaveRoom = true;
+        yield break;
     }
 
     [ContextMenu("CreateCurrentRoom")]
@@ -334,7 +348,7 @@ public class PhotonMenu : MonoBehaviourPunCallbacks
     public override void OnDisconnected(DisconnectCause cause)
     {
         base.OnDisconnected(cause);
-        if (isDebug) Debug.Log("OnDisconnected " + cause.ToString());        
+        if (isDebug) Debug.Log("OnDisconnected " + cause.ToString());
     }
 
     public override void OnRegionListReceived(RegionHandler regionHandler)
@@ -410,7 +424,7 @@ public class PhotonMenu : MonoBehaviourPunCallbacks
     public override void OnLeftRoom()
     {
         base.OnLeftRoom();
-        if (isDebug) Debug.Log("OnLeftRoom");        
+        if (isDebug) Debug.Log("OnLeftRoom");
     }
 
     #endregion pun callback
@@ -450,11 +464,16 @@ public class PhotonMenu : MonoBehaviourPunCallbacks
         set { _nameMap = value; HandleCurrentMapName(); }
     }
 
-    public PlaceNote placeNote = null;
-
-    void HandleCurrentMapName()
+    public PlaceNote placeNote = null;    
+    
+    [ContextMenu("HandleCurrentMapName")]
+    public void HandleCurrentMapName()
     {
-        if (string.IsNullOrEmpty(_nameMap)) return;
+        if (string.IsNullOrEmpty(_nameMap))
+        {
+            placeNote.mInitButtonPanel.gameObject.SetActive(true);
+            return;
+        }
 
 #if UNITY_EDITOR
         _nameMap = "mapEditor";

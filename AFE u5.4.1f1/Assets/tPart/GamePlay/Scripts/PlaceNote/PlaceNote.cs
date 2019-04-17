@@ -17,32 +17,19 @@ public class PlaceNote : MonoBehaviour, PlacenoteListener
     [Header("Debug")]
     public bool isDebug = true;
 
-    [SerializeField]
-    GameObject mMapSelectedPanel;
-    [SerializeField]
-    GameObject mInitButtonPanel;
-    [SerializeField]
-    GameObject mMappingButtonPanel;
-    [SerializeField]
-    GameObject mSimulatorAddShapeButton;
-    [SerializeField]
-    GameObject mMapListPanel;
-    [SerializeField]
-    GameObject mExitButton;
-    [SerializeField]
-    GameObject mListElement;
-    [SerializeField]
-    RectTransform mListContentParent;
-    [SerializeField]
-    ToggleGroup mToggleGroup;
-    [SerializeField]
-    Text mLabelText;
-    [SerializeField]
-    Slider mRadiusSlider;
-    [SerializeField]
-    float mMaxRadiusSearch;
-    [SerializeField]
-    Text mRadiusLabel;
+    public GameObject mMapSelectedPanel = null;
+    public GameObject mInitButtonPanel = null;
+    public GameObject mMappingButtonPanel = null;
+    public GameObject mSimulatorAddShapeButton = null;
+    public GameObject mMapListPanel = null;
+    public GameObject mExitButton = null;
+    public GameObject mListElement = null;
+    public RectTransform mListContentParent = null;
+    public ToggleGroup mToggleGroup = null;
+    public Text mLabelText = null;
+    public Slider mRadiusSlider = null;
+    public float mMaxRadiusSearch = 500f;
+    public Text mRadiusLabel = null;
 
     private UnityARSessionNativeInterface mSession;
 
@@ -188,13 +175,11 @@ public class PlaceNote : MonoBehaviour, PlacenoteListener
     public void OnExitClick()
     {
         mInitButtonPanel.SetActive(true);
-        mExitButton.SetActive(false);
         mMappingButtonPanel.SetActive(false);
 
         LibPlacenote.Instance.StopSession();
         FeaturesVisualizer.clearPointcloud();
         GetComponent<ShapeManager>().ClearShapes();
-
     }
 
 
@@ -237,7 +222,6 @@ public class PlaceNote : MonoBehaviour, PlacenoteListener
                     mMapListPanel.SetActive(false);
                     mInitButtonPanel.SetActive(false);
                     mMappingButtonPanel.SetActive(false);
-                    mExitButton.SetActive(true);
 
                     LibPlacenote.Instance.StartSession();
 
@@ -322,8 +306,8 @@ public class PlaceNote : MonoBehaviour, PlacenoteListener
 
                         i = mapList.Length;
                         doneOnLoadMapClickedNameMap = true;
-                    }                    
-                }                
+                    }
+                }
             }
         });
 
@@ -485,7 +469,6 @@ public class PlaceNote : MonoBehaviour, PlacenoteListener
                 mSaveMapId = mapId;
                 mInitButtonPanel.SetActive(true);
                 mMappingButtonPanel.SetActive(false);
-                mExitButton.SetActive(false);
 
                 LibPlacenote.MapMetadataSettable metadata = new LibPlacenote.MapMetadataSettable();
                 metadata.name = RandomName.Get();
