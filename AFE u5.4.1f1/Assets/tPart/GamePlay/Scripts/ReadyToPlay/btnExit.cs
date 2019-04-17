@@ -38,6 +38,7 @@ public class btnExit : MonoBehaviour
 
         photonMenu.LeaveRoom();
         yield return new WaitUntil(() => photonMenu.doneLeaveRoom == true);
+        photonMenu.nameMap = string.Empty;
 
         LibPlacenote.Instance.StopSession();
         FeaturesVisualizer.clearPointcloud();        
