@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using Photon.Pun;
 using UniRx;
 using UnityEngine;
@@ -37,8 +38,34 @@ namespace Com.Beetsoft.AFE
 
         private void Start()
         {
-            minYAxis = transform.position.y;
+            FindBackground();
         }
+
+        private BackgroundMarker currentBackgroundMarker;
+        [Header("FindBackground")]
+        public bool doneFindBackground = true;
+
+        [ContextMenu("FindBackground")]
+        public void FindBackground()
+        {
+            StartCoroutine(C_FindBackground());
+        }
+
+        IEnumerator C_FindBackground()
+        {
+            doneFindBackground = false;
+
+            float momentFound = Time.time;
+            yield return new WaitUntil(() => FindObjectOfType<BackgroundMarker>() != null || Time.time - momentFound > 1f);
+            currentBackgroundMarker = FindObjectOfType<BackgroundMarker>();
+
+            doneFindBackground = true;
+            minYAxis = currentBackgroundMarker.transform.position.y;
+            maxYAxis = minYAxis + 4;
+            transform.position = new Vector3(transform.position.x,minYAxis,transform.position.z);
+            yield break;
+        }
+
         public void BlowUp(float timeUp)
         {
             photonView.RPC("BlowUpRpc", RpcTarget.All, timeUp, GetRandomRotate());
