@@ -48,6 +48,7 @@ namespace Com.Beetsoft.AFE
 
         private void Start()
         {
+
             message = new MessageChangedCharacterYasuo(this, true);
             MessageBroker.Default.Publish<MessageChangedCharacterYasuo>(message);
 
@@ -67,13 +68,15 @@ namespace Com.Beetsoft.AFE
                 .Subscribe(_ => JoystickInputFilter.Spell4(new InputMessage(Vector3.forward)));
 
             if (photonView.IsMine)
-                CanvasJoystickManager.Singleton.canvas.gameObject.SetActive(true);
+            {
+                CanvasJoystickManager.Singleton.SetViewIdCharacter(photonView.ViewID);
+                CanvasJoystickManager.Singleton.ShowCanvas();
+            }
         }
 
         void OnDisable()
         {
-            if (photonView.IsMine)
-                CanvasJoystickManager.Singleton.canvas.gameObject.SetActive(false);
+            CanvasJoystickManager.Singleton.HideCanvas(photonView.ViewID);
         }
 
         private void OnDestroy()

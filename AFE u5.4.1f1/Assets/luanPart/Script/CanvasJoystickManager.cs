@@ -45,5 +45,25 @@ public class CanvasJoystickManager : MonoBehaviour
     }
     #endregion
 
+    private int viewIdCharacter;
+
     public Transform barPlayer;
+
+    public void SetViewIdCharacter(int id)
+    {
+        viewIdCharacter = id;
+    }
+
+    public void ShowCanvas()
+    {
+        canvas.gameObject.SetActive(true);
+    }
+
+    public void HideCanvas(int id)
+    {
+        if (viewIdCharacter == id)
+        {
+            canvas.gameObject.SetActive(false);
+        }
+    }
 }
