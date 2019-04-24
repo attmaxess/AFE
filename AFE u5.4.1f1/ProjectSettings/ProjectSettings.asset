@@ -40,8 +40,7 @@ PlayerSettings:
     width: 1
     height: 1
   m_SplashScreenLogos: []
-  m_VirtualRealitySplashScreen: {fileID: 2800000, guid: b7b7d830e94405143921c8520acd1953,
-    type: 3}
+  m_VirtualRealitySplashScreen: {fileID: 0}
   m_HolographicTrackingLossScreen: {fileID: 0}
   defaultScreenWidth: 1280
   defaultScreenHeight: 720
@@ -155,7 +154,7 @@ PlayerSettings:
   applicationIdentifier:
     Android: com.NewGame4U.WebFighters
     Standalone: unity.NewGame4U.WebFighters
-    iOS: com.Beetsoft.AFE
+    iOS: com.thandh.ARLeagueOfFightingLegends
     tvOS: com.NewGame4U.WebFighters
   buildNumber:
     iOS: 0
@@ -185,18 +184,29 @@ PlayerSettings:
   uIStatusBarHidden: 1
   uIExitOnSuspend: 0
   uIStatusBarStyle: 0
-  iPhoneSplashScreen: {fileID: 0}
-  iPhoneHighResSplashScreen: {fileID: 0}
-  iPhoneTallHighResSplashScreen: {fileID: 0}
-  iPhone47inSplashScreen: {fileID: 0}
-  iPhone55inPortraitSplashScreen: {fileID: 0}
-  iPhone55inLandscapeSplashScreen: {fileID: 0}
-  iPhone58inPortraitSplashScreen: {fileID: 0}
-  iPhone58inLandscapeSplashScreen: {fileID: 0}
-  iPadPortraitSplashScreen: {fileID: 0}
-  iPadHighResPortraitSplashScreen: {fileID: 0}
-  iPadLandscapeSplashScreen: {fileID: 0}
-  iPadHighResLandscapeSplashScreen: {fileID: 0}
+  iPhoneSplashScreen: {fileID: 2800000, guid: c4945fc6bc11be1449253bdaf5b95ec3, type: 3}
+  iPhoneHighResSplashScreen: {fileID: 2800000, guid: 8e186bf70cbd8474c834d3950cae37c5,
+    type: 3}
+  iPhoneTallHighResSplashScreen: {fileID: 2800000, guid: 709042759f6ec8a4ab06af5450774aba,
+    type: 3}
+  iPhone47inSplashScreen: {fileID: 2800000, guid: bffb44a81bc7e234b958bc8d787a0ff5,
+    type: 3}
+  iPhone55inPortraitSplashScreen: {fileID: 2800000, guid: 794cb2b09c74912469fe0c47c1a39013,
+    type: 3}
+  iPhone55inLandscapeSplashScreen: {fileID: 2800000, guid: f5675f8dcf5ad6044a6fede22c8b771e,
+    type: 3}
+  iPhone58inPortraitSplashScreen: {fileID: 2800000, guid: 709042759f6ec8a4ab06af5450774aba,
+    type: 3}
+  iPhone58inLandscapeSplashScreen: {fileID: 2800000, guid: dbc7a08a1d61e3c448513c76240f8133,
+    type: 3}
+  iPadPortraitSplashScreen: {fileID: 2800000, guid: dd0c3091c484bc24784ee2fcc93507ff,
+    type: 3}
+  iPadHighResPortraitSplashScreen: {fileID: 2800000, guid: 464aac3be0bc92b4e94cf47a0656571b,
+    type: 3}
+  iPadLandscapeSplashScreen: {fileID: 2800000, guid: b47db164f64c5bc429170c717baa9234,
+    type: 3}
+  iPadHighResLandscapeSplashScreen: {fileID: 2800000, guid: fca1076b3079d6a4ab1b99b89dd868cd,
+    type: 3}
   appleTVSplashScreen: {fileID: 0}
   appleTVSplashScreen2x: {fileID: 0}
   tvOSSmallIconLayers: []
@@ -270,7 +280,123 @@ PlayerSettings:
       m_Width: 128
       m_Height: 128
       m_Kind: 0
-  m_BuildTargetPlatformIcons: []
+  m_BuildTargetPlatformIcons:
+  - m_BuildTarget: iPhone
+    m_Icons:
+    - m_Textures:
+      - {fileID: 2800000, guid: 8e186bf70cbd8474c834d3950cae37c5, type: 3}
+      m_Width: 180
+      m_Height: 180
+      m_Kind: 0
+      m_SubKind: iPhone
+    - m_Textures:
+      - {fileID: 2800000, guid: 8e186bf70cbd8474c834d3950cae37c5, type: 3}
+      m_Width: 120
+      m_Height: 120
+      m_Kind: 0
+      m_SubKind: iPhone
+    - m_Textures:
+      - {fileID: 2800000, guid: 709042759f6ec8a4ab06af5450774aba, type: 3}
+      m_Width: 167
+      m_Height: 167
+      m_Kind: 0
+      m_SubKind: iPad
+    - m_Textures:
+      - {fileID: 2800000, guid: 709042759f6ec8a4ab06af5450774aba, type: 3}
+      m_Width: 152
+      m_Height: 152
+      m_Kind: 0
+      m_SubKind: iPad
+    - m_Textures:
+      - {fileID: 2800000, guid: 709042759f6ec8a4ab06af5450774aba, type: 3}
+      m_Width: 76
+      m_Height: 76
+      m_Kind: 0
+      m_SubKind: iPad
+    - m_Textures:
+      - {fileID: 2800000, guid: b47db164f64c5bc429170c717baa9234, type: 3}
+      m_Width: 120
+      m_Height: 120
+      m_Kind: 3
+      m_SubKind: iPhone
+    - m_Textures:
+      - {fileID: 2800000, guid: b47db164f64c5bc429170c717baa9234, type: 3}
+      m_Width: 80
+      m_Height: 80
+      m_Kind: 3
+      m_SubKind: iPhone
+    - m_Textures:
+      - {fileID: 2800000, guid: 0bcd7a382b5acf3468f66eecb52b67b5, type: 3}
+      m_Width: 80
+      m_Height: 80
+      m_Kind: 3
+      m_SubKind: iPad
+    - m_Textures:
+      - {fileID: 2800000, guid: 0bcd7a382b5acf3468f66eecb52b67b5, type: 3}
+      m_Width: 40
+      m_Height: 40
+      m_Kind: 3
+      m_SubKind: iPad
+    - m_Textures:
+      - {fileID: 2800000, guid: 794cb2b09c74912469fe0c47c1a39013, type: 3}
+      m_Width: 87
+      m_Height: 87
+      m_Kind: 1
+      m_SubKind: iPhone
+    - m_Textures:
+      - {fileID: 2800000, guid: 794cb2b09c74912469fe0c47c1a39013, type: 3}
+      m_Width: 58
+      m_Height: 58
+      m_Kind: 1
+      m_SubKind: iPhone
+    - m_Textures:
+      - {fileID: 2800000, guid: 794cb2b09c74912469fe0c47c1a39013, type: 3}
+      m_Width: 29
+      m_Height: 29
+      m_Kind: 1
+      m_SubKind: iPhone
+    - m_Textures:
+      - {fileID: 2800000, guid: f5675f8dcf5ad6044a6fede22c8b771e, type: 3}
+      m_Width: 58
+      m_Height: 58
+      m_Kind: 1
+      m_SubKind: iPad
+    - m_Textures:
+      - {fileID: 2800000, guid: f5675f8dcf5ad6044a6fede22c8b771e, type: 3}
+      m_Width: 29
+      m_Height: 29
+      m_Kind: 1
+      m_SubKind: iPad
+    - m_Textures:
+      - {fileID: 2800000, guid: dbc7a08a1d61e3c448513c76240f8133, type: 3}
+      m_Width: 60
+      m_Height: 60
+      m_Kind: 2
+      m_SubKind: iPhone
+    - m_Textures:
+      - {fileID: 2800000, guid: dbc7a08a1d61e3c448513c76240f8133, type: 3}
+      m_Width: 40
+      m_Height: 40
+      m_Kind: 2
+      m_SubKind: iPhone
+    - m_Textures:
+      - {fileID: 2800000, guid: c4945fc6bc11be1449253bdaf5b95ec3, type: 3}
+      m_Width: 40
+      m_Height: 40
+      m_Kind: 2
+      m_SubKind: iPad
+    - m_Textures:
+      - {fileID: 2800000, guid: c4945fc6bc11be1449253bdaf5b95ec3, type: 3}
+      m_Width: 20
+      m_Height: 20
+      m_Kind: 2
+      m_SubKind: iPad
+    - m_Textures:
+      - {fileID: 2800000, guid: bffb44a81bc7e234b958bc8d787a0ff5, type: 3}
+      m_Width: 1024
+      m_Height: 1024
+      m_Kind: 4
+      m_SubKind: App Store
   m_BuildTargetBatching: []
   m_BuildTargetGraphicsAPIs:
   - m_BuildTarget: AndroidPlayer
