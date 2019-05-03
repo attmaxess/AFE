@@ -7,13 +7,13 @@ public class CreateCharacter : MonoBehaviour
     public static ControlsScript p1ControlsScript = null;
     public static ControlsScript p2ControlsScript = null;
 
-    [ContextMenu("DoCreate")]
-    public void DoCreate()
+    [ContextMenu("UFEDoCreate")]
+    public void UFEDoCreate()
     {
-        _DoCreate(this.transform);
+        _UFEDoCreate(this.transform);
     }
 
-    public static void _DoCreate(Transform parent)
+    public static void _UFEDoCreate(Transform parent)
     {
         CharacterInfo[] charInfos = UFE.GetVersusModeSelectableCharacters();
         CharacterInfo p1Info = charInfos[1];
