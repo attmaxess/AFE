@@ -959,7 +959,6 @@ public class NetworkOptions
 [System.Serializable]
 public class GlobalInfo : ScriptableObject
 {
-
     #region public instance fields
     public float version = 1.8f;
     public LanguageOptions selectedLanguage;
@@ -973,14 +972,12 @@ public class GlobalInfo : ScriptableObject
     public bool p1CPUControl;
     public bool p2CPUControl;
     public string gameName;
-
-
+    
     //-----------------------------------------------------------------------------------------------------------------
     public GameGUI gameGUI;
     public StoryMode storyMode;
     //-----------------------------------------------------------------------------------------------------------------
-
-
+    
     public int fps = 60;
     public float gameSpeed = 1;
     public int executionBufferTime = 10;

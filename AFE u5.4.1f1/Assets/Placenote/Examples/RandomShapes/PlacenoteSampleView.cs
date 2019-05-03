@@ -10,6 +10,7 @@ using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using DHT.TextureToString64;
 using AFE.BaseGround;
+using Com.Beetsoft.Luan;
 
 public class PlacenoteSampleView : MonoBehaviour, PlacenoteListener
 {
@@ -336,7 +337,7 @@ public class PlacenoteSampleView : MonoBehaviour, PlacenoteListener
 
     [Header("LoadCharacter")]
     public bool doneLoadCharacter = true;
-    public CreateCharacter createCharacter = null;
+    public Com.Beetsoft.Luan.CreateCharacter createCharacter = null;
     public CanvasJoystickManagerMethods joystickMethods = null;
     public BackgroundMarker currentGroundMarker = null;
 

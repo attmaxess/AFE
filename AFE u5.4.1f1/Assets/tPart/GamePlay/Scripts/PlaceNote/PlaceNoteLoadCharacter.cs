@@ -4,6 +4,7 @@ using UnityEngine;
 using UniRx;
 using Com.Beetsoft.AFE;
 using Photon.Pun;
+using Com.Beetsoft.Luan;
 
 public class PlaceNoteLoadCharacter : MonoBehaviour
 {
@@ -54,7 +55,7 @@ public class PlaceNoteLoadCharacter : MonoBehaviour
 
     [Header("LoadCharacter")]
     public bool doneLoadCharacter = true;
-    public CreateCharacter createCharacter = null;
+    public Com.Beetsoft.Luan.CreateCharacter createCharacter = null;
     public CanvasJoystickManagerMethods joystickMethods = null;
     public BackgroundMarker currentGroundMarker = null;
     public PlaneJoystick currentJoystick = null;

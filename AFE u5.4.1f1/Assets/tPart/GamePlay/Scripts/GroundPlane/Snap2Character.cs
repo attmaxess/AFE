@@ -1,15 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Com.Beetsoft.Luan;
 
 public class Snap2Character : MonoBehaviour
 {
-    public void Snap(CreateCharacter loadChar, GameObject snapPos)
+    public void Snap(Com.Beetsoft.Luan.CreateCharacter loadChar, GameObject snapPos)
     {
         StartCoroutine(C_Snap(loadChar, snapPos));
     }
 
-    IEnumerator C_Snap(CreateCharacter loadChar, GameObject snapPos)
+    IEnumerator C_Snap(Com.Beetsoft.Luan.CreateCharacter loadChar, GameObject snapPos)
     {
         yield return new WaitUntil(() => loadChar.currentCharacter != null);
 

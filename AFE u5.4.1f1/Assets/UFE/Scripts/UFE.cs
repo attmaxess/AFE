@@ -31,7 +31,6 @@ using System.Collections.ObjectModel;
 using System.Reflection;
 using System.Text;
 
-[RequireComponent(typeof(EventSystem))]
 public class UFE : MonoBehaviour
 {
     #region public instance properties
@@ -1994,14 +1993,14 @@ public class UFE : MonoBehaviour
     public static void JoinBluetoothGame()
     {
 #if !UNITY_WEBGL
-        
+
 #endif
     }
 
     protected static void OnLanGamesDiscovered(ReadOnlyCollection<string> addresses)
     {
 #if !UNITY_WEBGL
-        
+
 #endif
     }
 
@@ -2047,7 +2046,16 @@ public class UFE : MonoBehaviour
 
 
     #region protected instance methods: MonoBehaviour methods
+    [Header("Awake")]
+    public bool DoAwakeAtAwake = false;
+
     protected void Awake()
+    {
+        if (DoAwakeAtAwake) DoAwake();
+    }
+
+    [ContextMenu("DoAwake")]
+    public void DoAwake()
     {
         // TODO: it would be cool to load/save the user settings from/to disk (PlayerPrefs)
         UFE.config = UFE_Config;
@@ -2321,11 +2329,20 @@ public class UFE : MonoBehaviour
         }
         else
         {
-            UFE.StartIntroScreen(0f);
+            //UFE.StartIntroScreen(0f);
         }
     }
 
+    [Header("Update")]
+    public bool useUpdate = false;
+
     protected void Update()
+    {
+        if (useUpdate) DoUpdate();
+    }
+
+    [ContextMenu("DoUpdate")]
+    public void DoUpdate()
     {
         UFEController controller1 = UFE.GetPlayer1Controller();
         UFEController controller2 = UFE.GetPlayer2Controller();
@@ -2380,7 +2397,16 @@ public class UFE : MonoBehaviour
         }
     }
 
+    [Header("FixedUpdate")]
+    public bool useFixedUpdate = false;
+
     protected void FixedUpdate()
+    {
+        if (useFixedUpdate) DoFixedUpdate();
+    }
+
+    [ContextMenu("DoFixedUpdate")]
+    public void DoFixedUpdate()
     {
         UFEController controller1 = UFE.GetPlayer1Controller();
         UFEController controller2 = UFE.GetPlayer2Controller();
@@ -2614,12 +2640,12 @@ public class UFE : MonoBehaviour
 #if !UNITY_WEBGL
     protected static void AddNetworkEventListeners()
     {
-        
+
     }
 
     protected static void RemoveNetworkEventListeners()
     {
-        
+
     }
 
     protected static void OnConnectedToServer()
@@ -2630,17 +2656,17 @@ public class UFE : MonoBehaviour
 
     protected static void OnDisconnectedFromServer()
     {
-        
+
     }
 
     protected static void OnFailedToConnect()
     {
-        
+
     }
 
     protected static void OnPlayerConnected()
     {
-        
+
     }
 
     protected static void OnPlayerDisconnected()
@@ -2656,7 +2682,7 @@ public class UFE : MonoBehaviour
 
         if (UFE.config.networkOptions.fakeNetwork)
         {
-            
+
         }
     }
 #endif
@@ -2918,8 +2944,6 @@ public class UFE : MonoBehaviour
             }
 #endif
         }
-
-
 
         UFE.config.currentRound = 1;
         UFE.config.lockInputs = true;

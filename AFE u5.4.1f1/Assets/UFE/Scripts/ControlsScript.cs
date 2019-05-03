@@ -3,14 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class ControlsScript : MonoBehaviour
-{
-    [HideInInspector]
+{    
     public GameObject character;
-    [HideInInspector]
-    public GameObject opponent;
-    [HideInInspector]
-    public CharacterInfo myInfo;
-    [HideInInspector]
+    public GameObject opponent;    
+    public CharacterInfo myInfo;    
     public CharacterInfo opInfo;
 
     public int mirror;
@@ -111,7 +107,8 @@ public class ControlsScript : MonoBehaviour
 
         if (gameObject.name == "Player1")
         {
-            transform.position = new Vector3(UFE.config.roundOptions.p1XPosition, .009f, 0);
+            transform.position = Vector3.zero;
+                ///new Vector3(UFE.config.roundOptions.p1XPosition, .009f, 0);
             opponent = GameObject.Find("Player2");
             if (myInfo == null)
                 Debug.LogError("Player 1 character not found! Make sure you have set the characters correctly in the Global Editor");
@@ -134,7 +131,8 @@ public class ControlsScript : MonoBehaviour
         }
         else
         {
-            transform.position = new Vector3(UFE.config.roundOptions.p2XPosition, .009f, 0);
+            transform.position = Vector3.zero;
+                //new Vector3(UFE.config.roundOptions.p2XPosition, .009f, 0);
             opponent = GameObject.Find("Player1");
             if (myInfo == null)
                 Debug.LogError("Player 2 character not found! Make sure you have set the characters correctly in the Global Editor");
@@ -169,7 +167,7 @@ public class ControlsScript : MonoBehaviour
         myPhysicsScript = GetComponent<PhysicsScript>();
         myMoveSetScript = character.GetComponent<MoveSetScript>();
         myHitBoxesScript = character.GetComponent<HitBoxesScript>();
-        cameraScript = transform.parent.GetComponent<CameraScript>();
+        //cameraScript = transform.parent.GetComponent<CameraScript>();
 
         myHitBoxesScript.controlsScript = this;
 
@@ -583,8 +581,6 @@ public class ControlsScript : MonoBehaviour
                 }
             }
         }
-
-
 
         // Shake character
         if (shakeDensity > 0)
@@ -1721,7 +1717,7 @@ public class ControlsScript : MonoBehaviour
                 UFE.freezePhysics = cameraMovement.freezePhysics;
                 myPhysicsScript.freeze = cameraMovement.freezePhysics;
                 opPhysicsScript.freeze = cameraMovement.freezePhysics;
-                cameraScript.cinematicFreeze = cameraMovement.freezePhysics;
+                //cameraScript.cinematicFreeze = cameraMovement.freezePhysics;
 
                 if (cameraMovement.cinematicType == CinematicType.CameraEditor)
                 {
@@ -1730,15 +1726,15 @@ public class ControlsScript : MonoBehaviour
                     Vector3 targetRotation = cameraMovement.rotation;
                     targetRotation.y *= -mirror;
                     targetRotation.z *= -mirror;
-                    cameraScript.MoveCameraToLocation(targetPosition,
-                                                      targetRotation,
-                                                      cameraMovement.fieldOfView,
-                                                      cameraMovement.camSpeed, gameObject.name);
+                    //cameraScript.MoveCameraToLocation(targetPosition,
+                    //                                  targetRotation,
+                    //                                  cameraMovement.fieldOfView,
+                    //                                  cameraMovement.camSpeed, gameObject.name);
 
                 }
                 else if (cameraMovement.cinematicType == CinematicType.Prefab)
                 {
-                    cameraScript.SetCameraOwner(gameObject.name);
+                    //cameraScript.SetCameraOwner(gameObject.name);
                     emulatedCam = (GameObject)Instantiate(cameraMovement.prefab);
                     emulatedCam.transform.position = transform.position;
 
@@ -1756,10 +1752,11 @@ public class ControlsScript : MonoBehaviour
                     cameraMovement.duration = cameraMovement.animationClip.length / cameraMovement.camAnimationSpeed;
 
                     Camera.main.transform.parent = emulatedCam.transform;
-                    cameraScript.MoveCameraToLocation(cameraMovement.position,
-                                                      cameraMovement.rotation,
-                                                      cameraMovement.fieldOfView,
-                                                      cameraMovement.blendSpeed, gameObject.name);
+
+                    //cameraScript.MoveCameraToLocation(cameraMovement.position,
+                    //                                  cameraMovement.rotation,
+                    //                                  cameraMovement.fieldOfView,
+                    //                                  cameraMovement.blendSpeed, gameObject.name);
 
                 }
             }
@@ -2107,7 +2104,7 @@ public class ControlsScript : MonoBehaviour
 
     private void ReleaseCam()
     {
-        if (cameraScript.GetCameraOwner() != gameObject.name) return;
+        //if (cameraScript.GetCameraOwner() != gameObject.name) return;
         if (outroPlayed && UFE.config.roundOptions.freezeCamAfterOutro) return;
         Camera.main.transform.parent = null;
 
@@ -2115,7 +2112,7 @@ public class ControlsScript : MonoBehaviour
 
         opControlsScript.PausePlayAnimation(false);
         PausePlayAnimation(false);
-        cameraScript.ReleaseCam();
+        //cameraScript.ReleaseCam();
         UFE.freezePhysics = false;
         myPhysicsScript.freeze = false;
         opPhysicsScript.freeze = false;
@@ -2873,8 +2870,8 @@ public class ControlsScript : MonoBehaviour
         // Override Camera Speed
         if (hit.overrideCameraSpeed)
         {
-            cameraScript.OverrideSpeed(hit.newMovementSpeed, hit.newRotationSpeed);
-            UFE.DelaySynchronizedAction(cameraScript.RestoreSpeed, hit.cameraSpeedDuration);
+            //cameraScript.OverrideSpeed(hit.newMovementSpeed, hit.newRotationSpeed);
+            //UFE.DelaySynchronizedAction(cameraScript.RestoreSpeed, hit.cameraSpeedDuration);
         }
 
 
@@ -3178,7 +3175,7 @@ public class ControlsScript : MonoBehaviour
     // Unpauses the pause
     void HitUnpause()
     {
-        if (cameraScript.cinematicFreeze) return;
+        //if (cameraScript.cinematicFreeze) return;
         myPhysicsScript.freeze = false;
 
         PausePlayAnimation(false);
@@ -3383,7 +3380,7 @@ public class ControlsScript : MonoBehaviour
     private void EndGame()
     {
         UFE.FireGameEnds(opInfo, myInfo);
-        cameraScript.killCamMove = true;
+        //cameraScript.killCamMove = true;
     }
 
     public void ResetData(bool resetLife)
@@ -3451,7 +3448,7 @@ public class ControlsScript : MonoBehaviour
         if (UFE.config.roundOptions.resetPositions)
         {
             CameraFade.StartAlphaFade(UFE.config.gameGUI.roundFadeColor, true, UFE.config.gameGUI.roundFadeDuration / 2);
-            cameraScript.ResetCam();
+            //cameraScript.ResetCam();
         }
 
         UFE.config.lockInputs = true;
