@@ -6586,7 +6586,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isDebug: 0
   boolCreatePlaneJoystick: 1
-  characterPrefab: Yasuo_CHP
+  characterPrefab: Ninja_DHT
   currentCharacter: {fileID: 0}
   doneClickSpawn: 1
 --- !u!114 &114302489051572672

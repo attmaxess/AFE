@@ -16,8 +16,8 @@ public class CreateCharacter : MonoBehaviour
     public static void _UFEDoCreate(Transform parent)
     {
         CharacterInfo[] charInfos = UFE.GetVersusModeSelectableCharacters();
-        CharacterInfo p1Info = charInfos[1];
-        CharacterInfo p2Info = charInfos[3];
+        CharacterInfo p1Info = charInfos[8];
+        CharacterInfo p2Info = charInfos[8];
 
         GameObject p1 = new GameObject("Player1");
         p1.transform.parent = parent;

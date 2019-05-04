@@ -142,11 +142,15 @@ MonoBehaviour:
           possibleStagesIndexes: 00000000
         showOpponentsInEditor: 1
       showStoryInEditor: 1
-    selectableCharactersInStoryMode: 0100000002000000030000000000000004000000050000000600000007000000
-    selectableCharactersInVersusMode: 0000000001000000020000000300000004000000050000000600000007000000
+    selectableCharactersInStoryMode: 010000000200000003000000000000000400000005000000060000000700000008000000
+    selectableCharactersInVersusMode: 000000000100000002000000030000000400000005000000060000000700000008000000
     characterStories:
-      _keys: 0000000001000000020000000300000004000000050000000600000007000000
+      _keys: 000000000100000002000000030000000400000005000000060000000700000008000000
       _values:
+      - opening: {fileID: 0}
+        ending: {fileID: 0}
+        fightsGroups: []
+        showStoryInEditor: 0
       - opening: {fileID: 0}
         ending: {fileID: 0}
         fightsGroups: []
@@ -810,6 +814,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3994e5b27b5d71e4f81c5ebe9a69b2e0, type: 2}
   - {fileID: 11400000, guid: ba08c6c21735e434f83d90e6d5e9a1ee, type: 2}
   - {fileID: 11400000, guid: d711647a1ae13244689043e90b148c37, type: 2}
+  - {fileID: 11400000, guid: e4ffd0a6a8de58d4bb8c85ec5bed5a01, type: 2}
   debugOptions:
     startGameImmediately: 0
     skipLoadingScreen: 1
