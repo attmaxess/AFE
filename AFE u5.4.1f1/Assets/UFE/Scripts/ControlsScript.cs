@@ -1,7 +1,9 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
+[Serializable]
 public class ControlsScript : MonoBehaviour
 {    
     public GameObject character;
@@ -530,7 +532,7 @@ public class ControlsScript : MonoBehaviour
             if (afkTimer >= myMoveSetScript.basicMoves.idle.restingClipInterval)
             {
                 afkTimer = 0;
-                int clipNum = Mathf.RoundToInt(Random.Range(2, 6));
+                int clipNum = Mathf.RoundToInt(UnityEngine.Random.Range(2, 6));
                 if (myMoveSetScript.AnimationExists("idle_" + clipNum))
                 {
                     myMoveSetScript.PlayBasicMove(myMoveSetScript.basicMoves.idle, "idle_" + clipNum, false);
@@ -3525,13 +3527,13 @@ public class ControlsScript : MonoBehaviour
 
     void shakeCam()
     {
-        float rnd = Random.Range(-.2f * shakeDensity, .2f * shakeDensity);
+        float rnd = UnityEngine.Random.Range(-.2f * shakeDensity, .2f * shakeDensity);
         Camera.main.transform.position += new Vector3(rnd, rnd, 0);
     }
 
     void shake()
     {
-        float rnd = Random.Range(-.1f * shakeDensity, .2f * shakeDensity);
+        float rnd = UnityEngine.Random.Range(-.1f * shakeDensity, .2f * shakeDensity);
         character.transform.localPosition = new Vector3(rnd, 0, 0);
     }
 }

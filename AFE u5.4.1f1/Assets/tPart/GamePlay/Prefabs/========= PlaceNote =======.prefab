@@ -4748,11 +4748,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isDebug: 1
   doneLoadCharacter: 1
-  createCharacter: {fileID: 114287358193939406}
+  createCharacterAFE: {fileID: 114287358193939406}
   joystickMethods: {fileID: 114863235956301726}
   currentGroundMarker: {fileID: 0}
   currentJoystick: {fileID: 0}
   snap2Character: {fileID: 114405752558986212}
+  createCharacterUFE: {fileID: 0}
 --- !u!114 &114123709169224692
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6586,7 +6587,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isDebug: 0
   boolCreatePlaneJoystick: 1
-  characterPrefab: Ninja_DHT
+  characterPrefab: Maskman_DHT
   currentCharacter: {fileID: 0}
   doneClickSpawn: 1
 --- !u!114 &114302489051572672

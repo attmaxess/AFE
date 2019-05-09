@@ -159,7 +159,7 @@ public class UFE : MonoBehaviour
     protected static readonly string DifficultyLevelKey = "DifficultyLevel";
     protected static readonly string DebugModeKey = "DebugMode";
     //-----------------------------------------------------------------------------------------------------------------
-
+    [SerializeField]
     public static GameMode gameMode = GameMode.None;
     public static GlobalInfo config;
     public static bool freeCamera;
@@ -178,8 +178,8 @@ public class UFE : MonoBehaviour
     public static bool isBluetoothAddonInstalled { get; set; }
     public static long currentNetworkFrame { get; protected set; }
     public static UFEScreen currentScreen { get; protected set; }
-    public static UFEScreen battleGUI { get; protected set; }
-    public static GameObject gameEngine { get; protected set; }
+    public static UFEScreen battleGUI { get; set; }
+    public static GameObject gameEngine { get; set; }
     public static bool gameRunning { get; protected set; }
     public static bool synchronizedRandomSeed { get; protected set; }
     #endregion
@@ -189,7 +189,7 @@ public class UFE : MonoBehaviour
     private static int intTimer;
     private static bool pauseTimer;
     private static bool newRoundCasted;
-    private static CameraScript cameraScript;
+    public static CameraScript cameraScript;
     private static AudioSource musicAudioSource;
     private static AudioSource soundsAudioSource;
 
@@ -197,8 +197,8 @@ public class UFE : MonoBehaviour
     private static UFEController p2Controller;
     private static UFEController localPlayerController;
     private static UFEController remotePlayerController;
-    private static ControlsScript p1ControlsScript;
-    private static ControlsScript p2ControlsScript;
+    public static ControlsScript p1ControlsScript;
+    public static ControlsScript p2ControlsScript;
 
     private static RandomAI p1RandomAI;
     private static RandomAI p2RandomAI;

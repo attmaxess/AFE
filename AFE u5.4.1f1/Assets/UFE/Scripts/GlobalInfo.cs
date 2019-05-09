@@ -8,18 +8,21 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 
+[Serializable]
 public enum AnimationFlow
 {
     UFEEngine,
     UnityEngine
 }
 
+[Serializable]
 public enum AnimationType
 {
     Legacy,
     Mecanim
 }
 
+[Serializable]
 public enum BlockType
 {
     None,
@@ -39,6 +42,7 @@ public enum BlockType
     HoldButton12
 }
 
+[Serializable]
 public enum BodyPart
 {
     none,
@@ -69,6 +73,7 @@ public enum BodyPart
     custom9
 }
 
+[Serializable]
 public enum NetworkService
 {
     P2P,
@@ -77,6 +82,7 @@ public enum NetworkService
     Unity
 }
 
+[Serializable]
 public enum CollisionType
 {
     bodyCollider,
@@ -85,12 +91,14 @@ public enum CollisionType
     throwCollider
 }
 
+[Serializable]
 public enum ComboDisplayMode
 {
     ShowDuringComboExecution,
     ShowAfterComboExecution,
 }
 
+[Serializable]
 public enum GameMode
 {
     None,
@@ -100,6 +108,7 @@ public enum GameMode
     NetworkGame,
 }
 
+[Serializable]
 public enum Gender
 {
     Unknown,
@@ -107,18 +116,21 @@ public enum Gender
     Female
 }
 
+[Serializable]
 public enum HitBoxType
 {
     high,
     low
 }
 
+[Serializable]
 public enum HitBoxShape
 {
     circle,
     rectangle
 }
 
+[Serializable]
 public enum ExecutionBufferType
 {
     OnlyMoveLinks,
@@ -126,6 +138,7 @@ public enum ExecutionBufferType
     NoBuffer
 }
 
+[Serializable]
 public enum ParryType
 {
     None,
@@ -145,18 +158,21 @@ public enum ParryType
     TapButton12
 }
 
+[Serializable]
 public enum ParryStunType
 {
     Fixed,
     BlockStunPercentage
 }
 
+[Serializable]
 public enum Side
 {
     Left,
     Right
 }
 
+[Serializable]
 public enum Sizes
 {
     None,
@@ -165,12 +181,14 @@ public enum Sizes
     High
 }
 
+[Serializable]
 public enum AirJuggleDeteriorationType
 {
     ComboHits,
     AirHits
 }
 
+[Serializable]
 public enum AirRecoveryType
 {
     AllowMoves,
@@ -179,6 +197,7 @@ public enum AirRecoveryType
 }
 
 #if !UFE_BASIC
+[Serializable]
 public enum InputManagerType
 {
     UnityInputManager,
@@ -186,12 +205,15 @@ public enum InputManagerType
     ControlFreak
 }
 #else
-public enum InputManagerType{
+[Serializable]
+public enum InputManagerType
+{
 	UnityInputManager,
 	cInput
 }
 #endif
 
+[Serializable]
 public enum AIEngine
 {
     RandomAI,
@@ -208,6 +230,7 @@ public enum AIBehavior
     VeryAggressive
 }
 
+[Serializable]
 public enum AIDifficultyLevel
 {
     VeryEasy,
@@ -218,6 +241,7 @@ public enum AIDifficultyLevel
     Impossible
 }
 
+[Serializable]
 public enum LifeBarTrainingMode
 {
     Refill,
@@ -225,12 +249,14 @@ public enum LifeBarTrainingMode
     Normal
 }
 
+[Serializable]
 public enum LobbyMatchCreationSystem
 {
     ManualRoomCreation,
     MatchMaking
 }
 
+[Serializable]
 public enum MatchMakingFilterType
 {
     Range,
@@ -240,6 +266,7 @@ public enum MatchMakingFilterType
     LowerThen
 }
 
+[Serializable]
 public enum ServerVariableUpdateType
 {
     ELO,
@@ -247,6 +274,7 @@ public enum ServerVariableUpdateType
     Increment
 }
 
+[Serializable]
 public enum ServerVariableType
 {
     Float,
@@ -256,10 +284,13 @@ public enum ServerVariableType
 }
 
 #if UFE_BASIC
-public enum StorageMode{
+[Serializable]
+public enum StorageMode
+{
 	Legacy
 }
 #else
+[Serializable]
 public enum StorageMode
 {
     Legacy,
@@ -267,12 +298,14 @@ public enum StorageMode
 }
 #endif
 
+[Serializable]
 public enum UFEBoolean
 {
     TRUE,
     FALSE
 }
 
+[Serializable]
 public enum HitEffectSpawnPoint
 {
     StrikingHurtBox,
@@ -972,12 +1005,12 @@ public class GlobalInfo : ScriptableObject
     public bool p1CPUControl;
     public bool p2CPUControl;
     public string gameName;
-    
+
     //-----------------------------------------------------------------------------------------------------------------
     public GameGUI gameGUI;
     public StoryMode storyMode;
     //-----------------------------------------------------------------------------------------------------------------
-    
+
     public int fps = 60;
     public float gameSpeed = 1;
     public int executionBufferTime = 10;

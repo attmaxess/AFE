@@ -48,26 +48,28 @@ public class PlaceNoteLoadCharacter : MonoBehaviour
         yield return new WaitUntil(() => doneLoadCharacter == true);
 
         int index = PhotonNetwork.IsMasterClient ? 0 : 1;
-        snap2Character.Snap(createCharacter, currentGroundMarker.retrieveMainChar.spawnposList[index].gameObject);
+        snap2Character.Snap(createCharacterAFE, currentGroundMarker.retrieveMainChar.spawnposList[index].gameObject);
 
         yield break;
     }
 
     [Header("LoadCharacter")]
     public bool doneLoadCharacter = true;
-    public Com.Beetsoft.Luan.CreateCharacter createCharacter = null;
+    public Com.Beetsoft.Luan.CreateCharacter createCharacterAFE = null;
     public CanvasJoystickManagerMethods joystickMethods = null;
     public BackgroundMarker currentGroundMarker = null;
     public PlaneJoystick currentJoystick = null;
     public Snap2Character snap2Character = null;
 
+    public CreateCharacter createCharacterUFE = null;
+
     [ContextMenu("LoadCharacter")]
     public void LoadCharacter()
     {
-        StartCoroutine(C_LoadCharacter());
+        StartCoroutine(C_LoadCharacterUFE());
     }
 
-    IEnumerator C_LoadCharacter()
+    IEnumerator C_LoadCharacterAFE()
     {
         if (isDebug) Debug.Log("Start C_LoadCharacter");
         doneLoadCharacter = false;
@@ -83,9 +85,9 @@ public class PlaceNoteLoadCharacter : MonoBehaviour
         }
         currentGroundMarker.Show();
 
-        createCharacter.ClickSpawn();
+        createCharacterAFE.ClickSpawn();
         //joystickMethods.SetCanvasOn();
-        yield return new WaitUntil(() => createCharacter.doneClickSpawn == true);
+        yield return new WaitUntil(() => createCharacterAFE.doneClickSpawn == true);
 
         float momentPlaneJoystick = Time.time;
         yield return new WaitUntil(() => FindObjectOfType<PlaneJoystick>() != null || Time.time - momentPlaneJoystick > 2f);
@@ -100,6 +102,34 @@ public class PlaceNoteLoadCharacter : MonoBehaviour
         //currentGroundMarker.retrieveMainChar.eSnap = RetrieveMainCharacter.eSnapBackgroundMarker.SpawnPosList;
         //currentGroundMarker.retrieveMainChar.TrySnap(currentGroundMarker, currentJoystick, createCharacter.currentCharacter);
         //yield return new WaitUntil(() => currentGroundMarker.retrieveMainChar.doneSnapSpawnPos == true);
+
+        if (isDebug) Debug.Log("Done C_LoadCharacter");
+        doneLoadCharacter = true;
+
+        yield break;
+    }
+
+    IEnumerator C_LoadCharacterUFE()
+    {
+        if (isDebug) Debug.Log("Start C_LoadCharacter");
+        doneLoadCharacter = false;        
+
+        float momentBackground = Time.time;
+        yield return new WaitUntil(() => FindObjectOfType<BackgroundMarker>() != null || Time.time - momentBackground > 2f);
+
+        currentGroundMarker = FindObjectOfType<BackgroundMarker>();
+        if (currentGroundMarker == null && Time.time - momentBackground > 2f)
+        {
+            doneLoadCharacter = true;
+            yield break;
+        }
+        currentGroundMarker.Show();
+
+        createCharacterUFE.UFEDoCreate();
+        yield return new WaitUntil(() => CreateCharacter.sdoneUFEDoCreate == true);
+
+        GameObject gameEngine = GameObject.Find("Game");
+        gameEngine.transform.position = currentGroundMarker.transform.position;
 
         if (isDebug) Debug.Log("Done C_LoadCharacter");
         doneLoadCharacter = true;

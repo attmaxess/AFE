@@ -17,8 +17,8 @@ public class CameraScript : MonoBehaviour
     private float rotationSpeed;
     private float freeCameraSpeed;
 
-    private Transform player1;
-    private Transform player2;
+    public Transform player1;
+    public Transform player2;
     private string lastOwner;
 
     //private Vector3 cameraStartingPos;

@@ -6,45 +6,51 @@ using System.Linq;
 
 
 [System.Serializable]
-public class BasicMoveInfo:ICloneable {
-	public AnimationClip clip1;
-	public AnimationClip clip2;
-	public AnimationClip clip3;
-	public AnimationClip clip4;
-	public AnimationClip clip5;
-	public AnimationClip clip6;
-	public WrapMode wrapMode;
-	public bool autoSpeed = true;
-	public float animationSpeed = 1;
-	public float restingClipInterval = 6;
-	public bool overrideBlendingIn = false;
-	public bool overrideBlendingOut = false;
-	public float blendingIn = 0;
-	public float blendingOut = 0;
-	public bool invincible;
-	public bool disableHeadLook;
+public class BasicMoveInfo : ICloneable
+{
+    public AnimationClip clip1;
+    public AnimationClip clip2;
+    public AnimationClip clip3;
+    public AnimationClip clip4;
+    public AnimationClip clip5;
+    public AnimationClip clip6;
+    public WrapMode wrapMode;
+    public bool autoSpeed = true;
+    public float animationSpeed = 1;
+    public float restingClipInterval = 6;
+    public bool overrideBlendingIn = false;
+    public bool overrideBlendingOut = false;
+    public float blendingIn = 0;
+    public float blendingOut = 0;
+    public bool invincible;
+    public bool disableHeadLook;
     public bool applyRootMotion;
     public bool downClip;
-	public AudioClip[] soundEffects = new AudioClip[0];
-	public bool continuousSound;
-	public ParticleInfo particleEffect = new ParticleInfo();
-	public BasicMoveReference reference;
-	
-	[HideInInspector] public string name;
-	[HideInInspector] public bool editorToggle;
-	[HideInInspector] public bool soundEffectsToggle;
-	
-	public object Clone() {
-		return CloneObject.Clone(this);
-	}
+    public AudioClip[] soundEffects = new AudioClip[0];
+    public bool continuousSound;
+    public ParticleInfo particleEffect = new ParticleInfo();
+    public BasicMoveReference reference;
+
+    [HideInInspector]
+    public string name;
+    [HideInInspector]
+    public bool editorToggle;
+    [HideInInspector]
+    public bool soundEffectsToggle;
+
+    public object Clone()
+    {
+        return CloneObject.Clone(this);
+    }
 }
 
 
 [System.Serializable]
-public class ParticleInfo:ICloneable {
-	public bool editorToggle;
-	public GameObject prefab;
-	public float duration = 1;
+public class ParticleInfo : ICloneable
+{
+    public bool editorToggle;
+    public GameObject prefab;
+    public float duration = 1;
     public bool stick = false;
     public bool destroyOnMoveOver = false;
     public bool followRotation = false;
@@ -52,57 +58,59 @@ public class ParticleInfo:ICloneable {
     public bool mirrorOn2PSide = false;
     public Vector3 initialRotation;
     public Vector3 positionOffSet;
-	public BodyPart bodyPart;
-	
-	public object Clone() {
-		return CloneObject.Clone(this);
-	}
+    public BodyPart bodyPart;
+
+    public object Clone()
+    {
+        return CloneObject.Clone(this);
+    }
 }
 
 [System.Serializable]
-public class BasicMoves:ICloneable {
-	public BasicMoveInfo idle = new BasicMoveInfo();
-	public BasicMoveInfo moveForward = new BasicMoveInfo();
-	public BasicMoveInfo moveBack = new BasicMoveInfo();
-	public BasicMoveInfo takeOff = new BasicMoveInfo();
-	public BasicMoveInfo jumpStraight = new BasicMoveInfo();
-	public BasicMoveInfo jumpBack = new BasicMoveInfo();
-	public BasicMoveInfo jumpForward = new BasicMoveInfo();
-	public BasicMoveInfo fallStraight = new BasicMoveInfo();
-	public BasicMoveInfo fallBack = new BasicMoveInfo();
-	public BasicMoveInfo fallForward = new BasicMoveInfo();
-	public BasicMoveInfo landing = new BasicMoveInfo();
-	public BasicMoveInfo crouching = new BasicMoveInfo();
-	public BasicMoveInfo blockingCrouchingPose = new BasicMoveInfo();
-	public BasicMoveInfo blockingCrouchingHit = new BasicMoveInfo();
-	public BasicMoveInfo blockingHighPose = new BasicMoveInfo();
-	public BasicMoveInfo blockingHighHit = new BasicMoveInfo();
-	public BasicMoveInfo blockingLowHit = new BasicMoveInfo();
-	public BasicMoveInfo blockingAirPose = new BasicMoveInfo();
-	public BasicMoveInfo blockingAirHit = new BasicMoveInfo();
-	public BasicMoveInfo parryCrouching = new BasicMoveInfo();
-	public BasicMoveInfo parryHigh = new BasicMoveInfo();
-	public BasicMoveInfo parryLow = new BasicMoveInfo();
-	public BasicMoveInfo parryAir = new BasicMoveInfo();
-	public BasicMoveInfo groundBounce = new BasicMoveInfo();
-	public BasicMoveInfo standingWallBounce = new BasicMoveInfo();
-	public BasicMoveInfo standingWallBounceKnockdown = new BasicMoveInfo();
-	public BasicMoveInfo airWallBounce = new BasicMoveInfo();
-	public BasicMoveInfo fallingFromGroundBounce = new BasicMoveInfo();
-	public BasicMoveInfo fallingFromAirHit = new BasicMoveInfo();
+public class BasicMoves : ICloneable
+{
+    public BasicMoveInfo idle = new BasicMoveInfo();
+    public BasicMoveInfo moveForward = new BasicMoveInfo();
+    public BasicMoveInfo moveBack = new BasicMoveInfo();
+    public BasicMoveInfo takeOff = new BasicMoveInfo();
+    public BasicMoveInfo jumpStraight = new BasicMoveInfo();
+    public BasicMoveInfo jumpBack = new BasicMoveInfo();
+    public BasicMoveInfo jumpForward = new BasicMoveInfo();
+    public BasicMoveInfo fallStraight = new BasicMoveInfo();
+    public BasicMoveInfo fallBack = new BasicMoveInfo();
+    public BasicMoveInfo fallForward = new BasicMoveInfo();
+    public BasicMoveInfo landing = new BasicMoveInfo();
+    public BasicMoveInfo crouching = new BasicMoveInfo();
+    public BasicMoveInfo blockingCrouchingPose = new BasicMoveInfo();
+    public BasicMoveInfo blockingCrouchingHit = new BasicMoveInfo();
+    public BasicMoveInfo blockingHighPose = new BasicMoveInfo();
+    public BasicMoveInfo blockingHighHit = new BasicMoveInfo();
+    public BasicMoveInfo blockingLowHit = new BasicMoveInfo();
+    public BasicMoveInfo blockingAirPose = new BasicMoveInfo();
+    public BasicMoveInfo blockingAirHit = new BasicMoveInfo();
+    public BasicMoveInfo parryCrouching = new BasicMoveInfo();
+    public BasicMoveInfo parryHigh = new BasicMoveInfo();
+    public BasicMoveInfo parryLow = new BasicMoveInfo();
+    public BasicMoveInfo parryAir = new BasicMoveInfo();
+    public BasicMoveInfo groundBounce = new BasicMoveInfo();
+    public BasicMoveInfo standingWallBounce = new BasicMoveInfo();
+    public BasicMoveInfo standingWallBounceKnockdown = new BasicMoveInfo();
+    public BasicMoveInfo airWallBounce = new BasicMoveInfo();
+    public BasicMoveInfo fallingFromGroundBounce = new BasicMoveInfo();
+    public BasicMoveInfo fallingFromAirHit = new BasicMoveInfo();
     public BasicMoveInfo fallDown = new BasicMoveInfo();
     public BasicMoveInfo airRecovery = new BasicMoveInfo();
-	public BasicMoveInfo getHitCrouching = new BasicMoveInfo();
-	public BasicMoveInfo getHitHigh = new BasicMoveInfo();
-	public BasicMoveInfo getHitLow = new BasicMoveInfo();
-	public BasicMoveInfo getHitHighKnockdown = new BasicMoveInfo();
-	public BasicMoveInfo getHitMidKnockdown = new BasicMoveInfo();
-	public BasicMoveInfo getHitAir = new BasicMoveInfo();
-	public BasicMoveInfo getHitCrumple = new BasicMoveInfo();
-	public BasicMoveInfo getHitKnockBack = new BasicMoveInfo();
-	public BasicMoveInfo getHitSweep = new BasicMoveInfo();
-	public BasicMoveInfo standUp = new BasicMoveInfo();
-	public BasicMoveInfo standUpFromAirHit = new BasicMoveInfo();
+    public BasicMoveInfo getHitCrouching = new BasicMoveInfo();
+    public BasicMoveInfo getHitHigh = new BasicMoveInfo();
+    public BasicMoveInfo getHitLow = new BasicMoveInfo();
+    public BasicMoveInfo getHitHighKnockdown = new BasicMoveInfo();
+    public BasicMoveInfo getHitMidKnockdown = new BasicMoveInfo();
+    public BasicMoveInfo getHitAir = new BasicMoveInfo();
+    public BasicMoveInfo getHitCrumple = new BasicMoveInfo();
+    public BasicMoveInfo getHitKnockBack = new BasicMoveInfo();
+    public BasicMoveInfo getHitSweep = new BasicMoveInfo();
+    public BasicMoveInfo standUp = new BasicMoveInfo();
+    public BasicMoveInfo standUpFromAirHit = new BasicMoveInfo();
     public BasicMoveInfo standUpFromKnockBack = new BasicMoveInfo();
     public BasicMoveInfo standUpFromStandingHighHit = new BasicMoveInfo();
     public BasicMoveInfo standUpFromStandingMidHit = new BasicMoveInfo();
@@ -118,84 +126,105 @@ public class BasicMoves:ICloneable {
     public bool blockEnabled = true;
     public bool parryEnabled = true;
 
-	public object Clone() {
-		return CloneObject.Clone(this);
-	}
+    public object Clone()
+    {
+        return CloneObject.Clone(this);
+    }
 }
 
-public class ButtonSequenceRecord {
+public class ButtonSequenceRecord
+{
     public ButtonPress buttonPress;
     public float chargeTime;
 
-    public ButtonSequenceRecord(ButtonPress buttonPress, float chargeTime) {
+    public ButtonSequenceRecord(ButtonPress buttonPress, float chargeTime)
+    {
         this.buttonPress = buttonPress;
         this.chargeTime = chargeTime;
     }
 }
 
-public class MoveSetScript : MonoBehaviour {
-	[HideInInspector]	public BasicMoves basicMoves;
-	[HideInInspector]	public MoveInfo[] attackMoves;
-	[HideInInspector]	public MoveInfo[] moves;
-	[HideInInspector]	public int totalAirMoves;
-	[HideInInspector]	public bool animationPaused;
-	[HideInInspector]	public float overrideNextBlendingValue = -1;
-	[HideInInspector]	public Dictionary<ButtonPress, float> chargeValues = new Dictionary<ButtonPress, float>();
-	[HideInInspector]	public MoveInfo intro;
-	[HideInInspector]	public MoveInfo outro;
+public class MoveSetScript : MonoBehaviour
+{
+    [HideInInspector]
+    public BasicMoves basicMoves;
+    [HideInInspector]
+    public MoveInfo[] attackMoves;
+    [HideInInspector]
+    public MoveInfo[] moves;
+    [HideInInspector]
+    public int totalAirMoves;
+    [HideInInspector]
+    public bool animationPaused;
+    [HideInInspector]
+    public float overrideNextBlendingValue = -1;
+    [HideInInspector]
+    public Dictionary<ButtonPress, float> chargeValues = new Dictionary<ButtonPress, float>();
+    [HideInInspector]
+    public MoveInfo intro;
+    [HideInInspector]
+    public MoveInfo outro;
 
 #if !UFE_BASIC
     public MecanimControl MecanimControl { get { return this.mecanimControl; } }
 #endif
 
     public LegacyControl LegacyControl { get { return this.legacyControl; } }
-    
-	private ControlsScript controlsScript;
-	private HitBoxesScript hitBoxesScript;
+
+    private ControlsScript controlsScript;
+    private HitBoxesScript hitBoxesScript;
     private List<ButtonSequenceRecord> lastButtonPresses = new List<ButtonSequenceRecord>();
     private List<BasicMoveInfo> basicMoveList = new List<BasicMoveInfo>();
-	private float lastTimePress;
+    private float lastTimePress;
     //private float[] animSpeedStorage;
 
 #if !UFE_BASIC
-	private MecanimControl mecanimControl;
+    private MecanimControl mecanimControl;
 #endif
 
     private LegacyControl legacyControl;
-	private bool precisionControl;
+    private bool precisionControl;
 
-	
-	void Awake(){
-		controlsScript = transform.parent.gameObject.GetComponent<ControlsScript>();
-		hitBoxesScript = GetComponent<HitBoxesScript>();
 
-		foreach(ButtonPress bp in Enum.GetValues(typeof(ButtonPress))){
-			chargeValues.Add (bp, 0);
-		}
+    void Awake()
+    {
+        controlsScript = transform.parent.gameObject.GetComponent<ControlsScript>();
+        hitBoxesScript = GetComponent<HitBoxesScript>();
+
+        foreach (ButtonPress bp in Enum.GetValues(typeof(ButtonPress)))
+        {
+            chargeValues.Add(bp, 0);
+        }
 
         controlsScript.myInfo.currentCombatStance = CombatStances.Stance10;
         ChangeMoveStances(CombatStances.Stance1);
-	}
+    }
 
 
-    void Start() {
+    void Start()
+    {
 #if !UFE_BASIC
-		if (controlsScript.myInfo.animationType == AnimationType.Mecanim){
-			mecanimControl.SetMirror(controlsScript.mirror > 0);
+        if (controlsScript.myInfo.animationType == AnimationType.Mecanim)
+        {
+            mecanimControl.SetMirror(controlsScript.mirror > 0);
         }
 #endif
-	}
+    }
 
 
-    public void ChangeMoveStances(CombatStances newStance) {
-		if (controlsScript.myInfo.currentCombatStance == newStance) return;
-		foreach(MoveSetData moveSetData in controlsScript.myInfo.moves){
-			if (moveSetData.combatStance == newStance){
+    public void ChangeMoveStances(CombatStances newStance)
+    {
+        if (controlsScript.myInfo.currentCombatStance == newStance) return;
+        foreach (MoveSetData moveSetData in controlsScript.myInfo.moves)
+        {
+            if (moveSetData.combatStance == newStance)
+            {
                 string currentClip = basicMoves != null ? GetCurrentClipName() : null;
                 float currentNormalizedTime = basicMoves != null ? GetCurrentClipPosition() : 0;
                 float currentSpeed = 0;
 
-                if (controlsScript.myInfo.animationType == AnimationType.Legacy && legacyControl != null) {
+                if (controlsScript.myInfo.animationType == AnimationType.Legacy && legacyControl != null)
+                {
                     currentSpeed = legacyControl.globalSpeed;
                 }
 #if !UFE_BASIC
@@ -204,7 +233,8 @@ public class MoveSetScript : MonoBehaviour {
                 MecanimAnimationData currentMecanimData = new MecanimAnimationData();
                 AnimatorOverrideController overrideController = new AnimatorOverrideController();
 
-                if (controlsScript.myInfo.animationType == AnimationType.Mecanim && mecanimControl != null) {
+                if (controlsScript.myInfo.animationType == AnimationType.Mecanim && mecanimControl != null)
+                {
                     currentState = mecanimControl.currentState;
                     currentMirror = mecanimControl.currentMirror;
                     currentSpeed = mecanimControl.currentSpeed;
@@ -213,77 +243,92 @@ public class MoveSetScript : MonoBehaviour {
                     mecanimControl.CopyAnimationData(mecanimControl.currentAnimationData, ref currentMecanimData);
                 }
 #endif
-                
 
-				basicMoves = moveSetData.basicMoves;
-				attackMoves = moveSetData.attackMoves;
-				
-				moves = attackMoves;
 
-				foreach(MoveInfo move1 in moves){
-					if (move1.chargeMove && move1.chargeTiming <= controlsScript.myInfo.executionTiming){
-						Debug.LogWarning("Warning: " + move1.name + " ("+ move1.moveName +") charge timing must be higher then the character's execution timing.");
-					}
+                basicMoves = moveSetData.basicMoves;
+                attackMoves = moveSetData.attackMoves;
 
-					foreach(MoveInfo move2 in moves){
-						if (move1.name != move2.name && move1.moveName == move2.moveName){
-							Debug.LogWarning("Warning: " + move1.name + " ("+ move1.moveName +") has the same name as "+ move2.name + " ("+ move2.moveName +")");
-						}
-					}
-				}
+                moves = attackMoves;
+
+                foreach (MoveInfo move1 in moves)
+                {
+                    if (move1.chargeMove && move1.chargeTiming <= controlsScript.myInfo.executionTiming)
+                    {
+                        Debug.LogWarning("Warning: " + move1.name + " (" + move1.moveName + ") charge timing must be higher then the character's execution timing.");
+                    }
+
+                    foreach (MoveInfo move2 in moves)
+                    {
+                        if (move1.name != move2.name && move1.moveName == move2.moveName)
+                        {
+                            Debug.LogWarning("Warning: " + move1.name + " (" + move1.moveName + ") has the same name as " + move2.name + " (" + move2.moveName + ")");
+                        }
+                    }
+                }
 
                 // Reset Animation Components
                 fillMoves();
 
-				if (moveSetData.cinematicIntro != null) {
-					intro = Instantiate(moveSetData.cinematicIntro) as MoveInfo;
-					intro.name = "Intro";
-					attachAnimation(intro.animationClip, intro.name, intro.animationSpeed, intro.wrapMode);
-				}
-				if (moveSetData.cinematicOutro != null) {
-					outro = Instantiate(moveSetData.cinematicOutro) as MoveInfo;
-					outro.name = "Outro";
+                if (moveSetData.cinematicIntro != null)
+                {
+                    intro = Instantiate(moveSetData.cinematicIntro) as MoveInfo;
+                    intro.name = "Intro";
+                    attachAnimation(intro.animationClip, intro.name, intro.animationSpeed, intro.wrapMode);
+                }
+                if (moveSetData.cinematicOutro != null)
+                {
+                    outro = Instantiate(moveSetData.cinematicOutro) as MoveInfo;
+                    outro.name = "Outro";
                     attachAnimation(outro.animationClip, outro.name, outro.animationSpeed, outro.wrapMode);
-				}
+                }
 
-				controlsScript.myInfo.currentCombatStance = newStance;
-				
-				System.Array.Sort(moves, delegate(MoveInfo move1, MoveInfo move2) {
-					return move1.buttonExecution.Length.CompareTo(move2.buttonExecution.Length);
-				});
-				
-				System.Array.Sort(moves, delegate(MoveInfo move1, MoveInfo move2) {
-					if (move1.buttonExecution.Length > 1 && move1.buttonExecution.Contains(ButtonPress.Back)) return 0;
-					if (move1.buttonExecution.Length > 1 && move1.buttonExecution.Contains(ButtonPress.Forward)) return 0;
-					if (move1.buttonExecution.Length > 1) return 1;
-					return 0;
-				});
-				
-				System.Array.Sort(moves, delegate(MoveInfo move1, MoveInfo move2) {
-					return move1.selfConditions.basicMoveLimitation.Length.CompareTo(move2.selfConditions.basicMoveLimitation.Length);
-				});
-				
-				System.Array.Sort(moves, delegate(MoveInfo move1, MoveInfo move2) {
-					return move1.opponentConditions.basicMoveLimitation.Length.CompareTo(move2.opponentConditions.basicMoveLimitation.Length);
-				});
+                controlsScript.myInfo.currentCombatStance = newStance;
 
-				System.Array.Sort(moves, delegate(MoveInfo move1, MoveInfo move2) {
-					return move1.opponentConditions.possibleMoveStates.Length.CompareTo(move2.opponentConditions.possibleMoveStates.Length);
-				});
+                System.Array.Sort(moves, delegate (MoveInfo move1, MoveInfo move2)
+                {
+                    return move1.buttonExecution.Length.CompareTo(move2.buttonExecution.Length);
+                });
 
-                System.Array.Sort(moves, delegate(MoveInfo move1, MoveInfo move2) {
+                System.Array.Sort(moves, delegate (MoveInfo move1, MoveInfo move2)
+                {
+                    if (move1.buttonExecution.Length > 1 && move1.buttonExecution.Contains(ButtonPress.Back)) return 0;
+                    if (move1.buttonExecution.Length > 1 && move1.buttonExecution.Contains(ButtonPress.Forward)) return 0;
+                    if (move1.buttonExecution.Length > 1) return 1;
+                    return 0;
+                });
+
+                System.Array.Sort(moves, delegate (MoveInfo move1, MoveInfo move2)
+                {
+                    return move1.selfConditions.basicMoveLimitation.Length.CompareTo(move2.selfConditions.basicMoveLimitation.Length);
+                });
+
+                System.Array.Sort(moves, delegate (MoveInfo move1, MoveInfo move2)
+                {
+                    return move1.opponentConditions.basicMoveLimitation.Length.CompareTo(move2.opponentConditions.basicMoveLimitation.Length);
+                });
+
+                System.Array.Sort(moves, delegate (MoveInfo move1, MoveInfo move2)
+                {
+                    return move1.opponentConditions.possibleMoveStates.Length.CompareTo(move2.opponentConditions.possibleMoveStates.Length);
+                });
+
+                System.Array.Sort(moves, delegate (MoveInfo move1, MoveInfo move2)
+                {
                     return move1.previousMoves.Length.CompareTo(move2.previousMoves.Length);
                 });
 
-				System.Array.Sort(moves, delegate(MoveInfo move1, MoveInfo move2) {
-					return move1.buttonSequence.Length.CompareTo(move2.buttonSequence.Length);
+                System.Array.Sort(moves, delegate (MoveInfo move1, MoveInfo move2)
+                {
+                    return move1.buttonSequence.Length.CompareTo(move2.buttonSequence.Length);
                 });
 
                 System.Array.Reverse(moves);
 
-                if (currentClip != null) {
+                if (currentClip != null)
+                {
                     // Restore animation
-                    if (controlsScript.myInfo.animationType == AnimationType.Mecanim) {
+                    if (controlsScript.myInfo.animationType == AnimationType.Mecanim)
+                    {
 #if !UFE_BASIC
                         mecanimControl.currentState = currentState;
                         mecanimControl.currentMirror = currentMirror;
@@ -301,78 +346,90 @@ public class MoveSetScript : MonoBehaviour {
 
                         //PlayAnimation(currentClip, 0, currentNormalizedTime);
 #endif
-                    } else {
+                    }
+                    else
+                    {
                         legacyControl.globalSpeed = currentSpeed;
                         PlayAnimation(currentClip, 0, currentNormalizedTime);
                     }
-                    
-                } else {
+
+                }
+                else
+                {
                     PlayBasicMove(basicMoves.idle);
                     controlsScript.currentState = PossibleStates.Stand;
                     controlsScript.currentSubState = SubStates.Resting;
                 }
-				return;
-			}
-		}
-	}
+                return;
+            }
+        }
+    }
 
-    private void fillMoves() {
+    private void fillMoves()
+    {
         DestroyImmediate(gameObject.GetComponent(typeof(MecanimControl)));
         DestroyImmediate(gameObject.GetComponent(typeof(LegacyControl)));
-		DestroyImmediate(gameObject.GetComponent(typeof(Animation)));
-		DestroyImmediate(gameObject.GetComponent(typeof(Animator)));
+        DestroyImmediate(gameObject.GetComponent(typeof(Animation)));
+        DestroyImmediate(gameObject.GetComponent(typeof(Animator)));
 
-        if (UFE.isNetworkAddonInstalled && UFE.config.networkOptions.forceAnimationControl) {
+        if (UFE.isNetworkAddonInstalled && UFE.config.networkOptions.forceAnimationControl)
+        {
             controlsScript.myInfo.animationFlow = AnimationFlow.UFEEngine;
         }
 
-		if (controlsScript.myInfo.animationType == AnimationType.Legacy){
-			gameObject.AddComponent(typeof(Animation));
+        if (controlsScript.myInfo.animationType == AnimationType.Legacy)
+        {
+            gameObject.AddComponent(typeof(Animation));
             gameObject.GetComponent<Animation>().clip = basicMoves.idle.clip1;
             gameObject.GetComponent<Animation>().wrapMode = WrapMode.Once;
 
             legacyControl = gameObject.AddComponent<LegacyControl>();
             if (controlsScript.myInfo.animationFlow == AnimationFlow.UFEEngine) legacyControl.overrideAnimatorUpdate = true;
 
-		}else{
+        }
+        else
+        {
 #if !UFE_BASIC
-            Animator animator = (Animator) gameObject.AddComponent(typeof(Animator));
-			animator.avatar = controlsScript.myInfo.avatar;
-			//animator.applyRootMotion = true;
+            Animator animator = (Animator)gameObject.AddComponent(typeof(Animator));
+            animator.avatar = controlsScript.myInfo.avatar;
+            //animator.applyRootMotion = true;
 
-			mecanimControl = gameObject.AddComponent<MecanimControl>();
-			mecanimControl.defaultTransitionDuration = controlsScript.myInfo.blendingTime;
-			mecanimControl.SetDefaultClip(basicMoves.idle.clip1, "default", basicMoves.idle.animationSpeed, WrapMode.Loop, 
-			                              (controlsScript.mirror > 0 && UFE.config.characterRotationOptions.autoMirror));
+            mecanimControl = gameObject.AddComponent<MecanimControl>();
+            mecanimControl.defaultTransitionDuration = controlsScript.myInfo.blendingTime;
+            mecanimControl.SetDefaultClip(basicMoves.idle.clip1, "default", basicMoves.idle.animationSpeed, WrapMode.Loop,
+                                          (controlsScript.mirror > 0 && UFE.config.characterRotationOptions.autoMirror));
 
             mecanimControl.defaultWrapMode = WrapMode.Once;
             if (controlsScript.myInfo.animationFlow == AnimationFlow.UFEEngine) mecanimControl.overrideAnimatorUpdate = true;
 #endif
-		}
+        }
 
 
-        foreach (MoveInfo move in moves) {
-            if (move == null) {
+        foreach (MoveInfo move in moves)
+        {
+            if (move == null)
+            {
                 Debug.LogWarning("You have empty entries in your move list. Check your special moves under Character Editor.");
                 continue;
             }
-			if (move.animationClip != null) {
+            if (move.animationClip != null)
+            {
                 //float animLength = ((float)move.totalFrames / UFE.config.fps);
                 attachAnimation(move.animationClip, move.name, move.animationSpeed, move.wrapMode);
-			}
-		}
-		setBasicMoveAnimation(basicMoves.idle, "idle", BasicMoveReference.Idle);
-		setBasicMoveAnimation(basicMoves.moveForward, "moveForward", BasicMoveReference.MoveForward);
-		setBasicMoveAnimation(basicMoves.moveBack, "moveBack", BasicMoveReference.MoveBack);
-		setBasicMoveAnimation(basicMoves.takeOff, "takeOff", BasicMoveReference.TakeOff);
-		setBasicMoveAnimation(basicMoves.jumpStraight, "jumpStraight", BasicMoveReference.JumpStraight);
-		setBasicMoveAnimation(basicMoves.jumpBack, "jumpBack", BasicMoveReference.JumpBack);
-		setBasicMoveAnimation(basicMoves.jumpForward, "jumpForward", BasicMoveReference.JumpForward);
-		setBasicMoveAnimation(basicMoves.fallStraight, "fallStraight", BasicMoveReference.FallStraight);
-		setBasicMoveAnimation(basicMoves.fallBack, "fallBack", BasicMoveReference.FallBack);
-		setBasicMoveAnimation(basicMoves.fallForward, "fallForward", BasicMoveReference.FallForward);
-		setBasicMoveAnimation(basicMoves.landing, "landing", BasicMoveReference.Landing);
-		setBasicMoveAnimation(basicMoves.crouching, "crouching", BasicMoveReference.Crouching);
+            }
+        }
+        setBasicMoveAnimation(basicMoves.idle, "idle", BasicMoveReference.Idle);
+        setBasicMoveAnimation(basicMoves.moveForward, "moveForward", BasicMoveReference.MoveForward);
+        setBasicMoveAnimation(basicMoves.moveBack, "moveBack", BasicMoveReference.MoveBack);
+        setBasicMoveAnimation(basicMoves.takeOff, "takeOff", BasicMoveReference.TakeOff);
+        setBasicMoveAnimation(basicMoves.jumpStraight, "jumpStraight", BasicMoveReference.JumpStraight);
+        setBasicMoveAnimation(basicMoves.jumpBack, "jumpBack", BasicMoveReference.JumpBack);
+        setBasicMoveAnimation(basicMoves.jumpForward, "jumpForward", BasicMoveReference.JumpForward);
+        setBasicMoveAnimation(basicMoves.fallStraight, "fallStraight", BasicMoveReference.FallStraight);
+        setBasicMoveAnimation(basicMoves.fallBack, "fallBack", BasicMoveReference.FallBack);
+        setBasicMoveAnimation(basicMoves.fallForward, "fallForward", BasicMoveReference.FallForward);
+        setBasicMoveAnimation(basicMoves.landing, "landing", BasicMoveReference.Landing);
+        setBasicMoveAnimation(basicMoves.crouching, "crouching", BasicMoveReference.Crouching);
 
         setBasicMoveAnimation(basicMoves.blockingCrouchingPose, "blockingCrouchingPose", BasicMoveReference.BlockingCrouchingPose);
         setBasicMoveAnimation(basicMoves.blockingCrouchingHit, "blockingCrouchingHit", BasicMoveReference.BlockingCrouchingHit);
@@ -382,19 +439,19 @@ public class MoveSetScript : MonoBehaviour {
         setBasicMoveAnimation(basicMoves.blockingAirPose, "blockingAirPose", BasicMoveReference.BlockingAirPose);
         setBasicMoveAnimation(basicMoves.blockingAirHit, "blockingAirHit", BasicMoveReference.BlockingAirHit);
         setBasicMoveAnimation(basicMoves.parryCrouching, "parryCrouching", BasicMoveReference.ParryCrouching);
-		setBasicMoveAnimation(basicMoves.parryHigh, "parryHigh", BasicMoveReference.ParryHigh);
-		setBasicMoveAnimation(basicMoves.parryLow, "parryLow", BasicMoveReference.ParryLow);
-		setBasicMoveAnimation(basicMoves.parryAir, "parryAir", BasicMoveReference.ParryAir);
+        setBasicMoveAnimation(basicMoves.parryHigh, "parryHigh", BasicMoveReference.ParryHigh);
+        setBasicMoveAnimation(basicMoves.parryLow, "parryLow", BasicMoveReference.ParryLow);
+        setBasicMoveAnimation(basicMoves.parryAir, "parryAir", BasicMoveReference.ParryAir);
 
         setBasicMoveAnimation(basicMoves.getHitHigh, "getHitHigh", BasicMoveReference.HitStandingHigh);
         setBasicMoveAnimation(basicMoves.getHitLow, "getHitLow", BasicMoveReference.HitStandingLow);
         setBasicMoveAnimation(basicMoves.getHitCrouching, "getHitCrouching", BasicMoveReference.HitStandingCrouching);
         setBasicMoveAnimation(basicMoves.getHitAir, "getHitAir", BasicMoveReference.HitAirJuggle);
         setBasicMoveAnimation(basicMoves.getHitKnockBack, "getHitKnockBack", BasicMoveReference.HitKnockBack);
-		setBasicMoveAnimation(basicMoves.getHitHighKnockdown, "getHitHighKnockdown", BasicMoveReference.HitStandingHighKnockdown);
-		setBasicMoveAnimation(basicMoves.getHitMidKnockdown, "getHitMidKnockdown", BasicMoveReference.HitStandingMidKnockdown);
-		setBasicMoveAnimation(basicMoves.getHitSweep, "getHitSweep", BasicMoveReference.HitSweep);
-		setBasicMoveAnimation(basicMoves.getHitCrumple, "getHitCrumple", BasicMoveReference.HitCrumple);
+        setBasicMoveAnimation(basicMoves.getHitHighKnockdown, "getHitHighKnockdown", BasicMoveReference.HitStandingHighKnockdown);
+        setBasicMoveAnimation(basicMoves.getHitMidKnockdown, "getHitMidKnockdown", BasicMoveReference.HitStandingMidKnockdown);
+        setBasicMoveAnimation(basicMoves.getHitSweep, "getHitSweep", BasicMoveReference.HitSweep);
+        setBasicMoveAnimation(basicMoves.getHitCrumple, "getHitCrumple", BasicMoveReference.HitCrumple);
 
         setBasicMoveAnimation(basicMoves.groundBounce, "groundBounce", BasicMoveReference.StageGroundBounce);
         setBasicMoveAnimation(basicMoves.standingWallBounce, "standingWallBounce", BasicMoveReference.StageStandingWallBounce);
@@ -406,7 +463,7 @@ public class MoveSetScript : MonoBehaviour {
         setBasicMoveAnimation(basicMoves.fallingFromGroundBounce, "fallingFromBounce", BasicMoveReference.FallDownFromGroundBounce);
         setBasicMoveAnimation(basicMoves.airRecovery, "airRecovery", BasicMoveReference.AirRecovery);
 
-		setBasicMoveAnimation(basicMoves.standUp, "standUp", BasicMoveReference.StandUpDefault);
+        setBasicMoveAnimation(basicMoves.standUp, "standUp", BasicMoveReference.StandUpDefault);
         setBasicMoveAnimation(basicMoves.standUpFromAirHit, "standUpFromAirHit", BasicMoveReference.StandUpFromAirJuggle);
         setBasicMoveAnimation(basicMoves.standUpFromKnockBack, "standUpFromKnockBack", BasicMoveReference.StandUpFromKnockBack);
         setBasicMoveAnimation(basicMoves.standUpFromStandingHighHit, "standUpFromStandingHighHit", BasicMoveReference.StandUpFromStandingHighHit);
@@ -416,27 +473,32 @@ public class MoveSetScript : MonoBehaviour {
         setBasicMoveAnimation(basicMoves.standUpFromStandingWallBounce, "standUpFromStandingWallBounce", BasicMoveReference.StandUpFromStandingWallBounce);
         setBasicMoveAnimation(basicMoves.standUpFromAirWallBounce, "standUpFromAirWallBounce", BasicMoveReference.StandUpFromAirWallBounce);
         setBasicMoveAnimation(basicMoves.standUpFromGroundBounce, "standUpFromGroundBounce", BasicMoveReference.StandUpFromGroundBounce);
-		
-		/*if (controlsScript.myInfo.animationType == AnimationType.Legacy){
+
+        /*if (controlsScript.myInfo.animationType == AnimationType.Legacy){
 			animSpeedStorage = new float[GetComponent<Animation>().GetClipCount() + 2];
 		}*/
-	}
-	
-	private void setBasicMoveAnimation(BasicMoveInfo basicMove, string animName, BasicMoveReference basicMoveReference){
-		if (basicMove.clip1 == null) {
-			return;
-		}
-		basicMove.name = animName;
-		basicMove.reference = basicMoveReference;
+    }
+
+    private void setBasicMoveAnimation(BasicMoveInfo basicMove, string animName, BasicMoveReference basicMoveReference)
+    {
+        if (basicMove.clip1 == null)
+        {
+            return;
+        }
+        basicMove.name = animName;
+        basicMove.reference = basicMoveReference;
 
         basicMoveList.Add(basicMove);
 
         attachAnimation(basicMove.clip1, animName, basicMove.animationSpeed, basicMove.wrapMode);
-        
+
         WrapMode newWrapMode = basicMove.wrapMode;
-        if (animName == "idle") {
+        if (animName == "idle")
+        {
             newWrapMode = WrapMode.Once;
-        } else if (basicMove.downClip) {
+        }
+        else if (basicMove.downClip)
+        {
             newWrapMode = WrapMode.Loop;
         }
         if (basicMove.clip2 != null) attachAnimation(basicMove.clip2, animName + "_2", basicMove.animationSpeed, newWrapMode);
@@ -444,41 +506,50 @@ public class MoveSetScript : MonoBehaviour {
         if (basicMove.clip4 != null) attachAnimation(basicMove.clip4, animName + "_4", basicMove.animationSpeed, newWrapMode);
         if (basicMove.clip5 != null) attachAnimation(basicMove.clip5, animName + "_5", basicMove.animationSpeed, newWrapMode);
         if (basicMove.clip6 != null) attachAnimation(basicMove.clip6, animName + "_6", basicMove.animationSpeed, newWrapMode);
-	}
-    
-    private void attachAnimation(AnimationClip clip, string animName, float speed, WrapMode wrapMode) {
+    }
+
+    private void attachAnimation(AnimationClip clip, string animName, float speed, WrapMode wrapMode)
+    {
         attachAnimation(clip, animName, speed, wrapMode, clip.length);
     }
 
-    private void attachAnimation(AnimationClip clip, string animName, float speed, WrapMode wrapMode, float length) {
-        if (controlsScript.myInfo.animationType == AnimationType.Legacy) {
+    private void attachAnimation(AnimationClip clip, string animName, float speed, WrapMode wrapMode, float length)
+    {
+        if (controlsScript.myInfo.animationType == AnimationType.Legacy)
+        {
             legacyControl.AddClip(clip, animName, speed, wrapMode, length);
-        } else {
+        }
+        else
+        {
 #if !UFE_BASIC
             mecanimControl.AddClip(clip, animName, speed, wrapMode, length);
 #endif
         }
     }
 
-    public BasicMoveInfo GetBasicAnimationInfo(BasicMoveReference reference) {
-        foreach(BasicMoveInfo basicMove in basicMoveList){
+    public BasicMoveInfo GetBasicAnimationInfo(BasicMoveReference reference)
+    {
+        foreach (BasicMoveInfo basicMove in basicMoveList)
+        {
             if (basicMove.reference == reference) return basicMove;
         }
         return null;
     }
 
-	public string GetAnimationString(BasicMoveInfo basicMove, int clipNum){
-		if (clipNum == 1) return basicMove.name;
-		if (clipNum == 2 && basicMove.clip2 != null) return basicMove.name + "_2";
-		if (clipNum == 3 && basicMove.clip3 != null) return basicMove.name + "_3";
-		if (clipNum == 4 && basicMove.clip4 != null) return basicMove.name + "_4";
-		if (clipNum == 5 && basicMove.clip5 != null) return basicMove.name + "_5";
-		if (clipNum == 6 && basicMove.clip6 != null) return basicMove.name + "_6";
-		return basicMove.name;
-	}
+    public string GetAnimationString(BasicMoveInfo basicMove, int clipNum)
+    {
+        if (clipNum == 1) return basicMove.name;
+        if (clipNum == 2 && basicMove.clip2 != null) return basicMove.name + "_2";
+        if (clipNum == 3 && basicMove.clip3 != null) return basicMove.name + "_3";
+        if (clipNum == 4 && basicMove.clip4 != null) return basicMove.name + "_4";
+        if (clipNum == 5 && basicMove.clip5 != null) return basicMove.name + "_5";
+        if (clipNum == 6 && basicMove.clip6 != null) return basicMove.name + "_6";
+        return basicMove.name;
+    }
 
 
-    public bool IsBasicMovePlaying(BasicMoveInfo basicMove) {
+    public bool IsBasicMovePlaying(BasicMoveInfo basicMove)
+    {
         if (basicMove.clip1 != null && IsAnimationPlaying(basicMove.name)) return true;
         if (basicMove.clip2 != null && IsAnimationPlaying(basicMove.name + "_2")) return true;
         if (basicMove.clip3 != null && IsAnimationPlaying(basicMove.name + "_3")) return true;
@@ -488,105 +559,143 @@ public class MoveSetScript : MonoBehaviour {
         return false;
     }
 
-	public bool IsAnimationPlaying(string animationName){
-		return IsAnimationPlaying(animationName, 1);
-	}
-	
-	public bool IsAnimationPlaying(string animationName, float weight){
-		if (controlsScript.myInfo.animationType == AnimationType.Legacy){
+    public bool IsAnimationPlaying(string animationName)
+    {
+        return IsAnimationPlaying(animationName, 1);
+    }
+
+    public bool IsAnimationPlaying(string animationName, float weight)
+    {
+        if (controlsScript.myInfo.animationType == AnimationType.Legacy)
+        {
             return legacyControl.IsPlaying(animationName);
-		}else{
+        }
+        else
+        {
 #if !UFE_BASIC
-			return mecanimControl.IsPlaying(animationName, weight);
+            return mecanimControl.IsPlaying(animationName, weight);
 #else
             return 0;
 #endif
-		}
-	}
+        }
+    }
 
-	public float GetAnimationLength(string animationName){
-		if (controlsScript.myInfo.animationType == AnimationType.Legacy){
+    public float GetAnimationLength(string animationName)
+    {
+        if (controlsScript.myInfo.animationType == AnimationType.Legacy)
+        {
             return legacyControl.GetAnimationData(animationName).length;
-		}else{
+        }
+        else
+        {
 #if !UFE_BASIC
-			return mecanimControl.GetAnimationData(animationName).length;
+            return mecanimControl.GetAnimationData(animationName).length;
 #else
             return 0;
 #endif
-		}
-	}
+        }
+    }
 
-	public bool AnimationExists(string animationName){
-		if (controlsScript.myInfo.animationType == AnimationType.Legacy){
+    public bool AnimationExists(string animationName)
+    {
+        if (controlsScript.myInfo.animationType == AnimationType.Legacy)
+        {
             return (legacyControl.GetAnimationData(animationName) != null);
-		}else{
+        }
+        else
+        {
 #if !UFE_BASIC
-			return (mecanimControl.GetAnimationData(animationName) != null);
+            return (mecanimControl.GetAnimationData(animationName) != null);
 #else
             return false;
 #endif
-		}
-	}
-	
-	public void PlayAnimation(string animationName, float blendingTime){
-		PlayAnimation(animationName, blendingTime, 0);
-	}
-	
-	public void PlayAnimation(string animationName, float blendingTime, float normalizedTime){
-		if (controlsScript.myInfo.animationType == AnimationType.Legacy){
+        }
+    }
+
+    public void PlayAnimation(string animationName, float blendingTime)
+    {
+        PlayAnimation(animationName, blendingTime, 0);
+    }
+
+    public void PlayAnimation(string animationName, float blendingTime, float normalizedTime)
+    {
+        if (controlsScript.myInfo.animationType == AnimationType.Legacy)
+        {
             legacyControl.Play(animationName, blendingTime, normalizedTime);
-		}else{
+        }
+        else
+        {
 #if !UFE_BASIC
-			mecanimControl.Play(animationName, blendingTime, normalizedTime, (controlsScript.mirror > 0 && UFE.config.characterRotationOptions.autoMirror));
+            mecanimControl.Play(animationName, blendingTime, normalizedTime, (controlsScript.mirror > 0 && UFE.config.characterRotationOptions.autoMirror));
 #endif
-		}
-	}
+        }
+    }
 
-	public void StopAnimation(string animationName){
-		if (controlsScript.myInfo.animationType == AnimationType.Legacy){
+    public void StopAnimation(string animationName)
+    {
+        if (controlsScript.myInfo.animationType == AnimationType.Legacy)
+        {
             legacyControl.Stop(animationName);
-		}else{
+        }
+        else
+        {
 #if !UFE_BASIC
-			mecanimControl.Stop();
+            mecanimControl.Stop();
 #endif
-		}
-	}
-	
-	public void SetAnimationSpeed(float speed){
+        }
+    }
+
+    public void SetAnimationSpeed(float speed)
+    {
         if (speed < 1) animationPaused = true;
-        if (controlsScript.myInfo.animationType == AnimationType.Legacy) {
+        if (controlsScript.myInfo.animationType == AnimationType.Legacy)
+        {
             legacyControl.SetSpeed(speed);
-		}else{
+        }
+        else
+        {
 #if !UFE_BASIC
-			mecanimControl.SetSpeed(speed);
+            mecanimControl.SetSpeed(speed);
 #endif
-		}
-	}
+        }
+    }
 
-    public void SetAnimationSpeed(string animationName, float speed) {
-        if (controlsScript.myInfo.animationType == AnimationType.Legacy) {
+    public void SetAnimationSpeed(string animationName, float speed)
+    {
+        if (controlsScript.myInfo.animationType == AnimationType.Legacy)
+        {
             legacyControl.SetSpeed(animationName, speed);
-		}else{
+        }
+        else
+        {
 #if !UFE_BASIC
-			mecanimControl.SetSpeed(animationName, speed);
+            mecanimControl.SetSpeed(animationName, speed);
 #endif
-		}
-	}
+        }
+    }
 
-    public void SetAnimationNormalizedSpeed(string animationName, float normalizedSpeed) {
-        if (controlsScript.myInfo.animationType == AnimationType.Legacy) {
+    public void SetAnimationNormalizedSpeed(string animationName, float normalizedSpeed)
+    {
+        if (controlsScript.myInfo.animationType == AnimationType.Legacy)
+        {
             legacyControl.SetNormalizedSpeed(animationName, normalizedSpeed);
-        } else {
+        }
+        else
+        {
 #if !UFE_BASIC
             mecanimControl.SetNormalizedSpeed(animationName, normalizedSpeed);
 #endif
         }
     }
 
-    public float GetAnimationSpeed() {
-        if (controlsScript.myInfo.animationType == AnimationType.Legacy) {
+    public float GetAnimationSpeed()
+    {
+        if (controlsScript.myInfo.animationType == AnimationType.Legacy)
+        {
             return legacyControl.GetSpeed();
-        } else {
+        }
+        else
+        {
 #if !UFE_BASIC
             return mecanimControl.GetSpeed();
 #else
@@ -595,10 +704,14 @@ public class MoveSetScript : MonoBehaviour {
         }
     }
 
-    public float GetAnimationSpeed(string animationName) {
-        if (controlsScript.myInfo.animationType == AnimationType.Legacy) {
+    public float GetAnimationSpeed(string animationName)
+    {
+        if (controlsScript.myInfo.animationType == AnimationType.Legacy)
+        {
             return legacyControl.GetSpeed(animationName);
-        } else {
+        }
+        else
+        {
 #if !UFE_BASIC
             return mecanimControl.GetSpeed(animationName);
 #else
@@ -607,130 +720,167 @@ public class MoveSetScript : MonoBehaviour {
         }
     }
 
-	private void updateCurrentMoveFrames(float speed){
-		if (speed > 0 && controlsScript.currentMove != null && controlsScript.currentMove.animationSpeedTemp != speed){
-			controlsScript.currentMove.totalFrames = (int)Mathf.Abs(Mathf.Floor(
-				(controlsScript.currentMove.fps * controlsScript.currentMove.animationClip.length) / speed));
-			controlsScript.currentMove.animationSpeedTemp = speed;
-		}
-	}
+    private void updateCurrentMoveFrames(float speed)
+    {
+        if (speed > 0 && controlsScript.currentMove != null && controlsScript.currentMove.animationSpeedTemp != speed)
+        {
+            controlsScript.currentMove.totalFrames = (int)Mathf.Abs(Mathf.Floor(
+                (controlsScript.currentMove.fps * controlsScript.currentMove.animationClip.length) / speed));
+            controlsScript.currentMove.animationSpeedTemp = speed;
+        }
+    }
 
-    public void RestoreAnimationSpeed() {
-        if (controlsScript.currentMove != null && IsAnimationPlaying(controlsScript.currentMove.name)) {
+    public void RestoreAnimationSpeed()
+    {
+        if (controlsScript.currentMove != null && IsAnimationPlaying(controlsScript.currentMove.name))
+        {
             controlsScript.currentMove.currentFrame = (int)Mathf.Round(GetCurrentClipPosition() * (float)controlsScript.currentMove.totalFrames);
             controlsScript.currentMove.currentTick = controlsScript.currentMove.currentFrame;
         }
-		if (controlsScript.myInfo.animationType == AnimationType.Legacy){
+        if (controlsScript.myInfo.animationType == AnimationType.Legacy)
+        {
             legacyControl.RestoreSpeed();
-		}else{
+        }
+        else
+        {
 #if !UFE_BASIC
-			mecanimControl.RestoreSpeed();
+            mecanimControl.RestoreSpeed();
 #endif
-		}
-		animationPaused = false;
-	}
-	
-	public void PlayBasicMove(BasicMoveInfo basicMove){
-		PlayBasicMove(basicMove, basicMove.name);
-	}
-	
-	public void PlayBasicMove(BasicMoveInfo basicMove, bool replay){
-		PlayBasicMove(basicMove, basicMove.name, replay);
-	}
+        }
+        animationPaused = false;
+    }
 
-	public void PlayBasicMove(BasicMoveInfo basicMove, string clipName){
-		PlayBasicMove(basicMove, clipName, true);
-	}
+    public void PlayBasicMove(BasicMoveInfo basicMove)
+    {
+        PlayBasicMove(basicMove, basicMove.name);
+    }
 
-	public void PlayBasicMove(BasicMoveInfo basicMove, string clipName, bool replay){
-		if (overrideNextBlendingValue > -1){
-			PlayBasicMove(basicMove, clipName, overrideNextBlendingValue);
-			overrideNextBlendingValue = -1;
-		}else if (basicMove.overrideBlendingIn){
+    public void PlayBasicMove(BasicMoveInfo basicMove, bool replay)
+    {
+        PlayBasicMove(basicMove, basicMove.name, replay);
+    }
+
+    public void PlayBasicMove(BasicMoveInfo basicMove, string clipName)
+    {
+        PlayBasicMove(basicMove, clipName, true);
+    }
+
+    public void PlayBasicMove(BasicMoveInfo basicMove, string clipName, bool replay)
+    {
+        if (overrideNextBlendingValue > -1)
+        {
+            PlayBasicMove(basicMove, clipName, overrideNextBlendingValue);
+            overrideNextBlendingValue = -1;
+        }
+        else if (basicMove.overrideBlendingIn)
+        {
             PlayBasicMove(basicMove, clipName, basicMove.blendingIn, replay, basicMove.invincible);
-		}else{
+        }
+        else
+        {
             PlayBasicMove(basicMove, clipName, controlsScript.myInfo.blendingTime, replay, basicMove.invincible);
-		}
-		
-		if (basicMove.overrideBlendingOut) overrideNextBlendingValue = basicMove.blendingOut;
-	}
-	
-	public void PlayBasicMove(BasicMoveInfo basicMove, string clipName, float blendingTime){
-        PlayBasicMove(basicMove, clipName, blendingTime, true, basicMove.invincible);
-	}
+        }
 
-    public void PlayBasicMove(BasicMoveInfo basicMove, string clipName, float blendingTime, bool replay) {
+        if (basicMove.overrideBlendingOut) overrideNextBlendingValue = basicMove.blendingOut;
+    }
+
+    public void PlayBasicMove(BasicMoveInfo basicMove, string clipName, float blendingTime)
+    {
+        PlayBasicMove(basicMove, clipName, blendingTime, true, basicMove.invincible);
+    }
+
+    public void PlayBasicMove(BasicMoveInfo basicMove, string clipName, float blendingTime, bool replay)
+    {
         PlayBasicMove(basicMove, clipName, blendingTime, replay, basicMove.invincible);
     }
 
-	public void PlayBasicMove(BasicMoveInfo basicMove, string clipName, float blendingTime, bool replay, bool hideHitBoxes){
-		if (IsAnimationPlaying(clipName) && !replay) return;
-		PlayAnimation(clipName, blendingTime);
+    public void PlayBasicMove(BasicMoveInfo basicMove, string clipName, float blendingTime, bool replay, bool hideHitBoxes)
+    {
+        if (IsAnimationPlaying(clipName) && !replay) return;
+        PlayAnimation(clipName, blendingTime);
 
         controlsScript.ToggleHeadLook(!basicMove.disableHeadLook);
         controlsScript.applyRootMotion = basicMove.applyRootMotion;
 
         _playBasicMove(basicMove);
         hitBoxesScript.HideHitBoxes(hideHitBoxes);
-	}
-	
-	private void _playBasicMove(BasicMoveInfo basicMove){
-		UFE.PlaySound(basicMove.soundEffects);
-		controlsScript.currentBasicMove = basicMove.reference;
-		
-		HitBoxesScript hitBoxes = controlsScript.character.GetComponent<HitBoxesScript>();
-		if (hitBoxes != null){
-			foreach (HitBox hitBox in hitBoxes.hitBoxes){
-				if (hitBox != null && hitBox.bodyPart != BodyPart.none && hitBox.position != null){
-					hitBox.position.gameObject.SetActive(hitBox.defaultVisibility);
-				}
-			}
-		}
-		
-		if (basicMove.particleEffect.prefab != null) {
-			GameObject pTemp = (GameObject) Instantiate(basicMove.particleEffect.prefab);
+    }
+
+    private void _playBasicMove(BasicMoveInfo basicMove)
+    {
+        UFE.PlaySound(basicMove.soundEffects);
+        controlsScript.currentBasicMove = basicMove.reference;
+
+        HitBoxesScript hitBoxes = controlsScript.character.GetComponent<HitBoxesScript>();
+        if (hitBoxes != null)
+        {
+            foreach (HitBox hitBox in hitBoxes.hitBoxes)
+            {
+                if (hitBox != null && hitBox.bodyPart != BodyPart.none && hitBox.position != null)
+                {
+                    hitBox.position.gameObject.SetActive(hitBox.defaultVisibility);
+                }
+            }
+        }
+
+        if (basicMove.particleEffect.prefab != null)
+        {
+            GameObject pTemp = (GameObject)Instantiate(basicMove.particleEffect.prefab);
             Vector3 newPosition = hitBoxesScript.GetPosition(basicMove.particleEffect.bodyPart);
             newPosition.x += basicMove.particleEffect.positionOffSet.x * -controlsScript.mirror;
             newPosition.y += basicMove.particleEffect.positionOffSet.y;
             newPosition.z += basicMove.particleEffect.positionOffSet.z;
-			pTemp.transform.position = newPosition;
+            pTemp.transform.position = newPosition;
 
-            if (basicMove.particleEffect.mirrorOn2PSide && controlsScript.mirror > 0) {
+            if (basicMove.particleEffect.mirrorOn2PSide && controlsScript.mirror > 0)
+            {
                 pTemp.transform.localEulerAngles = new Vector3(pTemp.transform.localEulerAngles.x, pTemp.transform.localEulerAngles.y + 180, pTemp.transform.localEulerAngles.z);
             }
 
             if (basicMove.particleEffect.stick) pTemp.transform.parent = transform;
 
-			Destroy(pTemp, basicMove.particleEffect.duration);
+            Destroy(pTemp, basicMove.particleEffect.duration);
         }
 
         UFE.FireBasicMove(basicMove.reference, controlsScript.myInfo);
-	}
+    }
 
-	public void SetAnimationPosition(string animationName, float normalizedTime){
-		if (controlsScript.myInfo.animationType == AnimationType.Legacy){
+    public void SetAnimationPosition(string animationName, float normalizedTime)
+    {
+        if (controlsScript.myInfo.animationType == AnimationType.Legacy)
+        {
             legacyControl.SetCurrentClipPosition(normalizedTime);
-		}else{
+        }
+        else
+        {
 #if !UFE_BASIC
-			mecanimControl.SetCurrentClipPosition(normalizedTime);
+            mecanimControl.SetCurrentClipPosition(normalizedTime);
 #endif
-		}
-	}
+        }
+    }
 
-    public Vector2 GetDeltaPosition() {
-        if (controlsScript.myInfo.animationType == AnimationType.Mecanim) {
+    public Vector2 GetDeltaPosition()
+    {
+        if (controlsScript.myInfo.animationType == AnimationType.Mecanim)
+        {
 #if !UFE_BASIC
             return mecanimControl.GetDeltaPosition();
 #endif
-        } else {
+        }
+        else
+        {
             return legacyControl.GetDeltaPosition();
         }
     }
 
-    public string GetCurrentClipName() {
-        if (controlsScript.myInfo.animationType == AnimationType.Legacy) {
+    public string GetCurrentClipName()
+    {
+        if (controlsScript.myInfo.animationType == AnimationType.Legacy)
+        {
             return legacyControl.GetCurrentClipName();
-        } else {
+        }
+        else
+        {
 #if !UFE_BASIC
             return mecanimControl.GetCurrentClipName();
 #else
@@ -739,201 +889,244 @@ public class MoveSetScript : MonoBehaviour {
         }
     }
 
-	public float GetCurrentClipPosition(){
-        if (controlsScript.myInfo.animationType == AnimationType.Legacy) {
+    public float GetCurrentClipPosition()
+    {
+        if (controlsScript.myInfo.animationType == AnimationType.Legacy)
+        {
             return legacyControl.GetCurrentClipPosition();
-		}else{
+        }
+        else
+        {
 #if !UFE_BASIC
-			return mecanimControl.GetCurrentClipPosition();
+            return mecanimControl.GetCurrentClipPosition();
 #else
             return 0;
 #endif
-		}
-	}
+        }
+    }
 
-	public float GetAnimationTime(int animFrame, MoveInfo move){
-		if (move == null) return 0;
-		if (move.animationSpeed < 0){
-			return (((float)animFrame/(float)UFE.config.fps) * move.animationSpeed) + move.animationClip.length;
-		}else{
-			return ((float)animFrame/(float)UFE.config.fps) * move.animationSpeed;
-		}
-	}
+    public float GetAnimationTime(int animFrame, MoveInfo move)
+    {
+        if (move == null) return 0;
+        if (move.animationSpeed < 0)
+        {
+            return (((float)animFrame / (float)UFE.config.fps) * move.animationSpeed) + move.animationClip.length;
+        }
+        else
+        {
+            return ((float)animFrame / (float)UFE.config.fps) * move.animationSpeed;
+        }
+    }
 
-	public float GetAnimationNormalizedTime(int animFrame, MoveInfo move){
-		if (move == null) return 0;
-		if (move.animationSpeed < 0){
-			return ((float)animFrame/ (float)move.totalFrames) + 1;
-		}else{
-			return (float)animFrame/ (float)move.totalFrames;
-		}
-	}
-	
-	public void SetMecanimMirror(bool toggle){
+    public float GetAnimationNormalizedTime(int animFrame, MoveInfo move)
+    {
+        if (move == null) return 0;
+        if (move.animationSpeed < 0)
+        {
+            return ((float)animFrame / (float)move.totalFrames) + 1;
+        }
+        else
+        {
+            return (float)animFrame / (float)move.totalFrames;
+        }
+    }
+
+    public void SetMecanimMirror(bool toggle)
+    {
 #if !UFE_BASIC
-		mecanimControl.SetMirror(toggle, UFE.config.characterRotationOptions.mirrorBlending, true);
+        mecanimControl.SetMirror(toggle, UFE.config.characterRotationOptions.mirrorBlending, true);
 #endif
-	}
+    }
 
-	public bool CompareBlockButtons(ButtonPress button){
-		if (button == ButtonPress.Button1 && UFE.config.blockOptions.blockType == BlockType.HoldButton1) return true;
-		if (button == ButtonPress.Button2 && UFE.config.blockOptions.blockType == BlockType.HoldButton2) return true;
-		if (button == ButtonPress.Button3 && UFE.config.blockOptions.blockType == BlockType.HoldButton3) return true;
-		if (button == ButtonPress.Button4 && UFE.config.blockOptions.blockType == BlockType.HoldButton4) return true;
-		if (button == ButtonPress.Button5 && UFE.config.blockOptions.blockType == BlockType.HoldButton5) return true;
-		if (button == ButtonPress.Button6 && UFE.config.blockOptions.blockType == BlockType.HoldButton6) return true;
-		if (button == ButtonPress.Button7 && UFE.config.blockOptions.blockType == BlockType.HoldButton7) return true;
-		if (button == ButtonPress.Button8 && UFE.config.blockOptions.blockType == BlockType.HoldButton8) return true;
-		if (button == ButtonPress.Button9 && UFE.config.blockOptions.blockType == BlockType.HoldButton9) return true;
-		if (button == ButtonPress.Button10 && UFE.config.blockOptions.blockType == BlockType.HoldButton10) return true;
-		if (button == ButtonPress.Button11 && UFE.config.blockOptions.blockType == BlockType.HoldButton11) return true;
-		if (button == ButtonPress.Button12 && UFE.config.blockOptions.blockType == BlockType.HoldButton12) return true;
-		return false;
-	}
-	
-	public bool CompareParryButtons(ButtonPress button){
-		if (button == ButtonPress.Button1 && UFE.config.blockOptions.parryType == ParryType.TapButton1) return true;
-		if (button == ButtonPress.Button2 && UFE.config.blockOptions.parryType == ParryType.TapButton2) return true;
-		if (button == ButtonPress.Button3 && UFE.config.blockOptions.parryType == ParryType.TapButton3) return true;
-		if (button == ButtonPress.Button4 && UFE.config.blockOptions.parryType == ParryType.TapButton4) return true;
-		if (button == ButtonPress.Button5 && UFE.config.blockOptions.parryType == ParryType.TapButton5) return true;
-		if (button == ButtonPress.Button6 && UFE.config.blockOptions.parryType == ParryType.TapButton6) return true;
-		if (button == ButtonPress.Button7 && UFE.config.blockOptions.parryType == ParryType.TapButton7) return true;
-		if (button == ButtonPress.Button8 && UFE.config.blockOptions.parryType == ParryType.TapButton8) return true;
-		if (button == ButtonPress.Button9 && UFE.config.blockOptions.parryType == ParryType.TapButton9) return true;
-		if (button == ButtonPress.Button10 && UFE.config.blockOptions.parryType == ParryType.TapButton10) return true;
-		if (button == ButtonPress.Button11 && UFE.config.blockOptions.parryType == ParryType.TapButton11) return true;
-		if (button == ButtonPress.Button12 && UFE.config.blockOptions.parryType == ParryType.TapButton12) return true;
-		return false;
-	}
+    public bool CompareBlockButtons(ButtonPress button)
+    {
+        if (button == ButtonPress.Button1 && UFE.config.blockOptions.blockType == BlockType.HoldButton1) return true;
+        if (button == ButtonPress.Button2 && UFE.config.blockOptions.blockType == BlockType.HoldButton2) return true;
+        if (button == ButtonPress.Button3 && UFE.config.blockOptions.blockType == BlockType.HoldButton3) return true;
+        if (button == ButtonPress.Button4 && UFE.config.blockOptions.blockType == BlockType.HoldButton4) return true;
+        if (button == ButtonPress.Button5 && UFE.config.blockOptions.blockType == BlockType.HoldButton5) return true;
+        if (button == ButtonPress.Button6 && UFE.config.blockOptions.blockType == BlockType.HoldButton6) return true;
+        if (button == ButtonPress.Button7 && UFE.config.blockOptions.blockType == BlockType.HoldButton7) return true;
+        if (button == ButtonPress.Button8 && UFE.config.blockOptions.blockType == BlockType.HoldButton8) return true;
+        if (button == ButtonPress.Button9 && UFE.config.blockOptions.blockType == BlockType.HoldButton9) return true;
+        if (button == ButtonPress.Button10 && UFE.config.blockOptions.blockType == BlockType.HoldButton10) return true;
+        if (button == ButtonPress.Button11 && UFE.config.blockOptions.blockType == BlockType.HoldButton11) return true;
+        if (button == ButtonPress.Button12 && UFE.config.blockOptions.blockType == BlockType.HoldButton12) return true;
+        return false;
+    }
 
-	private bool hasEnoughGauge(float gaugeNeeded){
+    public bool CompareParryButtons(ButtonPress button)
+    {
+        if (button == ButtonPress.Button1 && UFE.config.blockOptions.parryType == ParryType.TapButton1) return true;
+        if (button == ButtonPress.Button2 && UFE.config.blockOptions.parryType == ParryType.TapButton2) return true;
+        if (button == ButtonPress.Button3 && UFE.config.blockOptions.parryType == ParryType.TapButton3) return true;
+        if (button == ButtonPress.Button4 && UFE.config.blockOptions.parryType == ParryType.TapButton4) return true;
+        if (button == ButtonPress.Button5 && UFE.config.blockOptions.parryType == ParryType.TapButton5) return true;
+        if (button == ButtonPress.Button6 && UFE.config.blockOptions.parryType == ParryType.TapButton6) return true;
+        if (button == ButtonPress.Button7 && UFE.config.blockOptions.parryType == ParryType.TapButton7) return true;
+        if (button == ButtonPress.Button8 && UFE.config.blockOptions.parryType == ParryType.TapButton8) return true;
+        if (button == ButtonPress.Button9 && UFE.config.blockOptions.parryType == ParryType.TapButton9) return true;
+        if (button == ButtonPress.Button10 && UFE.config.blockOptions.parryType == ParryType.TapButton10) return true;
+        if (button == ButtonPress.Button11 && UFE.config.blockOptions.parryType == ParryType.TapButton11) return true;
+        if (button == ButtonPress.Button12 && UFE.config.blockOptions.parryType == ParryType.TapButton12) return true;
+        return false;
+    }
+
+    private bool hasEnoughGauge(float gaugeNeeded)
+    {
         if (!UFE.config.gameGUI.hasGauge) return true;
         if (controlsScript.myInfo.currentGaugePoints < (controlsScript.myInfo.maxGaugePoints * (gaugeNeeded / 100))) return false;
-		return true;
-	}
+        return true;
+    }
 
-	public MoveInfo GetIntro(){
-		return InstantiateMove(intro);
-	}
-	
-	public MoveInfo GetOutro(){
-		return InstantiateMove(outro);
-	}
-	
-	public MoveInfo InstantiateMove(MoveInfo move){
-		if (move == null) return null;
-		MoveInfo newMove = Instantiate(move) as MoveInfo;
-		newMove.name = move.name;
-		return newMove;
-	}
+    public MoveInfo GetIntro()
+    {
+        return InstantiateMove(intro);
+    }
 
-	public MoveInfo GetNextMove(MoveInfo currentMove){
-		if (currentMove.frameLinks.Length == 0) return null;
-		foreach(FrameLink frameLink in currentMove.frameLinks){
-			if (frameLink.linkableMoves.Length == 0) continue;
-			if (frameLink.cancelable || frameLink.counterCancelable){
-                foreach (MoveInfo move in frameLink.linkableMoves) {
+    public MoveInfo GetOutro()
+    {
+        return InstantiateMove(outro);
+    }
+
+    public MoveInfo InstantiateMove(MoveInfo move)
+    {
+        if (move == null) return null;
+        MoveInfo newMove = Instantiate(move) as MoveInfo;
+        newMove.name = move.name;
+        return newMove;
+    }
+
+    public MoveInfo GetNextMove(MoveInfo currentMove)
+    {
+        if (currentMove.frameLinks.Length == 0) return null;
+        foreach (FrameLink frameLink in currentMove.frameLinks)
+        {
+            if (frameLink.linkableMoves.Length == 0) continue;
+            if (frameLink.cancelable || frameLink.counterCancelable)
+            {
+                foreach (MoveInfo move in frameLink.linkableMoves)
+                {
                     if (move == null) continue;
-					if (move.buttonExecution.Length == 0 || frameLink.ignoreInputs ||
-                        (move.onReleaseExecution && 
-                        !move.requireButtonPress && 
+                    if (move.buttonExecution.Length == 0 || frameLink.ignoreInputs ||
+                        (move.onReleaseExecution &&
+                        !move.requireButtonPress &&
                         controlsScript.inputHeldDown[move.buttonExecution[0]] == 0)
-                        ) {
-						return InstantiateMove(move);
-					}
-				}
-			}
-		}
-		return null;
-	}
+                        )
+                    {
+                        return InstantiateMove(move);
+                    }
+                }
+            }
+        }
+        return null;
+    }
 
-	public void ClearLastButtonSequence(){
-		lastButtonPresses.Clear();
+    public void ClearLastButtonSequence()
+    {
+        lastButtonPresses.Clear();
         lastTimePress = 0;
-		
-		foreach(ButtonPress bp in Enum.GetValues(typeof(ButtonPress))){
-			chargeValues[bp] = 0;
-		}
-	}
 
-	private bool checkExecutionState(ButtonPress[] buttonPress, bool inputUp){
-		if (inputUp 
-		    && lastButtonPresses.Count > 0 
-			&& buttonPress[0].Equals(lastButtonPresses.ToArray()[lastButtonPresses.Count - 1])) return false;
+        foreach (ButtonPress bp in Enum.GetValues(typeof(ButtonPress)))
+        {
+            chargeValues[bp] = 0;
+        }
+    }
 
-		return true;
-	}
+    private bool checkExecutionState(ButtonPress[] buttonPress, bool inputUp)
+    {
+        if (inputUp
+            && lastButtonPresses.Count > 0
+            && buttonPress[0].Equals(lastButtonPresses.ToArray()[lastButtonPresses.Count - 1])) return false;
 
-	public MoveInfo GetMove(ButtonPress[] buttonPress, float charge, MoveInfo currentMove, bool inputUp){
-		return GetMove(buttonPress, charge, currentMove, inputUp, false);
-	}
+        return true;
+    }
 
-	public MoveInfo GetMove(ButtonPress[] buttonPress, float charge, MoveInfo currentMove, bool inputUp, bool forceExecution){
-		if (buttonPress.Length > 0 
-		    && Time.time - lastTimePress <= controlsScript.myInfo.executionTiming) {
-            
-			if (controlsScript.debugInfo.buttonSequence){
+    public MoveInfo GetMove(ButtonPress[] buttonPress, float charge, MoveInfo currentMove, bool inputUp)
+    {
+        return GetMove(buttonPress, charge, currentMove, inputUp, false);
+    }
+
+    public MoveInfo GetMove(ButtonPress[] buttonPress, float charge, MoveInfo currentMove, bool inputUp, bool forceExecution)
+    {
+        if (buttonPress.Length > 0
+            && Time.time - lastTimePress <= controlsScript.myInfo.executionTiming)
+        {
+
+            if (controlsScript.debugInfo.buttonSequence)
+            {
                 string allbp = "";
-                foreach (ButtonSequenceRecord bp in lastButtonPresses) {
+                foreach (ButtonSequenceRecord bp in lastButtonPresses)
+                {
                     allbp += bp.buttonPress.ToString() + " [" + bp.chargeTime + "]" + ", ";
                 }
                 string allbp2 = "";
 
                 string inputUpStr = inputUp ? "[Up]" : "[Down]";
-				foreach(ButtonPress bp in buttonPress) allbp2 += bp.ToString() + " ";
+                foreach (ButtonPress bp in buttonPress) allbp2 += bp.ToString() + " ";
                 Debug.Log(" Sequence: ( " + allbp + ") | " + inputUpStr + " Execution: " + "( " + allbp2 + ")");
-			}
+            }
 
-			// Attempt execution
-            foreach (MoveInfo move in moves) {
+            // Attempt execution
+            foreach (MoveInfo move in moves)
+            {
                 if (move == null) continue;
-				MoveInfo newMove = TestMoveExecution(move, currentMove, buttonPress, inputUp, true);
-				if (newMove != null) return newMove;
-			}
-		}
+                MoveInfo newMove = TestMoveExecution(move, currentMove, buttonPress, inputUp, true);
+                if (newMove != null) return newMove;
+            }
+        }
 
-		if (buttonPress.Length > 0) {
-			if (Time.time - lastTimePress > controlsScript.myInfo.executionTiming){
-				ClearLastButtonSequence();
-			}
+        if (buttonPress.Length > 0)
+        {
+            if (Time.time - lastTimePress > controlsScript.myInfo.executionTiming)
+            {
+                ClearLastButtonSequence();
+            }
 
-			if (!forceExecution){
-				lastTimePress = Time.time;
-				// Store sequence
-                if (!inputUp || charge > controlsScript.myInfo.executionTiming) {
+            if (!forceExecution)
+            {
+                lastTimePress = Time.time;
+                // Store sequence
+                if (!inputUp || charge > controlsScript.myInfo.executionTiming)
+                {
                     lastButtonPresses.Add(new ButtonSequenceRecord(buttonPress[0], charge));
                 }
 
-				/*if (!inputUp || (inputUp && lastButtonPresses.Count == 0)){
+                /*if (!inputUp || (inputUp && lastButtonPresses.Count == 0)){
 					lastButtonPresses.Add(buttonPress[0]);
 					if (charge > 0) chargeValues[buttonPress[0]] = charge;
 				}*/
             }
 
             // Attempt execution one more time
-            foreach (MoveInfo move in moves) {
+            foreach (MoveInfo move in moves)
+            {
                 MoveInfo newMove = TestMoveExecution(move, currentMove, buttonPress, inputUp, false, forceExecution);
                 if (newMove != null) return newMove;
             }
-		}
+        }
 
-		return null;
-	}
+        return null;
+    }
 
 
-	private bool searchMove(string moveName, FrameLink[] frameLinks){
-		return searchMove(moveName, frameLinks, false);
-	}
+    private bool searchMove(string moveName, FrameLink[] frameLinks)
+    {
+        return searchMove(moveName, frameLinks, false);
+    }
 
-    private bool searchMove(string moveName, FrameLink[] frameLinks, int currentFrame) {
+    private bool searchMove(string moveName, FrameLink[] frameLinks, int currentFrame)
+    {
 
-        foreach (FrameLink frameLink in frameLinks) {
+        foreach (FrameLink frameLink in frameLinks)
+        {
             if ((currentFrame >= frameLink.activeFramesBegins && currentFrame <= frameLink.activeFramesEnds)
                 || (currentFrame >= (frameLink.activeFramesBegins - UFE.config.executionBufferTime)
-                && currentFrame <= frameLink.activeFramesEnds) && frameLink.allowBuffer) {
+                && currentFrame <= frameLink.activeFramesEnds) && frameLink.allowBuffer)
+            {
 
-                foreach (MoveInfo move in frameLink.linkableMoves) {
+                foreach (MoveInfo move in frameLink.linkableMoves)
+                {
                     if (moveName == move.moveName) return true;
                 }
             }
@@ -942,137 +1135,159 @@ public class MoveSetScript : MonoBehaviour {
         return false;
     }
 
-	private bool searchMove(string moveName, FrameLink[] frameLinks, bool ignoreConditions){
-		//if (moveName.IndexOf("(Clone)") != -1)
-		//	moveName = moveName.Substring(0, moveName.Length - 7);
-		
-		foreach(FrameLink frameLink in frameLinks){
-			if (frameLink.cancelable){
-				if (ignoreConditions && !frameLink.ignorePlayerConditions) continue;
+    private bool searchMove(string moveName, FrameLink[] frameLinks, bool ignoreConditions)
+    {
+        //if (moveName.IndexOf("(Clone)") != -1)
+        //	moveName = moveName.Substring(0, moveName.Length - 7);
 
-                foreach (MoveInfo move in frameLink.linkableMoves) {
+        foreach (FrameLink frameLink in frameLinks)
+        {
+            if (frameLink.cancelable)
+            {
+                if (ignoreConditions && !frameLink.ignorePlayerConditions) continue;
+
+                foreach (MoveInfo move in frameLink.linkableMoves)
+                {
                     if (move == null) continue;
-					if (moveName == move.moveName) return true;
-				}
-			}
-		}
-		
-		return false;
-	}
+                    if (moveName == move.moveName) return true;
+                }
+            }
+        }
 
-	private bool searchMove(string moveName, MoveInfo[] moves){
-        foreach (MoveInfo move in moves) {
+        return false;
+    }
+
+    private bool searchMove(string moveName, MoveInfo[] moves)
+    {
+        foreach (MoveInfo move in moves)
+        {
             if (move == null) continue;
             if (moveName == move.moveName) return true;
         }
-		
-		return false;
-	}
 
-	public bool HasMove(string moveName){
-		foreach(MoveInfo move in this.moves)
-			if (moveName == move.moveName) return true;
-		
-		return false;
-	}
+        return false;
+    }
+
+    public bool HasMove(string moveName)
+    {
+        foreach (MoveInfo move in this.moves)
+            if (moveName == move.moveName) return true;
+
+        return false;
+    }
 
 
-    public bool ValidateMoveExecution(MoveInfo move) {
+    public bool ValidateMoveExecution(MoveInfo move)
+    {
         if (!searchMove(move.moveName, attackMoves)) return false;
-		if (!ValidateMoveStances(move.selfConditions, controlsScript, true)) return false;
-		if (!ValidateMoveStances(move.opponentConditions, controlsScript.opControlsScript)) return false;
-		if (!ValidadeBasicMove(move.selfConditions, controlsScript)) return false;
-		if (!ValidadeBasicMove(move.opponentConditions, controlsScript.opControlsScript)) return false;
+        if (!ValidateMoveStances(move.selfConditions, controlsScript, true)) return false;
+        if (!ValidateMoveStances(move.opponentConditions, controlsScript.opControlsScript)) return false;
+        if (!ValidadeBasicMove(move.selfConditions, controlsScript)) return false;
+        if (!ValidadeBasicMove(move.opponentConditions, controlsScript.opControlsScript)) return false;
         if (!hasEnoughGauge(move.gaugeRequired)) return false;
-		if (move.previousMoves.Length > 0 && controlsScript.currentMove == null) return false;
-		if (move.previousMoves.Length > 0 && !searchMove(controlsScript.currentMove.moveName, move.previousMoves)) return false;
+        if (move.previousMoves.Length > 0 && controlsScript.currentMove == null) return false;
+        if (move.previousMoves.Length > 0 && !searchMove(controlsScript.currentMove.moveName, move.previousMoves)) return false;
 
-		if (controlsScript.currentMove != null && controlsScript.currentMove.frameLinks.Length == 0) return false;
-		if (controlsScript.currentMove != null && !searchMove(move.moveName, controlsScript.currentMove.frameLinks)) return false;
-		return true;
-	}
+        if (controlsScript.currentMove != null && controlsScript.currentMove.frameLinks.Length == 0) return false;
+        if (controlsScript.currentMove != null && !searchMove(move.moveName, controlsScript.currentMove.frameLinks)) return false;
+        return true;
+    }
 
-	
-	public bool ValidateMoveStances(PlayerConditions conditions, ControlsScript cScript){
-		return ValidateMoveStances(conditions, cScript, false);
-	}
 
-	public bool ValidateMoveStances(PlayerConditions conditions, ControlsScript cScript, bool bypassCrouchStance){
-		bool stateCheck = conditions.possibleMoveStates.Length > 0? false : true;
-		foreach(PossibleMoveStates possibleMoveState in conditions.possibleMoveStates){
+    public bool ValidateMoveStances(PlayerConditions conditions, ControlsScript cScript)
+    {
+        return ValidateMoveStances(conditions, cScript, false);
+    }
 
-			if (possibleMoveState.possibleState != cScript.currentState
-			    && (!bypassCrouchStance || (bypassCrouchStance && cScript.currentState != PossibleStates.Stand))) continue;
-			
-			if (cScript.normalizedDistance < (float)possibleMoveState.proximityRangeBegins/100) continue;
-			if (cScript.normalizedDistance > (float)possibleMoveState.proximityRangeEnds/100) continue;
-			
-			if (cScript.currentState == PossibleStates.Stand){ 
-				if (!possibleMoveState.standBy && cScript.currentSubState == SubStates.Resting) continue;
-				if (!possibleMoveState.movingBack && cScript.currentSubState == SubStates.MovingBack) continue;
-				if (!possibleMoveState.movingForward && cScript.currentSubState == SubStates.MovingForward) continue;
+    public bool ValidateMoveStances(PlayerConditions conditions, ControlsScript cScript, bool bypassCrouchStance)
+    {
+        bool stateCheck = conditions.possibleMoveStates.Length > 0 ? false : true;
+        foreach (PossibleMoveStates possibleMoveState in conditions.possibleMoveStates)
+        {
 
-			} else if (cScript.currentState == PossibleStates.StraightJump
-			          || cScript.currentState == PossibleStates.ForwardJump
-			          || cScript.currentState == PossibleStates.BackJump){ 
-				
-				if (cScript.normalizedJumpArc < (float)possibleMoveState.jumpArcBegins/100) continue;
-				if (cScript.normalizedJumpArc > (float)possibleMoveState.jumpArcEnds/100) continue;
-			}
-			
-			if (!possibleMoveState.blocking && (cScript.currentSubState == SubStates.Blocking || cScript.isBlocking)) continue;
+            if (possibleMoveState.possibleState != cScript.currentState
+                && (!bypassCrouchStance || (bypassCrouchStance && cScript.currentState != PossibleStates.Stand))) continue;
 
-			if ((!possibleMoveState.stunned && possibleMoveState.possibleState != PossibleStates.Down) 
-			    && cScript.currentSubState == SubStates.Stunned) continue;
+            if (cScript.normalizedDistance < (float)possibleMoveState.proximityRangeBegins / 100) continue;
+            if (cScript.normalizedDistance > (float)possibleMoveState.proximityRangeEnds / 100) continue;
 
-			stateCheck = true;
-		}
-		return stateCheck;
-	}
+            if (cScript.currentState == PossibleStates.Stand)
+            {
+                if (!possibleMoveState.standBy && cScript.currentSubState == SubStates.Resting) continue;
+                if (!possibleMoveState.movingBack && cScript.currentSubState == SubStates.MovingBack) continue;
+                if (!possibleMoveState.movingForward && cScript.currentSubState == SubStates.MovingForward) continue;
 
-	public bool ValidadeBasicMove(PlayerConditions conditions, ControlsScript cScript){
-		if (conditions.basicMoveLimitation.Length == 0) return true;
-		if (System.Array.IndexOf(conditions.basicMoveLimitation, cScript.currentBasicMove) != -1) return true;
-		return false;
-	}
-	
-	private MoveInfo TestMoveExecution(MoveInfo move, MoveInfo currentMove, ButtonPress[] buttonPress, bool inputUp, bool fromSequence) {
-		return TestMoveExecution(move, currentMove, buttonPress, inputUp, fromSequence, false);
-	}
+            }
+            else if (cScript.currentState == PossibleStates.StraightJump
+                    || cScript.currentState == PossibleStates.ForwardJump
+                    || cScript.currentState == PossibleStates.BackJump)
+            {
 
-	private MoveInfo TestMoveExecution(MoveInfo move, MoveInfo currentMove, ButtonPress[] buttonPress, bool inputUp, bool fromSequence, bool forceExecution) {
+                if (cScript.normalizedJumpArc < (float)possibleMoveState.jumpArcBegins / 100) continue;
+                if (cScript.normalizedJumpArc > (float)possibleMoveState.jumpArcEnds / 100) continue;
+            }
+
+            if (!possibleMoveState.blocking && (cScript.currentSubState == SubStates.Blocking || cScript.isBlocking)) continue;
+
+            if ((!possibleMoveState.stunned && possibleMoveState.possibleState != PossibleStates.Down)
+                && cScript.currentSubState == SubStates.Stunned) continue;
+
+            stateCheck = true;
+        }
+        return stateCheck;
+    }
+
+    public bool ValidadeBasicMove(PlayerConditions conditions, ControlsScript cScript)
+    {
+        if (conditions.basicMoveLimitation.Length == 0) return true;
+        if (System.Array.IndexOf(conditions.basicMoveLimitation, cScript.currentBasicMove) != -1) return true;
+        return false;
+    }
+
+    private MoveInfo TestMoveExecution(MoveInfo move, MoveInfo currentMove, ButtonPress[] buttonPress, bool inputUp, bool fromSequence)
+    {
+        return TestMoveExecution(move, currentMove, buttonPress, inputUp, fromSequence, false);
+    }
+
+    private MoveInfo TestMoveExecution(MoveInfo move, MoveInfo currentMove, ButtonPress[] buttonPress, bool inputUp, bool fromSequence, bool forceExecution)
+    {
         if (!hasEnoughGauge(move.gaugeRequired)) return null;
-		if (move.previousMoves.Length > 0 && currentMove == null) return null;
+        if (move.previousMoves.Length > 0 && currentMove == null) return null;
         if (move.previousMoves.Length > 0 && !searchMove(currentMove.moveName, move.previousMoves)) return null;
         if (controlsScript.isAirRecovering && controlsScript.airRecoveryType == AirRecoveryType.CantMove) return null;
 
-		if (currentMove == null || (currentMove != null && !searchMove(move.moveName, currentMove.frameLinks, true))){
-			if (!ValidateMoveStances(move.selfConditions, controlsScript)) return null;
-			if (!ValidateMoveStances(move.opponentConditions, controlsScript.opControlsScript)) return null;
-			if (!ValidadeBasicMove(move.selfConditions, controlsScript)) return null;
-			if (!ValidadeBasicMove(move.opponentConditions, controlsScript.opControlsScript)) return null;
-		}
+        if (currentMove == null || (currentMove != null && !searchMove(move.moveName, currentMove.frameLinks, true)))
+        {
+            if (!ValidateMoveStances(move.selfConditions, controlsScript)) return null;
+            if (!ValidateMoveStances(move.opponentConditions, controlsScript.opControlsScript)) return null;
+            if (!ValidadeBasicMove(move.selfConditions, controlsScript)) return null;
+            if (!ValidadeBasicMove(move.opponentConditions, controlsScript.opControlsScript)) return null;
+        }
 
-		Array.Sort(buttonPress);
-		Array.Sort(move.buttonExecution);
+        Array.Sort(buttonPress);
+        Array.Sort(move.buttonExecution);
 
 
-		if (fromSequence){
-			if (move.buttonSequence.Length == 0) return null;
-            if (move.chargeMove) {
+        if (fromSequence)
+        {
+            if (move.buttonSequence.Length == 0) return null;
+            if (move.chargeMove)
+            {
                 bool charged = false;
-                foreach (ButtonSequenceRecord bsr in lastButtonPresses) {
+                foreach (ButtonSequenceRecord bsr in lastButtonPresses)
+                {
                     if (bsr.buttonPress == move.buttonSequence[0]
-                        && bsr.chargeTime >= move.chargeTiming) {
-                            charged = true;
+                        && bsr.chargeTime >= move.chargeTiming)
+                    {
+                        charged = true;
                     }
                 }
 
-				if (!charged) return null;
-			}
+                if (!charged) return null;
+            }
 
-			// Uncomment these to view how the engine filters special executions
-			/*
+            // Uncomment these to view how the engine filters special executions
+            /*
 			string allbp = "";
 			foreach(ButtonPress bp in lastButtonPresses) allbp += " "+ bp.ToString();
 			Debug.Log(allbp);
@@ -1083,25 +1298,29 @@ public class MoveSetScript : MonoBehaviour {
 
 
             List<ButtonPress> buttonPressesList = new List<ButtonPress>();
-            foreach (ButtonSequenceRecord bsr in lastButtonPresses) {
-                if (bsr.chargeTime == 0 || (move.allowNegativeEdge && bsr.buttonPress == move.buttonSequence[0])) {
+            foreach (ButtonSequenceRecord bsr in lastButtonPresses)
+            {
+                if (bsr.chargeTime == 0 || (move.allowNegativeEdge && bsr.buttonPress == move.buttonSequence[0]))
+                {
                     buttonPressesList.Add(bsr.buttonPress);
                 }
             }
 
-            if (buttonPressesList.Count >= move.buttonSequence.Length) {
+            if (buttonPressesList.Count >= move.buttonSequence.Length)
+            {
 
                 ButtonPress[] compareSequence;
                 int compareRange = buttonPressesList.Count - move.buttonSequence.Length;
                 if (compareRange < 0) compareRange = 0;
 
-				if (move.allowInputLeniency){
+                if (move.allowInputLeniency)
+                {
                     compareRange -= move.leniencyBuffer;
                     if (compareRange < 0) compareRange = 0;
                     compareSequence = buttonPressesList.GetRange(compareRange, buttonPressesList.Count - compareRange).ToArray();
-					compareSequence = ArrayIntersect<ButtonPress>(move.buttonSequence, compareSequence);
+                    compareSequence = ArrayIntersect<ButtonPress>(move.buttonSequence, compareSequence);
 
-					/*string allbp = "";
+                    /*string allbp = "";
 					foreach(ButtonPress bp in lastButtonPresses) allbp += " "+ bp.ToString();
 					Debug.Log(move.moveName + ": lastButtonPresses (leniency): "+ allbp);
 
@@ -1115,83 +1334,97 @@ public class MoveSetScript : MonoBehaviour {
 						Debug.Log(move.moveName + ": compareSequence (leniency): "+ allbp3);
 					}*/
 
-				}else{
+                }
+                else
+                {
                     compareSequence = buttonPressesList.GetRange(compareRange, move.buttonSequence.Length).ToArray();
 
-					/*string allbp3 = "";
+                    /*string allbp3 = "";
 					foreach(ButtonPress bp in compareSequence) allbp3 += " "+ bp.ToString();
 					Debug.Log(move.moveName + ": compareSequence: "+ allbp3);*/
-				}
-				
-				if (!ArraysEqual<ButtonPress>(compareSequence, move.buttonSequence)) return null;
-			}else{
-				return null;
-			}
-			
-			//Debug.Log("Sequence for "+ move.moveName +" pass! Testing Execution:"+ ArraysEqual<ButtonPress>(buttonPress, move.buttonExecution));
-		}else{
-			if (move.buttonSequence.Length > 0) return null;
-		}
+                }
 
-		if (!inputUp && !move.onPressExecution) return null;
-		if (inputUp && !move.onReleaseExecution) return null;
-		if (!ArraysEqual<ButtonPress>(buttonPress, move.buttonExecution)) return null;
+                if (!ArraysEqual<ButtonPress>(compareSequence, move.buttonSequence)) return null;
+            }
+            else
+            {
+                return null;
+            }
 
-		if (controlsScript.storedMove != null && move.moveName == controlsScript.storedMove.moveName)
-			return controlsScript.storedMove;
+            //Debug.Log("Sequence for "+ move.moveName +" pass! Testing Execution:"+ ArraysEqual<ButtonPress>(buttonPress, move.buttonExecution));
+        }
+        else
+        {
+            if (move.buttonSequence.Length > 0) return null;
+        }
 
-        if (controlsScript.debugInfo.buttonSequence) {
+        if (!inputUp && !move.onPressExecution) return null;
+        if (inputUp && !move.onReleaseExecution) return null;
+        if (!ArraysEqual<ButtonPress>(buttonPress, move.buttonExecution)) return null;
+
+        if (controlsScript.storedMove != null && move.moveName == controlsScript.storedMove.moveName)
+            return controlsScript.storedMove;
+
+        if (controlsScript.debugInfo.buttonSequence)
+        {
             string allbp4 = "";
             foreach (ButtonPress bp in buttonPress) allbp4 += " " + bp.ToString();
             Debug.Log(move.moveName + ": Button Execution: " + allbp4);
         }
 
         if (currentMove == null || forceExecution || (searchMove(move.moveName, currentMove.frameLinks, currentMove.currentFrame)) ||
-		    UFE.config.executionBufferType == ExecutionBufferType.AnyMove){
-			MoveInfo newMove = InstantiateMove(move);
-			//UFE.FireMove(newMove, controlsScript.myInfo);
-			
-			if ((controlsScript.currentState == PossibleStates.StraightJump ||
-			    controlsScript.currentState == PossibleStates.ForwardJump ||
-			    controlsScript.currentState == PossibleStates.BackJump) &&
-			    totalAirMoves >= controlsScript.myInfo.possibleAirMoves) return null;
+            UFE.config.executionBufferType == ExecutionBufferType.AnyMove)
+        {
+            MoveInfo newMove = InstantiateMove(move);
+            //UFE.FireMove(newMove, controlsScript.myInfo);
 
-			return newMove;
-		}
+            if ((controlsScript.currentState == PossibleStates.StraightJump ||
+                controlsScript.currentState == PossibleStates.ForwardJump ||
+                controlsScript.currentState == PossibleStates.BackJump) &&
+                totalAirMoves >= controlsScript.myInfo.possibleAirMoves) return null;
 
-		return null;
-	}
-	
-	private T[] ArrayIntersect<T>(T[] a1, T[] a2) {
-		if (a1 == null || a2 == null) return null;
-		
-		EqualityComparer<T> comparer = EqualityComparer<T>.Default;
-		List<T> intersection = new List<T>();
-		int nextStartingPoint = 0;
-		for (int i = 0; i < a1.Length; i++){ // button sequence
-			bool added = false;
-			for (int k = nextStartingPoint; k < a2.Length; k++){ // button presses
-				if (comparer.Equals(a1[i], a2[k])) {
-					intersection.Add(a2[k]);
-					nextStartingPoint = k;
-					added = true;
-					break;
-				}
-			}
-			if (!added) return null;
-		}
+            return newMove;
+        }
 
-		return intersection.ToArray();
-	}
+        return null;
+    }
 
-	private bool ArraysEqual<T>(T[] a1, T[] a2) {
-    	if (ReferenceEquals(a1,a2)) return true;
-  		if (a1 == null || a2 == null) return false;
-		if (a1.Length != a2.Length) return false;
-	    EqualityComparer<T> comparer = EqualityComparer<T>.Default;
-		for (int i = 0; i < a1.Length; i++){
-        	if (!comparer.Equals(a1[i], a2[i])) return false;
-    	}
-    	return true;
-	}
+    private T[] ArrayIntersect<T>(T[] a1, T[] a2)
+    {
+        if (a1 == null || a2 == null) return null;
+
+        EqualityComparer<T> comparer = EqualityComparer<T>.Default;
+        List<T> intersection = new List<T>();
+        int nextStartingPoint = 0;
+        for (int i = 0; i < a1.Length; i++)
+        { // button sequence
+            bool added = false;
+            for (int k = nextStartingPoint; k < a2.Length; k++)
+            { // button presses
+                if (comparer.Equals(a1[i], a2[k]))
+                {
+                    intersection.Add(a2[k]);
+                    nextStartingPoint = k;
+                    added = true;
+                    break;
+                }
+            }
+            if (!added) return null;
+        }
+
+        return intersection.ToArray();
+    }
+
+    private bool ArraysEqual<T>(T[] a1, T[] a2)
+    {
+        if (ReferenceEquals(a1, a2)) return true;
+        if (a1 == null || a2 == null) return false;
+        if (a1.Length != a2.Length) return false;
+        EqualityComparer<T> comparer = EqualityComparer<T>.Default;
+        for (int i = 0; i < a1.Length; i++)
+        {
+            if (!comparer.Equals(a1[i], a2[i])) return false;
+        }
+        return true;
+    }
 }
