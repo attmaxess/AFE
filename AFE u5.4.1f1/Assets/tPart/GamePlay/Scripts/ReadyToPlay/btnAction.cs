@@ -12,10 +12,13 @@ public class btnAction : MonoBehaviour
     public GameObject placeNoteHolder = null;
     public BeetsoftLogoMethod logoMethod = null;
     public VideoPlayer videoPlayer = null;
-    public UnityARVideo uityARVideo = null;
+    public UnityARVideo unityARVideo = null;
     public UnityARCameraNearFar unityARCameraNearFar = null;    
     public PhotonMenu photonMenu = null;
     public GameStateBeThis stateWhenAwake = null;
+
+    public Transform tribalHolder = null;
+    public CanvasTribalWorld_Movement canvasTribal = null;
 
     private void Awake()
     {
@@ -46,8 +49,8 @@ public class btnAction : MonoBehaviour
 
         videoPlayer.Stop();        
 
-        uityARVideo.UpdateFrameAtStart = true;        
-        uityARVideo.Start();
+        unityARVideo.UpdateFrameAtStart = true;        
+        unityARVideo.Start();
 
         unityARCameraNearFar.UpdateFrameAtStart = true;
         unityARCameraNearFar.useUpdate = true;
@@ -63,6 +66,11 @@ public class btnAction : MonoBehaviour
 
         stateAfterClick.OnClick();
         photonMenu.HandleCurrentMapName();
+
+        tribalHolder.gameObject.SetActive(true);        
+        canvasTribal.ZoomCamAndDistance();
+
+        yield return new WaitUntil(() => canvasTribal.doneZoom == true);
 
         yield break;
     }
