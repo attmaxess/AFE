@@ -553,11 +553,6 @@ MonoBehaviour:
     disableWhenTouchScreenInactive: 1
     disableWhenCursorIsUnlocked: 0
     switchList: []
---- !u!1 &179461121 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1758713255320416, guid: 00785ef11e189fa438252f492fb12f2a,
-    type: 2}
-  m_PrefabInternal: {fileID: 467428589}
 --- !u!1 &186207531
 GameObject:
   m_ObjectHideFlags: 0
@@ -991,6 +986,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isDebug: 0
   playerPrefabName: RemoteCamPrefab
+--- !u!114 &388218535 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114266975563398072, guid: bee59d89d99c8ff43a54d7faddba443f,
+    type: 2}
+  m_PrefabInternal: {fileID: 1822171579}
+  m_Script: {fileID: 11500000, guid: 777a3511898cbe54fbeb61395743a6f9, type: 3}
 --- !u!114 &393285629 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114567641709271370, guid: 00785ef11e189fa438252f492fb12f2a,
@@ -1616,12 +1617,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &802630351 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 114458337560443536, guid: bee59d89d99c8ff43a54d7faddba443f,
-    type: 2}
-  m_PrefabInternal: {fileID: 1822171579}
-  m_Script: {fileID: 11500000, guid: 777a3511898cbe54fbeb61395743a6f9, type: 3}
 --- !u!224 &834941390 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 224051068614214234, guid: 5467f6725d2f11c4e88c0165b45083c4,
@@ -2080,16 +2075,16 @@ Prefab:
       propertyPath: m_RootOrder
       value: 6
       objectReference: {fileID: 0}
-    - target: {fileID: 114376244451237366, guid: d646a1d034469164a80776bc8a1872be,
+    - target: {fileID: 114770849714330750, guid: d646a1d034469164a80776bc8a1872be,
         type: 2}
-      propertyPath: canvasPlaceNote
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 467428590}
-    - target: {fileID: 114376244451237366, guid: d646a1d034469164a80776bc8a1872be,
+      objectReference: {fileID: 79788435}
+    - target: {fileID: 114276047731244258, guid: d646a1d034469164a80776bc8a1872be,
         type: 2}
-      propertyPath: placeNoteHolder
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 179461121}
+      objectReference: {fileID: 79788435}
     - target: {fileID: 114376244451237366, guid: d646a1d034469164a80776bc8a1872be,
         type: 2}
       propertyPath: videoPlayer
@@ -2119,17 +2114,7 @@ Prefab:
         type: 2}
       propertyPath: canvasTribal
       value: 
-      objectReference: {fileID: 802630351}
-    - target: {fileID: 114276047731244258, guid: d646a1d034469164a80776bc8a1872be,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 79788435}
-    - target: {fileID: 114770849714330750, guid: d646a1d034469164a80776bc8a1872be,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 79788435}
+      objectReference: {fileID: 388218535}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d646a1d034469164a80776bc8a1872be, type: 2}
   m_IsPrefabAsset: 0
@@ -2725,6 +2710,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 223503683908900474, guid: bee59d89d99c8ff43a54d7faddba443f,
+        type: 2}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 467428591}
     - target: {fileID: 114696266564408594, guid: bee59d89d99c8ff43a54d7faddba443f,
         type: 2}
       propertyPath: placeNoteHolder
@@ -2735,55 +2725,21 @@ Prefab:
       propertyPath: canvasPlaceNote
       value: 
       objectReference: {fileID: 467428590}
-    - target: {fileID: 223503683908900474, guid: bee59d89d99c8ff43a54d7faddba443f,
+    - target: {fileID: 114590355182879120, guid: bee59d89d99c8ff43a54d7faddba443f,
+        type: 2}
+      propertyPath: placeNoteHolder
+      value: 
+      objectReference: {fileID: 1184304964}
+    - target: {fileID: 114590355182879120, guid: bee59d89d99c8ff43a54d7faddba443f,
+        type: 2}
+      propertyPath: canvasPlaceNote
+      value: 
+      objectReference: {fileID: 467428590}
+    - target: {fileID: 223943944751165348, guid: bee59d89d99c8ff43a54d7faddba443f,
         type: 2}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 467428591}
-    - target: {fileID: 224006763490164212, guid: bee59d89d99c8ff43a54d7faddba443f,
-        type: 2}
-      propertyPath: m_AnchorMin.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 224006763490164212, guid: bee59d89d99c8ff43a54d7faddba443f,
-        type: 2}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 224006763490164212, guid: bee59d89d99c8ff43a54d7faddba443f,
-        type: 2}
-      propertyPath: m_AnchoredPosition.x
-      value: 181.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 224006763490164212, guid: bee59d89d99c8ff43a54d7faddba443f,
-        type: 2}
-      propertyPath: m_AnchoredPosition.y
-      value: -250
-      objectReference: {fileID: 0}
-    - target: {fileID: 224127358957932162, guid: bee59d89d99c8ff43a54d7faddba443f,
-        type: 2}
-      propertyPath: m_AnchorMin.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 224127358957932162, guid: bee59d89d99c8ff43a54d7faddba443f,
-        type: 2}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 224127358957932162, guid: bee59d89d99c8ff43a54d7faddba443f,
-        type: 2}
-      propertyPath: m_AnchoredPosition.x
-      value: 458.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 224127358957932162, guid: bee59d89d99c8ff43a54d7faddba443f,
-        type: 2}
-      propertyPath: m_AnchoredPosition.y
-      value: -250
-      objectReference: {fileID: 0}
-    - target: {fileID: 1611816654128530, guid: bee59d89d99c8ff43a54d7faddba443f, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bee59d89d99c8ff43a54d7faddba443f, type: 2}
   m_IsPrefabAsset: 0

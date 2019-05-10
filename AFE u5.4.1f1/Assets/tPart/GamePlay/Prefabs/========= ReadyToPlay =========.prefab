@@ -420,8 +420,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvasVideo: {fileID: 225211108870809900}
-  canvasPlaceNote: {fileID: 0}
-  placeNoteHolder: {fileID: 0}
   logoMethod: {fileID: 114903102217264818}
   videoPlayer: {fileID: 0}
   unityARVideo: {fileID: 0}
