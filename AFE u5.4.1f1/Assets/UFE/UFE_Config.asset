@@ -38,15 +38,15 @@ MonoBehaviour:
   p1CharStorage: {fileID: 11400000, guid: e4ffd0a6a8de58d4bb8c85ec5bed5a01, type: 2}
   p2CharStorage: {fileID: 11400000, guid: ba08c6c21735e434f83d90e6d5e9a1ee, type: 2}
   selectedStage:
-    stageName: Kopar
+    stageName: romer
     stageResourcePath: 
     musicResourcePath: 
-    screenshot: {fileID: 2800000, guid: 5edb427db3d86424cb80b4d094c60157, type: 3}
-    prefab: {fileID: 100000, guid: 064338a39a43ad647989c96c321658a2, type: 2}
-    music: {fileID: 8300000, guid: 2067a21e6d6e0a345a9eac9c41ec5d33, type: 3}
+    screenshot: {fileID: 2800000, guid: 7af1c084407d30a4db7ac3d30c1e6df8, type: 3}
+    prefab: {fileID: 1000011525759900, guid: 49445c85659c0c545840ae987306a2dd, type: 2}
+    music: {fileID: 8300000, guid: 78a0035e01d5f0346a8eb0fc22bb4fa2, type: 3}
     groundFriction: 100
-    leftBoundary: -38
-    rightBoundary: 38
+    leftBoundary: -37
+    rightBoundary: 37
   stagePrefabStorage: 0
   stageMusicStorage: 0
   p1CPUControl: 1
