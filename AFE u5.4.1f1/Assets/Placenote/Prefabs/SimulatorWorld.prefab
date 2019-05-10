@@ -273,3 +273,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7de68137ec784374ca0ab273ec974181, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowOnEditorAtAwake: 0

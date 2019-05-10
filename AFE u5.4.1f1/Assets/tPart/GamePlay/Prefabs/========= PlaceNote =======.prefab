@@ -1174,7 +1174,7 @@ GameObject:
   - component: {fileID: 114741454183500244}
   - component: {fileID: 225250018252821042}
   m_Layer: 5
-  m_Name: ArkitUI
+  m_Name: ArkitPlaceNoteUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3449,8 +3449,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1095392032991794}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: -0.15406005, y: 0.104458645, z: -0.016381418, w: -0.9823877}
+  m_LocalPosition: {x: 2.9983077, y: 6.3462706, z: -17.630583}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4071068260546752}
@@ -6688,6 +6688,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7de68137ec784374ca0ab273ec974181, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowOnEditorAtAwake: 0
 --- !u!114 &114310771746370524
 MonoBehaviour:
   m_ObjectHideFlags: 1

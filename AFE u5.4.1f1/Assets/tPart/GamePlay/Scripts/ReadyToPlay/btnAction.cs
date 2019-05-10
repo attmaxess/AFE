@@ -7,16 +7,13 @@ using UnityEngine.XR.iOS;
 public class btnAction : MonoBehaviour
 {
     [Header("Input")]
-    public CanvasGroup canvasVideo = null;
-    public CanvasGroup canvasPlaceNote = null;
-    public GameObject placeNoteHolder = null;
+    public CanvasGroup canvasVideo = null;    
     public BeetsoftLogoMethod logoMethod = null;
     public VideoPlayer videoPlayer = null;
     public UnityARVideo unityARVideo = null;
     public UnityARCameraNearFar unityARCameraNearFar = null;    
     public PhotonMenu photonMenu = null;
     public GameStateBeThis stateWhenAwake = null;
-
     public Transform tribalHolder = null;
     public CanvasTribalWorld_Movement canvasTribal = null;
 
@@ -56,16 +53,9 @@ public class btnAction : MonoBehaviour
         unityARCameraNearFar.useUpdate = true;
         unityARCameraNearFar.Start();
 
-        yield return new WaitUntil(() => logoMethod.doneGoToWaitBack == true);
+        yield return new WaitUntil(() => logoMethod.doneGoToWaitBack == true);                
 
-        placeNoteHolder.gameObject.SetActive(true);
-
-        canvasPlaceNote.alpha = 1;
-        canvasPlaceNote.interactable = true;
-        canvasPlaceNote.blocksRaycasts = true;
-
-        stateAfterClick.OnClick();
-        photonMenu.HandleCurrentMapName();
+        stateAfterClick.OnClick();        
 
         tribalHolder.gameObject.SetActive(true);        
         canvasTribal.ZoomCamAndDistance();
